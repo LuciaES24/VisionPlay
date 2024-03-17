@@ -1,0 +1,242 @@
+{
+  "name": "cabecera",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "AFdA8RFxJr5tJTbLkkKJfi",
+    "node": "23:336",
+    "version": "5355211721",
+    "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
+  },
+  "default": "Property 1=Perfil",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "text",
+        "id": "Favoritos"
+      },
+      {
+        "type": "vector",
+        "id": "salir"
+      },
+      {
+        "type": "text",
+        "id": "Buscar"
+      },
+      {
+        "type": "vector",
+        "id": "volver"
+      }
+    ],
+    "modes": {
+      "Property 1=Perfil": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "15.0",
+              "top": "12.0",
+              "right": "15.0",
+              "bottom": "12.0"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "arrangement": "row",
+            "main-axis-align": "end",
+            "children": [
+              "Favoritos",
+              "salir"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "Favoritos",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "192.8125"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "32.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Favoritos",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "28.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          },
+          {
+            "id": "salir",
+            "tap-handler": "$salir",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.1875"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "salir.svg"
+          }
+        ]
+      },
+      "Property 1=BuscarPeli": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "136.0",
+              "top": "12.0",
+              "right": "136.0",
+              "bottom": "12.0"
+            },
+            "arrangement": "row",
+            "children": [
+              "Buscar"
+            ],
+            "item-spacing": "10.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "Buscar",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Buscar",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "28.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          }
+        ]
+      },
+      "Property 1=volver": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "14.0",
+              "top": "12.0",
+              "right": "14.0",
+              "bottom": "12.0"
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "children": [
+              "volver"
+            ],
+            "item-spacing": "10.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "volver",
+            "tap-handler": "$volver",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "volver.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "salir": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "volver": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Property 1=Perfil",
+      "size": {
+        "width": 358.0,
+        "height": 56.0
+      }
+    },
+    {
+      "design": "Property 1=BuscarPeli",
+      "size": {
+        "width": 358.0,
+        "height": 56.0
+      }
+    },
+    {
+      "design": "Property 1=volver",
+      "size": {
+        "width": 358.0,
+        "height": 56.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "57763419473",
+    "project_id": "visionplay-6d257",
+    "storage_bucket": "visionplay-6d257.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:57763419473:android:b18cf83e3e5356898aaf70",
+        "android_client_info": {
+          "package_name": "com.lespsan543.visionplay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyZAJtKeC4JISMYzo9LYaQLj02oss0GRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

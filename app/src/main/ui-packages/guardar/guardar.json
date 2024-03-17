@@ -1,0 +1,133 @@
+{
+  "name": "guardar",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "AFdA8RFxJr5tJTbLkkKJfi",
+    "node": "6:3",
+    "version": "5330892190",
+    "component-id": "1af087e12011ffb6606e9aaf9d2fe18e2fa32fd9"
+  },
+  "default": "Property 1=Default",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "Guardado"
+      },
+      {
+        "type": "vector",
+        "id": "Guardado2"
+      }
+    ],
+    "modes": {
+      "Property 1=Default": {
+        "rules": [
+          {
+            "id": "top_level",
+            "tap-handler": "$guardar",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "children": [
+              "Guardado"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "Guardado",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "29.999998092651367"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.525001525878906"
+              }
+            },
+            "vector-content": "guardado.svg"
+          }
+        ]
+      },
+      "Property 1=guardado": {
+        "rules": [
+          {
+            "id": "top_level",
+            "tap-handler": "$guardar",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "shrink"
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "children": [
+              "Guardado2"
+            ],
+            "item-spacing": "10.0",
+            "clip-content": "false"
+          },
+          {
+            "id": "Guardado2",
+            "tap-handler": "$eliminar",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "30.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.525001525878906"
+              }
+            },
+            "vector-content": "guardado2.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "guardar": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "eliminar": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Property 1=Default",
+      "size": {
+        "width": 29.999998092651367,
+        "height": 27.525001525878906
+      }
+    },
+    {
+      "design": "Property 1=guardado",
+      "size": {
+        "width": 30.0,
+        "height": 27.525001525878906
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

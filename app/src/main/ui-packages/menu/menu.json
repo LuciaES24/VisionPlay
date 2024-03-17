@@ -1,0 +1,492 @@
+{
+  "name": "menu",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "AFdA8RFxJr5tJTbLkkKJfi",
+    "node": "15:21",
+    "version": "5339934038",
+    "component-id": "79f497b890a2416aee3977b1eaff7d93a15d8fe8"
+  },
+  "default": "Property 1=Inicio",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "homeB"
+      },
+      {
+        "type": "group",
+        "id": "lupaW2"
+      },
+      {
+        "type": "vector",
+        "id": "favW1"
+      },
+      {
+        "type": "vector",
+        "id": "lupa22W"
+      },
+      {
+        "type": "vector",
+        "id": "lupa2W"
+      },
+      {
+        "type": "vector",
+        "id": "homeW2"
+      },
+      {
+        "type": "group",
+        "id": "lupaB"
+      },
+      {
+        "type": "vector",
+        "id": "favW2"
+      },
+      {
+        "type": "vector",
+        "id": "lupaB2"
+      },
+      {
+        "type": "vector",
+        "id": "lupaB1"
+      },
+      {
+        "type": "vector",
+        "id": "homeW1"
+      },
+      {
+        "type": "group",
+        "id": "lupaW1"
+      },
+      {
+        "type": "vector",
+        "id": "favB"
+      },
+      {
+        "type": "vector",
+        "id": "lupa11W"
+      },
+      {
+        "type": "vector",
+        "id": "lupa1W"
+      }
+    ],
+    "modes": {
+      "Property 1=Inicio": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "40.0",
+              "top": "10.0",
+              "right": "40.0",
+              "bottom": "10.0"
+            },
+            "arrangement": "row",
+            "children": [
+              "homeB",
+              "lupaW2",
+              "favW1"
+            ],
+            "item-spacing": "100.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "homeB",
+            "tap-handler": "$home",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "home_b.svg"
+          },
+          {
+            "id": "lupaW2",
+            "tap-handler": "$search",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.999996185302734"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.000001907348633"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "lupa22W",
+              "lupa2W"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "favW1",
+            "tap-handler": "$fav1",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "fav_w1.svg"
+          },
+          {
+            "id": "lupa22W",
+            "margin": {
+              "right": "5.599998474121094",
+              "bottom": "5.5841522216796875"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "lupa22w.svg"
+          },
+          {
+            "id": "lupa2W",
+            "margin": {
+              "left": "16.36419677734375",
+              "top": "16.499771118164062"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "lupa2w.svg"
+          }
+        ]
+      },
+      "Property 1=Buscar": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "40.0",
+              "top": "10.0",
+              "right": "40.0",
+              "bottom": "10.0"
+            },
+            "arrangement": "row",
+            "children": [
+              "homeW2",
+              "lupaB",
+              "favW2"
+            ],
+            "item-spacing": "100.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "homeW2",
+            "tap-handler": "$home2",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "home_w2.svg"
+          },
+          {
+            "id": "lupaB",
+            "tap-handler": "$search2",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.999996185302734"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.000001907348633"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "lupaB2",
+              "lupaB1"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "favW2",
+            "tap-handler": "$fav2",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "fav_w2.svg"
+          },
+          {
+            "id": "lupaB2",
+            "margin": {
+              "right": "5.599998474121094",
+              "bottom": "5.5841522216796875"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "lupa_b2.svg"
+          },
+          {
+            "id": "lupaB1",
+            "margin": {
+              "left": "16.36419677734375",
+              "top": "16.499771118164062"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "lupa_b1.svg"
+          }
+        ]
+      },
+      "Property 1=Perfil": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "40.0",
+              "top": "10.0",
+              "right": "40.0",
+              "bottom": "10.0"
+            },
+            "arrangement": "row",
+            "children": [
+              "homeW1",
+              "lupaW1",
+              "favB"
+            ],
+            "item-spacing": "100.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "homeW1",
+            "tap-handler": "$home3",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "home_w1.svg"
+          },
+          {
+            "id": "lupaW1",
+            "tap-handler": "$search3",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "is-structured": "false",
+            "children": [
+              "lupa11W",
+              "lupa1W"
+            ],
+            "clip-content": "false"
+          },
+          {
+            "id": "favB",
+            "tap-handler": "$fav3",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "fav_b.svg"
+          },
+          {
+            "id": "lupa11W",
+            "margin": {
+              "right": "5.600002288818359",
+              "bottom": "5.584150314331055"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "lupa11w.svg"
+          },
+          {
+            "id": "lupa1W",
+            "margin": {
+              "left": "16.36419677734375",
+              "top": "16.499771118164062"
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": "1.0"
+              }
+            },
+            "vector-content": "lupa1w.svg"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "home": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "search": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "fav1": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "home2": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "search2": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "fav2": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "home3": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "search3": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "fav3": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Property 1=Inicio",
+      "size": {
+        "width": 360.0,
+        "height": 50.0
+      }
+    },
+    {
+      "design": "Property 1=Buscar",
+      "size": {
+        "width": 360.0,
+        "height": 50.0
+      }
+    },
+    {
+      "design": "Property 1=Perfil",
+      "size": {
+        "width": 360.0,
+        "height": 50.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
