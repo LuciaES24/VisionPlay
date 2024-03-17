@@ -201,11 +201,15 @@ fun ShowFavorite(navController: NavHostController,
                     volver = { navController.navigate(Routes.FavoritesScreen.route)}
                 )
             },
-            bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                property1 = com.lespsan543.visionplay.menu.Property1.Inicio,
-                home = { navController.navigate(Routes.MoviesScreen.route) },
-                fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                search = { navController.navigate(Routes.SearchScreen.route) }) },
+            bottomBar = { Menu(
+                modifier = Modifier
+                    .height(maxHeight.times(0.08f)),
+                home3 = { navController.navigate(Routes.MoviesScreen.route) },
+                search3 = { navController.navigate(Routes.SearchScreen.route) },
+                fav3 = { navController.navigate(Routes.FavoritesScreen.route) },
+                property1 = com.lespsan543.visionplay.menu.Property1.Perfil
+                )
+            },
             floatingActionButton = {
                 IconButton(onClick = { favoritesViewModel.deleteMovieOrSerie(movieOrSerie.idDoc)
                                         navController.navigate(Routes.FavoritesScreen.route)}) {

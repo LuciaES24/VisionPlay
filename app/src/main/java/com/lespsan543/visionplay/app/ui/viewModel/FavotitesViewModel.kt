@@ -45,46 +45,31 @@ class FavotitesViewModel :ViewModel() {
     private var _showGenres = MutableStateFlow("")
     var showGenres : StateFlow<String> = _showGenres
 
-    private var _genres = MutableStateFlow<Map<String,String>>(emptyMap())
+    private var _movieGenres = MutableStateFlow<Map<String,String>>(emptyMap())
+
+    private var _serieGenres = MutableStateFlow<Map<String,String>>(emptyMap())
 
     init {
-        findGenres()
+        movieGenres()
+        serieGenres()
     }
 
     /**
-     * Buscamos los distintos géneros de las películas y series en la api
+     * Buscamos los distintos géneros de las películas
      */
-    private fun findGenres(){
-        var movieGenres = mutableMapOf<String,String>()
+    private fun movieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
-            movieGenres = getMovieGenres.invoke()
+            _movieGenres.value = getMovieGenres.invoke()
         }
-        var serieGenres = mutableMapOf<String,String>()
-        viewModelScope.launch(Dispatchers.IO) {
-            serieGenres = getSerieGenres.invoke()
-        }
-        getGenres(movieGenres, serieGenres)
     }
 
     /**
-     * Obtenemos los distíntos id y nombres de géneros de películas y series
-     *
-     * @param movieGenres géneros de películas
-     * @param serieGenres géneros de series
+     * Buscamos los distintos géneros de las series
      */
-    private fun getGenres(movieGenres: MutableMap<String, String>, serieGenres: MutableMap<String, String>) {
-        val genres = mutableMapOf<String,String>()
-        for ((key, value) in movieGenres){
-            genres[key] = value
+    private fun serieGenres(){
+        viewModelScope.launch(Dispatchers.IO) {
+            _serieGenres.value = getSerieGenres.invoke()
         }
-        for ((key, value) in serieGenres){
-            //Comprobamos si ya hemos guardado el id
-            if (key !in genres.keys){
-                genres[key] = value
-            }
-        }
-        Log.d("genre", genres.toString())
-        _genres.value = genres
     }
 
     /**
@@ -95,10 +80,17 @@ class FavotitesViewModel :ViewModel() {
     fun getGenresToShow(movieOrSerie: MovieOrSerieState){
         var genres = ""
         for (i in movieOrSerie.genres){
-            val genre = _genres.value.get(i)
+            var genre = ""
+            if (i in _movieGenres.value.keys){
+                genre = _movieGenres.value.get(i).toString()
+            }
+            else if (i in _serieGenres.value.keys){
+                genre = _serieGenres.value.get(i).toString()
+            }
             genres+=genre+"\n"
         }
         _showGenres.value = genres
+        Log.d("genres", genres)
     }
 
     /**
