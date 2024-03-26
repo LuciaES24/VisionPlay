@@ -213,8 +213,8 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     fun lastMovie(){
         _propertyButton.value = Property1.Default
-        if (_apiMoviePage.value==0){
-            _apiMoviePage.value=0
+        if (_apiMoviePage.value==1){
+            _apiMoviePage.value=1
         }else if(_moviePosition.value <= 0) {
             _apiMoviePage.value--
             _moviePosition.value = _movieList.value.size - 1
@@ -243,8 +243,8 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     fun lastSerie(){
         _propertyButton.value = Property1.Default
-        if (_apiSeriePage.value == 0){
-            _apiSeriePage.value=0
+        if (_apiSeriePage.value == 1){
+            _apiSeriePage.value=1
         } else if (_seriePosition.value <= 0) {
             _apiSeriePage.value--
             _seriePosition.value = _movieList.value.size - 1
@@ -281,6 +281,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
                     "poster" to searchMovieState.poster,
                     "date" to searchMovieState.date,
                     "votes" to searchMovieState.votes,
+                    "genres" to searchMovieState.genres,
                     "emailUser" to email.toString()
                 )
                 firestore.collection("Favoritos")

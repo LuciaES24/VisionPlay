@@ -90,7 +90,6 @@ class FavotitesViewModel :ViewModel() {
             genres+=genre+"\n"
         }
         _showGenres.value = genres
-        Log.d("genres", genres)
     }
 
     /**

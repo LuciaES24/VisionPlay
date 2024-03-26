@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -213,7 +214,8 @@ fun ShowFavorite(navController: NavHostController,
             floatingActionButton = {
                 IconButton(onClick = { favoritesViewModel.deleteMovieOrSerie(movieOrSerie.idDoc)
                                         navController.navigate(Routes.FavoritesScreen.route)}) {
-                    Icon(imageVector = Icons.Filled.Delete , contentDescription = null, tint = Color.White)
+                    Icon(imageVector = Icons.Filled.Delete , contentDescription = null, tint = Color.White,
+                        modifier = Modifier.size(height*0.045f) )
                 }
             }
         ) {
