@@ -15,7 +15,9 @@ sealed class Routes(val route:String) {
 
     object FavoritesScreen : Routes("FavoritesScreen")
 
-    object SearchScreen : Routes("SearchScreen")
+    object SearchGenres : Routes("SearchGenres")
+
+    object ShowByGenre : Routes("ShowByGenre")
 
     object ShowMovie : Routes("ShowMovie")
 

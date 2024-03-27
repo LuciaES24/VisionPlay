@@ -83,9 +83,10 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                 Menu(
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
-                    home3 = { navController.navigate(Routes.MoviesScreen.route) },
-                    genres3 = { navController.navigate(Routes.SearchScreen.route) },
-                    fav3 = { navController.navigate(Routes.FavoritesScreen.route) },
+                    home4 = { navController.navigate(Routes.MoviesScreen.route) },
+                    genres4 = { navController.navigate(Routes.SearchGenres.route) },
+                    fav4 = { navController.navigate(Routes.FavoritesScreen.route) },
+                    cine4 = { navController.navigate(Routes.CinemaScreen.route) },
                     property1 = com.lespsan543.visionplay.menu.Property1.Favoritos
                 )
             },
@@ -186,7 +187,7 @@ fun ShowFavorite(navController: NavHostController,
 ) {
     //Película o serie que vamos a mostrar
     val movieOrSerie by favoritesViewModel.selectedMovieOrSerie.collectAsState()
-    //Lista de géneros de la serie
+    //Lista de géneros de la película o serie
     val genres by favoritesViewModel.showGenres.collectAsState()
 
     favoritesViewModel.getGenresToShow(movieOrSerie)
@@ -205,10 +206,10 @@ fun ShowFavorite(navController: NavHostController,
             bottomBar = { Menu(
                 modifier = Modifier
                     .height(maxHeight.times(0.08f)),
-                home3 = { navController.navigate(Routes.MoviesScreen.route) },
-                genres3 = { navController.navigate(Routes.SearchScreen.route) },
-                fav3 = { navController.navigate(Routes.FavoritesScreen.route) },
-                cine3 = { navController.navigate(Routes.CinemaScreen.route) },
+                home4 = { navController.navigate(Routes.MoviesScreen.route) },
+                genres4 = { navController.navigate(Routes.SearchGenres.route) },
+                fav4 = { navController.navigate(Routes.FavoritesScreen.route) },
+                cine4 = { navController.navigate(Routes.CinemaScreen.route) },
                 property1 = com.lespsan543.visionplay.menu.Property1.Favoritos
                 )
             },

@@ -75,8 +75,8 @@ fun MoviesScreen(
     //Propiedad del botón de guardado
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
 
+    //Se encarga del desplazamiento de las películas al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
-
 
     LaunchedEffect(Unit){
         moviesOrSeriesViewModel.fetchMoviesInDB()
@@ -89,7 +89,8 @@ fun MoviesScreen(
                 property1 = Property1.Inicio,
                 home = { navController.navigate(Routes.MoviesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                genres1 = { navController.navigate(Routes.SearchScreen.route) }) },
+                genres1 = { navController.navigate(Routes.SearchGenres.route) },
+                cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
             floatingActionButton = {
                 Row {
                     FloatingActionButton(onClick = { navController.navigate(Routes.MoviesScreen.route) },
@@ -98,7 +99,7 @@ fun MoviesScreen(
                             .height(height.times(0.05f)),
                         containerColor = Color(40,40,40),
                         shape = RectangleShape) {
-                        Text(text = "Películas", color = Color.White, fontSize = 16.sp)
+                        Text(text = "Películas", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
                     }
                     Spacer(modifier = Modifier.width(10.dp))
                     FloatingActionButton(onClick = { navController.navigate(Routes.SeriesScreen.route) },
@@ -108,7 +109,7 @@ fun MoviesScreen(
                         containerColor = Color(85,85,85),
                         shape = RectangleShape
                     ) {
-                        Text(text = "Series", color = Color.White, fontSize = 16.sp)
+                        Text(text = "Series", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
                     }
                 }
             }
@@ -205,7 +206,7 @@ fun ShowMovie(navController: NavHostController,
                 property1 = Property1.Inicio,
                 home = { navController.navigate(Routes.MoviesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                genres1 = { navController.navigate(Routes.SearchScreen.route) },
+                genres1 = { navController.navigate(Routes.SearchGenres.route) },
                 cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
             floatingActionButton = {
                 Guardar(

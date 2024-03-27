@@ -763,7 +763,7 @@ fun TopLevelProperty1Inicio(
             end = 40.0.dp,
             bottom = 10.0.dp
         ),
-        itemSpacing = 60.0,
+        itemSpacing = 70.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
@@ -994,7 +994,7 @@ fun TopLevelProperty1Generos(
             end = 40.0.dp,
             bottom = 10.0.dp
         ),
-        itemSpacing = 60.0,
+        itemSpacing = 70.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
@@ -1238,7 +1238,7 @@ fun TopLevelProperty1Cine(
             end = 40.0.dp,
             bottom = 10.0.dp
         ),
-        itemSpacing = 60.0,
+        itemSpacing = 70.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
@@ -1495,7 +1495,7 @@ fun TopLevelProperty1Favoritos(
             end = 40.0.dp,
             bottom = 10.0.dp
         ),
-        itemSpacing = 60.0,
+        itemSpacing = 70.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )

@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "23:336",
-    "version": "5430785281",
+    "version": "5435196808",
     "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
   },
   "default": "Property 1=Perfil",
@@ -58,7 +58,7 @@
               "Favorites",
               "salir1"
             ],
-            "item-spacing": "84.0",
+            "item-spacing": "76.0",
             "background-color": {
               "alpha": "1.0",
               "hue": "0.0",
@@ -86,11 +86,11 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "117.0"
+                "value": "130.0"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "29.0"
+                "value": "28.0"
               }
             },
             "color": {
@@ -102,6 +102,7 @@
             "text-content": "Favorites",
             "overflow": "visible",
             "max-lines": "-1",
+            "text-align-vertical": "center",
             "text-size": "28.0",
             "line-height": "1.18701171875",
             "typeface": "Kameron"
@@ -123,7 +124,7 @@
           }
         ]
       },
-      "Property 1=BuscarPeli": {
+      "Property 1=Genres": {
         "rules": [
           {
             "id": "top_level",
@@ -150,7 +151,7 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "95.0"
+                "value": "100.0"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
@@ -166,7 +167,7 @@
             "text-content": "Genres",
             "overflow": "visible",
             "max-lines": "-1",
-            "text-align": "left",
+            "text-align-vertical": "bottom",
             "text-size": "28.0",
             "line-height": "1.18701171875",
             "typeface": "Kameron"
@@ -200,11 +201,11 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "127.0"
+                "value": "133.0"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "32.0"
+                "value": "33.0"
               }
             },
             "color": {
@@ -216,6 +217,7 @@
             "text-content": "Billboard",
             "overflow": "visible",
             "max-lines": "-1",
+            "text-align-vertical": "center",
             "text-size": "28.0",
             "line-height": "1.18701171875",
             "typeface": "Kameron"
@@ -285,7 +287,7 @@
       }
     },
     {
-      "design": "Property 1=BuscarPeli",
+      "design": "Property 1=Genres",
       "size": {
         "width": 358.0,
         "height": 56.0

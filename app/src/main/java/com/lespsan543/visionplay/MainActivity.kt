@@ -19,10 +19,13 @@ import com.lespsan543.visionplay.app.ui.FavoritesScreen
 import com.lespsan543.visionplay.app.ui.LogInScreen
 import com.lespsan543.visionplay.app.ui.MoviesScreen
 import com.lespsan543.visionplay.app.ui.RegisterScreen
+import com.lespsan543.visionplay.app.ui.SearchGenres
 import com.lespsan543.visionplay.app.ui.SeriesScreen
 import com.lespsan543.visionplay.app.ui.ShowFavorite
 import com.lespsan543.visionplay.app.ui.ShowMovie
+import com.lespsan543.visionplay.app.ui.ShowMoviesAndSeriesByGenre
 import com.lespsan543.visionplay.app.ui.ShowSerie
+import com.lespsan543.visionplay.app.ui.viewModel.SearchGenresViewModel
 import com.lespsan543.visionplay.ui.theme.VisionPlayTheme
 
 /**
@@ -36,6 +39,8 @@ class MainActivity : ComponentActivity() {
     private val moviesOrSeriesViewModel : MoviesOrSeriesViewModel by viewModels()
     private val logInOrRegisterViewModel : LogInOrRegisterViewModel by viewModels()
     private val favotitesViewModel : FavotitesViewModel by viewModels()
+    private val searchGenresViewModel : SearchGenresViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +76,12 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Routes.ShowFavotite.route) {
                             ShowFavorite(navController, favotitesViewModel)
+                        }
+                        composable(Routes.SearchGenres.route) {
+                            SearchGenres(navController, searchGenresViewModel)
+                        }
+                        composable(Routes.ShowByGenre.route) {
+                            ShowMoviesAndSeriesByGenre(navController, searchGenresViewModel)
                         }
                     }
                 }

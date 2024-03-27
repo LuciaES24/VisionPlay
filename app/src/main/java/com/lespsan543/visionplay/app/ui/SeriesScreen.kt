@@ -74,6 +74,7 @@ fun SeriesScreen(
     //Propiedad del botón de guardado
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
 
+    //Se encarga del desplazamiento de las series al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
 
 
@@ -88,7 +89,7 @@ fun SeriesScreen(
                 property1 = Property1.Inicio,
                 home = { navController.navigate(Routes.SeriesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                genres1 = { navController.navigate(Routes.SearchScreen.route) },
+                genres1 = { navController.navigate(Routes.SearchGenres.route) },
                 cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
             floatingActionButton = {
                 Row {
@@ -204,7 +205,8 @@ fun ShowSerie(navController: NavHostController,
                 property1 = Property1.Inicio,
                 home = { navController.navigate(Routes.SeriesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                genres1 = { navController.navigate(Routes.SearchScreen.route) }) },
+                genres1 = { navController.navigate(Routes.SearchGenres.route) },
+                cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
             floatingActionButton = {
                 Guardar(
                     property1 = property,
