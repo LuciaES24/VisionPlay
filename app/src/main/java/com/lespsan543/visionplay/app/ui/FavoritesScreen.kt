@@ -84,9 +84,9 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
                     home3 = { navController.navigate(Routes.MoviesScreen.route) },
-                    search3 = { navController.navigate(Routes.SearchScreen.route) },
+                    genres3 = { navController.navigate(Routes.SearchScreen.route) },
                     fav3 = { navController.navigate(Routes.FavoritesScreen.route) },
-                    property1 = com.lespsan543.visionplay.menu.Property1.Perfil
+                    property1 = com.lespsan543.visionplay.menu.Property1.Favoritos
                 )
             },
             ) {
@@ -206,9 +206,10 @@ fun ShowFavorite(navController: NavHostController,
                 modifier = Modifier
                     .height(maxHeight.times(0.08f)),
                 home3 = { navController.navigate(Routes.MoviesScreen.route) },
-                search3 = { navController.navigate(Routes.SearchScreen.route) },
+                genres3 = { navController.navigate(Routes.SearchScreen.route) },
                 fav3 = { navController.navigate(Routes.FavoritesScreen.route) },
-                property1 = com.lespsan543.visionplay.menu.Property1.Perfil
+                cine3 = { navController.navigate(Routes.CinemaScreen.route) },
+                property1 = com.lespsan543.visionplay.menu.Property1.Favoritos
                 )
             },
             floatingActionButton = {

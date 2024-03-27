@@ -1,5 +1,9 @@
 [
     {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_fav_b.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_fav_b.xml"
+    },
+    {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\xml_backup_rules.xml.flat",
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\xml\\backup_rules.xml"
     },
@@ -12,12 +16,16 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-xhdpi\\ic_launcher.webp"
     },
     {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_vector3.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_vector3.xml"
+    },
+    {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable_ic_launcher_foreground.xml.flat",
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-hdpi\\ic_launcher_round.webp"
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable_votes.png.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\drawable\\votes.png"
     },
     {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_home_b.xml.flat",
@@ -32,24 +40,12 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\xml_data_extraction_rules.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\xml\\data_extraction_rules.xml"
-    },
-    {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_lupa_b1.xml.flat",
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_lupa_b1.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_fav_w1.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_fav_w1.xml"
-    },
-    {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_relay_kameron_bold.ttf.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\font\\relay_kameron_bold.ttf"
-    },
-    {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_guardar_guardado.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\guardar_guardado.xml"
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_home_w3.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_home_w3.xml"
     },
     {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
@@ -60,16 +56,12 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-hdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_vector.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_vector.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_lupa1w.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_lupa1w.xml"
-    },
-    {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_cabecera_vector.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\cabecera_vector.xml"
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_cabecera_salir1.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/cabecera_salir1.xml"
     },
     {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
@@ -84,10 +76,6 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_fav_w2.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_cabecera_salir.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\cabecera_salir.xml"
-    },
-    {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_cabecera_volver.xml.flat",
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\cabecera_volver.xml"
     },
@@ -96,16 +84,8 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\guardar_guardado2.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_relay_kameron_semibold.ttf.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\font\\relay_kameron_semibold.ttf"
-    },
-    {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-xhdpi\\ic_launcher_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_relay_kameron_regular.ttf.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\font\\relay_kameron_regular.ttf"
     },
     {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_relay_kameron_medium.ttf.flat",
@@ -116,8 +96,104 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_home_w2.xml"
     },
     {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_vector2.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_vector2.xml"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_gen_w1.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_gen_w1.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_lupa11w.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_lupa11w.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_fav_w1.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_fav_w1.xml"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_home_w2.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_home_w2.xml"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_genres4.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_genres4.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_vector1.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_vector1.xml"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_fav_w2.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_fav_w2.xml"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_home_w1.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_home_w1.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_fav_w1.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_fav_w1.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_relay_kameron_bold.ttf.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\font\\relay_kameron_bold.ttf"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_guardar_guardado.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\guardar_guardado.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_lupa1w.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_lupa1w.xml"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_gen_w2.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_gen_w2.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_cabecera_vector.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\cabecera_vector.xml"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_genres2.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_genres2.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_cabecera_salir.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\cabecera_salir.xml"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_relay_kameron_semibold.ttf.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\font\\relay_kameron_semibold.ttf"
+    },
+    {
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_relay_kameron_regular.ttf.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\font\\relay_kameron_regular.ttf"
+    },
+    {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-mdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_home_b.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_home_b.xml"
     },
     {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\font_kameron_font.ttf.flat",
@@ -128,12 +204,12 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-xxhdpi\\ic_launcher.webp"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_menu_fav_w3.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/menu_fav_w3.xml"
     },
     {
-        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable_votes.png.flat",
-        "source": "com.lespsan543.visionplay.app-main-64:/drawable/votes.png"
+        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_home_w1.xml.flat",
@@ -144,15 +220,11 @@
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_fav_b.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_lupa11w.xml.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_lupa11w.xml"
-    },
-    {
         "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\drawable-nodpi_menu_lupa_b2.xml.flat",
         "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-relay-58:\\drawable-nodpi\\menu_lupa_b2.xml"
     },
     {
-        "merged": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-merged_res-62:\\mipmap-mdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-main-64:\\mipmap-mdpi\\ic_launcher.webp"
+        "merged": "com.lespsan543.visionplay.app-merged_res-62:/drawable-nodpi_cabecera_salir.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-58:/drawable-nodpi/cabecera_salir.xml"
     }
 ]

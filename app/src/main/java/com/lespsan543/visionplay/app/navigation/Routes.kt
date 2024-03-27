@@ -22,4 +22,6 @@ sealed class Routes(val route:String) {
     object ShowSerie : Routes("ShowSerie")
 
     object ShowFavotite : Routes("ShowFavotite")
+
+    object CinemaScreen : Routes("CinemaScreen")
 }

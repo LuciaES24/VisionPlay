@@ -28,6 +28,7 @@ import com.lespsan543.visionplay.R
 enum class Property1 {
     Perfil,
     BuscarPeli,
+    Cartelera,
     Volver
 }
 
@@ -44,11 +45,15 @@ fun Cabecera(
 ) {
     when (property1) {
         Property1.Perfil -> TopLevelProperty1Perfil(modifier = modifier) {
-            FavoritosProperty1Perfil()
             SalirProperty1Perfil(salir = salir)
+            FavoritesProperty1Perfil()
+            Salir1Property1Perfil(salir = salir)
         }
         Property1.BuscarPeli -> TopLevelProperty1BuscarPeli(modifier = modifier) {
-            BuscarProperty1BuscarPeli(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
+            GenresProperty1BuscarPeli()
+        }
+        Property1.Cartelera -> TopLevelProperty1Cartelera(modifier = modifier) {
+            BillboardProperty1Cartelera()
         }
         Property1.Volver -> TopLevelProperty1Volver(modifier = modifier) {
             VolverProperty1Volver(volver = volver)
@@ -65,7 +70,7 @@ private fun CabeceraProperty1PerfilPreview() {
                 salir = {},
                 volver = {},
                 property1 = Property1.Perfil,
-                modifier = Modifier.rowWeight(1.0f)
+                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
     }
@@ -88,6 +93,21 @@ private fun CabeceraProperty1BuscarPeliPreview() {
 
 @Preview(widthDp = 358, heightDp = 56)
 @Composable
+private fun CabeceraProperty1CarteleraPreview() {
+    MaterialTheme {
+        RelayContainer {
+            Cabecera(
+                salir = {},
+                volver = {},
+                property1 = Property1.Cartelera,
+                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
+            )
+        }
+    }
+}
+
+@Preview(widthDp = 358, heightDp = 56)
+@Composable
 private fun CabeceraProperty1VolverPreview() {
     MaterialTheme {
         RelayContainer {
@@ -102,9 +122,20 @@ private fun CabeceraProperty1VolverPreview() {
 }
 
 @Composable
-fun FavoritosProperty1Perfil(modifier: Modifier = Modifier) {
+fun SalirProperty1Perfil(
+    salir: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    RelayVector(
+        vector = painterResource(R.drawable.cabecera_salir),
+        modifier = modifier.tappable(onTap = salir).requiredWidth(27.1875.dp).requiredHeight(28.0.dp)
+    )
+}
+
+@Composable
+fun FavoritesProperty1Perfil(modifier: Modifier = Modifier) {
     RelayText(
-        content = "Favoritos",
+        content = "Favorites",
         fontSize = 28.0.sp,
         fontFamily = kameron,
         color = Color(
@@ -114,19 +145,18 @@ fun FavoritosProperty1Perfil(modifier: Modifier = Modifier) {
             blue = 255
         ),
         height = 1.18701171875.em,
-        textAlign = TextAlign.Left,
         maxLines = -1,
-        modifier = modifier.requiredWidth(192.8125.dp).requiredHeight(32.0.dp)
+        modifier = modifier.requiredWidth(117.0.dp).requiredHeight(29.0.dp)
     )
 }
 
 @Composable
-fun SalirProperty1Perfil(
+fun Salir1Property1Perfil(
     salir: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     RelayVector(
-        vector = painterResource(R.drawable.cabecera_salir),
+        vector = painterResource(R.drawable.cabecera_salir1),
         modifier = modifier.tappable(onTap = salir).requiredWidth(27.1875.dp).requiredHeight(28.0.dp)
     )
 }
@@ -143,7 +173,6 @@ fun TopLevelProperty1Perfil(
             green = 107,
             blue = 107
         ),
-        mainAxisAlignment = MainAxisAlignment.End,
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
             start = 15.0.dp,
@@ -151,15 +180,16 @@ fun TopLevelProperty1Perfil(
             end = 15.0.dp,
             bottom = 12.0.dp
         ),
+        itemSpacing = 84.0,
         content = content,
-        modifier = modifier.fillMaxWidth(1.0f)
+        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
 }
 
 @Composable
-fun BuscarProperty1BuscarPeli(modifier: Modifier = Modifier) {
+fun GenresProperty1BuscarPeli(modifier: Modifier = Modifier) {
     RelayText(
-        content = "Buscar",
+        content = "Genres",
         fontSize = 28.0.sp,
         fontFamily = kameron,
         color = Color(
@@ -171,12 +201,55 @@ fun BuscarProperty1BuscarPeli(modifier: Modifier = Modifier) {
         height = 1.18701171875.em,
         textAlign = TextAlign.Left,
         maxLines = -1,
-        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
+        modifier = modifier.requiredWidth(95.0.dp).requiredHeight(31.0.dp)
     )
 }
 
 @Composable
 fun TopLevelProperty1BuscarPeli(
+    modifier: Modifier = Modifier,
+    content: @Composable RelayContainerScope.() -> Unit
+) {
+    RelayContainer(
+        backgroundColor = Color(
+            alpha = 255,
+            red = 107,
+            green = 107,
+            blue = 107
+        ),
+        arrangement = RelayContainerArrangement.Row,
+        padding = PaddingValues(
+            start = 136.0.dp,
+            top = 12.0.dp,
+            end = 136.0.dp,
+            bottom = 12.0.dp
+        ),
+        itemSpacing = 10.0,
+        content = content,
+        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
+    )
+}
+
+@Composable
+fun BillboardProperty1Cartelera(modifier: Modifier = Modifier) {
+    RelayText(
+        content = "Billboard",
+        fontSize = 28.0.sp,
+        fontFamily = kameron,
+        color = Color(
+            alpha = 255,
+            red = 255,
+            green = 255,
+            blue = 255
+        ),
+        height = 1.18701171875.em,
+        maxLines = -1,
+        modifier = modifier.requiredWidth(127.0.dp).requiredHeight(32.0.dp)
+    )
+}
+
+@Composable
+fun TopLevelProperty1Cartelera(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {

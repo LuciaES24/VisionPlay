@@ -126,6 +126,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _movieGenres.value = getMovieGenres.invoke()
         }
+        Log.d("genres", _movieGenres.value.values.toString())
     }
 
     /**
@@ -135,6 +136,8 @@ class MoviesOrSeriesViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _serieGenres.value = getSerieGenres.invoke()
         }
+        Log.d("genres2", _movieGenres.value.values.toString())
+
     }
 
     /**

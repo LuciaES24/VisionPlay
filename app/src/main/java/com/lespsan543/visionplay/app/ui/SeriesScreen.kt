@@ -88,7 +88,8 @@ fun SeriesScreen(
                 property1 = Property1.Inicio,
                 home = { navController.navigate(Routes.SeriesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                search = { navController.navigate(Routes.SearchScreen.route) }) },
+                genres1 = { navController.navigate(Routes.SearchScreen.route) },
+                cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
             floatingActionButton = {
                 Row {
                     FloatingActionButton(onClick = { navController.navigate(Routes.MoviesScreen.route) },
@@ -203,7 +204,7 @@ fun ShowSerie(navController: NavHostController,
                 property1 = Property1.Inicio,
                 home = { navController.navigate(Routes.SeriesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                search = { navController.navigate(Routes.SearchScreen.route) }) },
+                genres1 = { navController.navigate(Routes.SearchScreen.route) }) },
             floatingActionButton = {
                 Guardar(
                     property1 = property,
