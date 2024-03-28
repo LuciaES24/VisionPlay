@@ -1,6 +1,5 @@
 package com.lespsan543.visionplay.app.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -62,11 +61,23 @@ class SearchGenresViewModel : ViewModel(){
 
     private var _actualSearchMovieState = MutableStateFlow(MovieOrSerieState())
 
+    private var _showGenres = MutableStateFlow("")
+    var showGenres : StateFlow<String> = _showGenres
+
     init {
         getAllMovies()
         getAllSeries()
         movieGenres()
         serieGenres()
+    }
+
+    /**
+     * Reinicia el número de página de la API y la posición al cambiar de género
+     */
+    fun reset(){
+        _apiMoviePage.value = 1
+        _apiSeriePage.value = 1
+        _position.value = 0
     }
 
     /**
@@ -128,6 +139,7 @@ class SearchGenresViewModel : ViewModel(){
             _position.value=0
             getAllMovies()
             getAllSeries()
+            diferentGenres(_actualGenre.value)
         }else{
             _position.value++
         }
@@ -138,15 +150,17 @@ class SearchGenresViewModel : ViewModel(){
      */
     fun lastMovieOrSerie(){
         _propertyButton.value = Property1.Default
-        if (_apiMoviePage.value==1 && _apiSeriePage.value == 1){
+        if (_apiMoviePage.value==1 && _position.value == 0 || _apiSeriePage.value == 1 && _position.value == 0){
             _apiMoviePage.value=1
             _apiSeriePage.value=1
+            _position.value=0
         }else if(_position.value <= 0) {
             _apiMoviePage.value--
             _apiSeriePage.value--
             _position.value = _moviesAndSeriesList.value.size - 1
             getAllMovies()
             getAllSeries()
+            diferentGenres(_actualGenre.value)
         }else{
             _position.value--
         }
@@ -159,15 +173,16 @@ class SearchGenresViewModel : ViewModel(){
         viewModelScope.launch(Dispatchers.IO) {
             _serieGenres.value = getSerieGenres.invoke()
         }
-        diferentGenres()
     }
 
     /**
      * Buscamos los géneros que hay entre películas y series
      * para que no se repitan si alguno coincide
      * y los guardamos en la variable _genres
+     *
+     * @param genre género a buscar
      */
-     fun diferentGenres(){
+    fun diferentGenres(genre : String){
         val temporalGenresMap = mutableMapOf<String, String>()
         for ((key, value) in _movieGenres.value){
             temporalGenresMap[key] = value
@@ -178,6 +193,7 @@ class SearchGenresViewModel : ViewModel(){
             }
         }
         _genres.value = temporalGenresMap
+        getActualGenre(genre)
     }
 
     /**
@@ -199,18 +215,17 @@ class SearchGenresViewModel : ViewModel(){
     }
 
     /**
-     * Comprueba si el nombre de la película ya se encuentra en la base de datos
-     * para mostrar el botón de guardado correspondiente
+     * Obtiene el nombre de los géneros de la película o serie que se indica
      *
-     * @param title título de la película o serie que queremos comprobar
+     * @param movieOrSerie película o serie de la que vamos a obtener los géneros
      */
-    fun findMovieInList(title: String){
-        for (movie in _moviesInDB.value) {
-            if (title == movie.title){
-                _propertyButton.value = Property1.Guardado
-                _actualSearchMovieState.value = movie
-            }
+    fun getGenresToShow(movieOrSerie: MovieOrSerieState){
+        var genres = ""
+        for (i in movieOrSerie.genres){
+            val genre = _genres.value.get(i)
+            genres+=genre+"\n"
         }
+        _showGenres.value = genres
     }
 
     /**
@@ -218,7 +233,7 @@ class SearchGenresViewModel : ViewModel(){
      *
      * @param genre género a buscar
      */
-    fun getActualGenre(genre:String){
+    private fun getActualGenre(genre:String){
         for ((key, value ) in _genres.value){
             if (genre in value){
                 _actualGenre.value = key
@@ -245,7 +260,7 @@ class SearchGenresViewModel : ViewModel(){
     /**
      * Cambia la propiedad del botón de guardado dependiendo de cuando se pulsa
      */
-    fun guardarPeliculaOSerie(){
+    private fun guardarPeliculaOSerie(){
         if (_propertyButton.value == Property1.Default){
             _propertyButton.value = Property1.Guardado
         }else{
@@ -290,7 +305,6 @@ class SearchGenresViewModel : ViewModel(){
      * Elimina una película o serie de la base de datos a partir de su id
      */
     fun deleteMovieOrSerie() {
-        Log.d("eliminar", _actualSearchMovieState.value.idDoc)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 firestore.collection("Favoritos").document(_actualSearchMovieState.value.idDoc)

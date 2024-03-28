@@ -23,6 +23,7 @@ import com.lespsan543.visionplay.app.ui.SearchGenres
 import com.lespsan543.visionplay.app.ui.SeriesScreen
 import com.lespsan543.visionplay.app.ui.ShowFavorite
 import com.lespsan543.visionplay.app.ui.ShowMovie
+import com.lespsan543.visionplay.app.ui.ShowMovieOrSerieByGenre
 import com.lespsan543.visionplay.app.ui.ShowMoviesAndSeriesByGenre
 import com.lespsan543.visionplay.app.ui.ShowSerie
 import com.lespsan543.visionplay.app.ui.viewModel.SearchGenresViewModel
@@ -82,6 +83,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Routes.ShowByGenre.route) {
                             ShowMoviesAndSeriesByGenre(navController, searchGenresViewModel)
+                        }
+                        composable(Routes.ShowMovieOrSerieByGenre.route) {
+                            ShowMovieOrSerieByGenre(navController, searchGenresViewModel)
                         }
                     }
                 }

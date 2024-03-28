@@ -3,6 +3,7 @@ package com.lespsan543.visionplay.app.ui
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -25,9 +26,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,13 +42,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.viewModel.SearchGenresViewModel
@@ -98,7 +101,7 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
                 items(genresToShow){ genre ->
                     Box(modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { searchGenresViewModel.getActualGenre(genre)
+                        .clickable { searchGenresViewModel.diferentGenres(genre)
                         navController.navigate(Routes.ShowByGenre.route)}
                         .padding(6.dp)
                         .height(height * 0.4f)
@@ -141,7 +144,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
         val height = maxHeight
         Scaffold(
             bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                property1 = Property1.Inicio,
+                property1 = Property1.Generos,
                 home2 = { navController.navigate(Routes.MoviesScreen.route) },
                 fav2 = { navController.navigate(Routes.FavoritesScreen.route) },
                 genres2 = { navController.navigate(Routes.SearchGenres.route) },
@@ -151,21 +154,22 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
                     com.lespsan543.visionplay.cabecera.Property1.Volver,
-                    volver = { navController.navigate(Routes.SearchGenres.route) }
+                    volver = { navController.navigate(Routes.SearchGenres.route)
+                               searchGenresViewModel.reset()}
                 )
             }
         ) {
             //Aparece si la información de la API ya ha sido cargada
             if (moviesAndSeriesList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
-                searchGenresViewModel.findMovieInList(moviesAndSeriesList[position].title)
+                searchGenresViewModel.findMovieOrSerieInList(moviesAndSeriesList[position].title)
                 AsyncImage(model = moviesAndSeriesList[position].poster,
                     contentDescription = "Poster película",
                     modifier = Modifier
                         .height(height)
                         .width(width)
                         .combinedClickable(enabled = true,
-                            onDoubleClick = { navController.navigate(Routes.ShowMovie.route) },
+                            onDoubleClick = { navController.navigate(Routes.ShowMovieOrSerieByGenre.route) },
                             onClick = {})
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -203,6 +207,134 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                             .width(width * 0.5f)
                     )
                 }
+            }
+        }
+    }
+}
+
+/**
+ * Muestra la información de la película o serie sobre la que se pulse
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param searchGenresViewModel viewModel del que obtendremos los datos
+ */
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ShowMovieOrSerieByGenre(navController: NavHostController,
+                 searchGenresViewModel: SearchGenresViewModel
+) {
+    //Guarda la posición de la película o serie que se muestra
+    val position by searchGenresViewModel.position.collectAsState()
+    //Lista de películas y series obtenida
+    val moviesAndSeriesList by searchGenresViewModel.moviesAndSeriesList.collectAsState()
+    //Propiedad del botón de guardado
+    val property by searchGenresViewModel.propertyButton.collectAsState()
+    //Lista de géneros de la película o serie
+    val genres by searchGenresViewModel.showGenres.collectAsState()
+
+    //Comprobamos si la película o serie ya ha sido guardada
+    searchGenresViewModel.findMovieOrSerieInList(moviesAndSeriesList[position].title)
+    searchGenresViewModel.getGenresToShow(moviesAndSeriesList[position])
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        val height = maxHeight
+        val width = maxWidth
+        Scaffold(
+            topBar = {
+                Cabecera(
+                    modifier = Modifier
+                        .height(maxHeight.times(0.08f)),
+                    property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
+                    volver = { navController.navigate(Routes.ShowByGenre.route)}
+                )
+            },
+            bottomBar = { Menu(
+                modifier = Modifier
+                    .height(maxHeight.times(0.08f)),
+                home2 = { navController.navigate(Routes.MoviesScreen.route) },
+                genres2 = { navController.navigate(Routes.SearchGenres.route) },
+                fav2 = { navController.navigate(Routes.FavoritesScreen.route) },
+                cine2 = { navController.navigate(Routes.CinemaScreen.route) },
+                property1 = Property1.Generos
+            )
+            },
+            floatingActionButton = {
+                Guardar(
+                    property1 = property,
+                    guardar = { searchGenresViewModel.saveMovieOrSerie(moviesAndSeriesList[position]) },
+                    eliminar = { searchGenresViewModel.deleteMovieOrSerie() }
+                )
+            }
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color(199, 199, 199))
+                    .verticalScroll(rememberScrollState())
+                    .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
+            ) {
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = width * 0.04f,
+                        end = width * 0.04f,
+                        top = height * 0.03f,
+                        bottom = height * 0.03f
+                    )
+                ) {
+                    AsyncImage(model = moviesAndSeriesList[position].poster,
+                        contentDescription = "Poster",
+                        modifier = Modifier
+                            .height(height * 0.3f)
+                    )
+                    Spacer(modifier = Modifier.width(width * 0.03f))
+                    Column {
+                        Text(text = moviesAndSeriesList[position].title,
+                            fontFamily = Constants.FONT_FAMILY,
+                            textAlign = TextAlign.Justify,
+                            color = Color.Black,
+                            fontSize = 25.sp
+                        )
+                        Spacer(modifier = Modifier.height(width * 0.03f))
+                        Text(text = "Release date: ${moviesAndSeriesList[position].date}",
+                            fontFamily = Constants.FONT_FAMILY,
+                            textAlign = TextAlign.Start,
+                            color = Color.Black,
+                            fontSize = 18.sp
+                        )
+                        Spacer(modifier = Modifier.height(width * 0.03f))
+                        Row {
+                            for (i in 0..searchGenresViewModel.calculateVotes(moviesAndSeriesList[position])-1){
+                                Image(
+                                    painter = painterResource(id = R.drawable.votes),
+                                    contentDescription = "Votes",
+                                    modifier = Modifier.width(width*0.08f)
+                                )
+                            }
+                        }
+                    }
+                }
+                Text(text = moviesAndSeriesList[position].overview,
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.05f))
+                Text(text = "Genres: \n$genres",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
             }
         }
     }

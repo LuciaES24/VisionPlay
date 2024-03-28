@@ -216,8 +216,9 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     fun lastMovie(){
         _propertyButton.value = Property1.Default
-        if (_apiMoviePage.value==1){
+        if (_apiMoviePage.value==1 && _moviePosition.value == 0){
             _apiMoviePage.value=1
+            _moviePosition.value=0
         }else if(_moviePosition.value <= 0) {
             _apiMoviePage.value--
             _moviePosition.value = _movieList.value.size - 1
@@ -246,8 +247,9 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     fun lastSerie(){
         _propertyButton.value = Property1.Default
-        if (_apiSeriePage.value == 1){
+        if (_apiSeriePage.value == 1 && _seriePosition.value == 0){
             _apiSeriePage.value=1
+            _seriePosition.value=0
         } else if (_seriePosition.value <= 0) {
             _apiSeriePage.value--
             _seriePosition.value = _movieList.value.size - 1
@@ -260,7 +262,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
     /**
      * Cambia la propiedad del botón de guardado dependiendo de cuando se pulsa
      */
-    fun guardarPeliculaOSerie(){
+    private fun guardarPeliculaOSerie(){
         if (_propertyButton.value == Property1.Default){
             _propertyButton.value = Property1.Guardado
         }else{
