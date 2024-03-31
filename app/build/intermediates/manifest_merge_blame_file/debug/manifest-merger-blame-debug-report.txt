@@ -30,7 +30,7 @@
 19-->[androidx.core:core:1.12.0] C:\Users\lucia\.gradle\caches\transforms-3\5d5f90d684b11056db68460943bee0cc\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
 20
 21    <application
-21-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:6:5-26:19
+21-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:6:5-27:19
 22        android:allowBackup="true"
 22-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:7:9-35
 23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -53,22 +53,22 @@
 33        android:theme="@style/Theme.VisionPlay" >
 33-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:14:9-48
 34        <activity
-34-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:16:9-25:20
+34-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:17:9-26:20
 35            android:name="com.lespsan543.visionplay.MainActivity"
-35-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:17:13-41
+35-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:18:13-41
 36            android:exported="true"
-36-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:18:13-36
+36-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:19:13-36
 37            android:theme="@style/Theme.VisionPlay" >
-37-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:19:13-52
+37-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:20:13-52
 38            <intent-filter>
-38-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:20:13-24:29
+38-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:21:13-25:29
 39                <action android:name="android.intent.action.MAIN" />
-39-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:21:17-69
-39-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:21:25-66
+39-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:22:17-69
+39-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:22:25-66
 40
 41                <category android:name="android.intent.category.LAUNCHER" />
-41-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:23:17-77
-41-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:23:27-74
+41-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:24:17-77
+41-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:24:27-74
 42            </intent-filter>
 43        </activity>
 44

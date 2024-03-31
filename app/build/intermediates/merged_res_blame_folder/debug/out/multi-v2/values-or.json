@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-60:/values-or/values-or.xml",
+            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-64:/values-or/values-or.xml",
             "map": [
                 {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bea390e904cba1b4df1bc0736a499eeb\\transformed\\ui-release\\res\\values-or\\values-or.xml",
