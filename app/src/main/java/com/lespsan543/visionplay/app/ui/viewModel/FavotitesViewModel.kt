@@ -7,8 +7,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.lespsan543.visionplay.app.domain.GetMovieGenres
-import com.lespsan543.visionplay.app.domain.GetSerieGenres
+import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
+import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,9 +32,9 @@ class FavotitesViewModel :ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     private val firestore = Firebase.firestore
 
-    private val getMovieGenres = GetMovieGenres()
+    private val getMovieGenresUseCase = GetMovieGenresUseCase()
 
-    private val getSerieGenres = GetSerieGenres()
+    private val getSerieGenresUseCase = GetSerieGenresUseCase()
 
     private var _favoritesList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
     var favoritesList : StateFlow<List<MovieOrSerieState>> = _favoritesList.asStateFlow()
@@ -59,7 +59,7 @@ class FavotitesViewModel :ViewModel() {
      */
     private fun movieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
-            _movieGenres.value = getMovieGenres.invoke()
+            _movieGenres.value = getMovieGenresUseCase.invoke()
         }
     }
 
@@ -68,7 +68,7 @@ class FavotitesViewModel :ViewModel() {
      */
     private fun serieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
-            _serieGenres.value = getSerieGenres.invoke()
+            _serieGenres.value = getSerieGenresUseCase.invoke()
         }
     }
 

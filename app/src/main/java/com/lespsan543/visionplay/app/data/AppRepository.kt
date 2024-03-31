@@ -67,7 +67,7 @@ class AppRepository {
         val response = apiService.discoverMovieGenres()
         val genres : MutableMap<String,String> = mutableMapOf()
         if (response.isSuccessful){
-            for (i in response.body()!!.genres){
+            for (i in response.body()!!.genreModels){
                 genres[i.id] = i.genre
             }
         }
@@ -83,11 +83,27 @@ class AppRepository {
         val response = apiService.discoverSerieGenres()
         val genres : MutableMap<String,String> = mutableMapOf()
         if (response.isSuccessful){
-            for (i in response.body()!!.genres){
+            for (i in response.body()!!.genreModels){
                 genres[i.id] = i.genre
             }
         }
         return genres
+    }
+
+    /**
+     * Realiza una búsqueda en youtube dependiendo del título que se indique
+     *
+     * @param movieOrSerie título de la película o serie formateado para la búsqueda
+     *
+     * @return id del video encontrado
+     */
+    suspend fun getYoutubeTrailer(movieOrSerie: String): String {
+        val response = apiService.getYoutubeTrailer(movieOrSerie)
+        var id = ""
+        if (response.isSuccessful){
+            id = response.body()?.items?.get(0)?.id?.videoId.toString()
+        }
+        return id
     }
 
     /**

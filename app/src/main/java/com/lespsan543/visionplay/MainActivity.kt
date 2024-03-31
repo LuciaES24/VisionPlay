@@ -15,6 +15,7 @@ import com.lespsan543.apppeliculas.peliculas.ui.viewModel.FavotitesViewModel
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
 import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.CinemaScreen
 import com.lespsan543.visionplay.app.ui.FavoritesScreen
 import com.lespsan543.visionplay.app.ui.LogInScreen
 import com.lespsan543.visionplay.app.ui.MoviesScreen
@@ -26,6 +27,7 @@ import com.lespsan543.visionplay.app.ui.ShowMovie
 import com.lespsan543.visionplay.app.ui.ShowMovieOrSerieByGenre
 import com.lespsan543.visionplay.app.ui.ShowMoviesAndSeriesByGenre
 import com.lespsan543.visionplay.app.ui.ShowSerie
+import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
 import com.lespsan543.visionplay.app.ui.viewModel.SearchGenresViewModel
 import com.lespsan543.visionplay.ui.theme.VisionPlayTheme
 
@@ -41,6 +43,7 @@ class MainActivity : ComponentActivity() {
     private val logInOrRegisterViewModel : LogInOrRegisterViewModel by viewModels()
     private val favotitesViewModel : FavotitesViewModel by viewModels()
     private val searchGenresViewModel : SearchGenresViewModel by viewModels()
+    private val cinemaViewModel : CinemaViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,6 +89,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Routes.ShowMovieOrSerieByGenre.route) {
                             ShowMovieOrSerieByGenre(navController, searchGenresViewModel)
+                        }
+                        composable(Routes.CinemaScreen.route) {
+                            CinemaScreen(navController, cinemaViewModel)
                         }
                     }
                 }

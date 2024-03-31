@@ -9,8 +9,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
-import com.lespsan543.visionplay.app.domain.GetMovieGenres
-import com.lespsan543.visionplay.app.domain.GetSerieGenres
+import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
+import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
+import com.lespsan543.visionplay.app.domain.GetTrailerUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.guardar.Property1
 import kotlinx.coroutines.Dispatchers
@@ -49,9 +50,11 @@ class MoviesOrSeriesViewModel : ViewModel() {
 
     private val discoverSeriesUseCase = DiscoverSeriesUseCase()
 
-    private val getMovieGenres = GetMovieGenres()
+    private val getMovieGenresUseCase = GetMovieGenresUseCase()
 
-    private val getSerieGenres = GetSerieGenres()
+    private val getSerieGenresUseCase = GetSerieGenresUseCase()
+
+    private val getTrailerUseCase = GetTrailerUseCase()
 
     private var _moviePosition = MutableStateFlow(0)
     var moviePosition : StateFlow<Int> = _moviePosition
@@ -82,6 +85,9 @@ class MoviesOrSeriesViewModel : ViewModel() {
 
     private var _showGenres = MutableStateFlow("")
     var showGenres : StateFlow<String> = _showGenres
+
+    private var _trailerId = MutableStateFlow("")
+    var trailerId : StateFlow<String> = _trailerId
 
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
@@ -124,7 +130,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     private fun movieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
-            _movieGenres.value = getMovieGenres.invoke()
+            _movieGenres.value = getMovieGenresUseCase.invoke()
         }
         Log.d("genres", _movieGenres.value.values.toString())
     }
@@ -134,7 +140,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     private fun serieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
-            _serieGenres.value = getSerieGenres.invoke()
+            _serieGenres.value = getSerieGenresUseCase.invoke()
         }
         Log.d("genres2", _movieGenres.value.values.toString())
 
@@ -334,5 +340,25 @@ class MoviesOrSeriesViewModel : ViewModel() {
     fun calculateVotes(movieOrSerie: MovieOrSerieState) : Int{
         val votes = movieOrSerie.votes.toDouble() / 2
         return votes.roundToInt()
+    }
+
+    fun formatTitle(title: String){
+        val words = title.split(" ")
+        var result = "trailer%20"
+        for (word in words){
+            result+=word
+            if (word != words.last()){
+                result+="%20"
+            }
+        }
+        Log.d("title", result)
+        getTrailer(result)
+    }
+
+    private fun getTrailer(title: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _trailerId.value = getTrailerUseCase.invoke(title)
+        }
+        Log.d("idtrailer", _trailerId.value)
     }
 }

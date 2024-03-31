@@ -8,8 +8,8 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
-import com.lespsan543.visionplay.app.domain.GetMovieGenres
-import com.lespsan543.visionplay.app.domain.GetSerieGenres
+import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
+import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.guardar.Property1
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +22,9 @@ class SearchGenresViewModel : ViewModel(){
     private val auth: FirebaseAuth = Firebase.auth
     private val firestore = Firebase.firestore
 
-    private val getMovieGenres = GetMovieGenres()
+    private val getMovieGenresUseCase = GetMovieGenresUseCase()
 
-    private val getSerieGenres = GetSerieGenres()
+    private val getSerieGenresUseCase = GetSerieGenresUseCase()
 
     private val discoverMoviesUseCase = DiscoverMoviesUseCase()
 
@@ -109,7 +109,7 @@ class SearchGenresViewModel : ViewModel(){
      */
     private fun movieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
-            _movieGenres.value = getMovieGenres.invoke()
+            _movieGenres.value = getMovieGenresUseCase.invoke()
         }
     }
 
@@ -171,7 +171,7 @@ class SearchGenresViewModel : ViewModel(){
      */
     private fun serieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
-            _serieGenres.value = getSerieGenres.invoke()
+            _serieGenres.value = getSerieGenresUseCase.invoke()
         }
     }
 

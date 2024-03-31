@@ -28,6 +28,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -38,11 +39,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.media3.common.MediaItem
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.ui.PlayerView
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
@@ -124,7 +131,8 @@ fun MoviesScreen(
                         .height(height)
                         .width(width)
                         .combinedClickable(enabled = true,
-                            onDoubleClick = { navController.navigate(Routes.ShowMovie.route) },
+                            onDoubleClick = { navController.navigate(Routes.ShowMovie.route)
+                                              moviesOrSeriesViewModel.formatTitle(movieList[moviePosition].title)},
                             onClick = {})
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -139,7 +147,8 @@ fun MoviesScreen(
                                 } else if (offsetX > 0) {
                                     moviesOrSeriesViewModel.lastMovie()
                                 }
-                                offsetX = 0 }
+                                offsetX = 0
+                            }
                         )
                 )
                 Guardar(
@@ -172,7 +181,7 @@ fun MoviesScreen(
  * @param navController nos permite realizar la navegación entre pantallas
  * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
  */
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@androidx.annotation.OptIn(UnstableApi::class) @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShowMovie(navController: NavHostController,
@@ -186,6 +195,29 @@ fun ShowMovie(navController: NavHostController,
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
     //Lista de géneros de la película
     val genres by moviesOrSeriesViewModel.showGenres.collectAsState()
+    //Id del trailer a mostrar
+    val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
+    //Contexto para poder poner el video del tráiler
+    val context = LocalContext.current
+    //Inicializamos el componente ExoPlayer
+    val exoPlayer = ExoPlayer.Builder(context).build()
+
+    //Creamos un MediaItem
+    val mediaItem = MediaItem.Builder().setUri("https://www.youtube.com/watch?v=$trailerId").build()
+
+    //Asociamos el MediaSource al ExoPlayer
+    LaunchedEffect(mediaItem) {
+        exoPlayer.setMediaItem(mediaItem)
+        exoPlayer.prepare()
+        exoPlayer.play()
+    }
+
+    //Mostramos el video cuando se abra la pantalla
+    DisposableEffect(Unit) {
+        onDispose {
+            exoPlayer.release()
+        }
+    }
 
     //Comprobamos si la película ya ha sido guardada
     moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
@@ -264,6 +296,17 @@ fun ShowMovie(navController: NavHostController,
                         }
                     }
                 }
+                Text(text = "Overview:",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.03f))
                 Text(text = movieList[moviePosition].overview,
                     fontFamily = Constants.FONT_FAMILY,
                     textAlign = TextAlign.Justify,
@@ -275,7 +318,18 @@ fun ShowMovie(navController: NavHostController,
                     )
                 )
                 Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Genres: \n$genres",
+                Text(text = "Genres:",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.03f))
+                Text(text = genres,
                     fontFamily = Constants.FONT_FAMILY,
                     textAlign = TextAlign.Justify,
                     color = Color.Black,
@@ -285,6 +339,33 @@ fun ShowMovie(navController: NavHostController,
                         end = width * 0.05f
                     )
                 )
+                Spacer(modifier = Modifier.height(width * 0.05f))
+                Text(text = "Trailer: ",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.05f))
+                AndroidView(
+                    factory = { ctx ->
+                        PlayerView(ctx).apply {
+                            player = exoPlayer
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
+                        .height(height * 0.25f)
+                )
+                Spacer(modifier = Modifier.height(width * 0.07f))
             }
         }
     }

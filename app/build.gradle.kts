@@ -33,6 +33,11 @@ android {
             )
         }
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -84,4 +89,8 @@ dependencies {
     //Iconos
     implementation ("androidx.compose.material:material-icons-core:1.1.0-alpha03")
     implementation ("androidx.compose.material:material-icons-extended:1.1.0-alpha03")
+    //ExoPlayer
+    implementation("androidx.media3:media3-exoplayer:1.2.0")
+    implementation("androidx.media3:media3-ui:1.2.0")
+
 }
