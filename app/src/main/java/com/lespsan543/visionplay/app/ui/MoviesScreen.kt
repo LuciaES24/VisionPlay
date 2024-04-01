@@ -39,17 +39,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.MediaItem
-import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.PlayerView
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
@@ -60,6 +58,9 @@ import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.Property1
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
@@ -131,8 +132,10 @@ fun MoviesScreen(
                         .height(height)
                         .width(width)
                         .combinedClickable(enabled = true,
-                            onDoubleClick = { navController.navigate(Routes.ShowMovie.route)
-                                              moviesOrSeriesViewModel.formatTitle(movieList[moviePosition].title)},
+                            onDoubleClick = {
+                                navController.navigate(Routes.ShowMovie.route)
+                                moviesOrSeriesViewModel.formatTitle(movieList[moviePosition].title)
+                            },
                             onClick = {})
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -181,7 +184,7 @@ fun MoviesScreen(
  * @param navController nos permite realizar la navegación entre pantallas
  * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
  */
-@androidx.annotation.OptIn(UnstableApi::class) @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShowMovie(navController: NavHostController,
@@ -197,28 +200,12 @@ fun ShowMovie(navController: NavHostController,
     val genres by moviesOrSeriesViewModel.showGenres.collectAsState()
     //Id del trailer a mostrar
     val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
-    //Contexto para poder poner el video del tráiler
-    val context = LocalContext.current
-    //Inicializamos el componente ExoPlayer
-    val exoPlayer = ExoPlayer.Builder(context).build()
 
-    //Creamos un MediaItem
-    val mediaItem = MediaItem.Builder().setUri("https://www.youtube.com/watch?v=$trailerId").build()
-
-    //Asociamos el MediaSource al ExoPlayer
-    LaunchedEffect(mediaItem) {
-        exoPlayer.setMediaItem(mediaItem)
-        exoPlayer.prepare()
-        exoPlayer.play()
-    }
-
-    //Mostramos el video cuando se abra la pantalla
-    DisposableEffect(Unit) {
+    DisposableEffect(Unit){
         onDispose {
-            exoPlayer.release()
+            moviesOrSeriesViewModel.resetTrailer()
         }
     }
-
     //Comprobamos si la película ya ha sido guardada
     moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
     moviesOrSeriesViewModel.getMovieGenresToShow(movieList[moviePosition])
@@ -351,22 +338,38 @@ fun ShowMovie(navController: NavHostController,
                     )
                 )
                 Spacer(modifier = Modifier.height(width * 0.05f))
-                AndroidView(
-                    factory = { ctx ->
-                        PlayerView(ctx).apply {
-                            player = exoPlayer
-                        }
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(
-                            start = width * 0.05f,
-                            end = width * 0.05f
-                        )
-                        .height(height * 0.25f)
-                )
-                Spacer(modifier = Modifier.height(width * 0.07f))
+                if (trailerId!=""){
+                    YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
+                    Spacer(modifier = Modifier.height(width * 0.07f))
+                }
             }
         }
     }
+}
+
+@Composable
+fun YoutubeVideo(id:String,
+            lifecycleOwner: LifecycleOwner,
+            width: Dp,
+            height: Dp){
+
+    AndroidView(
+        factory = { cntx->
+            YouTubePlayerView(cntx).apply {
+                lifecycleOwner.lifecycle.addObserver(this)
+                addYouTubePlayerListener(object:AbstractYouTubePlayerListener(){
+                    override fun onReady(youTubePlayer: YouTubePlayer) {
+                        youTubePlayer.loadVideo(id, 0f)
+                    }
+                })
+            }
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = width * 0.05f,
+                end = width * 0.05f
+            )
+            .height(height * 0.25f)
+    )
 }

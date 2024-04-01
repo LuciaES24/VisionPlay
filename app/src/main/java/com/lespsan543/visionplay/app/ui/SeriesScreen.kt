@@ -27,6 +27,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
@@ -124,7 +126,8 @@ fun SeriesScreen(
                         .height(height)
                         .width(width)
                         .combinedClickable(enabled = true,
-                            onDoubleClick = { navController.navigate(Routes.ShowSerie.route) },
+                            onDoubleClick = { navController.navigate(Routes.ShowSerie.route)
+                                              moviesOrSeriesViewModel.formatTitle(serieList[seriePosition].title)},
                             onClick = {})
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -185,7 +188,14 @@ fun ShowSerie(navController: NavHostController,
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
     //Lista de géneros de la serie
     val genres by moviesOrSeriesViewModel.showGenres.collectAsState()
+    //Id del trailer a mostrar
+    val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
 
+    DisposableEffect(Unit){
+        onDispose {
+            moviesOrSeriesViewModel.resetTrailer()
+        }
+    }
     //Comprobamos si la serie ya ha sido guardada
     moviesOrSeriesViewModel.findMovieInList(serieList[seriePosition].title)
     moviesOrSeriesViewModel.getSerieGenresToShow(serieList[seriePosition])
@@ -203,7 +213,7 @@ fun ShowSerie(navController: NavHostController,
             },
             bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
                 property1 = Property1.Inicio,
-                home = { navController.navigate(Routes.SeriesScreen.route) },
+                home = { navController.navigate(Routes.MoviesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
                 genres1 = { navController.navigate(Routes.SearchGenres.route) },
                 cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
@@ -263,6 +273,17 @@ fun ShowSerie(navController: NavHostController,
                         }
                     }
                 }
+                Text(text = "Overview:",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.03f))
                 Text(text = serieList[seriePosition].overview,
                     fontFamily = Constants.FONT_FAMILY,
                     textAlign = TextAlign.Justify,
@@ -274,7 +295,18 @@ fun ShowSerie(navController: NavHostController,
                     )
                 )
                 Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Genres: \n$genres",
+                Text(text = "Genres:",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.03f))
+                Text(text = genres,
                     fontFamily = Constants.FONT_FAMILY,
                     textAlign = TextAlign.Justify,
                     color = Color.Black,
@@ -284,6 +316,22 @@ fun ShowSerie(navController: NavHostController,
                         end = width * 0.05f
                     )
                 )
+                Spacer(modifier = Modifier.height(width * 0.05f))
+                Text(text = "Trailer: ",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.05f))
+                if (trailerId!=""){
+                    YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
+                    Spacer(modifier = Modifier.height(width * 0.07f))
+                }
             }
         }
     }

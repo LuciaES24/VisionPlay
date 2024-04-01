@@ -89,8 +89,7 @@ dependencies {
     //Iconos
     implementation ("androidx.compose.material:material-icons-core:1.1.0-alpha03")
     implementation ("androidx.compose.material:material-icons-extended:1.1.0-alpha03")
-    //ExoPlayer
-    implementation("androidx.media3:media3-exoplayer:1.2.0")
-    implementation("androidx.media3:media3-ui:1.2.0")
+    //YoutubePlayer
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 
 }

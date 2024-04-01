@@ -344,7 +344,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
 
     fun formatTitle(title: String){
         val words = title.split(" ")
-        var result = "trailer%20"
+        var result = "official%20trailer%20"
         for (word in words){
             result+=word
             if (word != words.last()){
@@ -359,6 +359,9 @@ class MoviesOrSeriesViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _trailerId.value = getTrailerUseCase.invoke(title)
         }
-        Log.d("idtrailer", _trailerId.value)
+    }
+
+    fun resetTrailer(){
+        _trailerId.value = ""
     }
 }
