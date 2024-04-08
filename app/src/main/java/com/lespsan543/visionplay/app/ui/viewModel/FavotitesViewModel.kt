@@ -7,9 +7,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
+import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
+import com.lespsan543.visionplay.guardar.Property1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,6 +39,10 @@ class FavotitesViewModel :ViewModel() {
 
     private val getSerieGenresUseCase = GetSerieGenresUseCase()
 
+    private val discoverMoviesUseCase = DiscoverMoviesUseCase()
+
+    private val discoverSeriesUseCase = DiscoverSeriesUseCase()
+
     private var _favoritesList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
     var favoritesList : StateFlow<List<MovieOrSerieState>> = _favoritesList.asStateFlow()
 
@@ -49,9 +56,33 @@ class FavotitesViewModel :ViewModel() {
 
     private var _serieGenres = MutableStateFlow<Map<String,String>>(emptyMap())
 
+    private var _movieList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+
+    private var _serieList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+
+    private var _dbList = MutableStateFlow<List<List<MovieOrSerieState>>>(emptyList())
+
     init {
         movieGenres()
         serieGenres()
+    }
+
+    /**
+     * Buscamos una lista de películas en la API
+     */
+    private fun getAllMovies(page:Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            _movieList.value = discoverMoviesUseCase.invoke(page).results
+        }
+    }
+
+    /**
+     * Buscamos una lista de series en la API
+     */
+    private fun getAllSeries(page:Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            _serieList.value = discoverSeriesUseCase.invoke(page).results
+        }
     }
 
     /**
@@ -143,6 +174,63 @@ class FavotitesViewModel :ViewModel() {
                 }
                 _favoritesList.value = favorites
             }
+    }
+
+    fun loadFromAPI(){
+        val temporalList = mutableListOf<List<MovieOrSerieState>>()
+        for (z in 1..20-1){
+            getAllSeries(z)
+            getAllMovies(z)
+            Thread.sleep(500)
+            temporalList.add(_serieList.value)
+            temporalList.add(_movieList.value)
+        }
+        _dbList.value = temporalList
+        saveInDB()
+    }
+
+    private fun saveInDB(){
+        for (list in _dbList.value){
+            for (movieOrSerie in list){
+                save(movieOrSerie)
+            }
+        }
+    }
+
+    fun isAdmin(): Boolean {
+        val email = auth.currentUser?.email
+        return email == "admin@admin.com"
+    }
+
+    /**
+     * Guarda la película o serie que se le indica en la base de datos
+     *
+     * @param searchMovieState película o serie que queremos añadir a favoritos
+     */
+    fun save(searchMovieState: MovieOrSerieState) {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val newMovieOrSerie = hashMapOf(
+                    "title" to searchMovieState.title,
+                    "overview" to searchMovieState.overview,
+                    "poster" to searchMovieState.poster,
+                    "date" to searchMovieState.date,
+                    "votes" to searchMovieState.votes,
+                    "genres" to searchMovieState.genres,
+                    "type" to searchMovieState.type
+                )
+                firestore.collection("MoviesAndSeries")
+                    .add(newMovieOrSerie)
+                    .addOnSuccessListener {
+                    }
+                    .addOnFailureListener {
+                        throw Exception()
+                    }
+            } catch (e: Exception){
+                e.localizedMessage?.let { Log.d("Exception", it) }
+            }
+        }
     }
 
     /**

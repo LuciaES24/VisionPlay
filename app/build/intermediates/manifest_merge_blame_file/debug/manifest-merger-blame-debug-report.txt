@@ -12,8 +12,8 @@
 11-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:5:5-66
 11-->C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:5:22-64
 12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-12-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:26:5-79
-12-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:26:22-76
+12-->[com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:8:5-79
+12-->[com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:8:22-76
 13    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 13-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\lucia\.gradle\caches\transforms-3\4246b02058db6a760102609a955a0089\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:5-98
 13-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\lucia\.gradle\caches\transforms-3\4246b02058db6a760102609a955a0089\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:22-95

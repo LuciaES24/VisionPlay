@@ -87,7 +87,7 @@ fun MoviesScreen(
     var offsetX by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(Unit){
-        moviesOrSeriesViewModel.fetchMoviesInDB()
+        moviesOrSeriesViewModel.fetchFavoritesFromDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val width = maxWidth

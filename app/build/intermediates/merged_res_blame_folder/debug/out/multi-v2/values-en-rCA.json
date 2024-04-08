@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-64:/values-en-rCA/values-en-rCA.xml",
+            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values-en-rCA/values-en-rCA.xml",
             "map": [
                 {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bea390e904cba1b4df1bc0736a499eeb\\transformed\\ui-release\\res\\values-en-rCA\\values-en-rCA.xml",

@@ -7,6 +7,7 @@ INJECTED from C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml
 MERGED from [androidx.databinding:viewbinding:8.1.2] C:\Users\lucia\.gradle\caches\transforms-3\d7ed84c09ceecb028b58d39ff11fc579\transformed\viewbinding-8.1.2\AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil-compose:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\57ca326b7cb2a8e92c69adc362ff695e\transformed\coil-compose-2.5.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\b9813e727aa83e62b2dee5deb3c3e841\transformed\firebase-firestore-ktx-24.10.1\AndroidManifest.xml:2:1-18:12
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:2:1-10:12
 MERGED from [io.coil-kt:coil-compose-base:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\7512b7f5ebcb8720df4aded91b1b56b3\transformed\coil-compose-base-2.5.0\AndroidManifest.xml:2:1-7:12
 MERGED from [io.coil-kt:coil:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\b5c129d61b57c6967384981b53973d68\transformed\coil-2.5.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.firebase:firebase-auth-ktx:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\21e96df0849ecfb7edcfe5640cae7e0c\transformed\firebase-auth-ktx-22.3.1\AndroidManifest.xml:2:1-17:12
@@ -69,27 +70,17 @@ MERGED from [androidx.activity:activity-ktx:1.8.2] C:\Users\lucia\.gradle\caches
 MERGED from [androidx.activity:activity-compose:1.8.2] C:\Users\lucia\.gradle\caches\transforms-3\efab56f028b4edc5386777e335ba8873\transformed\activity-compose-1.8.2\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] C:\Users\lucia\.gradle\caches\transforms-3\963441b330dd7083c1d8657b8f8bd854\transformed\lifecycle-viewmodel-2.7.0\AndroidManifest.xml:17:1-22:12
 MERGED from [io.coil-kt:coil-base:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\ceb13197f9e65d5eec83d5027f6af658\transformed\coil-base-2.5.0\AndroidManifest.xml:2:1-7:12
-MERGED from [androidx.media3:media3-ui:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6f1b690a08b797a6d4ff47e3121c9c9b\transformed\media3-ui-1.2.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-extractor:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\283fa2da5b80ee12cbca00ca9e72a634\transformed\media3-extractor-1.2.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-container:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\1f874666d45b6e3683feb9f0eca8e271\transformed\media3-container-1.2.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-datasource:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\d53564198bd5c8a553f17c42f39929fc\transformed\media3-datasource-1.2.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-decoder:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\210be7cde3ab3ca1eb674a3c2c48f545\transformed\media3-decoder-1.2.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-database:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\51d7e21b7fa2da6dc46a12bfb7763206\transformed\media3-database-1.2.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media3:media3-common:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6bad567ee044f08c5e8609986dbb5e3b\transformed\media3-common-1.2.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.media3:media3-exoplayer:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\09789942041f8e538a0011a8fa901e3a\transformed\media3-exoplayer-1.2.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.media:media:1.6.0] C:\Users\lucia\.gradle\caches\transforms-3\9f40561a47a5638d679e79cdbf2bea7a\transformed\media-1.6.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.recyclerview:recyclerview:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\246846aa61765447827c60a57ee06d23\transformed\recyclerview-1.3.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\784c6a386847cb445c00032eeeca6965\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.core:core-ktx:1.12.0] C:\Users\lucia\.gradle\caches\transforms-3\a35fc5b2e32a7cfd0ca8bb409d000e43\transformed\core-ktx-1.12.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.browser:browser:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\569b9eae1829155aa5ac443991a922ac\transformed\browser-1.4.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\lucia\.gradle\caches\transforms-3\8741c1b10a90b687f9aa4d5ab914a0e6\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\2391ad40962a584975e2343d4123dd34\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\8e5e4a04077191502fdac55efcf8e9b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\9815f8d7502ec555478db28051e1c372\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\960af8604272390a4bb4bd582690780f\transformed\coordinatorlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\5a06b9cdd2f3fdb4c6d254f3bd7e7718\transformed\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\bfbbe6e99cfa07885c68f39978b1bee1\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\425c5850a9afc334b827e09176691413\transformed\customview-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\lucia\.gradle\caches\transforms-3\8741c1b10a90b687f9aa4d5ab914a0e6\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\2391ad40962a584975e2343d4123dd34\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\8e5e4a04077191502fdac55efcf8e9b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\8a23aa7f7e0d5467a8de41e137dbd077\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\72958f7c4b32c7644d09faffaebbd452\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\147f11030ab1462270074075e8c59470\transformed\autofill-1.0.0\AndroidManifest.xml:17:1-24:12
@@ -97,18 +88,18 @@ MERGED from [androidx.core:core:1.12.0] C:\Users\lucia\.gradle\caches\transforms
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.7.0] C:\Users\lucia\.gradle\caches\transforms-3\80ac47546b022f680839e074fd9d27b3\transformed\lifecycle-runtime-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\lucia\.gradle\caches\transforms-3\d8c66a336a8c8889a2a88fc0e599f78b\transformed\lifecycle-runtime-ktx-2.7.0\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.firebase:firebase-components:17.1.5] C:\Users\lucia\.gradle\caches\transforms-3\3d986954ee7eecae36df4a10653186a7\transformed\firebase-components-17.1.5\AndroidManifest.xml:15:1-20:12
-MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\lucia\.gradle\caches\transforms-3\f32a2626963080489d6c91dcb5ccffa9\transformed\exifinterface-1.3.6\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\lucia\.gradle\caches\transforms-3\1105168ac5cbbf3806e87cf95822ad5a\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\4225d6a846630a9b83234eff3313c0c9\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\lucia\.gradle\caches\transforms-3\17c97ff132f0083620744620c664ff60\transformed\profileinstaller-1.3.1\AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\lucia\.gradle\caches\transforms-3\cbebb5ce83a237192215f5b24e8b2f60\transformed\startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\82c98d306f6e46421d78c075de2712bf\transformed\tracing-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\lucia\.gradle\caches\transforms-3\f32a2626963080489d6c91dcb5ccffa9\transformed\exifinterface-1.3.6\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\ae1c6d0c4945d476d5a60cf01ec62278\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\lucia\.gradle\caches\transforms-3\c87361ff0d3fe1c6ae901d0c7811625a\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\a455546ab0a313fec68d57f197b29617\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\d779afa1968ddc3a9ecd07cf1a4922b8\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\22ad1e2a8cba0ad984c831d913f913b7\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.annotation:annotation-experimental:1.3.1] C:\Users\lucia\.gradle\caches\transforms-3\c36a9f444541aed6c03da9cb4537686d\transformed\annotation-experimental-1.3.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\a7712757bfa467f981ea4c34b63398f6\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:17:1-22:12
 MERGED from [io.grpc:grpc-android:1.57.2] C:\Users\lucia\.gradle\caches\transforms-3\d936adc79f2fc9057a578ffdc3247a8a\transformed\grpc-android-1.57.2\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\lucia\.gradle\caches\transforms-3\d65cd0097d63cae2cb33991d93c3f2f7\transformed\protolite-well-known-types-18.0.0\AndroidManifest.xml:2:1-11:12
 	package
@@ -123,6 +114,8 @@ MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\luc
 		ADDED from C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\lucia\Desktop\VisionPlay\app\src\main\AndroidManifest.xml:5:5-66
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:7:5-67
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:7:5-67
 MERGED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:25:5-67
 MERGED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:25:5-67
 MERGED from [com.google.firebase:firebase-firestore:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\dfac3f1ebbadf508a33246c6d646faf4\transformed\firebase-firestore-24.10.1\AndroidManifest.xml:11:5-67
@@ -224,6 +217,8 @@ MERGED from [io.coil-kt:coil-compose:2.5.0] C:\Users\lucia\.gradle\caches\transf
 MERGED from [io.coil-kt:coil-compose:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\57ca326b7cb2a8e92c69adc362ff695e\transformed\coil-compose-2.5.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\b9813e727aa83e62b2dee5deb3c3e841\transformed\firebase-firestore-ktx-24.10.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:firebase-firestore-ktx:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\b9813e727aa83e62b2dee5deb3c3e841\transformed\firebase-firestore-ktx-24.10.1\AndroidManifest.xml:5:5-44
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:5:5-44
+MERGED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-compose-base:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\7512b7f5ebcb8720df4aded91b1b56b3\transformed\coil-compose-base-2.5.0\AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-compose-base:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\7512b7f5ebcb8720df4aded91b1b56b3\transformed\coil-compose-base-2.5.0\AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\b5c129d61b57c6967384981b53973d68\transformed\coil-2.5.0\AndroidManifest.xml:5:5-44
@@ -348,32 +343,18 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] C:\Users\lucia\.gradl
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.7.0] C:\Users\lucia\.gradle\caches\transforms-3\963441b330dd7083c1d8657b8f8bd854\transformed\lifecycle-viewmodel-2.7.0\AndroidManifest.xml:20:5-44
 MERGED from [io.coil-kt:coil-base:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\ceb13197f9e65d5eec83d5027f6af658\transformed\coil-base-2.5.0\AndroidManifest.xml:5:5-44
 MERGED from [io.coil-kt:coil-base:2.5.0] C:\Users\lucia\.gradle\caches\transforms-3\ceb13197f9e65d5eec83d5027f6af658\transformed\coil-base-2.5.0\AndroidManifest.xml:5:5-44
-MERGED from [androidx.media3:media3-ui:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6f1b690a08b797a6d4ff47e3121c9c9b\transformed\media3-ui-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-ui:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6f1b690a08b797a6d4ff47e3121c9c9b\transformed\media3-ui-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-extractor:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\283fa2da5b80ee12cbca00ca9e72a634\transformed\media3-extractor-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-extractor:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\283fa2da5b80ee12cbca00ca9e72a634\transformed\media3-extractor-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-container:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\1f874666d45b6e3683feb9f0eca8e271\transformed\media3-container-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-container:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\1f874666d45b6e3683feb9f0eca8e271\transformed\media3-container-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-datasource:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\d53564198bd5c8a553f17c42f39929fc\transformed\media3-datasource-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-datasource:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\d53564198bd5c8a553f17c42f39929fc\transformed\media3-datasource-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-decoder:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\210be7cde3ab3ca1eb674a3c2c48f545\transformed\media3-decoder-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-decoder:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\210be7cde3ab3ca1eb674a3c2c48f545\transformed\media3-decoder-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-database:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\51d7e21b7fa2da6dc46a12bfb7763206\transformed\media3-database-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-database:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\51d7e21b7fa2da6dc46a12bfb7763206\transformed\media3-database-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-common:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6bad567ee044f08c5e8609986dbb5e3b\transformed\media3-common-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-common:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6bad567ee044f08c5e8609986dbb5e3b\transformed\media3-common-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-exoplayer:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\09789942041f8e538a0011a8fa901e3a\transformed\media3-exoplayer-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media3:media3-exoplayer:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\09789942041f8e538a0011a8fa901e3a\transformed\media3-exoplayer-1.2.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.6.0] C:\Users\lucia\.gradle\caches\transforms-3\9f40561a47a5638d679e79cdbf2bea7a\transformed\media-1.6.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.media:media:1.6.0] C:\Users\lucia\.gradle\caches\transforms-3\9f40561a47a5638d679e79cdbf2bea7a\transformed\media-1.6.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\246846aa61765447827c60a57ee06d23\transformed\recyclerview-1.3.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\246846aa61765447827c60a57ee06d23\transformed\recyclerview-1.3.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\784c6a386847cb445c00032eeeca6965\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\784c6a386847cb445c00032eeeca6965\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.core:core-ktx:1.12.0] C:\Users\lucia\.gradle\caches\transforms-3\a35fc5b2e32a7cfd0ca8bb409d000e43\transformed\core-ktx-1.12.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.core:core-ktx:1.12.0] C:\Users\lucia\.gradle\caches\transforms-3\a35fc5b2e32a7cfd0ca8bb409d000e43\transformed\core-ktx-1.12.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.browser:browser:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\569b9eae1829155aa5ac443991a922ac\transformed\browser-1.4.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.browser:browser:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\569b9eae1829155aa5ac443991a922ac\transformed\browser-1.4.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\lucia\.gradle\caches\transforms-3\8741c1b10a90b687f9aa4d5ab914a0e6\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\lucia\.gradle\caches\transforms-3\8741c1b10a90b687f9aa4d5ab914a0e6\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\2391ad40962a584975e2343d4123dd34\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\2391ad40962a584975e2343d4123dd34\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\8e5e4a04077191502fdac55efcf8e9b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\8e5e4a04077191502fdac55efcf8e9b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\9815f8d7502ec555478db28051e1c372\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\9815f8d7502ec555478db28051e1c372\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\960af8604272390a4bb4bd582690780f\transformed\coordinatorlayout-1.0.0\AndroidManifest.xml:20:5-44
@@ -384,12 +365,6 @@ MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\lucia\
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\bfbbe6e99cfa07885c68f39978b1bee1\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\425c5850a9afc334b827e09176691413\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\425c5850a9afc334b827e09176691413\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\lucia\.gradle\caches\transforms-3\8741c1b10a90b687f9aa4d5ab914a0e6\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\lucia\.gradle\caches\transforms-3\8741c1b10a90b687f9aa4d5ab914a0e6\transformed\appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\2391ad40962a584975e2343d4123dd34\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\2391ad40962a584975e2343d4123dd34\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\8e5e4a04077191502fdac55efcf8e9b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\lucia\.gradle\caches\transforms-3\8e5e4a04077191502fdac55efcf8e9b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\8a23aa7f7e0d5467a8de41e137dbd077\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\8a23aa7f7e0d5467a8de41e137dbd077\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\72958f7c4b32c7644d09faffaebbd452\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
@@ -404,8 +379,6 @@ MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\lucia\.gra
 MERGED from [androidx.lifecycle:lifecycle-runtime-ktx:2.7.0] C:\Users\lucia\.gradle\caches\transforms-3\d8c66a336a8c8889a2a88fc0e599f78b\transformed\lifecycle-runtime-ktx-2.7.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.firebase:firebase-components:17.1.5] C:\Users\lucia\.gradle\caches\transforms-3\3d986954ee7eecae36df4a10653186a7\transformed\firebase-components-17.1.5\AndroidManifest.xml:18:5-44
 MERGED from [com.google.firebase:firebase-components:17.1.5] C:\Users\lucia\.gradle\caches\transforms-3\3d986954ee7eecae36df4a10653186a7\transformed\firebase-components-17.1.5\AndroidManifest.xml:18:5-44
-MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\lucia\.gradle\caches\transforms-3\f32a2626963080489d6c91dcb5ccffa9\transformed\exifinterface-1.3.6\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\lucia\.gradle\caches\transforms-3\f32a2626963080489d6c91dcb5ccffa9\transformed\exifinterface-1.3.6\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\lucia\.gradle\caches\transforms-3\1105168ac5cbbf3806e87cf95822ad5a\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\lucia\.gradle\caches\transforms-3\1105168ac5cbbf3806e87cf95822ad5a\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\4225d6a846630a9b83234eff3313c0c9\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
@@ -416,6 +389,8 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\lucia\.gradle\cach
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\lucia\.gradle\caches\transforms-3\cbebb5ce83a237192215f5b24e8b2f60\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\82c98d306f6e46421d78c075de2712bf\transformed\tracing-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\82c98d306f6e46421d78c075de2712bf\transformed\tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\lucia\.gradle\caches\transforms-3\f32a2626963080489d6c91dcb5ccffa9\transformed\exifinterface-1.3.6\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.6] C:\Users\lucia\.gradle\caches\transforms-3\f32a2626963080489d6c91dcb5ccffa9\transformed\exifinterface-1.3.6\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\ae1c6d0c4945d476d5a60cf01ec62278\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\ae1c6d0c4945d476d5a60cf01ec62278\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\lucia\.gradle\caches\transforms-3\c87361ff0d3fe1c6ae901d0c7811625a\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
@@ -426,8 +401,8 @@ MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\lucia\.gradle\ca
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\d779afa1968ddc3a9ecd07cf1a4922b8\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\22ad1e2a8cba0ad984c831d913f913b7\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] C:\Users\lucia\.gradle\caches\transforms-3\22ad1e2a8cba0ad984c831d913f913b7\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.3.1] C:\Users\lucia\.gradle\caches\transforms-3\c36a9f444541aed6c03da9cb4537686d\transformed\annotation-experimental-1.3.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.3.1] C:\Users\lucia\.gradle\caches\transforms-3\c36a9f444541aed6c03da9cb4537686d\transformed\annotation-experimental-1.3.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\a7712757bfa467f981ea4c34b63398f6\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\a7712757bfa467f981ea4c34b63398f6\transformed\annotation-experimental-1.3.0\AndroidManifest.xml:20:5-44
 MERGED from [io.grpc:grpc-android:1.57.2] C:\Users\lucia\.gradle\caches\transforms-3\d936adc79f2fc9057a578ffdc3247a8a\transformed\grpc-android-1.57.2\AndroidManifest.xml:5:5-44
 MERGED from [io.grpc:grpc-android:1.57.2] C:\Users\lucia\.gradle\caches\transforms-3\d936adc79f2fc9057a578ffdc3247a8a\transformed\grpc-android-1.57.2\AndroidManifest.xml:5:5-44
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] C:\Users\lucia\.gradle\caches\transforms-3\d65cd0097d63cae2cb33991d93c3f2f7\transformed\protolite-well-known-types-18.0.0\AndroidManifest.xml:7:5-9:41
@@ -464,26 +439,24 @@ ADDED from [com.google.firebase:firebase-firestore-ktx:24.10.1] C:\Users\lucia\.
 		ADDED from [com.google.firebase:firebase-firestore-ktx:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\b9813e727aa83e62b2dee5deb3c3e841\transformed\firebase-firestore-ktx-24.10.1\AndroidManifest.xml:14:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-firestore-ktx:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\b9813e727aa83e62b2dee5deb3c3e841\transformed\firebase-firestore-ktx-24.10.1\AndroidManifest.xml:13:17-129
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:8:5-79
+MERGED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-firestore:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\dfac3f1ebbadf508a33246c6d646faf4\transformed\firebase-firestore-24.10.1\AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-firestore:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\dfac3f1ebbadf508a33246c6d646faf4\transformed\firebase-firestore-24.10.1\AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\lucia\.gradle\caches\transforms-3\4246b02058db6a760102609a955a0089\transformed\recaptcha-18.4.0\AndroidManifest.xml:8:5-79
+MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\lucia\.gradle\caches\transforms-3\4246b02058db6a760102609a955a0089\transformed\recaptcha-18.4.0\AndroidManifest.xml:8:5-79
+MERGED from [io.grpc:grpc-android:1.57.2] C:\Users\lucia\.gradle\caches\transforms-3\d936adc79f2fc9057a578ffdc3247a8a\transformed\grpc-android-1.57.2\AndroidManifest.xml:7:5-79
+MERGED from [io.grpc:grpc-android:1.57.2] C:\Users\lucia\.gradle\caches\transforms-3\d936adc79f2fc9057a578ffdc3247a8a\transformed\grpc-android-1.57.2\AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from [com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0] C:\Users\lucia\.gradle\caches\transforms-3\4f5a0a4e5aa025ca0002bb4755be79d6\transformed\core-12.1.0\AndroidManifest.xml:8:22-76
 meta-data#com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar
 ADDED from [com.google.firebase:firebase-auth-ktx:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\21e96df0849ecfb7edcfe5640cae7e0c\transformed\firebase-auth-ktx-22.3.1\AndroidManifest.xml:11:13-13:85
 	android:value
 		ADDED from [com.google.firebase:firebase-auth-ktx:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\21e96df0849ecfb7edcfe5640cae7e0c\transformed\firebase-auth-ktx-22.3.1\AndroidManifest.xml:13:17-82
 	android:name
 		ADDED from [com.google.firebase:firebase-auth-ktx:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\21e96df0849ecfb7edcfe5640cae7e0c\transformed\firebase-auth-ktx-22.3.1\AndroidManifest.xml:12:17-119
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:26:5-79
-MERGED from [com.google.firebase:firebase-firestore:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\dfac3f1ebbadf508a33246c6d646faf4\transformed\firebase-firestore-24.10.1\AndroidManifest.xml:10:5-79
-MERGED from [com.google.firebase:firebase-firestore:24.10.1] C:\Users\lucia\.gradle\caches\transforms-3\dfac3f1ebbadf508a33246c6d646faf4\transformed\firebase-firestore-24.10.1\AndroidManifest.xml:10:5-79
-MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\lucia\.gradle\caches\transforms-3\4246b02058db6a760102609a955a0089\transformed\recaptcha-18.4.0\AndroidManifest.xml:8:5-79
-MERGED from [com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\lucia\.gradle\caches\transforms-3\4246b02058db6a760102609a955a0089\transformed\recaptcha-18.4.0\AndroidManifest.xml:8:5-79
-MERGED from [androidx.media3:media3-common:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6bad567ee044f08c5e8609986dbb5e3b\transformed\media3-common-1.2.0\AndroidManifest.xml:22:5-79
-MERGED from [androidx.media3:media3-common:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\6bad567ee044f08c5e8609986dbb5e3b\transformed\media3-common-1.2.0\AndroidManifest.xml:22:5-79
-MERGED from [androidx.media3:media3-exoplayer:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\09789942041f8e538a0011a8fa901e3a\transformed\media3-exoplayer-1.2.0\AndroidManifest.xml:22:5-79
-MERGED from [androidx.media3:media3-exoplayer:1.2.0] C:\Users\lucia\.gradle\caches\transforms-3\09789942041f8e538a0011a8fa901e3a\transformed\media3-exoplayer-1.2.0\AndroidManifest.xml:22:5-79
-MERGED from [io.grpc:grpc-android:1.57.2] C:\Users\lucia\.gradle\caches\transforms-3\d936adc79f2fc9057a578ffdc3247a8a\transformed\grpc-android-1.57.2\AndroidManifest.xml:7:5-79
-MERGED from [io.grpc:grpc-android:1.57.2] C:\Users\lucia\.gradle\caches\transforms-3\d936adc79f2fc9057a578ffdc3247a8a\transformed\grpc-android-1.57.2\AndroidManifest.xml:7:5-79
-	android:name
-		ADDED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:26:22-76
 activity#com.google.firebase.auth.internal.GenericIdpActivity
 ADDED from [com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:29:9-46:20
 	android:excludeFromRecents

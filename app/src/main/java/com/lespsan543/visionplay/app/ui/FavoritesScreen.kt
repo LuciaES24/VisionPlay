@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CloudDownload
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -90,6 +91,14 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                     property1 = com.lespsan543.visionplay.menu.Property1.Favoritos
                 )
             },
+            floatingActionButton = {
+                if (favoritesViewModel.isAdmin()){
+                    IconButton(onClick = { favoritesViewModel.loadFromAPI() }) {
+                        Icon(imageVector = Icons.Filled.CloudDownload , contentDescription = null, tint = Color.Cyan,
+                            modifier = Modifier.size(maxHeight*0.045f) )
+                    }
+                }
+            }
             ) {
             //Se muestra si hay algún elemento en la lista de favoritos
             if(favoritesList.isNotEmpty()){

@@ -7,5 +7,6 @@ data class MovieOrSerieState(
     var date : String = "",
     var votes : String = "",
     var idDoc : String = "",
-    var genres : List<String> = emptyList()
+    var genres : List<String> = emptyList(),
+    var type : String = ""
 )

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-64:/values-as/values-as.xml",
+            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values-as/values-as.xml",
             "map": [
                 {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\e28121e44ee587e9ebe2063d58a490b5\\transformed\\play-services-base-18.0.1\\res\\values-as\\values.xml",

@@ -75,10 +75,6 @@ class MoviesOrSeriesViewModel : ViewModel() {
 
     private var _actualSearchMovieState = MutableStateFlow(MovieOrSerieState())
 
-    private var _apiMoviePage = MutableStateFlow(1)
-
-    private var _apiSeriePage = MutableStateFlow(1)
-
     private var _movieGenres = MutableStateFlow<Map<String,String>>(emptyMap())
 
     private var _serieGenres = MutableStateFlow<Map<String,String>>(emptyMap())
@@ -91,14 +87,14 @@ class MoviesOrSeriesViewModel : ViewModel() {
 
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
-        getAllMovies()
-        getAllSeries()
+        fetchMoviesFromDB()
+        fetchSeriesFromDB()
         movieGenres()
         serieGenres()
     }
 
     /**
-     * Obtiene el nombre de los géneros de la serie que se indica
+     * Obtiene el nombre de los géneros de la película que se indica
      *
      * @param movie película de la que vamos a obtener los géneros
      */
@@ -132,7 +128,6 @@ class MoviesOrSeriesViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             _movieGenres.value = getMovieGenresUseCase.invoke()
         }
-        Log.d("genres", _movieGenres.value.values.toString())
     }
 
     /**
@@ -141,26 +136,6 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private fun serieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
             _serieGenres.value = getSerieGenresUseCase.invoke()
-        }
-        Log.d("genres2", _movieGenres.value.values.toString())
-
-    }
-
-    /**
-     * Buscamos una lista de películas en la API
-     */
-    private fun getAllMovies(){
-        viewModelScope.launch(Dispatchers.IO) {
-            _movieList.value = discoverMoviesUseCase.invoke(_apiMoviePage.value).results
-        }
-    }
-
-    /**
-     * Buscamos una lista de series en la API
-     */
-    private fun getAllSeries(){
-        viewModelScope.launch(Dispatchers.IO) {
-            _serieList.value = discoverSeriesUseCase.invoke(_apiSeriePage.value).results
         }
     }
 
@@ -180,10 +155,54 @@ class MoviesOrSeriesViewModel : ViewModel() {
     }
 
     /**
+     * Busca todas las películas de la base de datos
+     */
+    fun fetchMoviesFromDB() {
+        firestore.collection("MoviesAndSeries")
+            .whereEqualTo("type", "Movie")
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                val movies = mutableListOf<MovieOrSerieState>()
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        val movie = document.toObject(MovieOrSerieState::class.java)
+                        movie.idDoc = document.id
+                        movies.add(movie)
+                    }
+                }
+                _movieList.value = movies
+            }
+    }
+
+    /**
+     * Busca todas las películas de la base de datos
+     */
+    fun fetchSeriesFromDB() {
+        firestore.collection("MoviesAndSeries")
+            .whereEqualTo("type", "Serie")
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                val series = mutableListOf<MovieOrSerieState>()
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        val serie = document.toObject(MovieOrSerieState::class.java)
+                        serie.idDoc = document.id
+                        series.add(serie)
+                    }
+                }
+                _serieList.value = series
+            }
+    }
+
+    /**
      * Busca todas las películas y series que ya están añadidas a favoritos
      * en la base de datos
      */
-    fun fetchMoviesInDB() {
+    fun fetchFavoritesFromDB() {
         val email = auth.currentUser?.email
         firestore.collection("Favoritos")
             .whereEqualTo("emailUser", email.toString())
@@ -209,9 +228,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
     fun newMovie(){
         _propertyButton.value = Property1.Default
         if (_moviePosition.value == _movieList.value.size-1){
-            _apiMoviePage.value++
             _moviePosition.value=0
-            getAllMovies()
         }else{
             _moviePosition.value++
         }
@@ -222,13 +239,10 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     fun lastMovie(){
         _propertyButton.value = Property1.Default
-        if (_apiMoviePage.value==1 && _moviePosition.value == 0){
-            _apiMoviePage.value=1
+        if (_moviePosition.value == 0){
             _moviePosition.value=0
         }else if(_moviePosition.value <= 0) {
-            _apiMoviePage.value--
             _moviePosition.value = _movieList.value.size - 1
-            getAllMovies()
         }else{
             _moviePosition.value--
         }
@@ -240,9 +254,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
     fun newSerie(){
         _propertyButton.value = Property1.Default
         if (_seriePosition.value == _serieList.value.size-1){
-            _apiSeriePage.value++
             _seriePosition.value=0
-            getAllSeries()
         }else{
             _seriePosition.value++
         }
@@ -253,13 +265,10 @@ class MoviesOrSeriesViewModel : ViewModel() {
      */
     fun lastSerie(){
         _propertyButton.value = Property1.Default
-        if (_apiSeriePage.value == 1 && _seriePosition.value == 0){
-            _apiSeriePage.value=1
+        if (_seriePosition.value == 0){
             _seriePosition.value=0
         } else if (_seriePosition.value <= 0) {
-            _apiSeriePage.value--
             _seriePosition.value = _movieList.value.size - 1
-            getAllSeries()
         }else{
             _seriePosition.value--
         }

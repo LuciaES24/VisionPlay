@@ -129,7 +129,8 @@ class AppRepository {
             poster = BASE_URL_IMG + this.poster,
             date = this.date,
             votes = this.votes,
-            genres = this.genres
+            genres = this.genres,
+            type = "Movie"
         )
     }
 
@@ -155,7 +156,9 @@ class AppRepository {
             overview = this.overview,
             poster = BASE_URL_IMG + this.poster,
             date = this.date,
-            votes = this.votes
+            votes = this.votes,
+            genres = this.genres,
+            type = "Serie"
         )
     }
 }

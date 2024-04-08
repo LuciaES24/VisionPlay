@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-64:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\22dac88c5d6580f6592572430df8a2fc\\transformed\\material3-1.0.0\\res\\values-en-rXC\\values-en-rXC.xml",
