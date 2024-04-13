@@ -6,8 +6,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
-import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
@@ -26,10 +24,6 @@ class SearchGenresViewModel : ViewModel(){
 
     private val getSerieGenresUseCase = GetSerieGenresUseCase()
 
-    private val discoverMoviesUseCase = DiscoverMoviesUseCase()
-
-    private val discoverSeriesUseCase = DiscoverSeriesUseCase()
-
     private var _moviesInDB = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
 
     var genresToShow = listOf("Crime","Comedy","Animation","Action","Adventure", "Fantasy","Horror","Romance","Mystery","Western")
@@ -40,18 +34,12 @@ class SearchGenresViewModel : ViewModel(){
 
     private var _genres = MutableStateFlow<Map<String,String>>(emptyMap())
 
-    private var _movieList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
-
-    private var _serieList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
-
-    private var _apiMoviePage = MutableStateFlow(1)
-
-    private var _apiSeriePage = MutableStateFlow(1)
+    private var _moviesAndSeriesList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
 
     private var _actualGenre = MutableStateFlow("")
 
-    private var _moviesAndSeriesList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
-    val moviesAndSeriesList : StateFlow<List<MovieOrSerieState>> = _moviesAndSeriesList
+    private var _favoriteList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+    val favoriteList : StateFlow<List<MovieOrSerieState>> = _favoriteList
 
     private var _propertyButton = MutableStateFlow(Property1.Default)
     var propertyButton : StateFlow<Property1> = _propertyButton
@@ -65,8 +53,6 @@ class SearchGenresViewModel : ViewModel(){
     var showGenres : StateFlow<String> = _showGenres
 
     init {
-        getAllMovies()
-        getAllSeries()
         movieGenres()
         serieGenres()
     }
@@ -75,8 +61,6 @@ class SearchGenresViewModel : ViewModel(){
      * Reinicia el número de página de la API y la posición al cambiar de género
      */
     fun reset(){
-        _apiMoviePage.value = 1
-        _apiSeriePage.value = 1
         _position.value = 0
     }
 
@@ -84,7 +68,7 @@ class SearchGenresViewModel : ViewModel(){
      * Busca todas las películas y series que ya están añadidas a favoritos
      * en la base de datos
      */
-    fun fetchMoviesInDB() {
+    fun fetchFavotitesFromDB() {
         val email = auth.currentUser?.email
         firestore.collection("Favoritos")
             .whereEqualTo("emailUser", email.toString())
@@ -133,16 +117,33 @@ class SearchGenresViewModel : ViewModel(){
      */
     fun newMovieOrSerie(){
         _propertyButton.value = Property1.Default
-        if (_position.value == _moviesAndSeriesList.value.size-1){
-            _apiMoviePage.value++
-            _apiSeriePage.value++
+        if (_position.value == _favoriteList.value.size-1){
             _position.value=0
-            getAllMovies()
-            getAllSeries()
-            diferentGenres(_actualGenre.value)
         }else{
             _position.value++
         }
+    }
+
+    /**
+     * Busca todas las películas y series de la base de datos a partir del género seleccionado
+     */
+    private fun fetchMoviesFromDB() {
+        firestore.collection("MoviesAndSeries")
+            .whereArrayContains("genres", _actualGenre.value)
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                val moviesAndSeries = mutableListOf<MovieOrSerieState>()
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        val movieOrSerie = document.toObject(MovieOrSerieState::class.java)
+                        movieOrSerie.idDoc = document.id
+                        moviesAndSeries.add(movieOrSerie)
+                    }
+                }
+                _moviesAndSeriesList.value = moviesAndSeries
+            }
     }
 
     /**
@@ -150,17 +151,8 @@ class SearchGenresViewModel : ViewModel(){
      */
     fun lastMovieOrSerie(){
         _propertyButton.value = Property1.Default
-        if (_apiMoviePage.value==1 && _position.value == 0 || _apiSeriePage.value == 1 && _position.value == 0){
-            _apiMoviePage.value=1
-            _apiSeriePage.value=1
+        if (_position.value == 0){
             _position.value=0
-        }else if(_position.value <= 0) {
-            _apiMoviePage.value--
-            _apiSeriePage.value--
-            _position.value = _moviesAndSeriesList.value.size - 1
-            getAllMovies()
-            getAllSeries()
-            diferentGenres(_actualGenre.value)
         }else{
             _position.value--
         }
@@ -179,39 +171,21 @@ class SearchGenresViewModel : ViewModel(){
      * Buscamos los géneros que hay entre películas y series
      * para que no se repitan si alguno coincide
      * y los guardamos en la variable _genres
-     *
-     * @param genre género a buscar
      */
-    fun diferentGenres(genre : String){
+    fun diferentGenres(genre:String){
         val temporalGenresMap = mutableMapOf<String, String>()
-        for ((key, value) in _movieGenres.value){
-            temporalGenresMap[key] = value
-        }
-        for ((key, value) in _serieGenres.value){
-            if (key !in _genres.value.keys){
+        if (_genres.value.isEmpty()){
+            for ((key, value) in _movieGenres.value){
                 temporalGenresMap[key] = value
             }
+            for ((key, value) in _serieGenres.value){
+                if (key !in _genres.value.keys){
+                    temporalGenresMap[key] = value
+                }
+            }
+            _genres.value = temporalGenresMap
         }
-        _genres.value = temporalGenresMap
         getActualGenre(genre)
-    }
-
-    /**
-     * Buscamos una lista de películas en la API
-     */
-    private fun getAllMovies(){
-        viewModelScope.launch(Dispatchers.IO) {
-            _movieList.value = discoverMoviesUseCase.invoke(_apiMoviePage.value).results
-        }
-    }
-
-    /**
-     * Buscamos una lista de series en la API
-     */
-    private fun getAllSeries(){
-        viewModelScope.launch(Dispatchers.IO) {
-            _serieList.value = discoverSeriesUseCase.invoke(_apiSeriePage.value).results
-        }
     }
 
     /**
@@ -233,28 +207,14 @@ class SearchGenresViewModel : ViewModel(){
      *
      * @param genre género a buscar
      */
-    private fun getActualGenre(genre:String){
+    fun getActualGenre(genre:String){
         for ((key, value ) in _genres.value){
-            if (genre in value){
+            if (genre == value){
                 _actualGenre.value = key
+                break
             }
         }
-        findByGenre()
-    }
-
-    /**
-     * Busca las películas y series que tienen el género seleccionado
-     */
-    private fun findByGenre(){
-        val temporalList = mutableListOf<MovieOrSerieState>()
-        for (i in 0.._movieList.value.size-1){
-            if (_actualGenre.value in _movieList.value[i].genres){
-                temporalList.add(_movieList.value[i])
-            }else if (_actualGenre.value in _serieList.value[i].genres){
-                temporalList.add(_serieList.value[i])
-            }
-        }
-        _moviesAndSeriesList.value = temporalList
+        fetchMoviesFromDB()
     }
 
     /**

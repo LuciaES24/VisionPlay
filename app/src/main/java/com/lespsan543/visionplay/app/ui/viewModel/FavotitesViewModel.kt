@@ -207,7 +207,7 @@ class FavotitesViewModel :ViewModel() {
      *
      * @param searchMovieState película o serie que queremos añadir a favoritos
      */
-    fun save(searchMovieState: MovieOrSerieState) {
+    private fun save(searchMovieState: MovieOrSerieState) {
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -228,9 +228,25 @@ class FavotitesViewModel :ViewModel() {
                         throw Exception()
                     }
             } catch (e: Exception){
-                e.localizedMessage?.let { Log.d("Exception", it) }
+                print(e.localizedMessage)
             }
         }
+    }
+
+    fun restartDB(){
+        for (list in _dbList.value){
+            for (movieOrSerie in list){
+                try {
+                    viewModelScope.launch {
+                        firestore.collection("MoviesAndSeries").document(movieOrSerie.idDoc)
+                            .delete()
+                    }
+                }catch (e: Exception) {
+                    print(e.localizedMessage)
+                }
+            }
+        }
+        loadFromAPI()
     }
 
     /**
@@ -243,14 +259,8 @@ class FavotitesViewModel :ViewModel() {
             try {
                 firestore.collection("Favoritos").document(id)
                     .delete()
-                    .addOnSuccessListener {
-                        Log.d("ELIMINAR OK", "Se eliminó la nota correctamente en Firestore")
-                    }
-                    .addOnFailureListener {
-                        Log.d("ERROR AL ELIMINAR", "ERROR al eliminar una nota en Firestore")
-                    }
             } catch (e: Exception) {
-                Log.d("ERROR BORRAR NOTA","Error al eliminar ${e.localizedMessage} ")
+                print(e.localizedMessage)
             }
         }
     }

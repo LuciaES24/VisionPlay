@@ -65,7 +65,7 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
     val genresToShow = searchGenresViewModel.genresToShow
 
     LaunchedEffect(Unit){
-        searchGenresViewModel.fetchMoviesInDB()
+        searchGenresViewModel.fetchFavotitesFromDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
@@ -130,7 +130,7 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
 @Composable
 fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresViewModel: SearchGenresViewModel){
     //Lista de películas y series encontradas a partir del género seleccionado
-    val moviesAndSeriesList by searchGenresViewModel.moviesAndSeriesList.collectAsState()
+    val moviesAndSeriesList by searchGenresViewModel.favoriteList.collectAsState()
     //Posición actual de la película o serie que se muestra
     val position by searchGenresViewModel.position.collectAsState()
     //Propiedad del botón de guardado
@@ -227,7 +227,7 @@ fun ShowMovieOrSerieByGenre(navController: NavHostController,
     //Guarda la posición de la película o serie que se muestra
     val position by searchGenresViewModel.position.collectAsState()
     //Lista de películas y series obtenida
-    val moviesAndSeriesList by searchGenresViewModel.moviesAndSeriesList.collectAsState()
+    val moviesAndSeriesList by searchGenresViewModel.favoriteList.collectAsState()
     //Propiedad del botón de guardado
     val property by searchGenresViewModel.propertyButton.collectAsState()
     //Lista de géneros de la película o serie

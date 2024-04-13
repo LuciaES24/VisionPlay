@@ -157,7 +157,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
     /**
      * Busca todas las películas de la base de datos
      */
-    fun fetchMoviesFromDB() {
+    private fun fetchMoviesFromDB() {
         firestore.collection("MoviesAndSeries")
             .whereEqualTo("type", "Movie")
             .addSnapshotListener { querySnapshot, error ->
@@ -179,7 +179,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
     /**
      * Busca todas las películas de la base de datos
      */
-    fun fetchSeriesFromDB() {
+    private fun fetchSeriesFromDB() {
         firestore.collection("MoviesAndSeries")
             .whereEqualTo("type", "Serie")
             .addSnapshotListener { querySnapshot, error ->
@@ -352,16 +352,8 @@ class MoviesOrSeriesViewModel : ViewModel() {
     }
 
     fun formatTitle(title: String){
-        val words = title.split(" ")
-        var result = "official%20trailer%20"
-        for (word in words){
-            result+=word
-            if (word != words.last()){
-                result+="%20"
-            }
-        }
-        Log.d("title", result)
-        getTrailer(result)
+        val result = "official trailer "
+        getTrailer(result+title)
     }
 
     private fun getTrailer(title: String){

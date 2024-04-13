@@ -93,8 +93,8 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
             },
             floatingActionButton = {
                 if (favoritesViewModel.isAdmin()){
-                    IconButton(onClick = { favoritesViewModel.loadFromAPI() }) {
-                        Icon(imageVector = Icons.Filled.CloudDownload , contentDescription = null, tint = Color.Cyan,
+                    IconButton(onClick = { favoritesViewModel.restartDB() }) {
+                        Icon(imageVector = Icons.Filled.CloudDownload , contentDescription = null, tint = Color.Blue,
                             modifier = Modifier.size(maxHeight*0.045f) )
                     }
                 }
