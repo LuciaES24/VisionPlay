@@ -123,8 +123,7 @@ fun SeriesScreen(
                 AsyncImage(model = serieList[seriePosition].poster,
                     contentDescription = "Poster serie",
                     modifier = Modifier
-                        .height(height)
-                        .width(width)
+                        .fillMaxSize()
                         .combinedClickable(enabled = true,
                             onDoubleClick = { navController.navigate(Routes.ShowSerie.route)
                                               moviesOrSeriesViewModel.formatTitle(serieList[seriePosition].title)},

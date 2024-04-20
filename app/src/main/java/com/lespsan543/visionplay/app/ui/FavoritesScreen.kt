@@ -129,7 +129,7 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                         .background(Color(199, 199, 199))
                         .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
-                    Text(text = "Aún no tienes nada en favoritos",
+                    Text(text = "There is nothing in favorites yet",
                         color = Color.Black,
                         textAlign = TextAlign.Center,
                         fontSize = 18.sp,
@@ -147,6 +147,7 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
  * @param movieOrSerie película o serie
  * @param maxHeigth altura de la pantalla
  * @param navController nos permite realizar la navegación entre pantallas
+ * @param favoritesViewModel viewModel del que obtenemos la información
  */
 @Composable
 fun ShowMovieOrSerie(

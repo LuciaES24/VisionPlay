@@ -1,8 +1,10 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -27,10 +29,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lespsan543.visionplay.R
@@ -54,6 +59,10 @@ import com.lespsan543.visionplay.menu.Menu
 fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewModel) {
     //Lista de películas que se encuentran en el cine actualmente
     val cineList by cinemaViewModel.cinemaList.collectAsState()
+    //Boolean que controla si se debe mostrar el trailer
+    val showTrailer by cinemaViewModel.showTrailer.collectAsState()
+    //Identificador del trailer que se debe mostrar
+    val trailerId by cinemaViewModel.trailerId.collectAsState()
 
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
@@ -87,7 +96,7 @@ fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewMo
                     .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ){
                     items(cineList){movie ->
-                        ShowCinemaMovie(height = height,
+                        MovieRow(height = height,
                             width = width,
                             movieOrSerie = movie,
                             cinemaViewModel = cinemaViewModel)
@@ -108,6 +117,19 @@ fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewMo
                     )
                 }
             }
+
+            //Se muestra el trailer si cuando el usuario pulsa sobre una película
+            if(showTrailer){
+                Dialog(onDismissRequest = { cinemaViewModel.showMovieTrailer()
+                    cinemaViewModel.resetTrailer()}) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center) {
+                        if (trailerId!=""){
+                            YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -116,19 +138,28 @@ fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewMo
  * Formato para mostrar una película
  *
  * @param height altura de la pantalla
+ * @param width ancho de la pantalla
  * @param movieOrSerie película o serie que se va a mostrar
+ * @param cinemaViewModel viewModel del que obtenemos la información
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ShowCinemaMovie(height: Dp,
-                    width : Dp,
-                    movieOrSerie:MovieOrSerieState,
-                    cinemaViewModel: CinemaViewModel){
+fun MovieRow(height: Dp,
+             width : Dp,
+             movieOrSerie:MovieOrSerieState,
+             cinemaViewModel: CinemaViewModel){
     BoxWithConstraints {
         val widthCard = maxWidth
         Box(
             modifier = Modifier
                 .height(height * 0.3f)
                 .fillMaxWidth()
+                .padding(bottom = height * 0.02f)
+                .combinedClickable(enabled = true,
+                    onClick = {
+                        cinemaViewModel.formatTitle(movieOrSerie.title)
+                        cinemaViewModel.showMovieTrailer()
+                    })
                 .background(Color(40, 40, 40))
         ) {
             Row {
@@ -137,7 +168,10 @@ fun ShowCinemaMovie(height: Dp,
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(widthCard * 0.5f))
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center)
+                {
+                    Spacer(modifier = Modifier.height(height * 0.03f))
                     Text(text = movieOrSerie.title,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center,
@@ -159,7 +193,8 @@ fun ShowCinemaMovie(height: Dp,
                             Image(
                                 painter = painterResource(id = R.drawable.votes),
                                 contentDescription = "Votes",
-                                modifier = Modifier.width(width*0.08f)
+                                modifier = Modifier.width(width*0.08f),
+                                colorFilter = ColorFilter.tint(Color.White)
                             )
                         }
                     }

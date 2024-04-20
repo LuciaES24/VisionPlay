@@ -122,15 +122,14 @@ fun MoviesScreen(
                 }
             }
         ) {
-            //Aparece si la información de la API ya ha sido cargada
+            //Aparece si la información ya ha sido cargada
             if (movieList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
                 moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
                 AsyncImage(model = movieList[moviePosition].poster,
                     contentDescription = "Poster película",
                     modifier = Modifier
-                        .height(height)
-                        .width(width)
+                        .fillMaxSize()
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
                                 navController.navigate(Routes.ShowMovie.route)
