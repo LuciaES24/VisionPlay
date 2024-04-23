@@ -8,6 +8,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
+import com.lespsan543.visionplay.app.domain.GetTrailerUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.guardar.Property1
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,8 @@ class SearchGenresViewModel : ViewModel(){
 
     private val getSerieGenresUseCase = GetSerieGenresUseCase()
 
+    private val getTrailerUseCase = GetTrailerUseCase()
+
     private var _moviesInDB = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
 
     var genresToShow = listOf("Crime","Comedy","Animation","Action","Adventure", "Fantasy","Horror","Romance","Mystery","Western")
@@ -35,11 +38,11 @@ class SearchGenresViewModel : ViewModel(){
     private var _genres = MutableStateFlow<Map<String,String>>(emptyMap())
 
     private var _moviesAndSeriesList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+    val moviesAndSeriesList : StateFlow<List<MovieOrSerieState>> = _moviesAndSeriesList
 
     private var _actualGenre = MutableStateFlow("")
 
     private var _favoriteList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
-    val favoriteList : StateFlow<List<MovieOrSerieState>> = _favoriteList
 
     private var _propertyButton = MutableStateFlow(Property1.Default)
     var propertyButton : StateFlow<Property1> = _propertyButton
@@ -51,6 +54,9 @@ class SearchGenresViewModel : ViewModel(){
 
     private var _showGenres = MutableStateFlow("")
     var showGenres : StateFlow<String> = _showGenres
+
+    private var _trailerId = MutableStateFlow("")
+    var trailerId : StateFlow<String> = _trailerId
 
     init {
         movieGenres()
@@ -168,6 +174,30 @@ class SearchGenresViewModel : ViewModel(){
     }
 
     /**
+     * Busca todas las películas y series que ya están añadidas a favoritos
+     * en la base de datos
+     */
+    fun fetchFavoritesFromDB() {
+        val email = auth.currentUser?.email
+        firestore.collection("Favoritos")
+            .whereEqualTo("emailUser", email.toString())
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                val movies = mutableListOf<MovieOrSerieState>()
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        val movie = document.toObject(MovieOrSerieState::class.java)
+                        movie.idDoc = document.id
+                        movies.add(movie)
+                    }
+                }
+                _moviesInDB.value = movies
+            }
+    }
+
+    /**
      * Buscamos los géneros que hay entre películas y series
      * para que no se repitan si alguno coincide
      * y los guardamos en la variable _genres
@@ -207,7 +237,7 @@ class SearchGenresViewModel : ViewModel(){
      *
      * @param genre género a buscar
      */
-    fun getActualGenre(genre:String){
+    private fun getActualGenre(genre:String){
         for ((key, value ) in _genres.value){
             if (genre == value){
                 _actualGenre.value = key
@@ -291,5 +321,20 @@ class SearchGenresViewModel : ViewModel(){
     fun calculateVotes(movieOrSerie: MovieOrSerieState) : Int{
         val votes = movieOrSerie.votes.toDouble() / 2
         return votes.roundToInt()
+    }
+
+    fun formatTitle(title: String){
+        val result = "official trailer "
+        getTrailer(result+title)
+    }
+
+    private fun getTrailer(title: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _trailerId.value = getTrailerUseCase.invoke(title)
+        }
+    }
+
+    fun resetTrailer(){
+        _trailerId.value = ""
     }
 }

@@ -42,7 +42,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -101,8 +103,10 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
                 items(genresToShow){ genre ->
                     Box(modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { searchGenresViewModel.diferentGenres(genre)
-                        navController.navigate(Routes.ShowByGenre.route)}
+                        .clickable {
+                            searchGenresViewModel.diferentGenres(genre)
+                            navController.navigate(Routes.ShowByGenre.route)
+                        }
                         .padding(6.dp)
                         .height(height * 0.4f)
                         .background(Color(85, 85, 85))){
@@ -130,7 +134,7 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
 @Composable
 fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresViewModel: SearchGenresViewModel){
     //Lista de películas y series encontradas a partir del género seleccionado
-    val moviesAndSeriesList by searchGenresViewModel.favoriteList.collectAsState()
+    val moviesAndSeriesList by searchGenresViewModel.moviesAndSeriesList.collectAsState()
     //Posición actual de la película o serie que se muestra
     val position by searchGenresViewModel.position.collectAsState()
     //Propiedad del botón de guardado
@@ -139,6 +143,9 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
     //Se encarga del desplazamiento de las películas o series al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
 
+    LaunchedEffect(Unit){
+        searchGenresViewModel.fetchFavoritesFromDB()
+    }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val width = maxWidth
         val height = maxHeight
@@ -169,7 +176,8 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                         .height(height)
                         .width(width)
                         .combinedClickable(enabled = true,
-                            onDoubleClick = { navController.navigate(Routes.ShowMovieOrSerieByGenre.route) },
+                            onDoubleClick = { navController.navigate(Routes.ShowMovieOrSerieByGenre.route)
+                                            searchGenresViewModel.formatTitle(moviesAndSeriesList[position].title)},
                             onClick = {})
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -227,11 +235,13 @@ fun ShowMovieOrSerieByGenre(navController: NavHostController,
     //Guarda la posición de la película o serie que se muestra
     val position by searchGenresViewModel.position.collectAsState()
     //Lista de películas y series obtenida
-    val moviesAndSeriesList by searchGenresViewModel.favoriteList.collectAsState()
+    val moviesAndSeriesList by searchGenresViewModel.moviesAndSeriesList.collectAsState()
     //Propiedad del botón de guardado
     val property by searchGenresViewModel.propertyButton.collectAsState()
     //Lista de géneros de la película o serie
     val genres by searchGenresViewModel.showGenres.collectAsState()
+    //Trailer de la película o serie que se está mostrando
+    val trailerId by searchGenresViewModel.trailerId.collectAsState()
 
     //Comprobamos si la película o serie ya ha sido guardada
     searchGenresViewModel.findMovieOrSerieInList(moviesAndSeriesList[position].title)
@@ -245,7 +255,9 @@ fun ShowMovieOrSerieByGenre(navController: NavHostController,
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
                     property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
-                    volver = { navController.navigate(Routes.ShowByGenre.route)}
+                    volver = { navController.navigate(Routes.ShowByGenre.route)
+                               searchGenresViewModel.resetTrailer()
+                    }
                 )
             },
             bottomBar = { Menu(
@@ -314,6 +326,16 @@ fun ShowMovieOrSerieByGenre(navController: NavHostController,
                         }
                     }
                 }
+                Text(text = "Overview:",
+                fontFamily = Constants.FONT_FAMILY,
+                textAlign = TextAlign.Justify,
+                color = Color.Black,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(
+                    start = width * 0.05f,
+                    end = width * 0.05f
+                ))
                 Text(text = moviesAndSeriesList[position].overview,
                     fontFamily = Constants.FONT_FAMILY,
                     textAlign = TextAlign.Justify,
@@ -325,7 +347,17 @@ fun ShowMovieOrSerieByGenre(navController: NavHostController,
                     )
                 )
                 Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Genres: \n$genres",
+                Text(text = "Genres:",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    ))
+                Text(text = genres,
                     fontFamily = Constants.FONT_FAMILY,
                     textAlign = TextAlign.Justify,
                     color = Color.Black,
@@ -335,6 +367,23 @@ fun ShowMovieOrSerieByGenre(navController: NavHostController,
                         end = width * 0.05f
                     )
                 )
+                Spacer(modifier = Modifier.height(width * 0.05f))
+                Text(text = "Trailer: ",
+                    fontFamily = Constants.FONT_FAMILY,
+                    textAlign = TextAlign.Justify,
+                    color = Color.Black,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(
+                        start = width * 0.05f,
+                        end = width * 0.05f
+                    )
+                )
+                Spacer(modifier = Modifier.height(width * 0.05f))
+                if (trailerId!=""){
+                    YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
+                    Spacer(modifier = Modifier.height(width * 0.07f))
+                }
             }
         }
     }

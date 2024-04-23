@@ -41,6 +41,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -287,6 +288,7 @@ fun ShowMovie(navController: NavHostController,
                     textAlign = TextAlign.Justify,
                     color = Color.Black,
                     fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(
                         start = width * 0.05f,
                         end = width * 0.05f
@@ -309,6 +311,7 @@ fun ShowMovie(navController: NavHostController,
                     textAlign = TextAlign.Justify,
                     color = Color.Black,
                     fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(
                         start = width * 0.05f,
                         end = width * 0.05f
@@ -331,6 +334,7 @@ fun ShowMovie(navController: NavHostController,
                     textAlign = TextAlign.Justify,
                     color = Color.Black,
                     fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(
                         start = width * 0.05f,
                         end = width * 0.05f
