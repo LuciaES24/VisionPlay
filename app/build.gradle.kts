@@ -86,10 +86,11 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.1")
     //Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
-    //Iconos
+    //Icons
     implementation ("androidx.compose.material:material-icons-core:1.1.0-alpha03")
     implementation ("androidx.compose.material:material-icons-extended:1.1.0-alpha03")
     //YoutubePlayer
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
-
+    //BottomSheetScaffold
+    implementation("androidx.compose.material:material:1.6.6")
 }

@@ -51,6 +51,7 @@ import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu

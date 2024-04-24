@@ -43,25 +43,20 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.Property1
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
@@ -348,31 +343,4 @@ fun ShowMovie(navController: NavHostController,
             }
         }
     }
-}
-
-@Composable
-fun YoutubeVideo(id:String,
-            lifecycleOwner: LifecycleOwner,
-            width: Dp,
-            height: Dp){
-
-    AndroidView(
-        factory = { cntx->
-            YouTubePlayerView(cntx).apply {
-                lifecycleOwner.lifecycle.addObserver(this)
-                addYouTubePlayerListener(object:AbstractYouTubePlayerListener(){
-                    override fun onReady(youTubePlayer: YouTubePlayer) {
-                        youTubePlayer.loadVideo(id, 0f)
-                    }
-                })
-            }
-        },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                start = width * 0.05f,
-                end = width * 0.05f
-            )
-            .height(height * 0.25f)
-    )
 }
