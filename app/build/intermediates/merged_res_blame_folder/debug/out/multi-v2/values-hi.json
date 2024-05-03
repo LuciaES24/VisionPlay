@@ -4,23 +4,6 @@
             "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values-hi/values-hi.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bea390e904cba1b4df1bc0736a499eeb\\transformed\\ui-release\\res\\values-hi\\values-hi.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,200,283,376,474,563,641,738,827,912,980,1049,1130,1215,1288,1369,1435",
-                        "endColumns": "94,82,92,97,88,77,96,88,84,67,68,80,84,72,80,65,119",
-                        "endOffsets": "195,278,371,469,558,636,733,822,907,975,1044,1125,1210,1283,1364,1430,1550"
-                    },
-                    "to": {
-                        "startLines": "9,10,31,32,34,39,40,41,42,43,44,45,46,47,49,50,51",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "858,953,3455,3548,3718,4205,4283,4380,4469,4554,4622,4691,4772,4857,5031,5112,5178",
-                        "endColumns": "94,82,92,97,88,77,96,88,84,67,68,80,84,72,80,65,119",
-                        "endOffsets": "948,1031,3543,3641,3802,4278,4375,4464,4549,4617,4686,4767,4852,4925,5107,5173,5293"
-                    }
-                },
-                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\e28121e44ee587e9ebe2063d58a490b5\\transformed\\play-services-base-18.0.1\\res\\values-hi\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
@@ -38,6 +21,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\243c5124bf6e4dc603cbb6ddd692c645\\transformed\\foundation-release\\res\\values-hi\\values-hi.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,140",
+                        "endColumns": "84,85",
+                        "endOffsets": "135,221"
+                    },
+                    "to": {
+                        "startLines": "52,53",
+                        "startColumns": "4,4",
+                        "startOffsets": "5298,5383",
+                        "endColumns": "84,85",
+                        "endOffsets": "5378,5464"
+                    }
+                },
+                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\5d5f90d684b11056db68460943bee0cc\\transformed\\core-1.12.0\\res\\values-hi\\values-hi.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
@@ -52,6 +52,23 @@
                         "startOffsets": "105,203,306,411,512,625,731,4930",
                         "endColumns": "97,102,104,100,112,105,126,100",
                         "endOffsets": "198,301,406,507,620,726,853,5026"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\0c340f0927decd5cd7136e52a1cf79ef\\transformed\\ui-release\\res\\values-hi\\values-hi.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,200,283,376,474,563,641,738,827,912,980,1049,1130,1215,1288,1369,1435",
+                        "endColumns": "94,82,92,97,88,77,96,88,84,67,68,80,84,72,80,65,119",
+                        "endOffsets": "195,278,371,469,558,636,733,822,907,975,1044,1125,1210,1283,1364,1430,1550"
+                    },
+                    "to": {
+                        "startLines": "9,10,31,32,34,39,40,41,42,43,44,45,46,47,49,50,51",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "858,953,3455,3548,3718,4205,4283,4380,4469,4554,4622,4691,4772,4857,5031,5112,5178",
+                        "endColumns": "94,82,92,97,88,77,96,88,84,67,68,80,84,72,80,65,119",
+                        "endOffsets": "948,1031,3543,3641,3802,4278,4375,4464,4549,4617,4686,4767,4852,4925,5107,5173,5293"
                     }
                 },
                 {

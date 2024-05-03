@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bea390e904cba1b4df1bc0736a499eeb\\transformed\\ui-release\\res\\values-mn\\values-mn.xml",
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\0c340f0927decd5cd7136e52a1cf79ef\\transformed\\ui-release\\res\\values-mn\\values-mn.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -69,6 +69,23 @@
                         "startOffsets": "1095,1205,1362,1494,1601,1738,1864,1993,2253,2397,2504,2672,2801,2942,3110,3171,3233",
                         "endColumns": "109,156,131,106,136,125,128,109,143,106,167,128,140,167,60,61,76",
                         "endOffsets": "1200,1357,1489,1596,1733,1859,1988,2098,2392,2499,2667,2796,2937,3105,3166,3228,3305"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\243c5124bf6e4dc603cbb6ddd692c645\\transformed\\foundation-release\\res\\values-mn\\values-mn.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,141",
+                        "endColumns": "85,88",
+                        "endOffsets": "136,225"
+                    },
+                    "to": {
+                        "startLines": "52,53",
+                        "startColumns": "4,4",
+                        "startOffsets": "5250,5336",
+                        "endColumns": "85,88",
+                        "endOffsets": "5331,5420"
                     }
                 },
                 {

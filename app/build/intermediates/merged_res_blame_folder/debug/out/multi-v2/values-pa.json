@@ -4,6 +4,23 @@
             "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values-pa/values-pa.xml",
             "map": [
                 {
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\243c5124bf6e4dc603cbb6ddd692c645\\transformed\\foundation-release\\res\\values-pa\\values-pa.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,142",
+                        "endColumns": "86,86",
+                        "endOffsets": "137,224"
+                    },
+                    "to": {
+                        "startLines": "52,53",
+                        "startColumns": "4,4",
+                        "startOffsets": "5296,5383",
+                        "endColumns": "86,86",
+                        "endOffsets": "5378,5465"
+                    }
+                },
+                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\adacb3c91960815dbae4214d60ff1ecb\\transformed\\play-services-basement-18.1.0\\res\\values-pa\\values.xml",
                     "from": {
                         "startLines": "4",
@@ -55,7 +72,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bea390e904cba1b4df1bc0736a499eeb\\transformed\\ui-release\\res\\values-pa\\values-pa.xml",
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\0c340f0927decd5cd7136e52a1cf79ef\\transformed\\ui-release\\res\\values-pa\\values-pa.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

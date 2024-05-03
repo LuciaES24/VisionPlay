@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bea390e904cba1b4df1bc0736a499eeb\\transformed\\ui-release\\res\\values-az\\values-az.xml",
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\0c340f0927decd5cd7136e52a1cf79ef\\transformed\\ui-release\\res\\values-az\\values-az.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -86,6 +86,23 @@
                         "startOffsets": "2117",
                         "endColumns": "161",
                         "endOffsets": "2274"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\243c5124bf6e4dc603cbb6ddd692c645\\transformed\\foundation-release\\res\\values-az\\values-az.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,144",
+                        "endColumns": "88,93",
+                        "endOffsets": "139,233"
+                    },
+                    "to": {
+                        "startLines": "52,53",
+                        "startColumns": "4,4",
+                        "startOffsets": "5292,5381",
+                        "endColumns": "88,93",
+                        "endOffsets": "5376,5470"
                     }
                 },
                 {

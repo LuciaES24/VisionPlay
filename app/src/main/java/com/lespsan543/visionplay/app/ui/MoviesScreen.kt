@@ -22,6 +22,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.BottomSheetValue
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonColors
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.rememberBackdropScaffoldState
+import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -34,6 +43,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -57,6 +67,7 @@ import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.Property1
+import kotlinx.coroutines.launch
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
@@ -180,7 +191,7 @@ fun MoviesScreen(
  * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
  */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ShowMovie(navController: NavHostController,
     moviesOrSeriesViewModel: MoviesOrSeriesViewModel
@@ -196,6 +207,12 @@ fun ShowMovie(navController: NavHostController,
     //Id del trailer a mostrar
     val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
 
+    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
+    
+    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
+
+    val scope = rememberCoroutineScope()
+
     DisposableEffect(Unit){
         onDispose {
             moviesOrSeriesViewModel.resetTrailer()
@@ -207,140 +224,182 @@ fun ShowMovie(navController: NavHostController,
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
         val width = maxWidth
-        Scaffold(
-            topBar = {
-                Cabecera(
-                    modifier = Modifier
-                        .height(maxHeight.times(0.08f)),
-                    property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
-                    volver = { navController.navigate(Routes.MoviesScreen.route)}
-                )
-            },
-            bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                property1 = Property1.Inicio,
-                home = { navController.navigate(Routes.MoviesScreen.route) },
-                fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                genres1 = { navController.navigate(Routes.SearchGenres.route) },
-                cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
-            floatingActionButton = {
-                Guardar(
-                    property1 = property,
-                    guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition]) },
-                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
-                )
+        BottomSheetScaffold(scaffoldState = scaffoldState,
+            sheetPeekHeight = 0.dp,
+            sheetContent = {
+            //Contenido de la sección de comentarios
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .height(height * 0.75f)
+                .padding(bottom = height*0.08f)
+                .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally)
+            {
+
             }
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(199, 199, 199))
-                    .verticalScroll(rememberScrollState())
-                    .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
-            ) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = width * 0.04f,
-                        end = width * 0.04f,
-                        top = height * 0.03f,
-                        bottom = height * 0.03f
-                    )
-                ) {
-                    AsyncImage(model = movieList[moviePosition].poster,
-                        contentDescription = "Poster película",
+        },
+            sheetBackgroundColor = Color(40,40,40))
+        {
+            Scaffold(
+                topBar = {
+                    Cabecera(
                         modifier = Modifier
-                            .height(height * 0.3f)
+                            .height(maxHeight.times(0.08f)),
+                        property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
+                        volver = { navController.navigate(Routes.MoviesScreen.route)}
                     )
-                    Spacer(modifier = Modifier.width(width * 0.03f))
-                    Column {
-                        Text(text = movieList[moviePosition].title,
-                            fontFamily = Constants.FONT_FAMILY,
-                            textAlign = TextAlign.Justify,
-                            color = Color.Black,
-                            fontSize = 25.sp
+                },
+                bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
+                    property1 = Property1.Inicio,
+                    home = { navController.navigate(Routes.MoviesScreen.route) },
+                    fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
+                    genres1 = { navController.navigate(Routes.SearchGenres.route) },
+                    cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
+                floatingActionButton = {
+                    Guardar(
+                        property1 = property,
+                        guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition]) },
+                        eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
+                    )
+                }
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color(199, 199, 199))
+                        .verticalScroll(rememberScrollState())
+                        .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
+                ) {
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = width * 0.04f,
+                            end = width * 0.04f,
+                            top = height * 0.03f,
+                            bottom = height * 0.03f
                         )
-                        Spacer(modifier = Modifier.height(width * 0.03f))
-                        Text(text = "Release date: ${movieList[moviePosition].date}",
-                            fontFamily = Constants.FONT_FAMILY,
-                            textAlign = TextAlign.Start,
-                            color = Color.Black,
-                            fontSize = 18.sp
+                    ) {
+                        AsyncImage(model = movieList[moviePosition].poster,
+                            contentDescription = "Poster película",
+                            modifier = Modifier
+                                .height(height * 0.3f)
                         )
-                        Spacer(modifier = Modifier.height(width * 0.03f))
-                        Row {
-                            for (i in 0..moviesOrSeriesViewModel.calculateVotes(movieList[moviePosition])-1){
-                                Image(
-                                    painter = painterResource(id = R.drawable.votes),
-                                    contentDescription = "Votes",
-                                    modifier = Modifier.width(width*0.08f)
-                                )
+                        Spacer(modifier = Modifier.width(width * 0.03f))
+                        Column {
+                            Text(text = movieList[moviePosition].title,
+                                fontFamily = Constants.FONT_FAMILY,
+                                textAlign = TextAlign.Justify,
+                                color = Color.Black,
+                                fontSize = 25.sp
+                            )
+                            Spacer(modifier = Modifier.height(width * 0.03f))
+                            Text(text = "Release date: ${movieList[moviePosition].date}",
+                                fontFamily = Constants.FONT_FAMILY,
+                                textAlign = TextAlign.Start,
+                                color = Color.Black,
+                                fontSize = 18.sp
+                            )
+                            Spacer(modifier = Modifier.height(width * 0.03f))
+                            Row {
+                                for (i in 0..moviesOrSeriesViewModel.calculateVotes(movieList[moviePosition])-1){
+                                    Image(
+                                        painter = painterResource(id = R.drawable.votes),
+                                        contentDescription = "Votes",
+                                        modifier = Modifier.width(width*0.08f)
+                                    )
+                                }
                             }
                         }
                     }
-                }
-                Text(text = "Overview:",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
+                    Text(text = "Overview:",
+                        fontFamily = Constants.FONT_FAMILY,
+                        textAlign = TextAlign.Justify,
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
                     )
-                )
-                Spacer(modifier = Modifier.height(width * 0.03f))
-                Text(text = movieList[moviePosition].overview,
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
+                    Spacer(modifier = Modifier.height(width * 0.03f))
+                    Text(text = movieList[moviePosition].overview,
+                        fontFamily = Constants.FONT_FAMILY,
+                        textAlign = TextAlign.Justify,
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
                     )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Genres:",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
+                    Spacer(modifier = Modifier.height(width * 0.05f))
+                    Text(text = "Genres:",
+                        fontFamily = Constants.FONT_FAMILY,
+                        textAlign = TextAlign.Justify,
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
                     )
-                )
-                Spacer(modifier = Modifier.height(width * 0.03f))
-                Text(text = genres,
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
+                    Spacer(modifier = Modifier.height(width * 0.03f))
+                    Text(text = genres,
+                        fontFamily = Constants.FONT_FAMILY,
+                        textAlign = TextAlign.Justify,
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
                     )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Trailer: ",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
+                    Spacer(modifier = Modifier.height(width * 0.05f))
+                    Text(text = "Trailer: ",
+                        fontFamily = Constants.FONT_FAMILY,
+                        textAlign = TextAlign.Justify,
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
                     )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                if (trailerId!=""){
-                    YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
-                    Spacer(modifier = Modifier.height(width * 0.07f))
+                    Spacer(modifier = Modifier.height(width * 0.05f))
+                    if (trailerId!=""){
+                        YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
+                        Spacer(modifier = Modifier.height(width * 0.07f))
+                    }
+                    Spacer(modifier = Modifier.height(width * 0.05f))
+                    Button(modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        ),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(40,40,40)),
+                        onClick = {
+                        scope.launch {
+                            if (sheetState.isCollapsed){
+                                sheetState.expand()
+                            }else{
+                                sheetState.collapse()
+                            }
+                        }
+
+                     }) {
+                        Text(text = "Show comments",
+                            color = Color.White,
+                            fontFamily = Constants.FONT_FAMILY,
+                            fontSize = 20.sp)
+                    }
+                    Spacer(modifier = Modifier.height(width * 0.05f))
                 }
             }
         }
+
     }
 }

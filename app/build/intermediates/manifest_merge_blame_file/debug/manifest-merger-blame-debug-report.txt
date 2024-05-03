@@ -194,34 +194,34 @@
 105-->[com.google.firebase:firebase-auth:22.3.1] C:\Users\lucia\.gradle\caches\transforms-3\f213e98a54b359952a1428e7e9c5e177\transformed\firebase-auth-22.3.1\AndroidManifest.xml:44:21-48
 106            </intent-filter>
 107        </activity>
-108        <activity
-108-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\lucia\.gradle\caches\transforms-3\b15f9d27a6bfbce65144d7dce04d8335\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
-109            android:name="androidx.compose.ui.tooling.PreviewActivity"
-109-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\lucia\.gradle\caches\transforms-3\b15f9d27a6bfbce65144d7dce04d8335\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
-110            android:exported="true" />
-110-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\lucia\.gradle\caches\transforms-3\b15f9d27a6bfbce65144d7dce04d8335\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
-111
-112        <provider
-112-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:23:9-28:39
-113            android:name="com.google.firebase.provider.FirebaseInitProvider"
-113-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:24:13-77
-114            android:authorities="com.lespsan543.visionplay.firebaseinitprovider"
-114-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:25:13-72
-115            android:directBootAware="true"
-115-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:26:13-43
-116            android:exported="false"
-116-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:27:13-37
-117            android:initOrder="100" />
-117-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:28:13-36
-118
-119        <activity
-119-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
-120            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-120-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
-121            android:exported="false"
-121-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
-122            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-122-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+108
+109        <provider
+109-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:23:9-28:39
+110            android:name="com.google.firebase.provider.FirebaseInitProvider"
+110-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:24:13-77
+111            android:authorities="com.lespsan543.visionplay.firebaseinitprovider"
+111-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:25:13-72
+112            android:directBootAware="true"
+112-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:26:13-43
+113            android:exported="false"
+113-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:27:13-37
+114            android:initOrder="100" />
+114-->[com.google.firebase:firebase-common:20.4.2] C:\Users\lucia\.gradle\caches\transforms-3\16e99b17c918ed325bfc8022d7f4600b\transformed\firebase-common-20.4.2\AndroidManifest.xml:28:13-36
+115
+116        <activity
+116-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+117            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+117-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+118            android:exported="false"
+118-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+119            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+119-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\lucia\.gradle\caches\transforms-3\e28121e44ee587e9ebe2063d58a490b5\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+120        <activity
+120-->[androidx.compose.ui:ui-tooling-android:1.6.6] C:\Users\lucia\.gradle\caches\transforms-3\406ac54a8279a69bcd22fead9eda7c8d\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+121            android:name="androidx.compose.ui.tooling.PreviewActivity"
+121-->[androidx.compose.ui:ui-tooling-android:1.6.6] C:\Users\lucia\.gradle\caches\transforms-3\406ac54a8279a69bcd22fead9eda7c8d\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+122            android:exported="true" />
+122-->[androidx.compose.ui:ui-tooling-android:1.6.6] C:\Users\lucia\.gradle\caches\transforms-3\406ac54a8279a69bcd22fead9eda7c8d\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
 123
 124        <meta-data
 124-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\lucia\.gradle\caches\transforms-3\adacb3c91960815dbae4214d60ff1ecb\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
@@ -231,19 +231,19 @@
 126-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\lucia\.gradle\caches\transforms-3\adacb3c91960815dbae4214d60ff1ecb\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
 127
 128        <provider
-128-->[androidx.emoji2:emoji2:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\436a140b27da79c3eed12a8e7a2dfc0d\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+128-->[androidx.emoji2:emoji2:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\404f21a5b5277a40663580d66d61a44e\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
 129            android:name="androidx.startup.InitializationProvider"
-129-->[androidx.emoji2:emoji2:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\436a140b27da79c3eed12a8e7a2dfc0d\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
+129-->[androidx.emoji2:emoji2:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\404f21a5b5277a40663580d66d61a44e\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
 130            android:authorities="com.lespsan543.visionplay.androidx-startup"
-130-->[androidx.emoji2:emoji2:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\436a140b27da79c3eed12a8e7a2dfc0d\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
+130-->[androidx.emoji2:emoji2:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\404f21a5b5277a40663580d66d61a44e\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
 131            android:exported="false" >
-131-->[androidx.emoji2:emoji2:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\436a140b27da79c3eed12a8e7a2dfc0d\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
+131-->[androidx.emoji2:emoji2:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\404f21a5b5277a40663580d66d61a44e\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
 132            <meta-data
-132-->[androidx.emoji2:emoji2:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\436a140b27da79c3eed12a8e7a2dfc0d\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+132-->[androidx.emoji2:emoji2:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\404f21a5b5277a40663580d66d61a44e\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
 133                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-133-->[androidx.emoji2:emoji2:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\436a140b27da79c3eed12a8e7a2dfc0d\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+133-->[androidx.emoji2:emoji2:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\404f21a5b5277a40663580d66d61a44e\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
 134                android:value="androidx.startup" />
-134-->[androidx.emoji2:emoji2:1.4.0] C:\Users\lucia\.gradle\caches\transforms-3\436a140b27da79c3eed12a8e7a2dfc0d\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+134-->[androidx.emoji2:emoji2:1.3.0] C:\Users\lucia\.gradle\caches\transforms-3\404f21a5b5277a40663580d66d61a44e\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
 135            <meta-data
 135-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\lucia\.gradle\caches\transforms-3\3b7c429c77282ecdf64ea22b6effa171\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
 136                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
@@ -259,11 +259,11 @@
 141        </provider>
 142
 143        <activity
-143-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\lucia\.gradle\caches\transforms-3\01b5b6bb05d7389dd2f4f33eb5732c8d\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:23:9-25:39
+143-->[androidx.compose.ui:ui-test-manifest:1.6.6] C:\Users\lucia\.gradle\caches\transforms-3\b5ca031c3c2cae9c4a2b11bcc943d47c\transformed\ui-test-manifest-1.6.6\AndroidManifest.xml:23:9-25:39
 144            android:name="androidx.activity.ComponentActivity"
-144-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\lucia\.gradle\caches\transforms-3\01b5b6bb05d7389dd2f4f33eb5732c8d\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:24:13-63
+144-->[androidx.compose.ui:ui-test-manifest:1.6.6] C:\Users\lucia\.gradle\caches\transforms-3\b5ca031c3c2cae9c4a2b11bcc943d47c\transformed\ui-test-manifest-1.6.6\AndroidManifest.xml:24:13-63
 145            android:exported="true" />
-145-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\lucia\.gradle\caches\transforms-3\01b5b6bb05d7389dd2f4f33eb5732c8d\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:25:13-36
+145-->[androidx.compose.ui:ui-test-manifest:1.6.6] C:\Users\lucia\.gradle\caches\transforms-3\b5ca031c3c2cae9c4a2b11bcc943d47c\transformed\ui-test-manifest-1.6.6\AndroidManifest.xml:25:13-36
 146
 147        <receiver
 147-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\lucia\.gradle\caches\transforms-3\17c97ff132f0083620744620c664ff60\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20

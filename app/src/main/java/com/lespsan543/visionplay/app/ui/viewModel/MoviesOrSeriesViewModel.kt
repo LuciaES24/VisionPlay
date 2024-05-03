@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.lespsan543.visionplay.app.data.model.CommentModel
 import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
@@ -85,6 +86,9 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private var _trailerId = MutableStateFlow("")
     var trailerId : StateFlow<String> = _trailerId
 
+    private var _commentsList = MutableStateFlow<List<CommentModel>>(emptyList())
+    var commentsList : StateFlow<List<CommentModel>> = _commentsList
+
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
         fetchMoviesFromDB()
@@ -152,6 +156,55 @@ class MoviesOrSeriesViewModel : ViewModel() {
                 _actualSearchMovieState.value = movie
             }
         }
+    }
+
+    /**
+     * Guarda el comentario del usuario en la base de datos
+     *
+     * @param movieOrSerie película o serie a la que realiza el comentario
+     * @param comment comentario del usuario
+     */
+    fun saveComment(movieOrSerie: String, comment : String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val commentDB = hashMapOf(
+                    "movieOrSerie" to movieOrSerie,
+                    "comment" to comment,
+                    "user" to ""
+                )
+                firestore.collection("Comments")
+                    .add(commentDB)
+                    .addOnFailureListener {
+                        throw Exception()
+                    }
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
+    }
+
+    /**
+     * Busca todos los comentarios de una película o serie de la base de datos
+     *
+     * @param movieOrSerie película o serie de la que vamos a buscar los comentarios
+     */
+    private fun fetchCommentsFromDB(movieOrSerie : String) {
+        firestore.collection("Comments")
+            .whereEqualTo("movieOrSerie", movieOrSerie)
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                val comments = mutableListOf<CommentModel>()
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        val comment = document.toObject(CommentModel::class.java)
+                        comment.idDoc = document.id
+                        comments.add(comment)
+                    }
+                }
+                _commentsList.value = comments
+            }
     }
 
     /**

@@ -41,6 +41,7 @@ import coil.compose.AsyncImage
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants.FONT_FAMILY
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
 import com.lespsan543.visionplay.cabecera.Cabecera

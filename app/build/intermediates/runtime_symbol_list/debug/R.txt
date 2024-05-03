@@ -373,6 +373,8 @@ int string status_bar_notification_info_overflow 0x7f0b0036
 int string switch_role 0x7f0b0037
 int string tab 0x7f0b0038
 int string template_percent 0x7f0b0039
+int string tooltip_description 0x7f0b003a
+int string tooltip_label 0x7f0b003b
 int style DialogWindowTheme 0x7f0c0000
 int style FloatingDialogTheme 0x7f0c0001
 int style FloatingDialogWindowTheme 0x7f0c0002

@@ -374,6 +374,8 @@ string status_bar_notification_info_overflow
 string switch_role
 string tab
 string template_percent
+string tooltip_description
+string tooltip_label
 style DialogWindowTheme
 style FloatingDialogTheme
 style FloatingDialogWindowTheme
