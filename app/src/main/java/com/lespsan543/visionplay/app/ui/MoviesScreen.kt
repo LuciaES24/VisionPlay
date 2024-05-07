@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomSheetScaffold
@@ -27,6 +28,7 @@ import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberBackdropScaffoldState
 import androidx.compose.material.rememberBottomSheetScaffoldState
@@ -36,14 +38,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -212,6 +217,10 @@ fun ShowMovie(navController: NavHostController,
     val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
 
     val scope = rememberCoroutineScope()
+    
+    var commentText by rememberSaveable {
+        mutableStateOf("")
+    }
 
     DisposableEffect(Unit){
         onDispose {
@@ -231,11 +240,21 @@ fun ShowMovie(navController: NavHostController,
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .height(height * 0.75f)
-                .padding(bottom = height*0.08f)
+                .padding(bottom = height * 0.08f)
                 .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
+                TextField(
+                    value = commentText, 
+                    onValueChange = { commentText = it},
+                    label = { Text(text = "Make a comment")}
+                )
+                Divider(color = Color.White, thickness = 2.dp)
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(){
 
+                    }
+                }
             }
         },
             sheetBackgroundColor = Color(40,40,40))
