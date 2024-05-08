@@ -101,7 +101,7 @@ fun SeriesScreen(
                         modifier = Modifier
                             .width(width.times(0.25f))
                             .height(height.times(0.05f)),
-                        containerColor = Color(85,85,85),
+                        containerColor = Color(40,40,40),
                         shape = RectangleShape) {
                         Text(text = "Películas", color = Color.White, fontSize = 16.sp)
                     }
@@ -110,7 +110,7 @@ fun SeriesScreen(
                         modifier = Modifier
                             .width(width.times(0.25f))
                             .height(height.times(0.05f)),
-                        containerColor = Color(40,40,40) ,
+                        containerColor = Color(138,0,0) ,
                         shape = RectangleShape
                     ) {
                         Text(text = "Series", color = Color.White, fontSize = 16.sp)

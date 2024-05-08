@@ -14,6 +14,7 @@ import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -52,7 +53,7 @@ class FavotitesViewModel :ViewModel() {
     private val discoverSeriesUseCase = DiscoverSeriesUseCase()
 
     private var _favoritesList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
-    var favoritesList : StateFlow<List<MovieOrSerieState>> = _favoritesList
+    var favoritesList : StateFlow<List<MovieOrSerieState>> = _favoritesList.asStateFlow()
 
     private val _selectedMovieOrSerie = MutableStateFlow(MovieOrSerieState())
     var selectedMovieOrSerie : StateFlow<MovieOrSerieState> = _selectedMovieOrSerie

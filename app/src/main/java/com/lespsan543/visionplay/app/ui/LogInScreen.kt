@@ -126,7 +126,7 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                                           viewModel.reset()},
                     text = AnnotatedString("Registrarse"),
                     style = TextStyle(
-                        color = Color(59, 161, 255),
+                        color = Color(135,0,0),
                         fontSize = 16.sp,
                         textDecoration = TextDecoration.Underline,
                         fontFamily = FONT_FAMILY

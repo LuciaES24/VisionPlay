@@ -146,7 +146,7 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                                         viewModel.reset()},
                     text = AnnotatedString("Inicia sesión"),
                     style = TextStyle(
-                        color = Color(59, 161, 255),
+                        color = Color(135,0,0),
                         fontSize = 16.sp,
                         textDecoration = TextDecoration.Underline,
                         fontFamily = FONT_FAMILY
