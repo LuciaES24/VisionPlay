@@ -173,9 +173,9 @@ fun TopLevelProperty1Perfil(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
@@ -219,9 +219,9 @@ fun TopLevelProperty1Genres(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
@@ -265,9 +265,9 @@ fun TopLevelProperty1Cartelera(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
@@ -301,9 +301,9 @@ fun TopLevelProperty1Volver(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         mainAxisAlignment = MainAxisAlignment.Start,
         arrangement = RelayContainerArrangement.Row,

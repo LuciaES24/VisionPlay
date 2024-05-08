@@ -752,9 +752,9 @@ fun TopLevelProperty1Inicio(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
@@ -983,9 +983,9 @@ fun TopLevelProperty1Generos(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
@@ -1063,9 +1063,9 @@ fun Frame4Property1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 69,
-            green = 69,
-            blue = 69
+            red = 141,
+            green = 141,
+            blue = 141
         ),
         isStructured = false,
         content = content,
@@ -1081,9 +1081,9 @@ fun Frame5Property1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 69,
-            green = 69,
-            blue = 69
+            red = 141,
+            green = 141,
+            blue = 141
         ),
         isStructured = false,
         content = content,
@@ -1099,9 +1099,9 @@ fun Frame6Property1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 69,
-            green = 69,
-            blue = 69
+            red = 141,
+            green = 141,
+            blue = 141
         ),
         isStructured = false,
         content = content,
@@ -1117,9 +1117,9 @@ fun Frame8Property1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 69,
-            green = 69,
-            blue = 69
+            red = 141,
+            green = 141,
+            blue = 141
         ),
         isStructured = false,
         content = content,
@@ -1135,9 +1135,9 @@ fun Frame7Property1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 69,
-            green = 69,
-            blue = 69
+            red = 141,
+            green = 141,
+            blue = 141
         ),
         isStructured = false,
         content = content,
@@ -1153,9 +1153,9 @@ fun Frame9Property1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 69,
-            green = 69,
-            blue = 69
+            red = 141,
+            green = 141,
+            blue = 141
         ),
         isStructured = false,
         content = content,
@@ -1171,9 +1171,9 @@ fun Frame10Property1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 69,
-            green = 69,
-            blue = 69
+            red = 141,
+            green = 141,
+            blue = 141
         ),
         isStructured = false,
         content = content,
@@ -1227,9 +1227,9 @@ fun TopLevelProperty1Cine(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
@@ -1484,9 +1484,9 @@ fun TopLevelProperty1Favoritos(
     RelayContainer(
         backgroundColor = Color(
             alpha = 255,
-            red = 107,
-            green = 107,
-            blue = 107
+            red = 138,
+            green = 0,
+            blue = 0
         ),
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
