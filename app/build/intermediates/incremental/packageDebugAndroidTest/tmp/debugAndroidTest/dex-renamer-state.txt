@@ -1,4 +1,4 @@
-#Fri Mar 15 20:44:21 CET 2024
+#Wed May 08 23:08:23 CEST 2024
 base.0=C\:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
 base.1=C\:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
 base.2=C\:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\12\\classes.dex
