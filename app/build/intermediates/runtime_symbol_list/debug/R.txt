@@ -114,6 +114,7 @@ int drawable abc_vector_test 0x7f040001
 int drawable cabecera_salir 0x7f040002
 int drawable cabecera_salir1 0x7f040003
 int drawable cabecera_volver 0x7f040004
+int drawable comment 0x7f040042
 int drawable common_full_open_on_phone 0x7f040005
 int drawable common_google_signin_btn_icon_dark 0x7f040006
 int drawable common_google_signin_btn_icon_dark_focused 0x7f040007

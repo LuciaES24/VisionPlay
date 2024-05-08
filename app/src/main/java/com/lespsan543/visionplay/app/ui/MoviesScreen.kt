@@ -1,7 +1,6 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,23 +18,28 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.Button
-import androidx.compose.material.ButtonColors
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Divider
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.rememberBackdropScaffoldState
+import androidx.compose.material.IconButton
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowCircleUp
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -45,10 +49,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,6 +58,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
@@ -67,6 +70,7 @@ import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.components.CommentSection
 import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
@@ -144,16 +148,21 @@ fun MoviesScreen(
                         .fillMaxSize()
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
+                                if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
+                                    moviesOrSeriesViewModel.deleteMovieOrSerie()
+                                }else{
+                                    moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition])
+                                }
+                            },
+                            onClick = {
                                 navController.navigate(Routes.ShowMovie.route)
                                 moviesOrSeriesViewModel.formatTitle(movieList[moviePosition].title)
-                            },
-                            onClick = {})
+                            })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
                             orientation = Orientation.Horizontal,
                             state = rememberDraggableState { delta ->
                                 offsetX += delta.toInt()
-                                Log.d("pointer", offsetX.toString())
                             },
                             onDragStopped = {
                                 if (offsetX < 0) {
@@ -211,6 +220,8 @@ fun ShowMovie(navController: NavHostController,
     val genres by moviesOrSeriesViewModel.showGenres.collectAsState()
     //Id del trailer a mostrar
     val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
+    //Lista de comentarios de la película
+    val commentsList by moviesOrSeriesViewModel.commentsList.collectAsState()
 
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     
@@ -218,9 +229,7 @@ fun ShowMovie(navController: NavHostController,
 
     val scope = rememberCoroutineScope()
     
-    var commentText by rememberSaveable {
-        mutableStateOf("")
-    }
+    val commentText = moviesOrSeriesViewModel.commentText
 
     DisposableEffect(Unit){
         onDispose {
@@ -230,6 +239,7 @@ fun ShowMovie(navController: NavHostController,
     //Comprobamos si la película ya ha sido guardada
     moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
     moviesOrSeriesViewModel.getMovieGenresToShow(movieList[moviePosition])
+    moviesOrSeriesViewModel.fetchCommentsFromDB(movieList[moviePosition].title)
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
         val width = maxWidth
@@ -240,19 +250,55 @@ fun ShowMovie(navController: NavHostController,
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .height(height * 0.75f)
-                .padding(bottom = height * 0.08f)
-                .verticalScroll(rememberScrollState()),
+                .padding(bottom = height * 0.02f),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
-                TextField(
-                    value = commentText, 
-                    onValueChange = { commentText = it},
-                    label = { Text(text = "Make a comment")}
-                )
+                Row(verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .padding(
+                            top = height * 0.02f,
+                            bottom = height * 0.02f,
+                            start = width * 0.1f
+                        )
+                        .fillMaxWidth())
+                {
+                    TextField(
+                        value = commentText.value,
+                        onValueChange = { moviesOrSeriesViewModel.writeComment(it) },
+                        textStyle = TextStyle.Default.copy(fontFamily = Constants.FONT_FAMILY, fontSize = 18.sp),
+                        placeholder = {
+                            Text(text = "Make a comment...",
+                            color = Color.White,
+                            fontFamily = Constants.FONT_FAMILY)
+                                },
+                        colors = TextFieldDefaults.textFieldColors(
+                            unfocusedIndicatorColor = Color.White,
+                            focusedIndicatorColor = Color.White,
+                            cursorColor = Color.White,
+                            textColor = Color.White,
+                            disabledTextColor = Color.White,
+                            containerColor = Color(35,35,35)
+                        ),
+                        modifier = Modifier.width(width*0.7f)
+                    )
+                    IconButton(onClick = { moviesOrSeriesViewModel.saveComment(movieList[moviePosition].title, commentText.value)
+                        moviesOrSeriesViewModel.fetchCommentsFromDB(movieList[moviePosition].title)
+                        moviesOrSeriesViewModel.newComment()})
+                    {
+                        Icon(
+                            Icons.Default.ArrowCircleUp,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(width*0.1f),
+                            tint = Color.White
+                        )
+                    }
+                }
                 Divider(color = Color.White, thickness = 2.dp)
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
-                    items(){
-
+                    items(commentsList){
+                        CommentSection(comment = it, width = width, height = height)
+                        Spacer(modifier = Modifier.width(width * 0.02f))
                     }
                 }
             }
@@ -375,7 +421,7 @@ fun ShowMovie(navController: NavHostController,
                             end = width * 0.05f
                         )
                     )
-                    Spacer(modifier = Modifier.height(width * 0.05f))
+                    Spacer(modifier = Modifier.height(width * 0.03f))
                     Text(text = "Trailer: ",
                         fontFamily = Constants.FONT_FAMILY,
                         textAlign = TextAlign.Justify,
@@ -419,6 +465,5 @@ fun ShowMovie(navController: NavHostController,
                 }
             }
         }
-
     }
 }

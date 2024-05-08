@@ -1,6 +1,5 @@
 package com.lespsan543.apppeliculas.peliculas.ui.viewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -12,11 +11,9 @@ import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
-import com.lespsan543.visionplay.guardar.Property1
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
@@ -26,10 +23,21 @@ import kotlin.math.roundToInt
  *
  * @property auth Instancia de FirebaseAuth utilizada para obtener el usuario actual
  * @property firestore Instancia de FirebaseFirestore utilizada para operaciones en la base de datos
+ * @property getMovieGenresUseCase caso de uso que busca los géneros de las películas en la API
+ * @property getSerieGenresUseCase caso de uso que busca los géneros de las series en la API
+ * @property discoverMoviesUseCase caso de uso que busca una lista de películas en la API
+ * @property discoverSeriesUseCase caso de uso que busca una lista de series en la API
  * @property _favoritesList flujo de datos de las películas y series que se han añadido a favoritos
  * @property favoritesList estado público de la lista de favoritos
  * @property _selectedMovieOrSerie flujo de datos que guarda la película o serie que se ha seleccionado en la UI
  * @property selectedMovieOrSerie estado público de la película o serie seleccionada
+ * @property _showGenres flujo de datos de los géneros que se deben mostrar en pantalla
+ * @property showGenres estado público de los géneros a mostrar
+ * @property _movieGenres mapa que guarda los géneros a los que puede pertenecer una película
+ * @property _serieGenres mapa que guarda los géneros a los que puede pertenecer una serie
+ * @property _movieList lista de películas obtenidas de la API
+ * @property _serieList lista de series obtenidas de la API
+ * @property _dbList lista de películas y series que van a ser guardadas en la base de datos
  */
 class FavotitesViewModel :ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
@@ -44,7 +52,7 @@ class FavotitesViewModel :ViewModel() {
     private val discoverSeriesUseCase = DiscoverSeriesUseCase()
 
     private var _favoritesList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
-    var favoritesList : StateFlow<List<MovieOrSerieState>> = _favoritesList.asStateFlow()
+    var favoritesList : StateFlow<List<MovieOrSerieState>> = _favoritesList
 
     private val _selectedMovieOrSerie = MutableStateFlow(MovieOrSerieState())
     var selectedMovieOrSerie : StateFlow<MovieOrSerieState> = _selectedMovieOrSerie
@@ -176,7 +184,10 @@ class FavotitesViewModel :ViewModel() {
             }
     }
 
-    fun loadFromAPI(){
+    /**
+     * Realiza una búsqueda amplia de películas y series en la API para introducirlas en la base de datos de Firebase
+     */
+    private fun loadFromAPI(){
         val temporalList = mutableListOf<List<MovieOrSerieState>>()
         for (z in 1..20-1){
             getAllSeries(z)
@@ -189,6 +200,9 @@ class FavotitesViewModel :ViewModel() {
         saveInDB()
     }
 
+    /**
+     * Guarda todas las películas y series obtenidas en la base de datos
+     */
     private fun saveInDB(){
         for (list in _dbList.value){
             for (movieOrSerie in list){
@@ -197,6 +211,12 @@ class FavotitesViewModel :ViewModel() {
         }
     }
 
+    /**
+     * Comprueba si el usuario que ha iniciado sesión es administrador para que tenga permisos
+     * sobre la base de datos y pueda actualizar la información de la misma
+     *
+     * @return booleano dependiendo de si el usuario que ha iniciado sesión es administrador o no
+     */
     fun isAdmin(): Boolean {
         val email = auth.currentUser?.email
         return email == "admin@admin.com"
@@ -233,6 +253,9 @@ class FavotitesViewModel :ViewModel() {
         }
     }
 
+    /**
+     * Borra todas las películas y series que están guardadas en la base de datos para actualizarlas
+     */
     fun restartDB(){
         for (list in _dbList.value){
             for (movieOrSerie in list){

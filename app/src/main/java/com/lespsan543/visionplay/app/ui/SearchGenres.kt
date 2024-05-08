@@ -177,9 +177,17 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                         .height(height)
                         .width(width)
                         .combinedClickable(enabled = true,
-                            onDoubleClick = { navController.navigate(Routes.ShowMovieOrSerieByGenre.route)
-                                            searchGenresViewModel.formatTitle(moviesAndSeriesList[position].title)},
-                            onClick = {})
+                            onDoubleClick = {
+                                if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
+                                    searchGenresViewModel.deleteMovieOrSerie()
+                                }else{
+                                    searchGenresViewModel.saveMovieOrSerie(moviesAndSeriesList[position])
+                                }
+                            },
+                            onClick = {
+                                navController.navigate(Routes.ShowMovieOrSerieByGenre.route)
+                                searchGenresViewModel.formatTitle(moviesAndSeriesList[position].title)
+                            })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
                             orientation = Orientation.Horizontal,

@@ -17,6 +17,7 @@ import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.CinemaScreen
 import com.lespsan543.visionplay.app.ui.FavoritesScreen
+import com.lespsan543.visionplay.app.ui.InitialScreen
 import com.lespsan543.visionplay.app.ui.LogInScreen
 import com.lespsan543.visionplay.app.ui.MoviesScreen
 import com.lespsan543.visionplay.app.ui.RegisterScreen
@@ -56,7 +57,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = Routes.LogInScreen.route) {
+                    NavHost(navController = navController, startDestination = "Initial") {
+                        composable("Initial"){
+                            InitialScreen(navController = navController, moviesOrSeriesViewModel = moviesOrSeriesViewModel)
+                        }
                         composable(Routes.LogInScreen.route) {
                             LogInScreen(navController, logInOrRegisterViewModel)
                         }

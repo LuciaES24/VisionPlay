@@ -115,6 +115,7 @@ drawable abc_vector_test
 drawable cabecera_salir
 drawable cabecera_salir1
 drawable cabecera_volver
+drawable comment
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused

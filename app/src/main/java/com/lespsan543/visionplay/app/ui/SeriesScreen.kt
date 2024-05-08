@@ -127,9 +127,17 @@ fun SeriesScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .combinedClickable(enabled = true,
-                            onDoubleClick = { navController.navigate(Routes.ShowSerie.route)
-                                              moviesOrSeriesViewModel.formatTitle(serieList[seriePosition].title)},
-                            onClick = {})
+                            onDoubleClick = {
+                                if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
+                                    moviesOrSeriesViewModel.deleteMovieOrSerie()
+                                }else{
+                                    moviesOrSeriesViewModel.saveMovieOrSerie(serieList[seriePosition])
+                                }
+                            },
+                            onClick = {
+                                navController.navigate(Routes.ShowSerie.route)
+                                moviesOrSeriesViewModel.formatTitle(serieList[seriePosition].title)
+                            })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
                             orientation = Orientation.Horizontal,

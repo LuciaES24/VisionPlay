@@ -1,6 +1,10 @@
 package com.lespsan543.visionplay.app.ui.viewModel
 
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -8,6 +12,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lespsan543.visionplay.app.data.model.CommentModel
+import com.lespsan543.visionplay.app.data.model.UserModel
 import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
@@ -89,12 +94,17 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private var _commentsList = MutableStateFlow<List<CommentModel>>(emptyList())
     var commentsList : StateFlow<List<CommentModel>> = _commentsList
 
+    private var _userName = MutableStateFlow("")
+
+    var commentText = mutableStateOf("")
+
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
         fetchMoviesFromDB()
         fetchSeriesFromDB()
         movieGenres()
         serieGenres()
+        findUserInDB()
     }
 
     /**
@@ -170,7 +180,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
                 val commentDB = hashMapOf(
                     "movieOrSerie" to movieOrSerie,
                     "comment" to comment,
-                    "user" to ""
+                    "user" to _userName.value
                 )
                 firestore.collection("Comments")
                     .add(commentDB)
@@ -188,7 +198,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
      *
      * @param movieOrSerie película o serie de la que vamos a buscar los comentarios
      */
-    private fun fetchCommentsFromDB(movieOrSerie : String) {
+    fun fetchCommentsFromDB(movieOrSerie : String) {
         firestore.collection("Comments")
             .whereEqualTo("movieOrSerie", movieOrSerie)
             .addSnapshotListener { querySnapshot, error ->
@@ -204,6 +214,25 @@ class MoviesOrSeriesViewModel : ViewModel() {
                     }
                 }
                 _commentsList.value = comments
+            }
+    }
+
+    /**
+     * Busca al usuario actual en la base de datos
+     */
+    fun findUserInDB() {
+        firestore.collection("Users")
+            .whereEqualTo("id",  auth.currentUser?.uid)
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        val user = document.toObject(UserModel::class.java)
+                        _userName.value = user.name
+                    }
+                }
             }
     }
 
@@ -227,6 +256,14 @@ class MoviesOrSeriesViewModel : ViewModel() {
                 }
                 _movieList.value = movies
             }
+    }
+
+    fun writeComment(new: String){
+        commentText.value = new
+    }
+
+    fun newComment(){
+        commentText.value = "";
     }
 
     /**
@@ -375,7 +412,6 @@ class MoviesOrSeriesViewModel : ViewModel() {
      * Elimina una película o serie de la base de datos a partir de su id
      */
     fun deleteMovieOrSerie() {
-        Log.d("eliminar", _actualSearchMovieState.value.idDoc)
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 firestore.collection("Favoritos").document(_actualSearchMovieState.value.idDoc)
