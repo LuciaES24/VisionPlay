@@ -108,7 +108,7 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                     contentPadding = PaddingValues(4.dp),
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(199, 199, 199))
+                        .background(Color(40,40,40))
                         .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
                     items(favoritesList) {movieOrSerie ->
@@ -118,7 +118,6 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                             favoritesViewModel = favoritesViewModel)
                     }
                 }
-                Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
             }//Se muestra si el usuario aún no ha añadido nada a favoritos
             else{
                 Column(
@@ -126,11 +125,10 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(199, 199, 199))
+                        .background(Color(40,40,40))
                         .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
                     Text(text = "There is nothing in favorites yet",
-                        color = Color.Black,
                         textAlign = TextAlign.Center,
                         fontSize = 18.sp,
                         fontFamily = FONT_FAMILY
@@ -161,7 +159,7 @@ fun ShowMovieOrSerie(
         .clickable { favoritesViewModel.changeSelectedMovieOrSerie(movieOrSerie)
                      navController.navigate(Routes.ShowFavotite.route) }
         .padding(4.dp)
-        .height(maxHeigth * 0.47f)
+        .height(maxHeigth * 0.45f)
         .background(Color.Transparent)){
         Column(modifier = Modifier
             .background(Color.Transparent)
@@ -172,10 +170,9 @@ fun ShowMovieOrSerie(
                 modifier = Modifier.fillMaxWidth()
             )
             Text(text = movieOrSerie.title,
-                fontSize = 16.sp,
+                fontSize = 18.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center,
-                color = Color.Black,
                 fontFamily = FONT_FAMILY
             )
         }

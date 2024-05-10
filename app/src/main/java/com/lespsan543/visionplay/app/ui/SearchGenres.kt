@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
@@ -98,7 +99,7 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
                 contentPadding = PaddingValues(4.dp),
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(199, 199, 199))
+                    .background(Color(40,40,40))
                     .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
             ) {
                 items(genresToShow){ genre ->
@@ -110,7 +111,8 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
                         }
                         .padding(6.dp)
                         .height(height * 0.4f)
-                        .background(Color(85, 85, 85))){
+                        .background(Color(25,25,25))
+                        .border(width = 2.dp, color = Color(138,0,0))){
                         Column(modifier = Modifier
                             .background(Color.Transparent)
                             .fillMaxSize(),

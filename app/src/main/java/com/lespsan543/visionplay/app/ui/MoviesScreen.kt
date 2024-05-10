@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
@@ -55,6 +56,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -222,14 +224,13 @@ fun ShowMovie(navController: NavHostController,
     val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
     //Lista de comentarios de la película
     val commentsList by moviesOrSeriesViewModel.commentsList.collectAsState()
-
-    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
-    
-    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
-
-    val scope = rememberCoroutineScope()
-    
+    //Comentario que introduce el usuario
     val commentText = moviesOrSeriesViewModel.commentText
+
+    //Variables para el manejo de la sección de comentarios
+    val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
+    val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
+    val scope = rememberCoroutineScope()
 
     DisposableEffect(Unit){
         onDispose {
@@ -250,7 +251,7 @@ fun ShowMovie(navController: NavHostController,
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .height(height * 0.75f)
-                .padding(bottom = height * 0.02f),
+                .border(width = 2.dp, color = Color(138,0,0)),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
                 Row(verticalAlignment = Alignment.CenterVertically,
@@ -294,11 +295,11 @@ fun ShowMovie(navController: NavHostController,
                         )
                     }
                 }
-                Divider(color = Color.White, thickness = 2.dp)
+                Divider(color = Color(138,0,0), thickness = 2.dp)
                 LazyColumn(modifier = Modifier.fillMaxSize()) {
                     items(commentsList){
                         CommentSection(comment = it, width = width, height = height)
-                        Spacer(modifier = Modifier.width(width * 0.02f))
+                        Spacer(modifier = Modifier.height(height * 0.01f))
                     }
                 }
             }
@@ -331,7 +332,7 @@ fun ShowMovie(navController: NavHostController,
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(199, 199, 199))
+                        .background(Color(40,40,40))
                         .verticalScroll(rememberScrollState())
                         .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
@@ -354,23 +355,27 @@ fun ShowMovie(navController: NavHostController,
                             Text(text = movieList[moviePosition].title,
                                 fontFamily = Constants.FONT_FAMILY,
                                 textAlign = TextAlign.Justify,
-                                color = Color.Black,
                                 fontSize = 25.sp
                             )
                             Spacer(modifier = Modifier.height(width * 0.03f))
                             Text(text = "Release date: ${movieList[moviePosition].date}",
                                 fontFamily = Constants.FONT_FAMILY,
                                 textAlign = TextAlign.Start,
-                                color = Color.Black,
                                 fontSize = 18.sp
                             )
                             Spacer(modifier = Modifier.height(width * 0.03f))
                             Row {
-                                for (i in 0..moviesOrSeriesViewModel.calculateVotes(movieList[moviePosition])-1){
+                                for (i in 1..5){
+                                    val colorFilter = if (i <= moviesOrSeriesViewModel.calculateVotes(movieList[moviePosition])){
+                                        Color.White
+                                    }else{
+                                        Color(25,25,25)
+                                    }
                                     Image(
                                         painter = painterResource(id = R.drawable.votes),
                                         contentDescription = "Votes",
-                                        modifier = Modifier.width(width*0.08f)
+                                        modifier = Modifier.width(width*0.08f),
+                                        colorFilter = ColorFilter.tint(color = colorFilter)
                                     )
                                 }
                             }
@@ -379,7 +384,6 @@ fun ShowMovie(navController: NavHostController,
                     Text(text = "Overview:",
                         fontFamily = Constants.FONT_FAMILY,
                         textAlign = TextAlign.Justify,
-                        color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(
@@ -391,7 +395,6 @@ fun ShowMovie(navController: NavHostController,
                     Text(text = movieList[moviePosition].overview,
                         fontFamily = Constants.FONT_FAMILY,
                         textAlign = TextAlign.Justify,
-                        color = Color.Black,
                         fontSize = 18.sp,
                         modifier = Modifier.padding(
                             start = width * 0.05f,
@@ -402,7 +405,6 @@ fun ShowMovie(navController: NavHostController,
                     Text(text = "Genres:",
                         fontFamily = Constants.FONT_FAMILY,
                         textAlign = TextAlign.Justify,
-                        color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(
@@ -414,7 +416,6 @@ fun ShowMovie(navController: NavHostController,
                     Text(text = genres,
                         fontFamily = Constants.FONT_FAMILY,
                         textAlign = TextAlign.Justify,
-                        color = Color.Black,
                         fontSize = 18.sp,
                         modifier = Modifier.padding(
                             start = width * 0.05f,
@@ -425,7 +426,6 @@ fun ShowMovie(navController: NavHostController,
                     Text(text = "Trailer: ",
                         fontFamily = Constants.FONT_FAMILY,
                         textAlign = TextAlign.Justify,
-                        color = Color.Black,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier.padding(
@@ -445,7 +445,7 @@ fun ShowMovie(navController: NavHostController,
                             start = width * 0.05f,
                             end = width * 0.05f
                         ),
-                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(40,40,40)),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(138,0,0)),
                         onClick = {
                         scope.launch {
                             if (sheetState.isCollapsed){

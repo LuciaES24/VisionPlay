@@ -73,7 +73,7 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
         val height = maxHeight
         Column(modifier = Modifier
             .fillMaxSize()
-            .background(Color(85, 85, 85)),
+            .background(Color(40,40,40)),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally)
         {
@@ -146,7 +146,7 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                                         viewModel.reset()},
                     text = AnnotatedString("Inicia sesión"),
                     style = TextStyle(
-                        color = Color(135,0,0),
+                        color = Color.Red,
                         fontSize = 16.sp,
                         textDecoration = TextDecoration.Underline,
                         fontFamily = FONT_FAMILY
