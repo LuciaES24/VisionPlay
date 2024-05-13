@@ -45,7 +45,6 @@ import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
  * @param movieOrSerie película o serie que se va a mostrar
  * @param cinemaViewModel viewModel del que obtenemos la información
  */
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CinemaMovie(
     height : Dp,
@@ -57,11 +56,7 @@ fun CinemaMovie(
         .height(height * 0.35f)
         .fillMaxWidth()
         .padding(start = width * 0.05f, end = width * 0.05f, top = height*0.04f, bottom = height*0.04f)
-        .combinedClickable(enabled = true,
-            onClick = {
-                cinemaViewModel.formatTitle(movieOrSerie.title)
-                cinemaViewModel.showMovieTrailer()
-            })) {
+        ) {
         AsyncImage(model = movieOrSerie.poster,
             contentDescription = null,
             modifier = Modifier
