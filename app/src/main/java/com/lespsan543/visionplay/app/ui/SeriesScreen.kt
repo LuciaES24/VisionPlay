@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -102,7 +103,8 @@ fun SeriesScreen(
                             .width(width.times(0.25f))
                             .height(height.times(0.05f)),
                         containerColor = Color(40,40,40),
-                        shape = RectangleShape) {
+                        shape = RoundedCornerShape(3.dp))
+                    {
                         Text(text = "Películas", color = Color.White, fontSize = 16.sp)
                     }
                     Spacer(modifier = Modifier.width(10.dp))
@@ -111,7 +113,7 @@ fun SeriesScreen(
                             .width(width.times(0.25f))
                             .height(height.times(0.05f)),
                         containerColor = Color(138,0,0) ,
-                        shape = RectangleShape
+                        shape = RoundedCornerShape(3.dp)
                     ) {
                         Text(text = "Series", color = Color.White, fontSize = 16.sp)
                     }

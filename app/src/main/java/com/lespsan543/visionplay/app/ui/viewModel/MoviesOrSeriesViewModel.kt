@@ -107,8 +107,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private val _selectedMovieOrSerie = MutableStateFlow(MovieOrSerieState())
     var selectedMovieOrSerie : StateFlow<MovieOrSerieState> = _selectedMovieOrSerie
 
-    private val _lastSelectedMovieOrSerie = MutableStateFlow(MovieOrSerieState())
-    var lastSelectedMovieOrSerie : StateFlow<MovieOrSerieState> = _lastSelectedMovieOrSerie
+    private val _lastSelectedMoviesOrSeries = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
 
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
@@ -150,21 +149,26 @@ class MoviesOrSeriesViewModel : ViewModel() {
     /**
      * Guarda la película o serie que se ha seleccionado en la variable
      * del ViewModel
-     *
-     * @param movieOrSerie película o serie que se ha seleccioando
      */
-    fun changeSelectedMovieOrSerie(movieOrSerie:MovieOrSerieState){
-        _selectedMovieOrSerie.value = movieOrSerie
+    fun changeSelectedMovieOrSerie(){
+        val temporalList = _lastSelectedMoviesOrSeries.value.toMutableList()
+        temporalList.removeAt(_lastSelectedMoviesOrSeries.value.size-1)
+        _lastSelectedMoviesOrSeries.value = temporalList
+        if (_lastSelectedMoviesOrSeries.value.isNotEmpty()){
+            _selectedMovieOrSerie.value = _lastSelectedMoviesOrSeries.value.last()
+        }
     }
 
     /**
-     * Guarda la película o serie que se ha seleccionado anteriormente en la variable
-     * del ViewModel
+     * Guarda la película o serie que se ha seleccionado anteriormente en la lista
      *
-     * @param movieOrSerie película o serie que se ha seleccioando
+     * @param movieOrSerie película o serie que se ha seleccionado
      */
-    fun changeLastSelectedMovieOrSerie(movieOrSerie:MovieOrSerieState){
-        _lastSelectedMovieOrSerie.value = movieOrSerie
+    fun addSelected(movieOrSerie:MovieOrSerieState){
+        val temporalList = _lastSelectedMoviesOrSeries.value.toMutableList()
+        temporalList.add(movieOrSerie)
+        _lastSelectedMoviesOrSeries.value = temporalList
+        _selectedMovieOrSerie.value = movieOrSerie
     }
 
     /**
@@ -485,6 +489,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
     }
 
     private fun getTrailer(title: String){
+        _trailerId.value = ""
         viewModelScope.launch(Dispatchers.IO) {
             _trailerId.value = getTrailerUseCase.invoke(title)
         }

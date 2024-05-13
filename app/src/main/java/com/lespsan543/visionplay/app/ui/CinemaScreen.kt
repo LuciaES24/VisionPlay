@@ -41,6 +41,7 @@ import coil.compose.AsyncImage
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants.FONT_FAMILY
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.components.CinemaMovie
 import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
@@ -93,11 +94,11 @@ fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewMo
                 Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
                 LazyColumn(modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(199, 199, 199))
+                    .background(Color(40, 40, 40))
                     .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ){
                     items(cineList){movie ->
-                        MovieRow(height = height,
+                        CinemaMovie(height = height,
                             width = width,
                             movieOrSerie = movie,
                             cinemaViewModel = cinemaViewModel)
@@ -127,76 +128,6 @@ fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewMo
                         verticalArrangement = Arrangement.Center) {
                         if (trailerId!=""){
                             YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-/**
- * Formato para mostrar una película
- *
- * @param height altura de la pantalla
- * @param width ancho de la pantalla
- * @param movieOrSerie película o serie que se va a mostrar
- * @param cinemaViewModel viewModel del que obtenemos la información
- */
-@OptIn(ExperimentalFoundationApi::class)
-@Composable
-fun MovieRow(height: Dp,
-             width : Dp,
-             movieOrSerie:MovieOrSerieState,
-             cinemaViewModel: CinemaViewModel){
-    BoxWithConstraints {
-        val widthCard = maxWidth
-        Box(
-            modifier = Modifier
-                .height(height * 0.3f)
-                .fillMaxWidth()
-                .padding(bottom = height * 0.02f)
-                .combinedClickable(enabled = true,
-                    onClick = {
-                        cinemaViewModel.formatTitle(movieOrSerie.title)
-                        cinemaViewModel.showMovieTrailer()
-                    })
-                .background(Color(40, 40, 40))
-        ) {
-            Row {
-                AsyncImage(model = movieOrSerie.poster,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(widthCard * 0.5f))
-                Column(horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center)
-                {
-                    Spacer(modifier = Modifier.height(height * 0.03f))
-                    Text(text = movieOrSerie.title,
-                        fontSize = 18.sp,
-                        textAlign = TextAlign.Center,
-                        color = Color.White,
-                        fontFamily = FONT_FAMILY,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(height * 0.03f))
-                    Text(text = movieOrSerie.date,
-                        fontSize = 15.sp,
-                        textAlign = TextAlign.Center,
-                        color = Color.White,
-                        fontFamily = FONT_FAMILY,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(height * 0.03f))
-                    Row {
-                        for (i in 0..cinemaViewModel.calculateVotes(movieOrSerie)-1){
-                            Image(
-                                painter = painterResource(id = R.drawable.votes),
-                                contentDescription = "Votes",
-                                modifier = Modifier.width(width*0.08f),
-                                colorFilter = ColorFilter.tint(Color.White)
-                            )
                         }
                     }
                 }

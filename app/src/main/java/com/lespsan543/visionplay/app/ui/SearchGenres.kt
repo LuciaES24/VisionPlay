@@ -28,6 +28,8 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -112,7 +114,7 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
                         .padding(6.dp)
                         .height(height * 0.4f)
                         .background(Color(25,25,25))
-                        .border(width = 2.dp, color = Color(138,0,0))){
+                        .border(width = 2.dp, color = Color(138,0,0), shape = RoundedCornerShape(3.dp))){
                         Column(modifier = Modifier
                             .background(Color.Transparent)
                             .fillMaxSize(),

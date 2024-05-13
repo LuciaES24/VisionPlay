@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
@@ -86,7 +87,8 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                     containerColor = Color.White,
                     textColor = Color.Black
                 ),
-                singleLine = true
+                singleLine = true,
+                shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
             TextField(value = password,
@@ -108,7 +110,9 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                         val description = if (hidden) "Ocultar contraseña" else "Revelar contraseña"
                         Icon(imageVector = vector, contentDescription = description)
                     }
-            })
+                },
+                shape = RoundedCornerShape(3.dp)
+            )
             Spacer(modifier = Modifier.height(height * 0.1f))
             OutlinedButton(onClick = { viewModel.logIn { navController.navigate(Routes.MoviesScreen.route) } },
                 modifier = Modifier

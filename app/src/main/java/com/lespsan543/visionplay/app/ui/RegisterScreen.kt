@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
@@ -89,7 +90,8 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                     containerColor = Color.White,
                     textColor = Color.Black
                 ),
-                singleLine = true
+                singleLine = true,
+                shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
             TextField(value = email,
@@ -100,7 +102,8 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                     containerColor = Color.White,
                     textColor = Color.Black
                 ),
-                singleLine = true
+                singleLine = true,
+                shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
             TextField(value = password,
@@ -121,7 +124,8 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                         val description = if (hidden) "Ocultar contraseña" else "Revelar contraseña" //6
                         Icon(imageVector = vector, contentDescription = description)
                     }
-                }
+                },
+                shape = RoundedCornerShape(3.dp)
             )
             Text(
                 text = "*Al menos 6 caracteres",

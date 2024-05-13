@@ -31,17 +31,15 @@ fun SimilarMovieOrSerie(
     moviesOrSeriesViewModel: MoviesOrSeriesViewModel,
     movieOrSerie:MovieOrSerieState,
     height : Dp,
-    width:Dp,
-    lastMovieOrSerie : MovieOrSerieState){
+    width:Dp){
 
     Box(modifier = Modifier
         .width(width*0.3f)
         .clickable {
+            moviesOrSeriesViewModel.addSelected(movieOrSerie)
             navController.navigate(Routes.ShowMovie.route)
             moviesOrSeriesViewModel.formatTitle(movieOrSerie.title)
             moviesOrSeriesViewModel.findSimilarMovies(movieOrSerie)
-            moviesOrSeriesViewModel.changeSelectedMovieOrSerie(movieOrSerie)
-            moviesOrSeriesViewModel.changeLastSelectedMovieOrSerie(lastMovieOrSerie)
         }
         .padding(6.dp)
         .height(height * 0.4f)
