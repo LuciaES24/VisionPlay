@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
  * Guarda la información de una película en concreto
  */
 data class MovieModel(
+    @SerializedName("id")
+    var idAPI: Int,
     @SerializedName("title")
     var title: String,
     @SerializedName("overview")

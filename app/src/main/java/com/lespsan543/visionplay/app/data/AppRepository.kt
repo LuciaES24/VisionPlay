@@ -45,6 +45,20 @@ class AppRepository {
     }
 
     /**
+     * Realiza una búsqueda de series en la API
+     *
+     * @return resultado de la búsqueda
+     */
+    suspend fun discoverSimilarMovies(movie_id:Int): MovieOrSerieResponseState {
+        val response = apiService.discoverSimilarMovies(movie_id)
+        return if (response.isSuccessful) {
+            response.body()?.toMovieOrSerieResponseState() ?: MovieOrSerieResponseState()
+        } else {
+            MovieOrSerieResponseState()
+        }
+    }
+
+    /**
      * Realiza una búsqueda de películas en la API
      *
      * @return resultado de la búsqueda
@@ -124,6 +138,7 @@ class AppRepository {
      */
     private fun MovieModel.toMovieOrSerieState(): MovieOrSerieState {
         return MovieOrSerieState(
+            idAPI = this.idAPI,
             title = this.title,
             overview = this.overview,
             poster = BASE_URL_IMG + this.poster,
@@ -152,6 +167,7 @@ class AppRepository {
      */
     private fun SerieModel.toMovieOrSerieState(): MovieOrSerieState {
         return MovieOrSerieState(
+            idAPI = this.idAPI,
             title = this.name,
             overview = this.overview,
             poster = BASE_URL_IMG + this.poster,

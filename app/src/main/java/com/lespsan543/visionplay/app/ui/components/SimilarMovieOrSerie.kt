@@ -1,0 +1,65 @@
+package com.lespsan543.visionplay.app.ui.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import com.lespsan543.visionplay.app.data.util.Constants
+import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
+import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
+
+@Composable
+fun SimilarMovieOrSerie(
+    navController:NavHostController,
+    moviesOrSeriesViewModel: MoviesOrSeriesViewModel,
+    movieOrSerie:MovieOrSerieState,
+    height : Dp,
+    width:Dp,
+    lastMovieOrSerie : MovieOrSerieState){
+
+    Box(modifier = Modifier
+        .width(width*0.3f)
+        .clickable {
+            navController.navigate(Routes.ShowMovie.route)
+            moviesOrSeriesViewModel.formatTitle(movieOrSerie.title)
+            moviesOrSeriesViewModel.findSimilarMovies(movieOrSerie)
+            moviesOrSeriesViewModel.changeSelectedMovieOrSerie(movieOrSerie)
+            moviesOrSeriesViewModel.changeLastSelectedMovieOrSerie(lastMovieOrSerie)
+        }
+        .padding(6.dp)
+        .height(height * 0.4f)
+        .background(Color.Transparent)){
+        Column(modifier = Modifier
+            .background(Color.Transparent)
+        ) {
+                AsyncImage(
+                    model = movieOrSerie.poster,
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxWidth()
+                )
+                Text(text = movieOrSerie.title,
+                    fontSize = 15.sp,
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    textAlign = TextAlign.Center,
+                    fontFamily = Constants.FONT_FAMILY
+                )
+        }
+    }
+}

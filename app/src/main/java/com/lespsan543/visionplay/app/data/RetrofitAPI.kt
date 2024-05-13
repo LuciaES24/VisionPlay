@@ -6,26 +6,23 @@ import com.lespsan543.visionplay.app.data.model.SerieResponse
 import com.lespsan543.visionplay.app.data.model.YoutubeResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
  * Interfaz que determina las operaciones que se le realizarán a la API
  */
 interface RetrofitAPI {
-    /**
-     * Recoge información de la API
-     *
-     * @param url url de la API en la que queremos buscar
-     *
-     * @return respuesta con los resultados obtenidos
-     */
     @GET("discover/movie")
     suspend fun discoverMovies(@Query("api_key") apiKey:String, @Query("page") page:Int) : Response<MovieResponse>
+
+    @GET("movie/{movie_id}/similar")
+    suspend fun discoverSimilarMovies(@Path("movie_id") movie_id:Int, @Query("api_key") apiKey:String) : Response<MovieResponse>
 
     @GET("movie/now_playing")
     suspend fun getCineMovies(@Query("api_key") apiKey:String, @Query("page") page:Int) : Response<MovieResponse>
 
-    @GET("tv/popular")
+    @GET("discover/tv")
     suspend fun discoverSeries(@Query("api_key") apiKey:String, @Query("page") page:Int) : Response<SerieResponse>
 
     @GET("genre/movie/list")

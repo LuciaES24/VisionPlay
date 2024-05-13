@@ -9,6 +9,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -73,7 +75,9 @@ import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.components.CommentSection
+import com.lespsan543.visionplay.app.ui.components.SimilarMovieOrSerie
 import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
+import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
@@ -150,15 +154,17 @@ fun MoviesScreen(
                         .fillMaxSize()
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
-                                if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
+                                if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
                                     moviesOrSeriesViewModel.deleteMovieOrSerie()
-                                }else{
+                                } else {
                                     moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition])
                                 }
                             },
                             onClick = {
                                 navController.navigate(Routes.ShowMovie.route)
                                 moviesOrSeriesViewModel.formatTitle(movieList[moviePosition].title)
+                                moviesOrSeriesViewModel.findSimilarMovies(movieList[moviePosition])
+                                moviesOrSeriesViewModel.changeSelectedMovieOrSerie(movieList[moviePosition])
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -210,12 +216,9 @@ fun MoviesScreen(
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ShowMovie(navController: NavHostController,
-    moviesOrSeriesViewModel: MoviesOrSeriesViewModel
+    moviesOrSeriesViewModel: MoviesOrSeriesViewModel,
+    movieOrSerie : MovieOrSerieState
 ) {
-    //Guarda la posición de la película que se muestra
-    val moviePosition by moviesOrSeriesViewModel.moviePosition.collectAsState()
-    //Lista de películas obtenida
-    val movieList by moviesOrSeriesViewModel.movieList.collectAsState()
     //Propiedad del botón de guardado
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
     //Lista de géneros de la película
@@ -226,6 +229,8 @@ fun ShowMovie(navController: NavHostController,
     val commentsList by moviesOrSeriesViewModel.commentsList.collectAsState()
     //Comentario que introduce el usuario
     val commentText = moviesOrSeriesViewModel.commentText
+    //Lista de películas similares
+    val similar = moviesOrSeriesViewModel.similarMovies.collectAsState()
 
     //Variables para el manejo de la sección de comentarios
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -238,9 +243,9 @@ fun ShowMovie(navController: NavHostController,
         }
     }
     //Comprobamos si la película ya ha sido guardada
-    moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
-    moviesOrSeriesViewModel.getMovieGenresToShow(movieList[moviePosition])
-    moviesOrSeriesViewModel.fetchCommentsFromDB(movieList[moviePosition].title)
+    moviesOrSeriesViewModel.findMovieInList(movieOrSerie.title)
+    moviesOrSeriesViewModel.getMovieGenresToShow(movieOrSerie)
+    moviesOrSeriesViewModel.fetchCommentsFromDB(movieOrSerie.title)
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
         val width = maxWidth
@@ -251,7 +256,7 @@ fun ShowMovie(navController: NavHostController,
             Column(modifier = Modifier
                 .fillMaxWidth()
                 .height(height * 0.75f)
-                .border(width = 2.dp, color = Color(138,0,0)),
+                .border(width = 2.dp, color = Color(138, 0, 0)),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
                 Row(verticalAlignment = Alignment.CenterVertically,
@@ -282,8 +287,8 @@ fun ShowMovie(navController: NavHostController,
                         ),
                         modifier = Modifier.width(width*0.7f)
                     )
-                    IconButton(onClick = { moviesOrSeriesViewModel.saveComment(movieList[moviePosition].title, commentText.value)
-                        moviesOrSeriesViewModel.fetchCommentsFromDB(movieList[moviePosition].title)
+                    IconButton(onClick = { moviesOrSeriesViewModel.saveComment(movieOrSerie.title, commentText.value)
+                        moviesOrSeriesViewModel.fetchCommentsFromDB(movieOrSerie.title)
                         moviesOrSeriesViewModel.newComment()})
                     {
                         Icon(
@@ -312,7 +317,8 @@ fun ShowMovie(navController: NavHostController,
                         modifier = Modifier
                             .height(maxHeight.times(0.08f)),
                         property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
-                        volver = { navController.navigate(Routes.MoviesScreen.route)}
+                        volver = { navController.popBackStack()
+                                   moviesOrSeriesViewModel.changeSelectedMovieOrSerie(moviesOrSeriesViewModel.lastSelectedMovieOrSerie.value)}
                     )
                 },
                 bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
@@ -324,7 +330,7 @@ fun ShowMovie(navController: NavHostController,
                 floatingActionButton = {
                     Guardar(
                         property1 = property,
-                        guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition]) },
+                        guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(movieOrSerie) },
                         eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
                     )
                 }
@@ -332,7 +338,7 @@ fun ShowMovie(navController: NavHostController,
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(40,40,40))
+                        .background(Color(40, 40, 40))
                         .verticalScroll(rememberScrollState())
                         .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
@@ -345,20 +351,20 @@ fun ShowMovie(navController: NavHostController,
                             bottom = height * 0.03f
                         )
                     ) {
-                        AsyncImage(model = movieList[moviePosition].poster,
+                        AsyncImage(model = movieOrSerie.poster,
                             contentDescription = "Poster película",
                             modifier = Modifier
                                 .height(height * 0.3f)
                         )
                         Spacer(modifier = Modifier.width(width * 0.03f))
                         Column {
-                            Text(text = movieList[moviePosition].title,
+                            Text(text = movieOrSerie.title,
                                 fontFamily = Constants.FONT_FAMILY,
                                 textAlign = TextAlign.Justify,
                                 fontSize = 25.sp
                             )
                             Spacer(modifier = Modifier.height(width * 0.03f))
-                            Text(text = "Release date: ${movieList[moviePosition].date}",
+                            Text(text = "Release date: ${movieOrSerie.date}",
                                 fontFamily = Constants.FONT_FAMILY,
                                 textAlign = TextAlign.Start,
                                 fontSize = 18.sp
@@ -366,7 +372,7 @@ fun ShowMovie(navController: NavHostController,
                             Spacer(modifier = Modifier.height(width * 0.03f))
                             Row {
                                 for (i in 1..5){
-                                    val colorFilter = if (i <= moviesOrSeriesViewModel.calculateVotes(movieList[moviePosition])){
+                                    val colorFilter = if (i <= moviesOrSeriesViewModel.calculateVotes(movieOrSerie)){
                                         Color.White
                                     }else{
                                         Color(25,25,25)
@@ -392,7 +398,7 @@ fun ShowMovie(navController: NavHostController,
                         )
                     )
                     Spacer(modifier = Modifier.height(width * 0.03f))
-                    Text(text = movieList[moviePosition].overview,
+                    Text(text = movieOrSerie.overview,
                         fontFamily = Constants.FONT_FAMILY,
                         textAlign = TextAlign.Justify,
                         fontSize = 18.sp,
@@ -460,6 +466,31 @@ fun ShowMovie(navController: NavHostController,
                             color = Color.White,
                             fontFamily = Constants.FONT_FAMILY,
                             fontSize = 20.sp)
+                    }
+                    Spacer(modifier = Modifier.height(width * 0.1f))
+                    Text(text = "Similar: ",
+                        fontFamily = Constants.FONT_FAMILY,
+                        textAlign = TextAlign.Justify,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(width * 0.03f))
+                    if (similar.value.isNotEmpty()){
+                        LazyRow(modifier = Modifier.fillMaxSize()) {
+                            items(similar.value){
+                                SimilarMovieOrSerie(
+                                    movieOrSerie = it,
+                                    height = height,
+                                    width = width,
+                                    moviesOrSeriesViewModel = moviesOrSeriesViewModel,
+                                    navController = navController,
+                                    lastMovieOrSerie = movieOrSerie)
+                            }
+                        }
                     }
                     Spacer(modifier = Modifier.height(width * 0.05f))
                 }

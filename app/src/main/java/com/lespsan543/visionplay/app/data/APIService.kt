@@ -37,6 +37,15 @@ class APIService {
     }
 
     /**
+     * Recoge una lista de películas similares a partir del id de otra
+     *
+     * @return objeto MovieResponse con los datos de las películas encontradas
+     */
+    suspend fun discoverSimilarMovies(movie_id: Int) : Response<MovieResponse>{
+        return retrofitTMDB.create(RetrofitAPI::class.java).discoverSimilarMovies(movie_id, API_KEY)
+    }
+
+    /**
      * Recoge una lista de películas que se encuentran actualmente en el cine
      *
      * @return objeto MovieResponse con la información recogida de la API

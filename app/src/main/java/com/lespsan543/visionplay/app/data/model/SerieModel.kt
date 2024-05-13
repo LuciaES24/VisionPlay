@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName
  * Guarda la información de una serie en concreto
  */
 data class SerieModel(
+    @SerializedName("id")
+    var idAPI: Int,
     @SerializedName("name")
     var name: String,
     @SerializedName("overview")

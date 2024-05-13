@@ -15,6 +15,7 @@ import com.lespsan543.visionplay.app.data.model.CommentModel
 import com.lespsan543.visionplay.app.data.model.UserModel
 import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
+import com.lespsan543.visionplay.app.domain.DiscoverSimilarMoviesUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetTrailerUseCase
@@ -62,6 +63,8 @@ class MoviesOrSeriesViewModel : ViewModel() {
 
     private val getTrailerUseCase = GetTrailerUseCase()
 
+    private val getSimilarMoviesUseCase = DiscoverSimilarMoviesUseCase()
+
     private var _moviePosition = MutableStateFlow(0)
     var moviePosition : StateFlow<Int> = _moviePosition
 
@@ -97,6 +100,15 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private var _userName = MutableStateFlow("")
 
     var commentText = mutableStateOf("")
+
+    private var _similarMovies = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+    var similarMovies : StateFlow<List<MovieOrSerieState>> = _similarMovies
+
+    private val _selectedMovieOrSerie = MutableStateFlow(MovieOrSerieState())
+    var selectedMovieOrSerie : StateFlow<MovieOrSerieState> = _selectedMovieOrSerie
+
+    private val _lastSelectedMovieOrSerie = MutableStateFlow(MovieOrSerieState())
+    var lastSelectedMovieOrSerie : StateFlow<MovieOrSerieState> = _lastSelectedMovieOrSerie
 
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
@@ -136,6 +148,26 @@ class MoviesOrSeriesViewModel : ViewModel() {
     }
 
     /**
+     * Guarda la película o serie que se ha seleccionado en la variable
+     * del ViewModel
+     *
+     * @param movieOrSerie película o serie que se ha seleccioando
+     */
+    fun changeSelectedMovieOrSerie(movieOrSerie:MovieOrSerieState){
+        _selectedMovieOrSerie.value = movieOrSerie
+    }
+
+    /**
+     * Guarda la película o serie que se ha seleccionado anteriormente en la variable
+     * del ViewModel
+     *
+     * @param movieOrSerie película o serie que se ha seleccioando
+     */
+    fun changeLastSelectedMovieOrSerie(movieOrSerie:MovieOrSerieState){
+        _lastSelectedMovieOrSerie.value = movieOrSerie
+    }
+
+    /**
      * Buscamos los distintos géneros de las películas
      */
     private fun movieGenres(){
@@ -150,6 +182,12 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private fun serieGenres(){
         viewModelScope.launch(Dispatchers.IO) {
             _serieGenres.value = getSerieGenresUseCase.invoke()
+        }
+    }
+
+    fun findSimilarMovies(movie: MovieOrSerieState){
+        viewModelScope.launch {
+            _similarMovies.value = getSimilarMoviesUseCase.invoke(movie.idAPI).results
         }
     }
 
@@ -386,6 +424,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val newMovieOrSerie = hashMapOf(
+                    "idAPI" to searchMovieState.idAPI,
                     "title" to searchMovieState.title,
                     "overview" to searchMovieState.overview,
                     "poster" to searchMovieState.poster,

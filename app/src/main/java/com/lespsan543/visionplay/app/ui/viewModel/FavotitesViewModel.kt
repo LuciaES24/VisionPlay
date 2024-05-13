@@ -233,6 +233,7 @@ class FavotitesViewModel :ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val newMovieOrSerie = hashMapOf(
+                    "idAPI" to searchMovieState.idAPI,
                     "title" to searchMovieState.title,
                     "overview" to searchMovieState.overview,
                     "poster" to searchMovieState.poster,

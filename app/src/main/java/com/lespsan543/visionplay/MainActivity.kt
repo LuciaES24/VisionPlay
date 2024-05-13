@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                             FavoritesScreen(navController, favotitesViewModel)
                         }
                         composable(Routes.ShowMovie.route) {
-                            ShowMovie(navController, moviesOrSeriesViewModel)
+                            ShowMovie(navController, moviesOrSeriesViewModel, moviesOrSeriesViewModel.selectedMovieOrSerie.value)
                         }
                         composable(Routes.ShowSerie.route) {
                             ShowSerie(navController, moviesOrSeriesViewModel)
