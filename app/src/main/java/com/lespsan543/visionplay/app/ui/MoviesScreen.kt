@@ -167,7 +167,6 @@ fun MoviesScreen(
                                 moviesOrSeriesViewModel.addSelected(movieList[moviePosition])
                                 navController.navigate(Routes.ShowMovie.route)
                                 moviesOrSeriesViewModel.formatTitle(movieList[moviePosition].title)
-                                moviesOrSeriesViewModel.findSimilarMovies(movieList[moviePosition])
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -184,8 +183,10 @@ fun MoviesScreen(
                                 offsetX = 0
                             }
                         )
-                        .border(border = BorderStroke(0.dp, color = Color.Transparent),
-                            shape = CutCornerShape(3.dp))
+                        .border(
+                            border = BorderStroke(0.dp, color = Color.Transparent),
+                            shape = CutCornerShape(3.dp)
+                        )
                 )
                 Guardar(
                     modifier = Modifier
@@ -251,6 +252,7 @@ fun ShowMovie(navController: NavHostController,
     moviesOrSeriesViewModel.findMovieInList(movieOrSerie.title)
     moviesOrSeriesViewModel.getMovieGenresToShow(movieOrSerie)
     moviesOrSeriesViewModel.fetchCommentsFromDB(movieOrSerie.title)
+    moviesOrSeriesViewModel.findSimilarMovies(movieOrSerie)
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
         val width = maxWidth
@@ -323,7 +325,7 @@ fun ShowMovie(navController: NavHostController,
                             .height(maxHeight.times(0.08f)),
                         property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
                         volver = { navController.popBackStack()
-                                   moviesOrSeriesViewModel.changeSelectedMovieOrSerie()}
+                                   moviesOrSeriesViewModel.changeSelectedMovieOrSerie() }
                     )
                 },
                 bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
@@ -360,8 +362,10 @@ fun ShowMovie(navController: NavHostController,
                             contentDescription = "Poster película",
                             modifier = Modifier
                                 .height(height * 0.3f)
-                                .border(border = BorderStroke(0.dp, color = Color.Transparent),
-                                    shape = RoundedCornerShape(3.dp))
+                                .border(
+                                    border = BorderStroke(0.dp, color = Color.Transparent),
+                                    shape = RoundedCornerShape(3.dp)
+                                )
                         )
                         Spacer(modifier = Modifier.width(width * 0.03f))
                         Column {

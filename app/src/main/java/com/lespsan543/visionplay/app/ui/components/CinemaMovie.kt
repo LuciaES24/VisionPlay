@@ -72,11 +72,11 @@ fun CinemaMovie(
             modifier = Modifier
                 .fillMaxHeight()
                 .width(width * 0.6f)
+                .background(Color(25, 25, 25))
                 .border(
                     border = BorderStroke(2.dp, color = Color(138, 0, 0)),
                     shape = RoundedCornerShape(5.dp)
-                )
-                .background(Color(25, 25, 25)),
+                ),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
