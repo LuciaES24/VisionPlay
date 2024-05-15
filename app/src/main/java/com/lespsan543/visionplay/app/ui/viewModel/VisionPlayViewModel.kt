@@ -174,7 +174,6 @@ class VisionPlayViewModel : ViewModel() {
         }else{
             _searchByGenrePosition.value++
         }
-        Log.d("posicion", _searchByGenrePosition.value.toString())
     }
 
     /**
