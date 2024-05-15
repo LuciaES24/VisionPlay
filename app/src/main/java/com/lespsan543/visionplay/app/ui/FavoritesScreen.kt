@@ -75,7 +75,8 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                         .height(maxHeight.times(0.08f)),
                     Property.Perfil,
                     salir = { visionPlayViewModel.signOut()
-                              navController.navigate(Routes.LogInScreen.route)},
+                              navController.navigate(Routes.LogInScreen.route)
+                              visionPlayViewModel.resetLogInOrRegister()},
                     username = username
                 )
             },
@@ -87,7 +88,7 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                     genres4 = { navController.navigate(Routes.SearchGenres.route) },
                     fav4 = { navController.navigate(Routes.FavoritesScreen.route) },
                     cine4 = { navController.navigate(Routes.CinemaScreen.route) },
-                    propertyBottomBar = com.lespsan543.visionplay.menu.PropertyBottomBar.Favoritos
+                    propertyBottomBar = PropertyBottomBar.Favoritos
                 )
             },
             floatingActionButton = {

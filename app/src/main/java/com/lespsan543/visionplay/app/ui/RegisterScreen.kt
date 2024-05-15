@@ -57,7 +57,7 @@ import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterScreen(navController: NavController, visionPlayViewModel : VisionPlayViewModel){
+fun RegisterScreen(navController: NavController, visionPlayViewModel: VisionPlayViewModel) {
     //Determina si la contraseña está visible o no
     var hidden by remember { mutableStateOf(true) }
     //Controla si algún dato es incorrecto para mostrar el mensaje de error
@@ -71,19 +71,32 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel : VisionPla
     BoxWithConstraints {
         val width = maxWidth
         val height = maxHeight
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(Color(40,40,40)),
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(40, 40, 40)),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally)
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
         {
-            Text(text = "Registrarse", fontSize = 30.sp,
-                modifier = Modifier.padding(top = height*0.1f), color = Color.White, fontFamily = FONT_FAMILY
+            Text(
+                text = "Registrarse",
+                fontSize = 30.sp,
+                modifier = Modifier.padding(top = height * 0.1f),
+                color = Color.White,
+                fontFamily = FONT_FAMILY
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
-            TextField(value = name,
+            TextField(
+                value = name,
                 onValueChange = { visionPlayViewModel.writeName(it) },
-                label = { Text(text = "Name...", color = Color.DarkGray, fontFamily = FONT_FAMILY) },
+                label = {
+                    Text(
+                        text = "Name...",
+                        color = Color.DarkGray,
+                        fontFamily = FONT_FAMILY
+                    )
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 colors = ExposedDropdownMenuDefaults.textFieldColors(
                     containerColor = Color.White,
@@ -93,9 +106,16 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel : VisionPla
                 shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
-            TextField(value = email,
+            TextField(
+                value = email,
                 onValueChange = { visionPlayViewModel.writeEmail(it) },
-                label = { Text(text = "Email...", color = Color.DarkGray, fontFamily =FONT_FAMILY) },
+                label = {
+                    Text(
+                        text = "Email...",
+                        color = Color.DarkGray,
+                        fontFamily = FONT_FAMILY
+                    )
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 colors = ExposedDropdownMenuDefaults.textFieldColors(
                     containerColor = Color.White,
@@ -105,9 +125,16 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel : VisionPla
                 shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
-            TextField(value = password,
+            TextField(
+                value = password,
                 onValueChange = { visionPlayViewModel.writePassword(it) },
-                label = { Text(text = "Password...",  color = Color.DarkGray, fontFamily = FONT_FAMILY) },
+                label = {
+                    Text(
+                        text = "Password...",
+                        color = Color.DarkGray,
+                        fontFamily = FONT_FAMILY
+                    )
+                },
                 colors = ExposedDropdownMenuDefaults.textFieldColors(
                     containerColor = Color.White,
                     textColor = Color.Black,
@@ -120,7 +147,8 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel : VisionPla
                     IconButton(onClick = { hidden = !hidden }) {
                         val vector = if (hidden) Icons.Filled.Visibility
                         else Icons.Filled.VisibilityOff
-                        val description = if (hidden) "Ocultar contraseña" else "Revelar contraseña" //6
+                        val description =
+                            if (hidden) "Ocultar contraseña" else "Revelar contraseña"
                         Icon(imageVector = vector, contentDescription = description)
                     }
                 },
@@ -130,24 +158,31 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel : VisionPla
                 text = "*Al menos 6 caracteres",
                 color = Color.LightGray,
                 style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier.padding(end = width*0.3f)
+                modifier = Modifier.padding(end = width * 0.3f)
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
-            OutlinedButton(onClick = { visionPlayViewModel.signOut()
-                                       visionPlayViewModel.createUser { navController.navigate(Routes.MoviesScreen.route) }},
+            OutlinedButton(
+                onClick = {
+                    visionPlayViewModel.signOut()
+                    visionPlayViewModel.createUser { navController.navigate(Routes.MoviesScreen.route) }
+                },
                 modifier = Modifier
                     .height(height * 0.06f)
                     .width(width * 0.35f),
                 shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black))
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color.Black
+                )
+            )
             {
                 Text(text = "Registrarse", fontFamily = FONT_FAMILY)
             }
             Spacer(modifier = Modifier.height(height * 0.07f))
             Row {
                 Text(text = "¿Ya estas registrado?", color = Color.White, fontFamily = FONT_FAMILY)
-                ClickableText(onClick = { navController.navigate(Routes.LogInScreen.route)
-                                          visionPlayViewModel.resetLogInOrRegister()},
+                ClickableText(
+                    onClick = { navController.navigate(Routes.LogInScreen.route) },
                     text = AnnotatedString("Inicia sesión"),
                     style = TextStyle(
                         color = Color.Red,
@@ -158,13 +193,14 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel : VisionPla
                 )
             }
             //Se muestra si algún dato es incorrecto
-            if (wrong == true){
-                AlertDialog(onDismissRequest = {  },
-                    confirmButton = { Button(onClick = { visionPlayViewModel.closeDialog() }) {
-                        Text(text = "Aceptar", fontFamily = FONT_FAMILY)
-                    }
+            if (wrong == true) {
+                AlertDialog(onDismissRequest = { },
+                    confirmButton = {
+                        Button(onClick = { visionPlayViewModel.closeDialog() }) {
+                            Text(text = "Aceptar", fontFamily = FONT_FAMILY)
+                        }
                     },
-                    text = { Text(text = "Algún dato es incorrecto", fontFamily = FONT_FAMILY)}
+                    text = { Text(text = "Algún dato es incorrecto", fontFamily = FONT_FAMILY) }
                 )
             }
         }

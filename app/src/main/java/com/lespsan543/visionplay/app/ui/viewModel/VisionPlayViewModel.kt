@@ -1,5 +1,6 @@
 package com.lespsan543.visionplay.app.ui.viewModel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -146,6 +147,9 @@ class VisionPlayViewModel : ViewModel() {
     private var _propertyBottomBar = MutableStateFlow(PropertyBottomBar.Inicio)
     var propertyBottomBar : StateFlow<PropertyBottomBar> = _propertyBottomBar
 
+    var userSearch by mutableStateOf("")
+        private set
+
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
         fetchMoviesFromDB()
@@ -165,11 +169,12 @@ class VisionPlayViewModel : ViewModel() {
      */
     fun newMovieOrSerie(){
         _propertyButton.value = Property1.Default
-        if (_searchByGenrePosition.value == _favoritesInDB.value.size-1){
+        if (_searchByGenrePosition.value == _dbList.value.size-1){
             _searchByGenrePosition.value=0
         }else{
             _searchByGenrePosition.value++
         }
+        Log.d("posicion", _searchByGenrePosition.value.toString())
     }
 
     /**
@@ -488,8 +493,7 @@ class VisionPlayViewModel : ViewModel() {
      */
     fun findUserInDB() {
         firestore.collection("Users")
-            .whereEqualTo("email", email)
-            .whereEqualTo("password", password)
+            .whereEqualTo("id", FirebaseAuth.getInstance().currentUser?.uid)
             .addSnapshotListener { querySnapshot, error ->
                 if (error != null) {
                     return@addSnapshotListener
@@ -764,7 +768,6 @@ class VisionPlayViewModel : ViewModel() {
                         }
                     }
                 findUserInDB()
-                resetLogInOrRegister()
             } catch (e: Exception){
                 _wrong.value = true
             }
@@ -809,7 +812,6 @@ class VisionPlayViewModel : ViewModel() {
                         }
                     }
                 findUserInDB()
-                resetLogInOrRegister()
             } catch (e: Exception){
                 _wrong.value = true
             }
@@ -858,5 +860,14 @@ class VisionPlayViewModel : ViewModel() {
      */
     fun writePassword(password:String){
         this.password = password
+    }
+
+    /**
+     * Guarda en la variable la búsqueda que va a realizar el usuario
+     *
+     * @param search contraseña del usuario
+     */
+    fun writeSearch(search:String){
+        this.userSearch = search
     }
 }

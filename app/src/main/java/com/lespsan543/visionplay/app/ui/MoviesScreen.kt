@@ -45,6 +45,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -105,6 +106,8 @@ fun MoviesScreen(
     val movieList by visionPlayViewModel.movieList.collectAsState()
     //Propiedad del botón de guardado
     val property by visionPlayViewModel.propertyButton.collectAsState()
+    //Guarda la búsqueda que va a realizar el usuario
+    var userSearch = visionPlayViewModel.userSearch
 
     //Se encarga del desplazamiento de las películas al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
@@ -156,6 +159,7 @@ fun MoviesScreen(
             if (movieList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
                 visionPlayViewModel.findMovieInList(movieList[moviePosition].title)
+                //OutlinedTextField(value = userSearch, onValueChange = { visionPlayViewModel.writeSearch(it) })
                 AsyncImage(model = movieList[moviePosition].poster,
                     contentDescription = "Poster película",
                     modifier = Modifier

@@ -56,7 +56,7 @@ import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LogInScreen(navController: NavController, visionPlayViewModel : VisionPlayViewModel){
+fun LogInScreen(navController: NavController, visionPlayViewModel: VisionPlayViewModel) {
     //Determina si la contraseña está visible o no
     var hidden by remember { mutableStateOf(true) }
     //Controla si algún dato es incorrecto para mostrar el mensaje de error
@@ -68,19 +68,32 @@ fun LogInScreen(navController: NavController, visionPlayViewModel : VisionPlayVi
     BoxWithConstraints {
         val with = maxWidth
         val height = maxHeight
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(Color(40,40,40)),
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(40, 40, 40)),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally)
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
         {
-            Text(text = "Iniciar sesión", fontSize = 30.sp,
-                modifier = Modifier.padding(top = height*0.1f), color = Color.White, fontFamily = FONT_FAMILY
+            Text(
+                text = "Iniciar sesión",
+                fontSize = 30.sp,
+                modifier = Modifier.padding(top = height * 0.1f),
+                color = Color.White,
+                fontFamily = FONT_FAMILY
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
-            TextField(value = email,
+            TextField(
+                value = email,
                 onValueChange = { visionPlayViewModel.writeEmail(it) },
-                label = { Text(text = "Email...", color = Color.DarkGray, fontFamily = FONT_FAMILY) },
+                label = {
+                    Text(
+                        text = "Email...",
+                        color = Color.DarkGray,
+                        fontFamily = FONT_FAMILY
+                    )
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 colors = textFieldColors(
                     containerColor = Color.White,
@@ -90,9 +103,16 @@ fun LogInScreen(navController: NavController, visionPlayViewModel : VisionPlayVi
                 shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
-            TextField(value = password,
+            TextField(
+                value = password,
                 onValueChange = { visionPlayViewModel.writePassword(it) },
-                label = { Text(text = "Password...",  color = Color.DarkGray, fontFamily = FONT_FAMILY) },
+                label = {
+                    Text(
+                        text = "Password...",
+                        color = Color.DarkGray,
+                        fontFamily = FONT_FAMILY
+                    )
+                },
                 colors = textFieldColors(
                     containerColor = Color.White,
                     textColor = Color.Black,
@@ -105,7 +125,7 @@ fun LogInScreen(navController: NavController, visionPlayViewModel : VisionPlayVi
                 trailingIcon = {
                     IconButton(onClick = { hidden = !hidden }) {
                         val vector = if (hidden) Icons.Filled.Visibility
-                            else Icons.Filled.VisibilityOff
+                        else Icons.Filled.VisibilityOff
                         val description = if (hidden) "Ocultar contraseña" else "Revelar contraseña"
                         Icon(imageVector = vector, contentDescription = description)
                     }
@@ -113,21 +133,32 @@ fun LogInScreen(navController: NavController, visionPlayViewModel : VisionPlayVi
                 shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
-            OutlinedButton(onClick = { visionPlayViewModel.signOut()
-                                       visionPlayViewModel.logIn { navController.navigate(Routes.MoviesScreen.route) }},
+            OutlinedButton(
+                onClick = {
+                    visionPlayViewModel.signOut()
+                    visionPlayViewModel.logIn { navController.navigate(Routes.MoviesScreen.route) }
+                },
                 modifier = Modifier
                     .height(height * 0.06f)
                     .width(with * 0.35f),
                 shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black))
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                    contentColor = Color.Black
+                )
+            )
             {
                 Text(text = "Iniciar sesión", fontFamily = FONT_FAMILY)
             }
             Spacer(modifier = Modifier.height(height * 0.15f))
             Row {
-                Text(text = "¿Aun no te has registrado?", color = Color.White, fontFamily = FONT_FAMILY)
-                ClickableText(onClick = { navController.navigate(Routes.RegisterScreen.route)
-                                          visionPlayViewModel.resetLogInOrRegister()},
+                Text(
+                    text = "¿Aun no te has registrado?",
+                    color = Color.White,
+                    fontFamily = FONT_FAMILY
+                )
+                ClickableText(
+                    onClick = { navController.navigate(Routes.RegisterScreen.route) },
                     text = AnnotatedString("Registrarse"),
                     style = TextStyle(
                         color = Color.Red,
@@ -138,13 +169,14 @@ fun LogInScreen(navController: NavController, visionPlayViewModel : VisionPlayVi
                 )
             }
             //Se muestra si algún dato es incorrecto
-            if (wrong == true){
-                AlertDialog(onDismissRequest = {  },
-                    confirmButton = { Button(onClick = { visionPlayViewModel.closeDialog() }) {
-                        Text(text = "Aceptar", fontFamily = FONT_FAMILY)
+            if (wrong == true) {
+                AlertDialog(onDismissRequest = { },
+                    confirmButton = {
+                        Button(onClick = { visionPlayViewModel.closeDialog() }) {
+                            Text(text = "Aceptar", fontFamily = FONT_FAMILY)
                         }
                     },
-                    text = { Text(text = "Algún dato es incorrecto", fontFamily = FONT_FAMILY)}
+                    text = { Text(text = "Algún dato es incorrecto", fontFamily = FONT_FAMILY) }
                 )
             }
         }
