@@ -5,10 +5,10 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "15:21",
-    "version": "5722077613",
+    "version": "5771067793",
     "component-id": "79f497b890a2416aee3977b1eaff7d93a15d8fe8"
   },
-  "default": "Property 1=Inicio",
+  "default": "PropertyBottomBar=Inicio",
   "design": {
     "atoms": [
       {
@@ -130,7 +130,7 @@
       }
     ],
     "modes": {
-      "Property 1=Inicio": {
+      "PropertyBottomBar=Inicio": {
         "rules": [
           {
             "id": "top_level",
@@ -582,7 +582,7 @@
           }
         ]
       },
-      "Property 1=Generos": {
+      "PropertyBottomBar=Generos": {
         "rules": [
           {
             "id": "top_level",
@@ -1034,7 +1034,7 @@
           }
         ]
       },
-      "Property 1=Cine": {
+      "PropertyBottomBar=Cine": {
         "rules": [
           {
             "id": "top_level",
@@ -1504,7 +1504,7 @@
           }
         ]
       },
-      "Property 1=Favoritos": {
+      "PropertyBottomBar=Favoritos": {
         "rules": [
           {
             "id": "top_level",
@@ -2078,28 +2078,28 @@
   },
   "previews": [
     {
-      "design": "Property 1=Inicio",
+      "design": "PropertyBottomBar=Inicio",
       "size": {
         "width": 360.0,
         "height": 50.0
       }
     },
     {
-      "design": "Property 1=Generos",
+      "design": "PropertyBottomBar=Generos",
       "size": {
         "width": 360.0,
         "height": 50.0
       }
     },
     {
-      "design": "Property 1=Cine",
+      "design": "PropertyBottomBar=Cine",
       "size": {
         "width": 360.0,
         "height": 50.0
       }
     },
     {
-      "design": "Property 1=Favoritos",
+      "design": "PropertyBottomBar=Favoritos",
       "size": {
         "width": 360.0,
         "height": 50.0

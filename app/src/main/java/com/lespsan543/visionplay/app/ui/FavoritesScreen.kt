@@ -45,7 +45,7 @@ import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.cabecera.Cabecera
-import com.lespsan543.visionplay.cabecera.Property1
+import com.lespsan543.visionplay.cabecera.Property
 import com.lespsan543.visionplay.menu.Menu
 
 /**
@@ -70,7 +70,7 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                 Cabecera(
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
-                    Property1.Perfil,
+                    Property.Perfil,
                     salir = { visionPlayViewModel.signOut()
                               navController.navigate(Routes.LogInScreen.route)}
                 )
@@ -83,7 +83,7 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                     genres4 = { navController.navigate(Routes.SearchGenres.route) },
                     fav4 = { navController.navigate(Routes.FavoritesScreen.route) },
                     cine4 = { navController.navigate(Routes.CinemaScreen.route) },
-                    property1 = com.lespsan543.visionplay.menu.Property1.Favoritos
+                    propertyBottomBar = com.lespsan543.visionplay.menu.PropertyBottomBar.Favoritos
                 )
             },
             floatingActionButton = {

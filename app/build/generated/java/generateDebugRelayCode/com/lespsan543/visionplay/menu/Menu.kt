@@ -24,7 +24,7 @@ import com.google.relay.compose.tappable
 import com.lespsan543.visionplay.R
 
 // Design to select for Menu
-enum class Property1 {
+enum class PropertyBottomBar {
     Inicio,
     Generos,
     Cine,
@@ -38,7 +38,7 @@ enum class Property1 {
 @Composable
 fun Menu(
     modifier: Modifier = Modifier,
-    property1: Property1 = Property1.Inicio,
+    propertyBottomBar: PropertyBottomBar = PropertyBottomBar.Inicio,
     home: () -> Unit = {},
     genres1: () -> Unit = {},
     cine1: () -> Unit = {},
@@ -56,12 +56,12 @@ fun Menu(
     cine4: () -> Unit = {},
     fav4: () -> Unit = {}
 ) {
-    when (property1) {
-        Property1.Inicio -> TopLevelProperty1Inicio(modifier = modifier) {
-            HomeBProperty1Inicio(home = home)
-            GenW1Property1Inicio(genres1 = genres1)
-            CineW1Property1Inicio(cine1 = cine1) {
-                VectorProperty1Inicio(
+    when (propertyBottomBar) {
+        PropertyBottomBar.Inicio -> TopLevelPropertyBottomBarInicio(modifier = modifier) {
+            HomeBPropertyBottomBarInicio(home = home)
+            GenW1PropertyBottomBarInicio(genres1 = genres1)
+            CineW1PropertyBottomBarInicio(cine1 = cine1) {
+                VectorPropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -70,7 +70,7 @@ fun Menu(
                         )
                     ).rowWeight(1.0f).columnWeight(1.0f)
                 )
-                Frame4Property1Inicio(
+                Frame4PropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -79,7 +79,7 @@ fun Menu(
                         )
                     )
                 ) {
-                    Frame11Property1Inicio(
+                    Frame11PropertyBottomBarInicio(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -89,7 +89,7 @@ fun Menu(
                         )
                     ) {}
                 }
-                Frame5Property1Inicio(
+                Frame5PropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -98,7 +98,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame6Property1Inicio(
+                Frame6PropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -107,7 +107,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame8Property1Inicio(
+                Frame8PropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -116,7 +116,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame7Property1Inicio(
+                Frame7PropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -125,7 +125,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame9Property1Inicio(
+                Frame9PropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -134,7 +134,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame10Property1Inicio(
+                Frame10PropertyBottomBarInicio(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -144,13 +144,13 @@ fun Menu(
                     )
                 ) {}
             }
-            FavW1Property1Inicio(fav1 = fav1)
+            FavW1PropertyBottomBarInicio(fav1 = fav1)
         }
-        Property1.Generos -> TopLevelProperty1Generos(modifier = modifier) {
-            HomeW2Property1Generos(home2 = home2)
-            Genres2Property1Generos(genres2 = genres2)
-            CineW2Property1Generos(cine2 = cine2) {
-                VectorProperty1Generos(
+        PropertyBottomBar.Generos -> TopLevelPropertyBottomBarGeneros(modifier = modifier) {
+            HomeW2PropertyBottomBarGeneros(home2 = home2)
+            Genres2PropertyBottomBarGeneros(genres2 = genres2)
+            CineW2PropertyBottomBarGeneros(cine2 = cine2) {
+                VectorPropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -159,7 +159,7 @@ fun Menu(
                         )
                     ).rowWeight(1.0f).columnWeight(1.0f)
                 )
-                Frame4Property1Generos(
+                Frame4PropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -168,7 +168,7 @@ fun Menu(
                         )
                     )
                 ) {
-                    Frame11Property1Generos(
+                    Frame11PropertyBottomBarGeneros(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -178,7 +178,7 @@ fun Menu(
                         )
                     ) {}
                 }
-                Frame5Property1Generos(
+                Frame5PropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -187,7 +187,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame6Property1Generos(
+                Frame6PropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -196,7 +196,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame8Property1Generos(
+                Frame8PropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -205,7 +205,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame7Property1Generos(
+                Frame7PropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -214,7 +214,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame9Property1Generos(
+                Frame9PropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -223,7 +223,7 @@ fun Menu(
                         )
                     )
                 ) {}
-                Frame10Property1Generos(
+                Frame10PropertyBottomBarGeneros(
                     modifier = Modifier.boxAlign(
                         alignment = Alignment.TopStart,
                         offset = DpOffset(
@@ -233,14 +233,14 @@ fun Menu(
                     )
                 ) {}
             }
-            FavW2Property1Generos(fav2 = fav2)
+            FavW2PropertyBottomBarGeneros(fav2 = fav2)
         }
-        Property1.Cine -> TopLevelProperty1Cine(modifier = modifier) {
-            HomeW3Property1Cine(home3 = home3)
-            GenW2Property1Cine(genres3 = genres3)
-            CineBProperty1Cine(cine3 = cine3) {
-                Group1Property1Cine {
-                    VectorProperty1Cine(
+        PropertyBottomBar.Cine -> TopLevelPropertyBottomBarCine(modifier = modifier) {
+            HomeW3PropertyBottomBarCine(home3 = home3)
+            GenW2PropertyBottomBarCine(genres3 = genres3)
+            CineBPropertyBottomBarCine(cine3 = cine3) {
+                Group1PropertyBottomBarCine {
+                    VectorPropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -249,7 +249,7 @@ fun Menu(
                             )
                         ).rowWeight(1.0f).columnWeight(1.0f)
                     )
-                    Frame4Property1Cine(
+                    Frame4PropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -258,7 +258,7 @@ fun Menu(
                             )
                         )
                     ) {
-                        Frame11Property1Cine(
+                        Frame11PropertyBottomBarCine(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -268,7 +268,7 @@ fun Menu(
                             )
                         ) {}
                     }
-                    Frame5Property1Cine(
+                    Frame5PropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -277,7 +277,7 @@ fun Menu(
                             )
                         )
                     ) {}
-                    Frame6Property1Cine(
+                    Frame6PropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -286,7 +286,7 @@ fun Menu(
                             )
                         )
                     ) {}
-                    Frame8Property1Cine(
+                    Frame8PropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -295,7 +295,7 @@ fun Menu(
                             )
                         )
                     ) {}
-                    Frame7Property1Cine(
+                    Frame7PropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -304,7 +304,7 @@ fun Menu(
                             )
                         )
                     ) {}
-                    Frame9Property1Cine(
+                    Frame9PropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -313,7 +313,7 @@ fun Menu(
                             )
                         )
                     ) {}
-                    Frame10Property1Cine(
+                    Frame10PropertyBottomBarCine(
                         modifier = Modifier.boxAlign(
                             alignment = Alignment.TopStart,
                             offset = DpOffset(
@@ -324,15 +324,15 @@ fun Menu(
                     ) {}
                 }
             }
-            FavW3Property1Cine(fav3 = fav3)
+            FavW3PropertyBottomBarCine(fav3 = fav3)
         }
-        Property1.Favoritos -> TopLevelProperty1Favoritos(modifier = modifier) {
-            HomeW1Property1Favoritos(home4 = home4)
-            Genres4Property1Favoritos(genres4 = genres4)
-            Group4Property1Favoritos(cine4 = cine4) {
-                Group3Property1Favoritos {
-                    Group2Property1Favoritos {
-                        VectorProperty1Favoritos(
+        PropertyBottomBar.Favoritos -> TopLevelPropertyBottomBarFavoritos(modifier = modifier) {
+            HomeW1PropertyBottomBarFavoritos(home4 = home4)
+            Genres4PropertyBottomBarFavoritos(genres4 = genres4)
+            Group4PropertyBottomBarFavoritos(cine4 = cine4) {
+                Group3PropertyBottomBarFavoritos {
+                    Group2PropertyBottomBarFavoritos {
+                        VectorPropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -341,7 +341,7 @@ fun Menu(
                                 )
                             ).rowWeight(1.0f).columnWeight(1.0f)
                         )
-                        Frame4Property1Favoritos(
+                        Frame4PropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -350,7 +350,7 @@ fun Menu(
                                 )
                             )
                         ) {
-                            Frame11Property1Favoritos(
+                            Frame11PropertyBottomBarFavoritos(
                                 modifier = Modifier.boxAlign(
                                     alignment = Alignment.TopStart,
                                     offset = DpOffset(
@@ -360,7 +360,7 @@ fun Menu(
                                 )
                             ) {}
                         }
-                        Frame5Property1Favoritos(
+                        Frame5PropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -369,7 +369,7 @@ fun Menu(
                                 )
                             )
                         ) {}
-                        Frame6Property1Favoritos(
+                        Frame6PropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -378,7 +378,7 @@ fun Menu(
                                 )
                             )
                         ) {}
-                        Frame8Property1Favoritos(
+                        Frame8PropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -387,7 +387,7 @@ fun Menu(
                                 )
                             )
                         ) {}
-                        Frame7Property1Favoritos(
+                        Frame7PropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -396,7 +396,7 @@ fun Menu(
                                 )
                             )
                         ) {}
-                        Frame9Property1Favoritos(
+                        Frame9PropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -405,7 +405,7 @@ fun Menu(
                                 )
                             )
                         ) {}
-                        Frame10Property1Favoritos(
+                        Frame10PropertyBottomBarFavoritos(
                             modifier = Modifier.boxAlign(
                                 alignment = Alignment.TopStart,
                                 offset = DpOffset(
@@ -417,14 +417,14 @@ fun Menu(
                     }
                 }
             }
-            FavBProperty1Favoritos(fav4 = fav4)
+            FavBPropertyBottomBarFavoritos(fav4 = fav4)
         }
     }
 }
 
 @Preview(widthDp = 360, heightDp = 50)
 @Composable
-private fun MenuProperty1InicioPreview() {
+private fun MenuPropertyBottomBarInicioPreview() {
     MaterialTheme {
         RelayContainer {
             Menu(
@@ -444,7 +444,7 @@ private fun MenuProperty1InicioPreview() {
                 genres4 = {},
                 cine4 = {},
                 fav4 = {},
-                property1 = Property1.Inicio,
+                propertyBottomBar = PropertyBottomBar.Inicio,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -453,7 +453,7 @@ private fun MenuProperty1InicioPreview() {
 
 @Preview(widthDp = 360, heightDp = 50)
 @Composable
-private fun MenuProperty1GenerosPreview() {
+private fun MenuPropertyBottomBarGenerosPreview() {
     MaterialTheme {
         RelayContainer {
             Menu(
@@ -473,7 +473,7 @@ private fun MenuProperty1GenerosPreview() {
                 genres4 = {},
                 cine4 = {},
                 fav4 = {},
-                property1 = Property1.Generos,
+                propertyBottomBar = PropertyBottomBar.Generos,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -482,7 +482,7 @@ private fun MenuProperty1GenerosPreview() {
 
 @Preview(widthDp = 360, heightDp = 50)
 @Composable
-private fun MenuProperty1CinePreview() {
+private fun MenuPropertyBottomBarCinePreview() {
     MaterialTheme {
         RelayContainer {
             Menu(
@@ -502,7 +502,7 @@ private fun MenuProperty1CinePreview() {
                 genres4 = {},
                 cine4 = {},
                 fav4 = {},
-                property1 = Property1.Cine,
+                propertyBottomBar = PropertyBottomBar.Cine,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -511,7 +511,7 @@ private fun MenuProperty1CinePreview() {
 
 @Preview(widthDp = 360, heightDp = 50)
 @Composable
-private fun MenuProperty1FavoritosPreview() {
+private fun MenuPropertyBottomBarFavoritosPreview() {
     MaterialTheme {
         RelayContainer {
             Menu(
@@ -531,7 +531,7 @@ private fun MenuProperty1FavoritosPreview() {
                 genres4 = {},
                 cine4 = {},
                 fav4 = {},
-                property1 = Property1.Favoritos,
+                propertyBottomBar = PropertyBottomBar.Favoritos,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -539,7 +539,7 @@ private fun MenuProperty1FavoritosPreview() {
 }
 
 @Composable
-fun HomeBProperty1Inicio(
+fun HomeBPropertyBottomBarInicio(
     home: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -550,7 +550,7 @@ fun HomeBProperty1Inicio(
 }
 
 @Composable
-fun GenW1Property1Inicio(
+fun GenW1PropertyBottomBarInicio(
     genres1: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -561,7 +561,7 @@ fun GenW1Property1Inicio(
 }
 
 @Composable
-fun VectorProperty1Inicio(modifier: Modifier = Modifier) {
+fun VectorPropertyBottomBarInicio(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.menu_vector),
         modifier = modifier.padding(
@@ -576,7 +576,7 @@ fun VectorProperty1Inicio(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Frame11Property1Inicio(
+fun Frame11PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -594,7 +594,7 @@ fun Frame11Property1Inicio(
 }
 
 @Composable
-fun Frame4Property1Inicio(
+fun Frame4PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -612,7 +612,7 @@ fun Frame4Property1Inicio(
 }
 
 @Composable
-fun Frame5Property1Inicio(
+fun Frame5PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -630,7 +630,7 @@ fun Frame5Property1Inicio(
 }
 
 @Composable
-fun Frame6Property1Inicio(
+fun Frame6PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -648,7 +648,7 @@ fun Frame6Property1Inicio(
 }
 
 @Composable
-fun Frame8Property1Inicio(
+fun Frame8PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -666,7 +666,7 @@ fun Frame8Property1Inicio(
 }
 
 @Composable
-fun Frame7Property1Inicio(
+fun Frame7PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -684,7 +684,7 @@ fun Frame7Property1Inicio(
 }
 
 @Composable
-fun Frame9Property1Inicio(
+fun Frame9PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -702,7 +702,7 @@ fun Frame9Property1Inicio(
 }
 
 @Composable
-fun Frame10Property1Inicio(
+fun Frame10PropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -720,7 +720,7 @@ fun Frame10Property1Inicio(
 }
 
 @Composable
-fun CineW1Property1Inicio(
+fun CineW1PropertyBottomBarInicio(
     cine1: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
@@ -734,7 +734,7 @@ fun CineW1Property1Inicio(
 }
 
 @Composable
-fun FavW1Property1Inicio(
+fun FavW1PropertyBottomBarInicio(
     fav1: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -745,7 +745,7 @@ fun FavW1Property1Inicio(
 }
 
 @Composable
-fun TopLevelProperty1Inicio(
+fun TopLevelPropertyBottomBarInicio(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -770,7 +770,7 @@ fun TopLevelProperty1Inicio(
 }
 
 @Composable
-fun HomeW2Property1Generos(
+fun HomeW2PropertyBottomBarGeneros(
     home2: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -781,7 +781,7 @@ fun HomeW2Property1Generos(
 }
 
 @Composable
-fun Genres2Property1Generos(
+fun Genres2PropertyBottomBarGeneros(
     genres2: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -792,7 +792,7 @@ fun Genres2Property1Generos(
 }
 
 @Composable
-fun VectorProperty1Generos(modifier: Modifier = Modifier) {
+fun VectorPropertyBottomBarGeneros(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.menu_vector1),
         modifier = modifier.padding(
@@ -807,7 +807,7 @@ fun VectorProperty1Generos(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Frame11Property1Generos(
+fun Frame11PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -825,7 +825,7 @@ fun Frame11Property1Generos(
 }
 
 @Composable
-fun Frame4Property1Generos(
+fun Frame4PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -843,7 +843,7 @@ fun Frame4Property1Generos(
 }
 
 @Composable
-fun Frame5Property1Generos(
+fun Frame5PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -861,7 +861,7 @@ fun Frame5Property1Generos(
 }
 
 @Composable
-fun Frame6Property1Generos(
+fun Frame6PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -879,7 +879,7 @@ fun Frame6Property1Generos(
 }
 
 @Composable
-fun Frame8Property1Generos(
+fun Frame8PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -897,7 +897,7 @@ fun Frame8Property1Generos(
 }
 
 @Composable
-fun Frame7Property1Generos(
+fun Frame7PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -915,7 +915,7 @@ fun Frame7Property1Generos(
 }
 
 @Composable
-fun Frame9Property1Generos(
+fun Frame9PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -933,7 +933,7 @@ fun Frame9Property1Generos(
 }
 
 @Composable
-fun Frame10Property1Generos(
+fun Frame10PropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -951,7 +951,7 @@ fun Frame10Property1Generos(
 }
 
 @Composable
-fun CineW2Property1Generos(
+fun CineW2PropertyBottomBarGeneros(
     cine2: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
@@ -965,7 +965,7 @@ fun CineW2Property1Generos(
 }
 
 @Composable
-fun FavW2Property1Generos(
+fun FavW2PropertyBottomBarGeneros(
     fav2: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -976,7 +976,7 @@ fun FavW2Property1Generos(
 }
 
 @Composable
-fun TopLevelProperty1Generos(
+fun TopLevelPropertyBottomBarGeneros(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1001,7 +1001,7 @@ fun TopLevelProperty1Generos(
 }
 
 @Composable
-fun HomeW3Property1Cine(
+fun HomeW3PropertyBottomBarCine(
     home3: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1012,7 +1012,7 @@ fun HomeW3Property1Cine(
 }
 
 @Composable
-fun GenW2Property1Cine(
+fun GenW2PropertyBottomBarCine(
     genres3: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1023,7 +1023,7 @@ fun GenW2Property1Cine(
 }
 
 @Composable
-fun VectorProperty1Cine(modifier: Modifier = Modifier) {
+fun VectorPropertyBottomBarCine(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.menu_vector2),
         modifier = modifier.padding(
@@ -1038,7 +1038,7 @@ fun VectorProperty1Cine(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Frame11Property1Cine(
+fun Frame11PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1056,7 +1056,7 @@ fun Frame11Property1Cine(
 }
 
 @Composable
-fun Frame4Property1Cine(
+fun Frame4PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1074,7 +1074,7 @@ fun Frame4Property1Cine(
 }
 
 @Composable
-fun Frame5Property1Cine(
+fun Frame5PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1092,7 +1092,7 @@ fun Frame5Property1Cine(
 }
 
 @Composable
-fun Frame6Property1Cine(
+fun Frame6PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1110,7 +1110,7 @@ fun Frame6Property1Cine(
 }
 
 @Composable
-fun Frame8Property1Cine(
+fun Frame8PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1128,7 +1128,7 @@ fun Frame8Property1Cine(
 }
 
 @Composable
-fun Frame7Property1Cine(
+fun Frame7PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1146,7 +1146,7 @@ fun Frame7Property1Cine(
 }
 
 @Composable
-fun Frame9Property1Cine(
+fun Frame9PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1164,7 +1164,7 @@ fun Frame9Property1Cine(
 }
 
 @Composable
-fun Frame10Property1Cine(
+fun Frame10PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1182,7 +1182,7 @@ fun Frame10Property1Cine(
 }
 
 @Composable
-fun Group1Property1Cine(
+fun Group1PropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1195,7 +1195,7 @@ fun Group1Property1Cine(
 }
 
 @Composable
-fun CineBProperty1Cine(
+fun CineBPropertyBottomBarCine(
     cine3: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
@@ -1209,7 +1209,7 @@ fun CineBProperty1Cine(
 }
 
 @Composable
-fun FavW3Property1Cine(
+fun FavW3PropertyBottomBarCine(
     fav3: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1220,7 +1220,7 @@ fun FavW3Property1Cine(
 }
 
 @Composable
-fun TopLevelProperty1Cine(
+fun TopLevelPropertyBottomBarCine(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1245,7 +1245,7 @@ fun TopLevelProperty1Cine(
 }
 
 @Composable
-fun HomeW1Property1Favoritos(
+fun HomeW1PropertyBottomBarFavoritos(
     home4: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1256,7 +1256,7 @@ fun HomeW1Property1Favoritos(
 }
 
 @Composable
-fun Genres4Property1Favoritos(
+fun Genres4PropertyBottomBarFavoritos(
     genres4: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1267,7 +1267,7 @@ fun Genres4Property1Favoritos(
 }
 
 @Composable
-fun VectorProperty1Favoritos(modifier: Modifier = Modifier) {
+fun VectorPropertyBottomBarFavoritos(modifier: Modifier = Modifier) {
     RelayVector(
         vector = painterResource(R.drawable.menu_vector3),
         modifier = modifier.padding(
@@ -1282,7 +1282,7 @@ fun VectorProperty1Favoritos(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Frame11Property1Favoritos(
+fun Frame11PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1300,7 +1300,7 @@ fun Frame11Property1Favoritos(
 }
 
 @Composable
-fun Frame4Property1Favoritos(
+fun Frame4PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1318,7 +1318,7 @@ fun Frame4Property1Favoritos(
 }
 
 @Composable
-fun Frame5Property1Favoritos(
+fun Frame5PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1336,7 +1336,7 @@ fun Frame5Property1Favoritos(
 }
 
 @Composable
-fun Frame6Property1Favoritos(
+fun Frame6PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1354,7 +1354,7 @@ fun Frame6Property1Favoritos(
 }
 
 @Composable
-fun Frame8Property1Favoritos(
+fun Frame8PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1372,7 +1372,7 @@ fun Frame8Property1Favoritos(
 }
 
 @Composable
-fun Frame7Property1Favoritos(
+fun Frame7PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1390,7 +1390,7 @@ fun Frame7Property1Favoritos(
 }
 
 @Composable
-fun Frame9Property1Favoritos(
+fun Frame9PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1408,7 +1408,7 @@ fun Frame9Property1Favoritos(
 }
 
 @Composable
-fun Frame10Property1Favoritos(
+fun Frame10PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1426,7 +1426,7 @@ fun Frame10Property1Favoritos(
 }
 
 @Composable
-fun Group2Property1Favoritos(
+fun Group2PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1439,7 +1439,7 @@ fun Group2Property1Favoritos(
 }
 
 @Composable
-fun Group3Property1Favoritos(
+fun Group3PropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -1452,7 +1452,7 @@ fun Group3Property1Favoritos(
 }
 
 @Composable
-fun Group4Property1Favoritos(
+fun Group4PropertyBottomBarFavoritos(
     cine4: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
@@ -1466,7 +1466,7 @@ fun Group4Property1Favoritos(
 }
 
 @Composable
-fun FavBProperty1Favoritos(
+fun FavBPropertyBottomBarFavoritos(
     fav4: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -1477,7 +1477,7 @@ fun FavBProperty1Favoritos(
 }
 
 @Composable
-fun TopLevelProperty1Favoritos(
+fun TopLevelPropertyBottomBarFavoritos(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {

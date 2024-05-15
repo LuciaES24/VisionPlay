@@ -51,11 +51,9 @@ import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
-import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
-import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
-import com.lespsan543.visionplay.menu.Property1
+import com.lespsan543.visionplay.menu.PropertyBottomBar
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo series según vayamos pulsando, estas
@@ -90,7 +88,7 @@ fun SeriesScreen(
         val height = maxHeight
         Scaffold(
             bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                property1 = Property1.Inicio,
+                propertyBottomBar = PropertyBottomBar.Inicio,
                 home = { navController.navigate(Routes.SeriesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
                 genres1 = { navController.navigate(Routes.SearchGenres.route) },

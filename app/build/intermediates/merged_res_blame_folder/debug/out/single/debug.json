@@ -24,6 +24,10 @@
         "source": "com.lespsan543.visionplay.app-main-65:/drawable/votes.png"
     },
     {
+        "merged": "com.lespsan543.visionplay.app-merged_res-63:/drawable-nodpi_cabecera_salir2.xml.flat",
+        "source": "com.lespsan543.visionplay.app-relay-59:/drawable-nodpi/cabecera_salir2.xml"
+    },
+    {
         "merged": "com.lespsan543.visionplay.app-merged_res-63:/mipmap-hdpi_ic_launcher.webp.flat",
         "source": "com.lespsan543.visionplay.app-main-65:/mipmap-hdpi/ic_launcher.webp"
     },

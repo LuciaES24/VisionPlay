@@ -29,8 +29,9 @@ import com.lespsan543.visionplay.app.ui.components.CinemaMovie
 import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
 import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.cabecera.Cabecera
-import com.lespsan543.visionplay.cabecera.Property1
+import com.lespsan543.visionplay.cabecera.Property
 import com.lespsan543.visionplay.menu.Menu
+import com.lespsan543.visionplay.menu.PropertyBottomBar
 
 /**
  * Muestra la pantalla de la cartelera, en la que podemos ver las películas que se encuentran en el cine
@@ -57,7 +58,7 @@ fun CinemaScreen(navController: NavHostController, visionPlayViewModel: VisionPl
                 Cabecera(
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
-                    Property1.Cartelera
+                    Property.Cartelera
                 )
             },
             bottomBar = {
@@ -68,7 +69,7 @@ fun CinemaScreen(navController: NavHostController, visionPlayViewModel: VisionPl
                     genres3 = { navController.navigate(Routes.SearchGenres.route) },
                     fav3 = { navController.navigate(Routes.FavoritesScreen.route) },
                     cine3 = { navController.navigate(Routes.CinemaScreen.route) },
-                    property1 = com.lespsan543.visionplay.menu.Property1.Cine
+                    propertyBottomBar = PropertyBottomBar.Cine
                 )
             },
         ) {

@@ -114,6 +114,7 @@ dimen notification_top_pad_large_text
 drawable abc_vector_test
 drawable cabecera_salir
 drawable cabecera_salir1
+drawable cabecera_salir2
 drawable cabecera_volver
 drawable comment
 drawable common_full_open_on_phone

@@ -26,11 +26,12 @@ import com.google.relay.compose.tappable
 import com.lespsan543.visionplay.R
 
 // Design to select for Cabecera
-enum class Property1 {
+enum class Property {
     Perfil,
     Genres,
     Cartelera,
-    Volver
+    Volver,
+    VisionPlay
 }
 
 /**
@@ -40,37 +41,42 @@ enum class Property1 {
 @Composable
 fun Cabecera(
     modifier: Modifier = Modifier,
-    property1: Property1 = Property1.Perfil,
+    propertyParam: Property = Property.Perfil,
+    username: String = "",
     salir: () -> Unit = {},
     volver: () -> Unit = {}
 ) {
-    when (property1) {
-        Property1.Perfil -> TopLevelProperty1Perfil(modifier = modifier) {
-            SalirProperty1Perfil(salir = salir)
-            FavoritesProperty1Perfil()
-            Salir1Property1Perfil(salir = salir)
+    when (propertyParam) {
+        Property.Perfil -> TopLevelPropertyPerfil(modifier = modifier) {
+            Salir2PropertyPerfil()
+            FavoritesPropertyPerfil(username = username)
+            SalirPropertyPerfil(salir = salir)
         }
-        Property1.Genres -> TopLevelProperty1Genres(modifier = modifier) {
-            GenresProperty1Genres()
+        Property.Genres -> TopLevelPropertyGenres(modifier = modifier) {
+            GenresPropertyGenres()
         }
-        Property1.Cartelera -> TopLevelProperty1Cartelera(modifier = modifier) {
-            BillboardProperty1Cartelera()
+        Property.Cartelera -> TopLevelPropertyCartelera(modifier = modifier) {
+            BillboardPropertyCartelera()
         }
-        Property1.Volver -> TopLevelProperty1Volver(modifier = modifier) {
-            VolverProperty1Volver(volver = volver)
+        Property.Volver -> TopLevelPropertyVolver(modifier = modifier) {
+            VolverPropertyVolver(volver = volver)
+        }
+        Property.VisionPlay -> TopLevelPropertyVisionPlay(modifier = modifier) {
+            VisionPlayPropertyVisionPlay()
         }
     }
 }
 
 @Preview(widthDp = 358, heightDp = 56)
 @Composable
-private fun CabeceraProperty1PerfilPreview() {
+private fun CabeceraPropertyPerfilPreview() {
     MaterialTheme {
         RelayContainer {
             Cabecera(
+                username = "Favorites",
                 salir = {},
                 volver = {},
-                property1 = Property1.Perfil,
+                propertyParam = Property.Perfil,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -79,13 +85,14 @@ private fun CabeceraProperty1PerfilPreview() {
 
 @Preview(widthDp = 358, heightDp = 56)
 @Composable
-private fun CabeceraProperty1GenresPreview() {
+private fun CabeceraPropertyGenresPreview() {
     MaterialTheme {
         RelayContainer {
             Cabecera(
+                username = "Favorites",
                 salir = {},
                 volver = {},
-                property1 = Property1.Genres,
+                propertyParam = Property.Genres,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -94,13 +101,14 @@ private fun CabeceraProperty1GenresPreview() {
 
 @Preview(widthDp = 358, heightDp = 56)
 @Composable
-private fun CabeceraProperty1CarteleraPreview() {
+private fun CabeceraPropertyCarteleraPreview() {
     MaterialTheme {
         RelayContainer {
             Cabecera(
+                username = "Favorites",
                 salir = {},
                 volver = {},
-                property1 = Property1.Cartelera,
+                propertyParam = Property.Cartelera,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -109,13 +117,30 @@ private fun CabeceraProperty1CarteleraPreview() {
 
 @Preview(widthDp = 358, heightDp = 56)
 @Composable
-private fun CabeceraProperty1VolverPreview() {
+private fun CabeceraPropertyVolverPreview() {
     MaterialTheme {
         RelayContainer {
             Cabecera(
+                username = "Favorites",
                 salir = {},
                 volver = {},
-                property1 = Property1.Volver,
+                propertyParam = Property.Volver,
+                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
+            )
+        }
+    }
+}
+
+@Preview(widthDp = 358, heightDp = 56)
+@Composable
+private fun CabeceraPropertyVisionPlayPreview() {
+    MaterialTheme {
+        RelayContainer {
+            Cabecera(
+                username = "Favorites",
+                salir = {},
+                volver = {},
+                propertyParam = Property.VisionPlay,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
         }
@@ -123,20 +148,20 @@ private fun CabeceraProperty1VolverPreview() {
 }
 
 @Composable
-fun SalirProperty1Perfil(
-    salir: () -> Unit,
-    modifier: Modifier = Modifier
-) {
+fun Salir2PropertyPerfil(modifier: Modifier = Modifier) {
     RelayVector(
-        vector = painterResource(R.drawable.cabecera_salir),
-        modifier = modifier.tappable(onTap = salir).requiredWidth(27.1875.dp).requiredHeight(28.0.dp)
+        vector = painterResource(R.drawable.cabecera_salir2),
+        modifier = modifier.requiredWidth(27.1875.dp).requiredHeight(28.0.dp)
     )
 }
 
 @Composable
-fun FavoritesProperty1Perfil(modifier: Modifier = Modifier) {
+fun FavoritesPropertyPerfil(
+    username: String,
+    modifier: Modifier = Modifier
+) {
     RelayText(
-        content = "Favorites",
+        content = username,
         fontSize = 28.0.sp,
         fontFamily = kameron,
         color = Color(
@@ -155,18 +180,18 @@ fun FavoritesProperty1Perfil(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Salir1Property1Perfil(
+fun SalirPropertyPerfil(
     salir: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     RelayVector(
-        vector = painterResource(R.drawable.cabecera_salir1),
+        vector = painterResource(R.drawable.cabecera_salir),
         modifier = modifier.tappable(onTap = salir).requiredWidth(27.1875.dp).requiredHeight(28.0.dp)
     )
 }
 
 @Composable
-fun TopLevelProperty1Perfil(
+fun TopLevelPropertyPerfil(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -191,7 +216,7 @@ fun TopLevelProperty1Perfil(
 }
 
 @Composable
-fun GenresProperty1Genres(modifier: Modifier = Modifier) {
+fun GenresPropertyGenres(modifier: Modifier = Modifier) {
     RelayText(
         content = "Genres",
         fontSize = 28.0.sp,
@@ -212,7 +237,7 @@ fun GenresProperty1Genres(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TopLevelProperty1Genres(
+fun TopLevelPropertyGenres(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -237,7 +262,7 @@ fun TopLevelProperty1Genres(
 }
 
 @Composable
-fun BillboardProperty1Cartelera(modifier: Modifier = Modifier) {
+fun BillboardPropertyCartelera(modifier: Modifier = Modifier) {
     RelayText(
         content = "Billboard",
         fontSize = 28.0.sp,
@@ -258,7 +283,7 @@ fun BillboardProperty1Cartelera(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun TopLevelProperty1Cartelera(
+fun TopLevelPropertyCartelera(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -283,7 +308,7 @@ fun TopLevelProperty1Cartelera(
 }
 
 @Composable
-fun VolverProperty1Volver(
+fun VolverPropertyVolver(
     volver: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -294,7 +319,7 @@ fun VolverProperty1Volver(
 }
 
 @Composable
-fun TopLevelProperty1Volver(
+fun TopLevelPropertyVolver(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
 ) {
@@ -314,6 +339,52 @@ fun TopLevelProperty1Volver(
             bottom = 12.0.dp
         ),
         itemSpacing = 10.0,
+        content = content,
+        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
+    )
+}
+
+@Composable
+fun VisionPlayPropertyVisionPlay(modifier: Modifier = Modifier) {
+    RelayText(
+        content = "VisionPlay",
+        fontSize = 28.0.sp,
+        fontFamily = kameron,
+        color = Color(
+            alpha = 255,
+            red = 255,
+            green = 255,
+            blue = 255
+        ),
+        height = 1.18701171875.em,
+        maxLines = -1,
+        modifier = modifier.requiredWidth(130.0.dp).requiredHeight(28.0.dp).wrapContentHeight(
+            align = Alignment.CenterVertically,
+            unbounded = true
+        )
+    )
+}
+
+@Composable
+fun TopLevelPropertyVisionPlay(
+    modifier: Modifier = Modifier,
+    content: @Composable RelayContainerScope.() -> Unit
+) {
+    RelayContainer(
+        backgroundColor = Color(
+            alpha = 255,
+            red = 138,
+            green = 0,
+            blue = 0
+        ),
+        arrangement = RelayContainerArrangement.Row,
+        padding = PaddingValues(
+            start = 15.0.dp,
+            top = 12.0.dp,
+            end = 15.0.dp,
+            bottom = 12.0.dp
+        ),
+        itemSpacing = 76.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )

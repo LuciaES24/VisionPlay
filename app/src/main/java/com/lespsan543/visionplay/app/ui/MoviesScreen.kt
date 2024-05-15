@@ -82,9 +82,8 @@ import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
-import com.lespsan543.visionplay.menu.Property1
+import com.lespsan543.visionplay.menu.PropertyBottomBar
 import kotlinx.coroutines.launch
-import okhttp3.Route
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
@@ -118,7 +117,7 @@ fun MoviesScreen(
         val height = maxHeight
         Scaffold(
             bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                property1 = Property1.Inicio,
+                propertyBottomBar = PropertyBottomBar.Inicio,
                 home = { navController.navigate(Routes.MoviesScreen.route) },
                 fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
                 genres1 = { navController.navigate(Routes.SearchGenres.route) },
@@ -323,13 +322,13 @@ fun ShowMovie(navController: NavHostController,
                     Cabecera(
                         modifier = Modifier
                             .height(maxHeight.times(0.08f)),
-                        property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
+                        propertyParam = com.lespsan543.visionplay.cabecera.Property.Volver,
                         volver = { navController.popBackStack()
                                    visionPlayViewModel.changeSelectedMovieOrSerie() }
                     )
                 },
                 bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                    property1 = Property1.Inicio,
+                    propertyBottomBar = PropertyBottomBar.Inicio,
                     home = { navController.navigate(Routes.MoviesScreen.route) },
                     fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
                     genres1 = { navController.navigate(Routes.SearchGenres.route) },

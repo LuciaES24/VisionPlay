@@ -52,7 +52,7 @@ import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
-import com.lespsan543.visionplay.menu.Property1
+import com.lespsan543.visionplay.menu.PropertyBottomBar
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -74,14 +74,14 @@ fun SearchGenres(navController: NavHostController, visionPlayViewModel: VisionPl
                     genres2 = { navController.navigate(Routes.SearchGenres.route) },
                     fav2 = { navController.navigate(Routes.FavoritesScreen.route) },
                     cine2 = { navController.navigate(Routes.CinemaScreen.route) },
-                    property1 = Property1.Generos
+                    propertyBottomBar = PropertyBottomBar.Generos
                 )
             },
             topBar = {
                 Cabecera(
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
-                    property1 = com.lespsan543.visionplay.cabecera.Property1.Genres
+                    propertyParam = com.lespsan543.visionplay.cabecera.Property.Genres
                 )
             }
         ){
@@ -146,7 +146,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
         val height = maxHeight
         Scaffold(
             bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                property1 = Property1.Generos,
+                propertyBottomBar = PropertyBottomBar.Generos,
                 home2 = { navController.navigate(Routes.MoviesScreen.route) },
                 fav2 = { navController.navigate(Routes.FavoritesScreen.route) },
                 genres2 = { navController.navigate(Routes.SearchGenres.route) },
@@ -155,7 +155,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                 Cabecera(
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
-                    com.lespsan543.visionplay.cabecera.Property1.Volver,
+                    com.lespsan543.visionplay.cabecera.Property.Volver,
                     volver = { navController.navigate(Routes.SearchGenres.route)
                                visionPlayViewModel.reset()}
                 )

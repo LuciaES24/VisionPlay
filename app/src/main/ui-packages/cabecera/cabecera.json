@@ -5,10 +5,10 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "23:336",
-    "version": "5722075571",
+    "version": "5771061611",
     "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
   },
-  "default": "Property 1=Perfil",
+  "default": "Property=Perfil",
   "design": {
     "atoms": [
       {
@@ -18,7 +18,7 @@
       },
       {
         "type": "vector",
-        "id": "salir"
+        "id": "salir2"
       },
       {
         "type": "text",
@@ -26,7 +26,7 @@
       },
       {
         "type": "vector",
-        "id": "salir1"
+        "id": "salir"
       },
       {
         "type": "text",
@@ -39,10 +39,14 @@
       {
         "type": "vector",
         "id": "volver"
+      },
+      {
+        "type": "text",
+        "id": "VisionPlay"
       }
     ],
     "modes": {
-      "Property 1=Perfil": {
+      "Property=Perfil": {
         "rules": [
           {
             "id": "top_level",
@@ -54,9 +58,9 @@
             },
             "arrangement": "row",
             "children": [
-              "salir",
+              "salir2",
               "Favorites",
-              "salir1"
+              "salir"
             ],
             "item-spacing": "76.0",
             "background-color": {
@@ -67,8 +71,7 @@
             }
           },
           {
-            "id": "salir",
-            "tap-handler": "$salir",
+            "id": "salir2",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
@@ -79,7 +82,7 @@
                 "value": "28.0"
               }
             },
-            "vector-content": "salir.svg"
+            "vector-content": "salir2.svg"
           },
           {
             "id": "Favorites",
@@ -99,7 +102,7 @@
               "saturation": "0.0",
               "value": "1.0"
             },
-            "text-content": "Favorites",
+            "text-content": "$username",
             "overflow": "visible",
             "max-lines": "-1",
             "text-align-vertical": "center",
@@ -108,7 +111,7 @@
             "typeface": "Kameron"
           },
           {
-            "id": "salir1",
+            "id": "salir",
             "tap-handler": "$salir",
             "size-constraints": {
               "width-constraints": {
@@ -120,11 +123,11 @@
                 "value": "28.0"
               }
             },
-            "vector-content": "salir1.svg"
+            "vector-content": "salir.svg"
           }
         ]
       },
-      "Property 1=Genres": {
+      "Property=Genres": {
         "rules": [
           {
             "id": "top_level",
@@ -174,7 +177,7 @@
           }
         ]
       },
-      "Property 1=Cartelera": {
+      "Property=Cartelera": {
         "rules": [
           {
             "id": "top_level",
@@ -224,7 +227,7 @@
           }
         ]
       },
-      "Property 1=volver": {
+      "Property=volver": {
         "rules": [
           {
             "id": "top_level",
@@ -263,10 +266,65 @@
             "vector-content": "volver.svg"
           }
         ]
+      },
+      "Property=VisionPlay": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "15.0",
+              "top": "12.0",
+              "right": "15.0",
+              "bottom": "12.0"
+            },
+            "arrangement": "row",
+            "children": [
+              "VisionPlay"
+            ],
+            "item-spacing": "76.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "1.0",
+              "value": "0.5411764705882353"
+            }
+          },
+          {
+            "id": "VisionPlay",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "130.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "VisionPlay",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "28.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          }
+        ]
       }
     }
   },
   "parameters": {
+    "username": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    },
     "salir": {
       "data-type": "void-callback",
       "required": false,
@@ -280,31 +338,53 @@
   },
   "previews": [
     {
-      "design": "Property 1=Perfil",
+      "design": "Property=Perfil",
       "size": {
         "width": 358.0,
         "height": 56.0
+      },
+      "parameters": {
+        "username": "Favorites"
       }
     },
     {
-      "design": "Property 1=Genres",
+      "design": "Property=Genres",
       "size": {
         "width": 358.0,
         "height": 56.0
+      },
+      "parameters": {
+        "username": "Favorites"
       }
     },
     {
-      "design": "Property 1=Cartelera",
+      "design": "Property=Cartelera",
       "size": {
         "width": 358.0,
         "height": 56.0
+      },
+      "parameters": {
+        "username": "Favorites"
       }
     },
     {
-      "design": "Property 1=volver",
+      "design": "Property=volver",
       "size": {
         "width": 358.0,
         "height": 56.0
+      },
+      "parameters": {
+        "username": "Favorites"
+      }
+    },
+    {
+      "design": "Property=VisionPlay",
+      "size": {
+        "width": 358.0,
+        "height": 56.0
+      },
+      "parameters": {
+        "username": "Favorites"
       }
     }
   ],
