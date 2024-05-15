@@ -51,6 +51,8 @@ import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.cabecera.Cabecera
+import com.lespsan543.visionplay.cabecera.Property
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.PropertyBottomBar
@@ -87,6 +89,13 @@ fun SeriesScreen(
         val width = maxWidth
         val height = maxHeight
         Scaffold(
+            topBar = {
+                Cabecera(
+                    modifier = Modifier
+                        .height(maxHeight.times(0.08f)),
+                    Property.VisionPlay
+                )
+            },
             bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
                 propertyBottomBar = PropertyBottomBar.Inicio,
                 home = { navController.navigate(Routes.SeriesScreen.route) },
@@ -137,6 +146,7 @@ fun SeriesScreen(
                                 visionPlayViewModel.addSelected(serieList[seriePosition])
                                 navController.navigate(Routes.ShowMovie.route)
                                 visionPlayViewModel.formatTitle(serieList[seriePosition].title)
+                                visionPlayViewModel.changeBottomBar(PropertyBottomBar.Inicio)
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(

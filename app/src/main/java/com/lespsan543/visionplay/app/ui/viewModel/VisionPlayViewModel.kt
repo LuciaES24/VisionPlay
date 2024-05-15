@@ -1,6 +1,5 @@
 package com.lespsan543.visionplay.app.ui.viewModel
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -21,6 +20,7 @@ import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetTrailerUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.guardar.Property1
+import com.lespsan543.visionplay.menu.PropertyBottomBar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -118,6 +118,7 @@ class VisionPlayViewModel : ViewModel() {
     var commentsList : StateFlow<List<CommentModel>> = _commentsList
 
     private var _userName = MutableStateFlow("")
+    var userName : StateFlow<String> = _userName
 
     var commentText = mutableStateOf("")
 
@@ -142,8 +143,8 @@ class VisionPlayViewModel : ViewModel() {
 
     var genresToShow = listOf("Crime","Comedy","Animation","Action","Adventure", "Fantasy","Horror","Romance","Mystery","Western")
 
-    private var _route = MutableStateFlow("")
-    var route : StateFlow<String> = _route
+    private var _propertyBottomBar = MutableStateFlow(PropertyBottomBar.Inicio)
+    var propertyBottomBar : StateFlow<PropertyBottomBar> = _propertyBottomBar
 
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
@@ -153,6 +154,10 @@ class VisionPlayViewModel : ViewModel() {
         serieGenres()
         findUserInDB()
         getCinemaMovies()
+    }
+
+    fun changeBottomBar(property : PropertyBottomBar){
+        _propertyBottomBar.value = property
     }
 
     /**

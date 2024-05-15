@@ -92,10 +92,6 @@
         "source": "com.lespsan543.visionplay.app-relay-59:/drawable-nodpi/menu_vector.xml"
     },
     {
-        "merged": "com.lespsan543.visionplay.app-merged_res-63:/drawable-nodpi_cabecera_salir1.xml.flat",
-        "source": "com.lespsan543.visionplay.app-relay-59:/drawable-nodpi/cabecera_salir1.xml"
-    },
-    {
         "merged": "com.lespsan543.visionplay.app-merged_res-63:/xml_data_extraction_rules.xml.flat",
         "source": "com.lespsan543.visionplay.app-main-65:/xml/data_extraction_rules.xml"
     },

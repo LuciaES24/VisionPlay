@@ -182,6 +182,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                                 visionPlayViewModel.addSelected(moviesAndSeriesList[position])
                                 navController.navigate(Routes.ShowMovie.route)
                                 visionPlayViewModel.formatTitle(moviesAndSeriesList[position].title)
+                                visionPlayViewModel.changeBottomBar(PropertyBottomBar.Generos)
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(

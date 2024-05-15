@@ -47,6 +47,7 @@ import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.cabecera.Property
 import com.lespsan543.visionplay.menu.Menu
+import com.lespsan543.visionplay.menu.PropertyBottomBar
 
 /**
  * Muestra la pantalla de favoritos, donde se encuentran todas las películas y series que ha añadido el usuario
@@ -60,6 +61,8 @@ import com.lespsan543.visionplay.menu.Menu
 fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: VisionPlayViewModel) {
     //Lista de películas y series que el usuario ha añadido a favoritos
     val favoritesList by visionPlayViewModel.favoritesInDB.collectAsState()
+    //Nombre del usuario
+    val username by visionPlayViewModel.userName.collectAsState()
 
     LaunchedEffect(Unit){
         visionPlayViewModel.fetchFavoritesFromDB()
@@ -72,7 +75,8 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                         .height(maxHeight.times(0.08f)),
                     Property.Perfil,
                     salir = { visionPlayViewModel.signOut()
-                              navController.navigate(Routes.LogInScreen.route)}
+                              navController.navigate(Routes.LogInScreen.route)},
+                    username = username
                 )
             },
             bottomBar = {
@@ -103,7 +107,7 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                     contentPadding = PaddingValues(4.dp),
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(40,40,40))
+                        .background(Color(40, 40, 40))
                         .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
                     items(favoritesList) {movieOrSerie ->
@@ -120,7 +124,7 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(40,40,40))
+                        .background(Color(40, 40, 40))
                         .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
                     Text(text = "There is nothing in favorites yet",
@@ -151,10 +155,12 @@ fun ShowMovieOrSerie(
 ){
     Box(modifier = Modifier
         .fillMaxWidth()
-        .clickable { visionPlayViewModel.changeFavoriteSelected(movieOrSerie)
-                     visionPlayViewModel.addSelected(movieOrSerie)
-                     navController.navigate(Routes.ShowMovie.route)
-                     visionPlayViewModel.formatTitle(movieOrSerie.title)
+        .clickable {
+            visionPlayViewModel.changeFavoriteSelected(movieOrSerie)
+            visionPlayViewModel.addSelected(movieOrSerie)
+            navController.navigate(Routes.ShowMovie.route)
+            visionPlayViewModel.formatTitle(movieOrSerie.title)
+            visionPlayViewModel.changeBottomBar(PropertyBottomBar.Favoritos)
         }
         .padding(4.dp)
         .height(maxHeigth * 0.45f)

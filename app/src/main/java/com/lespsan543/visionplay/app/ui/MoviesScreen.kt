@@ -78,8 +78,8 @@ import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.components.CommentSection
 import com.lespsan543.visionplay.app.ui.components.SimilarMovieOrSerie
 import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
-import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.cabecera.Cabecera
+import com.lespsan543.visionplay.cabecera.Property
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.PropertyBottomBar
@@ -116,6 +116,13 @@ fun MoviesScreen(
         val width = maxWidth
         val height = maxHeight
         Scaffold(
+            topBar = {
+                     Cabecera(
+                         modifier = Modifier
+                             .height(maxHeight.times(0.08f)),
+                         Property.VisionPlay
+                     )
+            },
             bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
                 propertyBottomBar = PropertyBottomBar.Inicio,
                 home = { navController.navigate(Routes.MoviesScreen.route) },
@@ -165,6 +172,7 @@ fun MoviesScreen(
                                 visionPlayViewModel.addSelected(movieList[moviePosition])
                                 navController.navigate(Routes.ShowMovie.route)
                                 visionPlayViewModel.formatTitle(movieList[moviePosition].title)
+                                visionPlayViewModel.changeBottomBar(PropertyBottomBar.Inicio)
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -236,6 +244,8 @@ fun ShowMovie(navController: NavHostController,
     val commentText = visionPlayViewModel.commentText
     //Lista de películas similares
     val similar = visionPlayViewModel.similarMovies.collectAsState()
+    //Propiedad del menú dependiendo de la pantalla en la que se encontraba anteriormente
+    val propertyBottomBar = visionPlayViewModel.propertyBottomBar.collectAsState()
 
     //Variables para el manejo de la sección de comentarios
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -328,7 +338,7 @@ fun ShowMovie(navController: NavHostController,
                     )
                 },
                 bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                    propertyBottomBar = PropertyBottomBar.Inicio,
+                    propertyBottomBar = propertyBottomBar.value,
                     home = { navController.navigate(Routes.MoviesScreen.route) },
                     fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
                     genres1 = { navController.navigate(Routes.SearchGenres.route) },
