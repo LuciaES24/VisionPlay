@@ -38,7 +38,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -48,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
@@ -63,28 +62,28 @@ import com.lespsan543.visionplay.menu.Property1
  * se podrán añadir a favoritos y podremos navegar a otras pantallas
  *
  * @param navController nos permite realizar la navegación entre pantallas
- * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
+ * @param visionPlayViewModel viewModel del que obtendremos los datos
  */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun SeriesScreen(
     navController: NavHostController,
-    moviesOrSeriesViewModel: MoviesOrSeriesViewModel
+    visionPlayViewModel: VisionPlayViewModel
 ) {
     //Guarda la posición de la película que se muestra
-    val seriePosition by moviesOrSeriesViewModel.seriePosition.collectAsState()
+    val seriePosition by visionPlayViewModel.seriePosition.collectAsState()
     //Lista de películas obtenida
-    val serieList by moviesOrSeriesViewModel.serieList.collectAsState()
+    val serieList by visionPlayViewModel.serieList.collectAsState()
     //Propiedad del botón de guardado
-    val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
+    val property by visionPlayViewModel.propertyButton.collectAsState()
 
     //Se encarga del desplazamiento de las series al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
 
 
     LaunchedEffect(Unit){
-        moviesOrSeriesViewModel.fetchFavoritesFromDB()
+        visionPlayViewModel.fetchFavoritesFromDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val width = maxWidth
@@ -105,7 +104,7 @@ fun SeriesScreen(
                         containerColor = Color(40,40,40),
                         shape = RoundedCornerShape(3.dp))
                     {
-                        Text(text = "Películas", color = Color.White, fontSize = 16.sp)
+                        Text(text = "Películas", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
                     }
                     Spacer(modifier = Modifier.width(10.dp))
                     FloatingActionButton(onClick = { navController.navigate(Routes.SeriesScreen.route) },
@@ -115,7 +114,7 @@ fun SeriesScreen(
                         containerColor = Color(138,0,0) ,
                         shape = RoundedCornerShape(3.dp)
                     ) {
-                        Text(text = "Series", color = Color.White, fontSize = 16.sp)
+                        Text(text = "Series", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
                     }
                 }
             }
@@ -123,7 +122,7 @@ fun SeriesScreen(
             //Aparece si la información de la API ya ha sido cargada
             if (serieList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
-                moviesOrSeriesViewModel.findMovieInList(serieList[seriePosition].title)
+                visionPlayViewModel.findMovieInList(serieList[seriePosition].title)
                 AsyncImage(model = serieList[seriePosition].poster,
                     contentDescription = "Poster serie",
                     modifier = Modifier
@@ -131,14 +130,15 @@ fun SeriesScreen(
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
                                 if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
-                                    moviesOrSeriesViewModel.deleteMovieOrSerie()
+                                    visionPlayViewModel.deleteMovieOrSerie()
                                 }else{
-                                    moviesOrSeriesViewModel.saveMovieOrSerie(serieList[seriePosition])
+                                    visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition])
                                 }
                             },
                             onClick = {
-                                navController.navigate(Routes.ShowSerie.route)
-                                moviesOrSeriesViewModel.formatTitle(serieList[seriePosition].title)
+                                visionPlayViewModel.addSelected(serieList[seriePosition])
+                                navController.navigate(Routes.ShowMovie.route)
+                                visionPlayViewModel.formatTitle(serieList[seriePosition].title)
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -148,9 +148,9 @@ fun SeriesScreen(
                             },
                             onDragStopped = {
                                 if (offsetX < 0) {
-                                    moviesOrSeriesViewModel.newSerie()
+                                    visionPlayViewModel.newSerie()
                                 } else if (offsetX > 0) {
-                                    moviesOrSeriesViewModel.lastSerie()
+                                    visionPlayViewModel.lastSerie()
                                 }
                                 offsetX = 0 }
                         )
@@ -159,8 +159,8 @@ fun SeriesScreen(
                     modifier = Modifier
                         .padding(start = width*0.10f, top = height*0.85f),
                     property1 = property,
-                    guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(serieList[seriePosition]) },
-                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
+                    guardar = { visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition]) },
+                    eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                 )
             }else{
                 //Aparece si aún no ha cargado la información de la API
@@ -173,178 +173,6 @@ fun SeriesScreen(
                             .height(height * 0.5f)
                             .width(width * 0.5f)
                     )
-                }
-            }
-        }
-    }
-}
-
-/**
- * Muestra la información de la serie sobre la que se pulse
- *
- * @param navController nos permite realizar la navegación entre pantallas
- * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
- */
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ShowSerie(navController: NavHostController,
-              moviesOrSeriesViewModel: MoviesOrSeriesViewModel
-) {
-    //Guarda la posición de la serie que se muestra
-    val seriePosition by moviesOrSeriesViewModel.seriePosition.collectAsState()
-    //Lista de series obtenida
-    val serieList by moviesOrSeriesViewModel.serieList.collectAsState()
-    //Propiedad del botón de guardado
-    val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
-    //Lista de géneros de la serie
-    val genres by moviesOrSeriesViewModel.showGenres.collectAsState()
-    //Id del trailer a mostrar
-    val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
-
-    DisposableEffect(Unit){
-        onDispose {
-            moviesOrSeriesViewModel.resetTrailer()
-        }
-    }
-    //Comprobamos si la serie ya ha sido guardada
-    moviesOrSeriesViewModel.findMovieInList(serieList[seriePosition].title)
-    moviesOrSeriesViewModel.getSerieGenresToShow(serieList[seriePosition])
-    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-        val height = maxHeight
-        val width = maxWidth
-        Scaffold(
-            topBar = {
-                Cabecera(
-                    modifier = Modifier
-                        .height(maxHeight.times(0.08f)),
-                    property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
-                    volver = { navController.navigate(Routes.SeriesScreen.route)}
-                )
-            },
-            bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
-                property1 = Property1.Inicio,
-                home = { navController.navigate(Routes.MoviesScreen.route) },
-                fav1 = { navController.navigate(Routes.FavoritesScreen.route) },
-                genres1 = { navController.navigate(Routes.SearchGenres.route) },
-                cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
-            floatingActionButton = {
-                Guardar(
-                    property1 = property,
-                    guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(serieList[seriePosition]) },
-                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
-                )
-            }
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(199, 199, 199))
-                    .verticalScroll(rememberScrollState())
-                    .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
-            ) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = width * 0.04f,
-                        end = width * 0.04f,
-                        top = height * 0.03f,
-                        bottom = height * 0.03f
-                    )
-                ) {
-                    AsyncImage(model = serieList[seriePosition].poster,
-                        contentDescription = "Poster serie",
-                        modifier = Modifier
-                            .height(height * 0.3f)
-                    )
-                    Spacer(modifier = Modifier.width(width * 0.03f))
-                    Column {
-                        Text(text = serieList[seriePosition].title,
-                            fontFamily = Constants.FONT_FAMILY,
-                            textAlign = TextAlign.Justify,
-                            color = Color.Black,
-                            fontSize = 25.sp
-                        )
-                        Spacer(modifier = Modifier.height(width * 0.03f))
-                        Text(text = "Release date: ${serieList[seriePosition].date}",
-                            fontFamily = Constants.FONT_FAMILY,
-                            textAlign = TextAlign.Start,
-                            color = Color.Black,
-                            fontSize = 18.sp
-                        )
-                        Spacer(modifier = Modifier.height(width * 0.03f))
-                        Row {
-                            for (i in 0..moviesOrSeriesViewModel.calculateVotes(serieList[seriePosition])-1){
-                                Image(
-                                    painter = painterResource(id = R.drawable.votes),
-                                    contentDescription = "Votes",
-                                    modifier = Modifier.width(width*0.08f)
-                                )
-                            }
-                        }
-                    }
-                }
-                Text(text = "Overview:",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.03f))
-                Text(text = serieList[seriePosition].overview,
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Genres:",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.03f))
-                Text(text = genres,
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Trailer: ",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                if (trailerId!=""){
-                    YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
-                    Spacer(modifier = Modifier.height(width * 0.07f))
                 }
             }
         }

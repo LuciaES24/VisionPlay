@@ -3,7 +3,6 @@ package com.lespsan543.visionplay.app.ui
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,10 +25,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -45,20 +40,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
-import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
-import com.lespsan543.visionplay.app.ui.viewModel.SearchGenresViewModel
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
@@ -67,11 +57,11 @@ import com.lespsan543.visionplay.menu.Property1
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchGenres(navController: NavHostController, searchGenresViewModel: SearchGenresViewModel){
-    val genresToShow = searchGenresViewModel.genresToShow
+fun SearchGenres(navController: NavHostController, visionPlayViewModel: VisionPlayViewModel){
+    val genresToShow = visionPlayViewModel.genresToShow
 
     LaunchedEffect(Unit){
-        searchGenresViewModel.fetchFavotitesFromDB()
+        visionPlayViewModel.fetchFavoritesFromDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
@@ -108,7 +98,7 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
                     Box(modifier = Modifier
                         .fillMaxWidth()
                         .clickable {
-                            searchGenresViewModel.diferentGenres(genre)
+                            visionPlayViewModel.diferentGenres(genre)
                             navController.navigate(Routes.ShowByGenre.route)
                         }
                         .padding(6.dp)
@@ -137,19 +127,19 @@ fun SearchGenres(navController: NavHostController, searchGenresViewModel: Search
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresViewModel: SearchGenresViewModel){
+fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewModel: VisionPlayViewModel){
     //Lista de películas y series encontradas a partir del género seleccionado
-    val moviesAndSeriesList by searchGenresViewModel.moviesAndSeriesList.collectAsState()
+    val moviesAndSeriesList by visionPlayViewModel.moviesAndSeriesByGenreList.collectAsState()
     //Posición actual de la película o serie que se muestra
-    val position by searchGenresViewModel.position.collectAsState()
+    val position by visionPlayViewModel.searchByGenrePosition.collectAsState()
     //Propiedad del botón de guardado
-    val property by searchGenresViewModel.propertyButton.collectAsState()
+    val property by visionPlayViewModel.propertyButton.collectAsState()
 
     //Se encarga del desplazamiento de las películas o series al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(Unit){
-        searchGenresViewModel.fetchFavoritesFromDB()
+        visionPlayViewModel.fetchFavoritesFromDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val width = maxWidth
@@ -167,14 +157,14 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                         .height(maxHeight.times(0.08f)),
                     com.lespsan543.visionplay.cabecera.Property1.Volver,
                     volver = { navController.navigate(Routes.SearchGenres.route)
-                               searchGenresViewModel.reset()}
+                               visionPlayViewModel.reset()}
                 )
             }
         ) {
             //Aparece si la información de la API ya ha sido cargada
             if (moviesAndSeriesList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
-                searchGenresViewModel.findMovieOrSerieInList(moviesAndSeriesList[position].title)
+                visionPlayViewModel.findMovieInList(moviesAndSeriesList[position].title)
                 AsyncImage(model = moviesAndSeriesList[position].poster,
                     contentDescription = "Poster película",
                     modifier = Modifier
@@ -183,27 +173,27 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
                                 if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
-                                    searchGenresViewModel.deleteMovieOrSerie()
+                                    visionPlayViewModel.deleteMovieOrSerie()
                                 }else{
-                                    searchGenresViewModel.saveMovieOrSerie(moviesAndSeriesList[position])
+                                    visionPlayViewModel.saveMovieOrSerie(moviesAndSeriesList[position])
                                 }
                             },
                             onClick = {
-                                navController.navigate(Routes.ShowMovieOrSerieByGenre.route)
-                                searchGenresViewModel.formatTitle(moviesAndSeriesList[position].title)
+                                visionPlayViewModel.addSelected(moviesAndSeriesList[position])
+                                navController.navigate(Routes.ShowMovie.route)
+                                visionPlayViewModel.formatTitle(moviesAndSeriesList[position].title)
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
                             orientation = Orientation.Horizontal,
                             state = rememberDraggableState { delta ->
                                 offsetX += delta.toInt()
-                                Log.d("pointer", offsetX.toString())
                             },
                             onDragStopped = {
                                 if (offsetX < 0) {
-                                    searchGenresViewModel.newMovieOrSerie()
+                                    visionPlayViewModel.newMovieOrSerie()
                                 } else if (offsetX > 0) {
-                                    searchGenresViewModel.lastMovieOrSerie()
+                                    visionPlayViewModel.lastMovieOrSerie()
                                 }
                                 offsetX = 0
                             }
@@ -213,8 +203,8 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                     modifier = Modifier
                         .padding(start = width*0.10f, top = height*0.85f),
                     property1 = property,
-                    guardar = { searchGenresViewModel.saveMovieOrSerie(moviesAndSeriesList[position]) },
-                    eliminar = { searchGenresViewModel.deleteMovieOrSerie() }
+                    guardar = { visionPlayViewModel.saveMovieOrSerie(moviesAndSeriesList[position]) },
+                    eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                 )
             }else{
                 //Aparece si aún no ha cargado la información de la API
@@ -227,175 +217,6 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, searchGenresVie
                             .height(height * 0.5f)
                             .width(width * 0.5f)
                     )
-                }
-            }
-        }
-    }
-}
-
-/**
- * Muestra la información de la película o serie sobre la que se pulse
- *
- * @param navController nos permite realizar la navegación entre pantallas
- * @param searchGenresViewModel viewModel del que obtendremos los datos
- */
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ShowMovieOrSerieByGenre(navController: NavHostController,
-                 searchGenresViewModel: SearchGenresViewModel
-) {
-    //Guarda la posición de la película o serie que se muestra
-    val position by searchGenresViewModel.position.collectAsState()
-    //Lista de películas y series obtenida
-    val moviesAndSeriesList by searchGenresViewModel.moviesAndSeriesList.collectAsState()
-    //Propiedad del botón de guardado
-    val property by searchGenresViewModel.propertyButton.collectAsState()
-    //Lista de géneros de la película o serie
-    val genres by searchGenresViewModel.showGenres.collectAsState()
-    //Trailer de la película o serie que se está mostrando
-    val trailerId by searchGenresViewModel.trailerId.collectAsState()
-
-    //Comprobamos si la película o serie ya ha sido guardada
-    searchGenresViewModel.findMovieOrSerieInList(moviesAndSeriesList[position].title)
-    searchGenresViewModel.getGenresToShow(moviesAndSeriesList[position])
-    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-        val height = maxHeight
-        val width = maxWidth
-        Scaffold(
-            topBar = {
-                Cabecera(
-                    modifier = Modifier
-                        .height(maxHeight.times(0.08f)),
-                    property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
-                    volver = { navController.navigate(Routes.ShowByGenre.route)
-                               searchGenresViewModel.resetTrailer()
-                    }
-                )
-            },
-            bottomBar = { Menu(
-                modifier = Modifier
-                    .height(maxHeight.times(0.08f)),
-                home2 = { navController.navigate(Routes.MoviesScreen.route) },
-                genres2 = { navController.navigate(Routes.SearchGenres.route) },
-                fav2 = { navController.navigate(Routes.FavoritesScreen.route) },
-                cine2 = { navController.navigate(Routes.CinemaScreen.route) },
-                property1 = Property1.Generos
-            )
-            },
-            floatingActionButton = {
-                Guardar(
-                    property1 = property,
-                    guardar = { searchGenresViewModel.saveMovieOrSerie(moviesAndSeriesList[position]) },
-                    eliminar = { searchGenresViewModel.deleteMovieOrSerie() }
-                )
-            }
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color(199, 199, 199))
-                    .verticalScroll(rememberScrollState())
-                    .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
-            ) {
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = width * 0.04f,
-                        end = width * 0.04f,
-                        top = height * 0.03f,
-                        bottom = height * 0.03f
-                    )
-                ) {
-                    AsyncImage(model = moviesAndSeriesList[position].poster,
-                        contentDescription = "Poster",
-                        modifier = Modifier
-                            .height(height * 0.3f)
-                    )
-                    Spacer(modifier = Modifier.width(width * 0.03f))
-                    Column {
-                        Text(text = moviesAndSeriesList[position].title,
-                            fontFamily = Constants.FONT_FAMILY,
-                            textAlign = TextAlign.Justify,
-                            color = Color.Black,
-                            fontSize = 25.sp
-                        )
-                        Spacer(modifier = Modifier.height(width * 0.03f))
-                        Text(text = "Release date: ${moviesAndSeriesList[position].date}",
-                            fontFamily = Constants.FONT_FAMILY,
-                            textAlign = TextAlign.Start,
-                            color = Color.Black,
-                            fontSize = 18.sp
-                        )
-                        Spacer(modifier = Modifier.height(width * 0.03f))
-                        Row {
-                            for (i in 0..searchGenresViewModel.calculateVotes(moviesAndSeriesList[position])-1){
-                                Image(
-                                    painter = painterResource(id = R.drawable.votes),
-                                    contentDescription = "Votes",
-                                    modifier = Modifier.width(width*0.08f)
-                                )
-                            }
-                        }
-                    }
-                }
-                Text(text = "Overview:",
-                fontFamily = Constants.FONT_FAMILY,
-                textAlign = TextAlign.Justify,
-                color = Color.Black,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(
-                    start = width * 0.05f,
-                    end = width * 0.05f
-                ))
-                Text(text = moviesAndSeriesList[position].overview,
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Genres:",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    ))
-                Text(text = genres,
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 18.sp,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                Text(text = "Trailer: ",
-                    fontFamily = Constants.FONT_FAMILY,
-                    textAlign = TextAlign.Justify,
-                    color = Color.Black,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(
-                        start = width * 0.05f,
-                        end = width * 0.05f
-                    )
-                )
-                Spacer(modifier = Modifier.height(width * 0.05f))
-                if (trailerId!=""){
-                    YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
-                    Spacer(modifier = Modifier.height(width * 0.07f))
                 }
             }
         }

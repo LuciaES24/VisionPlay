@@ -11,9 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.FavotitesViewModel
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
-import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.CinemaScreen
 import com.lespsan543.visionplay.app.ui.FavoritesScreen
@@ -23,28 +21,17 @@ import com.lespsan543.visionplay.app.ui.MoviesScreen
 import com.lespsan543.visionplay.app.ui.RegisterScreen
 import com.lespsan543.visionplay.app.ui.SearchGenres
 import com.lespsan543.visionplay.app.ui.SeriesScreen
-import com.lespsan543.visionplay.app.ui.ShowFavorite
 import com.lespsan543.visionplay.app.ui.ShowMovie
-import com.lespsan543.visionplay.app.ui.ShowMovieOrSerieByGenre
 import com.lespsan543.visionplay.app.ui.ShowMoviesAndSeriesByGenre
-import com.lespsan543.visionplay.app.ui.ShowSerie
-import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
-import com.lespsan543.visionplay.app.ui.viewModel.SearchGenresViewModel
 import com.lespsan543.visionplay.ui.theme.VisionPlayTheme
 
 /**
  * Clase principal que se encarga de mostrar la interfaz al usuario y guarda la configuración de navegación de la app
  *
- * @property moviesOrSeriesViewModel viewModel que maneja los datos de las pantallas MoviesScreen() y SeriesScreen()
- * @property logInOrRegisterViewModel viewModel que maneja los datos de las pantallas LogInScreen() y RegisterScreen()
- * @property favotitesViewModel viewModel que maneja los datos de la pantalla de FavoritesScreen()
+ * @property visionPlayViewModel viewModel que maneja los datos de las pantallas una vez iniciada la sesión del usuario
  */
 class MainActivity : ComponentActivity() {
-    private val moviesOrSeriesViewModel : MoviesOrSeriesViewModel by viewModels()
-    private val logInOrRegisterViewModel : LogInOrRegisterViewModel by viewModels()
-    private val favotitesViewModel : FavotitesViewModel by viewModels()
-    private val searchGenresViewModel : SearchGenresViewModel by viewModels()
-    private val cinemaViewModel : CinemaViewModel by viewModels()
+    private val visionPlayViewModel : VisionPlayViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,43 +46,34 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "Initial") {
                         composable("Initial"){
-                            InitialScreen(navController = navController, moviesOrSeriesViewModel = moviesOrSeriesViewModel)
+                            InitialScreen(navController = navController, visionPlayViewModel = visionPlayViewModel)
                         }
                         composable(Routes.LogInScreen.route) {
-                            LogInScreen(navController, logInOrRegisterViewModel)
+                            LogInScreen(navController, visionPlayViewModel)
                         }
                         composable(Routes.RegisterScreen.route) {
-                            RegisterScreen(navController, logInOrRegisterViewModel)
+                            RegisterScreen(navController, visionPlayViewModel)
                         }
                         composable(Routes.MoviesScreen.route) {
-                            MoviesScreen(navController, moviesOrSeriesViewModel)
+                            MoviesScreen(navController, visionPlayViewModel)
                         }
                         composable(Routes.SeriesScreen.route) {
-                            SeriesScreen(navController, moviesOrSeriesViewModel)
+                            SeriesScreen(navController, visionPlayViewModel)
                         }
                         composable(Routes.FavoritesScreen.route) {
-                            FavoritesScreen(navController, favotitesViewModel)
+                            FavoritesScreen(navController, visionPlayViewModel)
                         }
                         composable(Routes.ShowMovie.route) {
-                            ShowMovie(navController, moviesOrSeriesViewModel, moviesOrSeriesViewModel.selectedMovieOrSerie.value)
-                        }
-                        composable(Routes.ShowSerie.route) {
-                            ShowSerie(navController, moviesOrSeriesViewModel)
-                        }
-                        composable(Routes.ShowFavotite.route) {
-                            ShowFavorite(navController, favotitesViewModel)
+                            ShowMovie(navController, visionPlayViewModel)
                         }
                         composable(Routes.SearchGenres.route) {
-                            SearchGenres(navController, searchGenresViewModel)
+                            SearchGenres(navController, visionPlayViewModel)
                         }
                         composable(Routes.ShowByGenre.route) {
-                            ShowMoviesAndSeriesByGenre(navController, searchGenresViewModel)
-                        }
-                        composable(Routes.ShowMovieOrSerieByGenre.route) {
-                            ShowMovieOrSerieByGenre(navController, searchGenresViewModel)
+                            ShowMoviesAndSeriesByGenre(navController, visionPlayViewModel)
                         }
                         composable(Routes.CinemaScreen.route) {
-                            CinemaScreen(navController, cinemaViewModel)
+                            CinemaScreen(navController, visionPlayViewModel)
                         }
                     }
                 }

@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -23,12 +22,12 @@ import coil.compose.AsyncImage
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
-import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 
 @Composable
 fun SimilarMovieOrSerie(
     navController:NavHostController,
-    moviesOrSeriesViewModel: MoviesOrSeriesViewModel,
+    visionPlayViewModel: VisionPlayViewModel,
     movieOrSerie:MovieOrSerieState,
     height : Dp,
     width:Dp){
@@ -36,10 +35,10 @@ fun SimilarMovieOrSerie(
     Box(modifier = Modifier
         .width(width*0.3f)
         .clickable {
-            moviesOrSeriesViewModel.addSelected(movieOrSerie)
+            visionPlayViewModel.addSelected(movieOrSerie)
             navController.navigate(Routes.ShowMovie.route)
-            moviesOrSeriesViewModel.formatTitle(movieOrSerie.title)
-            moviesOrSeriesViewModel.findSimilarMovies(movieOrSerie)
+            visionPlayViewModel.formatTitle(movieOrSerie.title)
+            visionPlayViewModel.findSimilarMovies(movieOrSerie)
         }
         .padding(6.dp)
         .height(height * 0.4f)

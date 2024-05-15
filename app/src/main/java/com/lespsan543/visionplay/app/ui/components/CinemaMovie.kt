@@ -1,12 +1,9 @@
 package com.lespsan543.visionplay.app.ui.components
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -35,7 +31,7 @@ import coil.compose.AsyncImage
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
-import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 
 /**
  * Formato para mostrar una película
@@ -43,13 +39,13 @@ import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
  * @param height altura de la pantalla
  * @param width ancho de la pantalla
  * @param movieOrSerie película o serie que se va a mostrar
- * @param cinemaViewModel viewModel del que obtenemos la información
+ * @param visionPlayViewModel viewModel del que obtenemos la información
  */
 @Composable
 fun CinemaMovie(
     height : Dp,
     width:Dp,
-    cinemaViewModel: CinemaViewModel,
+    visionPlayViewModel: VisionPlayViewModel,
     movieOrSerie : MovieOrSerieState
 ){
     Row(modifier = Modifier
@@ -105,7 +101,7 @@ fun CinemaMovie(
                 horizontalArrangement = Arrangement.Center
             ) {
                 for (i in 1..5){
-                    val colorFilter = if (i <= cinemaViewModel.calculateVotes(movieOrSerie)){
+                    val colorFilter = if (i <= visionPlayViewModel.calculateVotes(movieOrSerie)){
                         Color.White
                     }else{
                         Color(40,40,40)
@@ -118,8 +114,8 @@ fun CinemaMovie(
                     )
                 }
             }
-            Button(onClick = {cinemaViewModel.formatTitle(movieOrSerie.title)
-                cinemaViewModel.showMovieTrailer()},
+            Button(onClick = {visionPlayViewModel.formatTitle(movieOrSerie.title)
+                visionPlayViewModel.showMovieTrailer()},
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 20.dp, end = 20.dp, top = 2.dp),

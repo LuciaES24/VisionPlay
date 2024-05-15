@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
@@ -45,27 +44,27 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
 import com.lespsan543.visionplay.app.data.util.Constants.FONT_FAMILY
 import com.lespsan543.visionplay.app.navigation.Routes
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 
 /**
  * Primera pantalla que se muestra al iniciar la aplicación donde el usuario podrá iniciar sesión con su email y contraseña
  *
  * @param navController nos permite realizar la navegación entre pantallas
- * @param viewModel viewModel del que obtendremos los datos
+ * @param visionPlayViewModel viewModel del que obtendremos los datos
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewModel){
+fun LogInScreen(navController: NavController, visionPlayViewModel : VisionPlayViewModel){
     //Determina si la contraseña está visible o no
     var hidden by remember { mutableStateOf(true) }
     //Controla si algún dato es incorrecto para mostrar el mensaje de error
-    val wrong by viewModel.wrong.collectAsState()
+    val wrong by visionPlayViewModel.wrong.collectAsState()
     //Email que escriba el usuario
-    val email = viewModel.email
+    val email = visionPlayViewModel.email
     //Contraseña que escriba el usuario
-    val password = viewModel.password
+    val password = visionPlayViewModel.password
     BoxWithConstraints {
         val with = maxWidth
         val height = maxHeight
@@ -80,7 +79,7 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
             TextField(value = email,
-                onValueChange = { viewModel.writeEmail(it) },
+                onValueChange = { visionPlayViewModel.writeEmail(it) },
                 label = { Text(text = "Email...", color = Color.DarkGray, fontFamily = FONT_FAMILY) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 colors = textFieldColors(
@@ -92,7 +91,7 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
             TextField(value = password,
-                onValueChange = { viewModel.writePassword(it) },
+                onValueChange = { visionPlayViewModel.writePassword(it) },
                 label = { Text(text = "Password...",  color = Color.DarkGray, fontFamily = FONT_FAMILY) },
                 colors = textFieldColors(
                     containerColor = Color.White,
@@ -114,7 +113,8 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                 shape = RoundedCornerShape(3.dp)
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
-            OutlinedButton(onClick = { viewModel.logIn { navController.navigate(Routes.MoviesScreen.route) } },
+            OutlinedButton(onClick = { visionPlayViewModel.signOut()
+                                       visionPlayViewModel.logIn { navController.navigate(Routes.MoviesScreen.route) }},
                 modifier = Modifier
                     .height(height * 0.06f)
                     .width(with * 0.35f),
@@ -127,7 +127,7 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
             Row {
                 Text(text = "¿Aun no te has registrado?", color = Color.White, fontFamily = FONT_FAMILY)
                 ClickableText(onClick = { navController.navigate(Routes.RegisterScreen.route)
-                                          viewModel.reset()},
+                                          visionPlayViewModel.resetLogInOrRegister()},
                     text = AnnotatedString("Registrarse"),
                     style = TextStyle(
                         color = Color.Red,
@@ -140,7 +140,7 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
             //Se muestra si algún dato es incorrecto
             if (wrong == true){
                 AlertDialog(onDismissRequest = {  },
-                    confirmButton = { Button(onClick = { viewModel.closeDialog() }) {
+                    confirmButton = { Button(onClick = { visionPlayViewModel.closeDialog() }) {
                         Text(text = "Aceptar", fontFamily = FONT_FAMILY)
                         }
                     },

@@ -10,7 +10,6 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -62,7 +61,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -73,7 +71,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.lespsan543.visionplay.app.ui.viewModel.MoviesOrSeriesViewModel
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants
 import com.lespsan543.visionplay.app.navigation.Routes
@@ -86,33 +84,34 @@ import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.Property1
 import kotlinx.coroutines.launch
+import okhttp3.Route
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
  * se podrán añadir a favoritos y podremos navegar a otras pantallas
  *
  * @param navController nos permite realizar la navegación entre pantallas
- * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
+ * @param visionPlayViewModel viewModel del que obtendremos los datos
  */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun MoviesScreen(
     navController: NavHostController,
-    moviesOrSeriesViewModel: MoviesOrSeriesViewModel
+    visionPlayViewModel: VisionPlayViewModel
 ) {
     //Guarda la posición de la película que se muestra
-    val moviePosition by moviesOrSeriesViewModel.moviePosition.collectAsState()
+    val moviePosition by visionPlayViewModel.moviePosition.collectAsState()
     //Lista de películas obtenida
-    val movieList by moviesOrSeriesViewModel.movieList.collectAsState()
+    val movieList by visionPlayViewModel.movieList.collectAsState()
     //Propiedad del botón de guardado
-    val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
+    val property by visionPlayViewModel.propertyButton.collectAsState()
 
     //Se encarga del desplazamiento de las películas al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
 
     LaunchedEffect(Unit){
-        moviesOrSeriesViewModel.fetchFavoritesFromDB()
+        visionPlayViewModel.fetchFavoritesFromDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val width = maxWidth
@@ -150,7 +149,7 @@ fun MoviesScreen(
             //Aparece si la información ya ha sido cargada
             if (movieList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
-                moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
+                visionPlayViewModel.findMovieInList(movieList[moviePosition].title)
                 AsyncImage(model = movieList[moviePosition].poster,
                     contentDescription = "Poster película",
                     modifier = Modifier
@@ -158,15 +157,15 @@ fun MoviesScreen(
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
                                 if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
-                                    moviesOrSeriesViewModel.deleteMovieOrSerie()
+                                    visionPlayViewModel.deleteMovieOrSerie()
                                 } else {
-                                    moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition])
+                                    visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition])
                                 }
                             },
                             onClick = {
-                                moviesOrSeriesViewModel.addSelected(movieList[moviePosition])
+                                visionPlayViewModel.addSelected(movieList[moviePosition])
                                 navController.navigate(Routes.ShowMovie.route)
-                                moviesOrSeriesViewModel.formatTitle(movieList[moviePosition].title)
+                                visionPlayViewModel.formatTitle(movieList[moviePosition].title)
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(
@@ -176,9 +175,9 @@ fun MoviesScreen(
                             },
                             onDragStopped = {
                                 if (offsetX < 0) {
-                                    moviesOrSeriesViewModel.newMovie()
+                                    visionPlayViewModel.newMovie()
                                 } else if (offsetX > 0) {
-                                    moviesOrSeriesViewModel.lastMovie()
+                                    visionPlayViewModel.lastMovie()
                                 }
                                 offsetX = 0
                             }
@@ -192,8 +191,8 @@ fun MoviesScreen(
                     modifier = Modifier
                         .padding(start = width*0.10f, top = height*0.85f),
                     property1 = property,
-                    guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition]) },
-                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
+                    guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition]) },
+                    eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                 )
             }else{
                 //Aparece si aún no ha cargado la información de la API
@@ -216,27 +215,28 @@ fun MoviesScreen(
  * Muestra la información de la película o serie que sobre la que se pulse
  *
  * @param navController nos permite realizar la navegación entre pantallas
- * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
+ * @param visionPlayViewModel viewModel del que obtendremos los datos
  */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
 @Composable
 fun ShowMovie(navController: NavHostController,
-    moviesOrSeriesViewModel: MoviesOrSeriesViewModel,
-    movieOrSerie : MovieOrSerieState
+              visionPlayViewModel: VisionPlayViewModel
 ) {
+    //Película que ha sido seleccionada
+    val movieOrSerie by visionPlayViewModel.selectedMovieOrSerie.collectAsState()
     //Propiedad del botón de guardado
-    val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
+    val property by visionPlayViewModel.propertyButton.collectAsState()
     //Lista de géneros de la película
-    val genres by moviesOrSeriesViewModel.showGenres.collectAsState()
+    val genres by visionPlayViewModel.showGenres.collectAsState()
     //Id del trailer a mostrar
-    val trailerId by moviesOrSeriesViewModel.trailerId.collectAsState()
+    val trailerId by visionPlayViewModel.trailerId.collectAsState()
     //Lista de comentarios de la película
-    val commentsList by moviesOrSeriesViewModel.commentsList.collectAsState()
+    val commentsList by visionPlayViewModel.commentsList.collectAsState()
     //Comentario que introduce el usuario
-    val commentText = moviesOrSeriesViewModel.commentText
+    val commentText = visionPlayViewModel.commentText
     //Lista de películas similares
-    val similar = moviesOrSeriesViewModel.similarMovies.collectAsState()
+    val similar = visionPlayViewModel.similarMovies.collectAsState()
 
     //Variables para el manejo de la sección de comentarios
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -245,14 +245,14 @@ fun ShowMovie(navController: NavHostController,
 
     DisposableEffect(Unit){
         onDispose {
-            moviesOrSeriesViewModel.resetTrailer()
+            visionPlayViewModel.resetTrailer()
         }
     }
     //Comprobamos si la película ya ha sido guardada
-    moviesOrSeriesViewModel.findMovieInList(movieOrSerie.title)
-    moviesOrSeriesViewModel.getMovieGenresToShow(movieOrSerie)
-    moviesOrSeriesViewModel.fetchCommentsFromDB(movieOrSerie.title)
-    moviesOrSeriesViewModel.findSimilarMovies(movieOrSerie)
+    visionPlayViewModel.findMovieInList(movieOrSerie.title)
+    visionPlayViewModel.getGenresToShow(movieOrSerie)
+    visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.title)
+    visionPlayViewModel.findSimilarMovies(movieOrSerie)
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
         val width = maxWidth
@@ -277,7 +277,7 @@ fun ShowMovie(navController: NavHostController,
                 {
                     TextField(
                         value = commentText.value,
-                        onValueChange = { moviesOrSeriesViewModel.writeComment(it) },
+                        onValueChange = { visionPlayViewModel.writeComment(it) },
                         textStyle = TextStyle.Default.copy(fontFamily = Constants.FONT_FAMILY, fontSize = 18.sp),
                         placeholder = {
                             Text(text = "Make a comment...",
@@ -294,9 +294,9 @@ fun ShowMovie(navController: NavHostController,
                         ),
                         modifier = Modifier.width(width*0.7f)
                     )
-                    IconButton(onClick = { moviesOrSeriesViewModel.saveComment(movieOrSerie.title, commentText.value)
-                        moviesOrSeriesViewModel.fetchCommentsFromDB(movieOrSerie.title)
-                        moviesOrSeriesViewModel.newComment()})
+                    IconButton(onClick = { visionPlayViewModel.saveComment(movieOrSerie.title, commentText.value)
+                        visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.title)
+                        visionPlayViewModel.newComment()})
                     {
                         Icon(
                             Icons.Default.ArrowCircleUp,
@@ -325,7 +325,7 @@ fun ShowMovie(navController: NavHostController,
                             .height(maxHeight.times(0.08f)),
                         property1 = com.lespsan543.visionplay.cabecera.Property1.Volver,
                         volver = { navController.popBackStack()
-                                   moviesOrSeriesViewModel.changeSelectedMovieOrSerie() }
+                                   visionPlayViewModel.changeSelectedMovieOrSerie() }
                     )
                 },
                 bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
@@ -337,8 +337,8 @@ fun ShowMovie(navController: NavHostController,
                 floatingActionButton = {
                     Guardar(
                         property1 = property,
-                        guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(movieOrSerie) },
-                        eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
+                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieOrSerie) },
+                        eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                     )
                 }
             ) {
@@ -383,7 +383,7 @@ fun ShowMovie(navController: NavHostController,
                             Spacer(modifier = Modifier.height(width * 0.03f))
                             Row {
                                 for (i in 1..5){
-                                    val colorFilter = if (i <= moviesOrSeriesViewModel.calculateVotes(movieOrSerie)){
+                                    val colorFilter = if (i <= visionPlayViewModel.calculateVotes(movieOrSerie)){
                                         Color.White
                                     }else{
                                         Color(25,25,25)
@@ -497,7 +497,7 @@ fun ShowMovie(navController: NavHostController,
                                     movieOrSerie = it,
                                     height = height,
                                     width = width,
-                                    moviesOrSeriesViewModel = moviesOrSeriesViewModel,
+                                    visionPlayViewModel = visionPlayViewModel,
                                     navController = navController)
                             }
                         }

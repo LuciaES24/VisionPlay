@@ -1,19 +1,12 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -22,29 +15,19 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
-import com.lespsan543.visionplay.R
-import com.lespsan543.visionplay.app.data.util.Constants.FONT_FAMILY
 import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.components.CinemaMovie
 import com.lespsan543.visionplay.app.ui.components.YoutubeVideo
-import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
-import com.lespsan543.visionplay.app.ui.viewModel.CinemaViewModel
+import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.cabecera.Cabecera
 import com.lespsan543.visionplay.cabecera.Property1
 import com.lespsan543.visionplay.menu.Menu
@@ -53,18 +36,18 @@ import com.lespsan543.visionplay.menu.Menu
  * Muestra la pantalla de la cartelera, en la que podemos ver las películas que se encuentran en el cine
  *
  * @param navController nos permite realizar la navegación entre pantallas
- * @param cinemaViewModel viewModel del que obtendremos los datos
+ * @param visionPlayViewModel viewModel del que obtendremos los datos
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewModel) {
+fun CinemaScreen(navController: NavHostController, visionPlayViewModel: VisionPlayViewModel) {
     //Lista de películas que se encuentran en el cine actualmente
-    val cineList by cinemaViewModel.cinemaList.collectAsState()
+    val cineList by visionPlayViewModel.cinemaList.collectAsState()
     //Boolean que controla si se debe mostrar el trailer
-    val showTrailer by cinemaViewModel.showTrailer.collectAsState()
+    val showTrailer by visionPlayViewModel.showTrailer.collectAsState()
     //Identificador del trailer que se debe mostrar
-    val trailerId by cinemaViewModel.trailerId.collectAsState()
+    val trailerId by visionPlayViewModel.trailerId.collectAsState()
 
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
@@ -101,7 +84,7 @@ fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewMo
                         CinemaMovie(height = height,
                             width = width,
                             movieOrSerie = movie,
-                            cinemaViewModel = cinemaViewModel)
+                            visionPlayViewModel = visionPlayViewModel)
                     }
                 }
                 Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
@@ -122,8 +105,8 @@ fun CinemaScreen(navController: NavHostController, cinemaViewModel: CinemaViewMo
 
             //Se muestra el trailer si cuando el usuario pulsa sobre una película
             if(showTrailer){
-                Dialog(onDismissRequest = { cinemaViewModel.showMovieTrailer()
-                    cinemaViewModel.resetTrailer()}) {
+                Dialog(onDismissRequest = { visionPlayViewModel.showMovieTrailer()
+                    visionPlayViewModel.resetTrailer()}) {
                     Column(horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center) {
                         if (trailerId!=""){
