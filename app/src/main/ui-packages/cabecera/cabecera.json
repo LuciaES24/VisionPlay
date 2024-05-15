@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "23:336",
-    "version": "5771061611",
+    "version": "5772169809",
     "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
   },
   "default": "Property=Perfil",
@@ -294,11 +294,11 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "130.0"
+                "value": "157.0"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "28.0"
+                "value": "25.0"
               }
             },
             "color": {

@@ -358,7 +358,7 @@ fun VisionPlayPropertyVisionPlay(modifier: Modifier = Modifier) {
         ),
         height = 1.18701171875.em,
         maxLines = -1,
-        modifier = modifier.requiredWidth(130.0.dp).requiredHeight(28.0.dp).wrapContentHeight(
+        modifier = modifier.requiredWidth(157.0.dp).requiredHeight(25.0.dp).wrapContentHeight(
             align = Alignment.CenterVertically,
             unbounded = true
         )
