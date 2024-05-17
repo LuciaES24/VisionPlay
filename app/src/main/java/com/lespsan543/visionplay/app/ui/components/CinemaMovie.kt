@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -58,10 +59,7 @@ fun CinemaMovie(
             modifier = Modifier
                 .height(height * 0.4f)
                 .width(width * 0.35f)
-                .border(
-                    border = BorderStroke(0.dp, color = Color.Transparent),
-                    shape = RoundedCornerShape(5.dp)
-                )
+                .clip(shape = RoundedCornerShape(5.dp))
         )
         Spacer(modifier = Modifier.width(width * 0.05f))
         Column(

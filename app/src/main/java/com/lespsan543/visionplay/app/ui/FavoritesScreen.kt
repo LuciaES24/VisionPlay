@@ -1,9 +1,7 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,7 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CloudDownload
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -66,6 +65,7 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
 
     LaunchedEffect(Unit){
         visionPlayViewModel.fetchFavoritesFromDB()
+        visionPlayViewModel.findUserInDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         Scaffold(
@@ -174,9 +174,7 @@ fun ShowMovieOrSerie(
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(border = BorderStroke(0.dp, color = Color.Transparent),
-                        shape = CutCornerShape(3.dp)
-                    )
+                    .clip(shape = RoundedCornerShape(5.dp))
             )
             Text(text = movieOrSerie.title,
                 fontSize = 18.sp,

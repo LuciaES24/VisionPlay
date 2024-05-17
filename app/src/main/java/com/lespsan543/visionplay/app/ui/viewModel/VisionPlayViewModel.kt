@@ -1,6 +1,5 @@
 package com.lespsan543.visionplay.app.ui.viewModel
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -491,8 +490,9 @@ class VisionPlayViewModel : ViewModel() {
      * Busca al usuario actual en la base de datos
      */
     fun findUserInDB() {
+        val email = auth.currentUser?.email
         firestore.collection("Users")
-            .whereEqualTo("id", FirebaseAuth.getInstance().currentUser?.uid)
+            .whereEqualTo("email", email)
             .addSnapshotListener { querySnapshot, error ->
                 if (error != null) {
                     return@addSnapshotListener

@@ -1,7 +1,6 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -40,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
@@ -167,9 +167,11 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                 visionPlayViewModel.findMovieInList(moviesAndSeriesList[position].title)
                 AsyncImage(model = moviesAndSeriesList[position].poster,
                     contentDescription = "Poster película",
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .height(height)
                         .width(width)
+                        .padding(top = height*0.08f, bottom = height*0.08f)
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
                                 if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){

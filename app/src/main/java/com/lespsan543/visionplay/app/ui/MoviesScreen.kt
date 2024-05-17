@@ -1,7 +1,6 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,7 +25,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.BottomSheetScaffold
@@ -39,6 +37,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleUp
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.material3.CircularProgressIndicator
@@ -60,8 +59,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -74,7 +76,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.R
-import com.lespsan543.visionplay.app.data.util.Constants
+import com.lespsan543.visionplay.app.data.util.Constants.FONT_FAMILY
 import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.components.CommentSection
 import com.lespsan543.visionplay.app.ui.components.SimilarMovieOrSerie
@@ -107,7 +109,7 @@ fun MoviesScreen(
     //Propiedad del botón de guardado
     val property by visionPlayViewModel.propertyButton.collectAsState()
     //Guarda la búsqueda que va a realizar el usuario
-    var userSearch = visionPlayViewModel.userSearch
+    val userSearch = visionPlayViewModel.userSearch
 
     //Se encarga del desplazamiento de las películas al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
@@ -140,7 +142,7 @@ fun MoviesScreen(
                             .height(height.times(0.05f)),
                         shape = RoundedCornerShape(3.dp),
                         containerColor = Color(138,0,0)) {
-                        Text(text = "Películas", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
+                        Text(text = "Películas", color = Color.White, fontSize = 16.sp, fontFamily = FONT_FAMILY)
                     }
                     Spacer(modifier = Modifier.width(10.dp))
                     FloatingActionButton(onClick = { navController.navigate(Routes.SeriesScreen.route) },
@@ -150,7 +152,7 @@ fun MoviesScreen(
                         containerColor = Color(40,40,40),
                         shape = RoundedCornerShape(3.dp)
                     ) {
-                        Text(text = "Series", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
+                        Text(text = "Series", color = Color.White, fontSize = 16.sp, fontFamily = FONT_FAMILY)
                     }
                 }
             }
@@ -159,52 +161,74 @@ fun MoviesScreen(
             if (movieList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
                 visionPlayViewModel.findMovieInList(movieList[moviePosition].title)
-                //OutlinedTextField(value = userSearch, onValueChange = { visionPlayViewModel.writeSearch(it) })
-                AsyncImage(model = movieList[moviePosition].poster,
-                    contentDescription = "Poster película",
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .combinedClickable(enabled = true,
-                            onDoubleClick = {
-                                if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
-                                    visionPlayViewModel.deleteMovieOrSerie()
-                                } else {
-                                    visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition])
-                                }
-                            },
-                            onClick = {
-                                visionPlayViewModel.addSelected(movieList[moviePosition])
-                                navController.navigate(Routes.ShowMovie.route)
-                                visionPlayViewModel.formatTitle(movieList[moviePosition].title)
-                                visionPlayViewModel.changeBottomBar(PropertyBottomBar.Inicio)
-                            })
-                        .offset { IntOffset(offsetX, 0) }
-                        .draggable(
-                            orientation = Orientation.Horizontal,
-                            state = rememberDraggableState { delta ->
-                                offsetX += delta.toInt()
-                            },
-                            onDragStopped = {
-                                if (offsetX < 0) {
-                                    visionPlayViewModel.newMovie()
-                                } else if (offsetX > 0) {
-                                    visionPlayViewModel.lastMovie()
-                                }
-                                offsetX = 0
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = height * 0.07f)
+                ) {
+                    OutlinedTextField(
+                        value = userSearch,
+                        label = { Text(text = "Search", color = Color.White, fontFamily = FONT_FAMILY)},
+                        onValueChange = { visionPlayViewModel.writeSearch(it) },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            disabledBorderColor = Color(138,0,0),
+                            focusedBorderColor = Color(138,0,0),
+                            unfocusedBorderColor = Color(138,0,0),
+                            textColor = Color.White,
+                            disabledTextColor = Color.White,
+                            containerColor = Color(24,24,24)
+                        ),
+                        trailingIcon = {
+                            IconButton(onClick = {  }) {
+                                Icon(imageVector = Icons.Filled.Search, contentDescription = "Search", tint = Color.White)
                             }
-                        )
-                        .border(
-                            border = BorderStroke(0.dp, color = Color.Transparent),
-                            shape = CutCornerShape(3.dp)
-                        )
-                )
-                Guardar(
-                    modifier = Modifier
-                        .padding(start = width*0.10f, top = height*0.85f),
-                    property1 = property,
-                    guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition]) },
-                    eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
-                )
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        shape = RectangleShape
+                    )
+                    AsyncImage(model = movieList[moviePosition].poster,
+                        contentDescription = "Poster película",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(bottom = height*0.08f)
+                            .combinedClickable(enabled = true,
+                                onDoubleClick = {
+                                    if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
+                                        visionPlayViewModel.deleteMovieOrSerie()
+                                    } else {
+                                        visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition])
+                                    }
+                                },
+                                onClick = {
+                                    visionPlayViewModel.addSelected(movieList[moviePosition])
+                                    navController.navigate(Routes.ShowMovie.route)
+                                    visionPlayViewModel.changeBottomBar(PropertyBottomBar.Inicio)
+                                })
+                            .offset { IntOffset(offsetX, 0) }
+                            .draggable(
+                                orientation = Orientation.Horizontal,
+                                state = rememberDraggableState { delta ->
+                                    offsetX += delta.toInt()
+                                },
+                                onDragStopped = {
+                                    if (offsetX < 0) {
+                                        visionPlayViewModel.newMovie()
+                                    } else if (offsetX > 0) {
+                                        visionPlayViewModel.lastMovie()
+                                    }
+                                    offsetX = 0
+                                }
+                            )
+                    )
+                    Guardar(
+                        modifier = Modifier
+                            .padding(start = width*0.10f, top = height*0.85f),
+                        property1 = property,
+                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition]) },
+                        eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
+                    )
+                }
             }else{
                 //Aparece si aún no ha cargado la información de la API
                 Column(
@@ -262,6 +286,7 @@ fun ShowMovie(navController: NavHostController,
         }
     }
     //Comprobamos si la película ya ha sido guardada
+    visionPlayViewModel.formatTitle(movieOrSerie.title)
     visionPlayViewModel.findMovieInList(movieOrSerie.title)
     visionPlayViewModel.getGenresToShow(movieOrSerie)
     visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.title)
@@ -291,11 +316,11 @@ fun ShowMovie(navController: NavHostController,
                     TextField(
                         value = commentText.value,
                         onValueChange = { visionPlayViewModel.writeComment(it) },
-                        textStyle = TextStyle.Default.copy(fontFamily = Constants.FONT_FAMILY, fontSize = 18.sp),
+                        textStyle = TextStyle.Default.copy(fontFamily = FONT_FAMILY, fontSize = 18.sp),
                         placeholder = {
                             Text(text = "Make a comment...",
                             color = Color.White,
-                            fontFamily = Constants.FONT_FAMILY)
+                            fontFamily = FONT_FAMILY)
                                 },
                         colors = TextFieldDefaults.textFieldColors(
                             unfocusedIndicatorColor = Color.White,
@@ -303,7 +328,7 @@ fun ShowMovie(navController: NavHostController,
                             cursorColor = Color.White,
                             textColor = Color.White,
                             disabledTextColor = Color.White,
-                            containerColor = Color(35,35,35)
+                            containerColor = Color(24,24,24)
                         ),
                         modifier = Modifier.width(width*0.7f)
                     )
@@ -336,7 +361,7 @@ fun ShowMovie(navController: NavHostController,
                     Cabecera(
                         modifier = Modifier
                             .height(maxHeight.times(0.08f)),
-                        propertyParam = com.lespsan543.visionplay.cabecera.Property.Volver,
+                        propertyParam = Property.Volver,
                         volver = { navController.popBackStack()
                                    visionPlayViewModel.changeSelectedMovieOrSerie() }
                     )
@@ -375,21 +400,18 @@ fun ShowMovie(navController: NavHostController,
                             contentDescription = "Poster película",
                             modifier = Modifier
                                 .height(height * 0.3f)
-                                .border(
-                                    border = BorderStroke(0.dp, color = Color.Transparent),
-                                    shape = RoundedCornerShape(3.dp)
-                                )
+                                .clip(shape = RoundedCornerShape(5.dp))
                         )
                         Spacer(modifier = Modifier.width(width * 0.03f))
                         Column {
                             Text(text = movieOrSerie.title,
-                                fontFamily = Constants.FONT_FAMILY,
+                                fontFamily = FONT_FAMILY,
                                 textAlign = TextAlign.Justify,
                                 fontSize = 25.sp
                             )
                             Spacer(modifier = Modifier.height(width * 0.03f))
                             Text(text = "Release date: ${movieOrSerie.date}",
-                                fontFamily = Constants.FONT_FAMILY,
+                                fontFamily = FONT_FAMILY,
                                 textAlign = TextAlign.Start,
                                 fontSize = 18.sp
                             )
@@ -412,7 +434,7 @@ fun ShowMovie(navController: NavHostController,
                         }
                     }
                     Text(text = "Overview:",
-                        fontFamily = Constants.FONT_FAMILY,
+                        fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
@@ -423,7 +445,7 @@ fun ShowMovie(navController: NavHostController,
                     )
                     Spacer(modifier = Modifier.height(width * 0.03f))
                     Text(text = movieOrSerie.overview,
-                        fontFamily = Constants.FONT_FAMILY,
+                        fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
                         fontSize = 18.sp,
                         modifier = Modifier.padding(
@@ -433,7 +455,7 @@ fun ShowMovie(navController: NavHostController,
                     )
                     Spacer(modifier = Modifier.height(width * 0.05f))
                     Text(text = "Genres:",
-                        fontFamily = Constants.FONT_FAMILY,
+                        fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
@@ -444,7 +466,7 @@ fun ShowMovie(navController: NavHostController,
                     )
                     Spacer(modifier = Modifier.height(width * 0.03f))
                     Text(text = genres,
-                        fontFamily = Constants.FONT_FAMILY,
+                        fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
                         fontSize = 18.sp,
                         modifier = Modifier.padding(
@@ -454,7 +476,7 @@ fun ShowMovie(navController: NavHostController,
                     )
                     Spacer(modifier = Modifier.height(width * 0.03f))
                     Text(text = "Trailer: ",
-                        fontFamily = Constants.FONT_FAMILY,
+                        fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
@@ -488,12 +510,12 @@ fun ShowMovie(navController: NavHostController,
                      }) {
                         Text(text = "Show comments",
                             color = Color.White,
-                            fontFamily = Constants.FONT_FAMILY,
+                            fontFamily = FONT_FAMILY,
                             fontSize = 20.sp)
                     }
                     Spacer(modifier = Modifier.height(width * 0.1f))
                     Text(text = "Similar: ",
-                        fontFamily = Constants.FONT_FAMILY,
+                        fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
