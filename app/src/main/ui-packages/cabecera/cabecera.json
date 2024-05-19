@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "23:336",
-    "version": "5772169809",
+    "version": "5796474715",
     "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
   },
   "default": "Property=Perfil",
@@ -39,6 +39,14 @@
       {
         "type": "vector",
         "id": "volver"
+      },
+      {
+        "type": "text",
+        "id": "Género"
+      },
+      {
+        "type": "vector",
+        "id": "volver2"
       },
       {
         "type": "text",
@@ -238,11 +246,12 @@
               "bottom": "12.0"
             },
             "arrangement": "row",
-            "main-axis-align": "start",
             "children": [
-              "volver"
+              "volver",
+              "Género",
+              "volver2"
             ],
-            "item-spacing": "10.0",
+            "item-spacing": "72.0",
             "background-color": {
               "alpha": "1.0",
               "hue": "0.0",
@@ -264,6 +273,46 @@
               }
             },
             "vector-content": "volver.svg"
+          },
+          {
+            "id": "Género",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "127.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "25.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "$generoSeleccionado",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "28.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          },
+          {
+            "id": "volver2",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "volver2.svg"
           }
         ]
       },
@@ -334,6 +383,11 @@
       "data-type": "void-callback",
       "required": false,
       "description": ""
+    },
+    "generoSeleccionado": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
     }
   },
   "previews": [
@@ -344,7 +398,8 @@
         "height": 56.0
       },
       "parameters": {
-        "username": "Favorites"
+        "username": "Favorites",
+        "generoSeleccionado": "Género"
       }
     },
     {
@@ -354,7 +409,8 @@
         "height": 56.0
       },
       "parameters": {
-        "username": "Favorites"
+        "username": "Favorites",
+        "generoSeleccionado": "Género"
       }
     },
     {
@@ -364,7 +420,8 @@
         "height": 56.0
       },
       "parameters": {
-        "username": "Favorites"
+        "username": "Favorites",
+        "generoSeleccionado": "Género"
       }
     },
     {
@@ -374,7 +431,8 @@
         "height": 56.0
       },
       "parameters": {
-        "username": "Favorites"
+        "username": "Favorites",
+        "generoSeleccionado": "Género"
       }
     },
     {
@@ -384,7 +442,8 @@
         "height": 56.0
       },
       "parameters": {
-        "username": "Favorites"
+        "username": "Favorites",
+        "generoSeleccionado": "Género"
       }
     }
   ],
