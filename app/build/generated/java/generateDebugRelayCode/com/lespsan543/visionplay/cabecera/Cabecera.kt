@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import com.google.relay.compose.MainAxisAlignment
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerArrangement
 import com.google.relay.compose.RelayContainerScope
@@ -43,6 +42,7 @@ fun Cabecera(
     modifier: Modifier = Modifier,
     propertyParam: Property = Property.Perfil,
     username: String = "",
+    generoSeleccionado: String = "",
     salir: () -> Unit = {},
     volver: () -> Unit = {}
 ) {
@@ -60,6 +60,8 @@ fun Cabecera(
         }
         Property.Volver -> TopLevelPropertyVolver(modifier = modifier) {
             VolverPropertyVolver(volver = volver)
+            GNeroPropertyVolver(generoSeleccionado = generoSeleccionado)
+            Volver2PropertyVolver()
         }
         Property.VisionPlay -> TopLevelPropertyVisionPlay(modifier = modifier) {
             VisionPlayPropertyVisionPlay()
@@ -76,6 +78,7 @@ private fun CabeceraPropertyPerfilPreview() {
                 username = "Favorites",
                 salir = {},
                 volver = {},
+                generoSeleccionado = "Género",
                 propertyParam = Property.Perfil,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -92,6 +95,7 @@ private fun CabeceraPropertyGenresPreview() {
                 username = "Favorites",
                 salir = {},
                 volver = {},
+                generoSeleccionado = "Género",
                 propertyParam = Property.Genres,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -108,6 +112,7 @@ private fun CabeceraPropertyCarteleraPreview() {
                 username = "Favorites",
                 salir = {},
                 volver = {},
+                generoSeleccionado = "Género",
                 propertyParam = Property.Cartelera,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -124,6 +129,7 @@ private fun CabeceraPropertyVolverPreview() {
                 username = "Favorites",
                 salir = {},
                 volver = {},
+                generoSeleccionado = "Género",
                 propertyParam = Property.Volver,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -140,6 +146,7 @@ private fun CabeceraPropertyVisionPlayPreview() {
                 username = "Favorites",
                 salir = {},
                 volver = {},
+                generoSeleccionado = "Género",
                 propertyParam = Property.VisionPlay,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -319,6 +326,38 @@ fun VolverPropertyVolver(
 }
 
 @Composable
+fun GNeroPropertyVolver(
+    generoSeleccionado: String,
+    modifier: Modifier = Modifier
+) {
+    RelayText(
+        content = generoSeleccionado,
+        fontSize = 28.0.sp,
+        fontFamily = kameron,
+        color = Color(
+            alpha = 255,
+            red = 255,
+            green = 255,
+            blue = 255
+        ),
+        height = 1.18701171875.em,
+        maxLines = -1,
+        modifier = modifier.requiredWidth(127.0.dp).requiredHeight(25.0.dp).wrapContentHeight(
+            align = Alignment.CenterVertically,
+            unbounded = true
+        )
+    )
+}
+
+@Composable
+fun Volver2PropertyVolver(modifier: Modifier = Modifier) {
+    RelayVector(
+        vector = painterResource(R.drawable.cabecera_volver2),
+        modifier = modifier.requiredWidth(27.0.dp).requiredHeight(28.0.dp)
+    )
+}
+
+@Composable
 fun TopLevelPropertyVolver(
     modifier: Modifier = Modifier,
     content: @Composable RelayContainerScope.() -> Unit
@@ -330,7 +369,6 @@ fun TopLevelPropertyVolver(
             green = 0,
             blue = 0
         ),
-        mainAxisAlignment = MainAxisAlignment.Start,
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
             start = 14.0.dp,
@@ -338,7 +376,7 @@ fun TopLevelPropertyVolver(
             end = 14.0.dp,
             bottom = 12.0.dp
         ),
-        itemSpacing = 10.0,
+        itemSpacing = 72.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )

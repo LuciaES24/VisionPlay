@@ -10,6 +10,7 @@ color white
 drawable cabecera_salir
 drawable cabecera_salir2
 drawable cabecera_volver
+drawable cabecera_volver2
 drawable comment
 drawable guardar_guardado
 drawable guardar_guardado2
