@@ -4,6 +4,7 @@ import com.lespsan543.visionplay.app.data.model.GenresModel
 import com.lespsan543.visionplay.app.data.model.MovieResponse
 import com.lespsan543.visionplay.app.data.model.SerieResponse
 import com.lespsan543.visionplay.app.data.model.YoutubeResponse
+import com.lespsan543.visionplay.app.data.model.watchProviders.MovieOrSerieProviderResponse
 import com.lespsan543.visionplay.app.data.util.Constants.API_KEY
 import com.lespsan543.visionplay.app.data.util.Constants.BASE_URL
 import com.lespsan543.visionplay.app.data.util.Constants.YOUTUBE_KEY
@@ -52,6 +53,24 @@ class APIService {
      */
     suspend fun getCineMovies(page:Int) : Response<MovieResponse> {
         return retrofitTMDB.create(RetrofitAPI::class.java).getCineMovies(API_KEY, page)
+    }
+
+    /**
+     * Recoge una lista de plataformas en las que se encuentra una película
+     *
+     * @return objeto MovieOrSerieProviderResponse con la información recogida de la API
+     */
+    suspend fun getMovieProvider(movie_id:Int) : Response<MovieOrSerieProviderResponse> {
+        return retrofitTMDB.create(RetrofitAPI::class.java).discoverMoviePlatform(movie_id,API_KEY)
+    }
+
+    /**
+     * Recoge una lista de plataformas en las que se encuentra una serie
+     *
+     * @return objeto MovieOrSerieProviderResponse con la información recogida de la API
+     */
+    suspend fun getSerieProvider(series_id:Int) : Response<MovieOrSerieProviderResponse> {
+        return retrofitTMDB.create(RetrofitAPI::class.java).discoverSeriePlatform(series_id,API_KEY)
     }
 
     /**

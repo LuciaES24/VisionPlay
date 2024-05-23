@@ -4,9 +4,13 @@ import com.lespsan543.visionplay.app.data.model.MovieModel
 import com.lespsan543.visionplay.app.data.model.MovieResponse
 import com.lespsan543.visionplay.app.data.model.SerieModel
 import com.lespsan543.visionplay.app.data.model.SerieResponse
+import com.lespsan543.visionplay.app.data.model.watchProviders.CountryResponse
+import com.lespsan543.visionplay.app.data.model.watchProviders.MovieOrSerieProviderModel
 import com.lespsan543.visionplay.app.data.util.Constants.BASE_URL_IMG
+import com.lespsan543.visionplay.app.ui.states.MovieOrSerieProviderState
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieResponseState
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
+import com.lespsan543.visionplay.app.ui.states.ProviderState
 
 /**
  * Repositorio encargado de la comunicación y transformación de datos obtenidos de la API
@@ -118,6 +122,60 @@ class AppRepository {
             id = response.body()?.items?.get(0)?.id?.videoId.toString()
         }
         return id
+    }
+
+    /**
+     * Realiza una búsqueda de las plataformas en las que se encuentra una película
+     *
+     * @return modelo de datos con la lista de plataformas obtenida
+     */
+    suspend fun getMovieProvider(movie_id: Int): ProviderState {
+        val response = apiService.getMovieProvider(movie_id)
+        var result = ProviderState()
+        if (response.isSuccessful){
+            result = response.body()!!.results.toProviderState()
+        }
+        return result
+    }
+
+    /**
+     * Realiza una búsqueda de las plataformas en las que se encuentra una serie
+     *
+     * @return modelo de datos con la lista de plataformas obtenida
+     */
+    suspend fun getSerieProvider(series_id: Int): ProviderState {
+        val response = apiService.getSerieProvider(series_id)
+        var result = ProviderState()
+        if (response.isSuccessful && response.body() != null){
+            result = response.body()!!.results.toProviderState()
+        }
+        return result
+    }
+
+    /**
+     * Función de extensión que transforma el modelo de datos al estado
+     *
+     * @return estado con los datos de búsqueda de las plataformas donde ver una película o serie
+     */
+    private fun CountryResponse.toProviderState() : ProviderState{
+        val platforms = (this.result.buy ?: emptyList()) + (this.result.flatrate?: emptyList()) + (this.result.rent?: emptyList())
+        val distinctPlatforms = platforms.distinct()
+        return ProviderState(
+            providerList = distinctPlatforms.map { it.toMovieOrSerieProviderState() }
+        )
+    }
+
+    /**
+     * Función de extensión que transforma el modelo de datos al estado
+     *
+     * @return estado con los datos de búsqueda de la plataforma donde ver una película o serie
+     */
+    private fun MovieOrSerieProviderModel.toMovieOrSerieProviderState() : MovieOrSerieProviderState{
+        return MovieOrSerieProviderState(
+            logo = BASE_URL_IMG + this.logo,
+            provider_id = this.provider_id,
+            provider_name = this.provider_name
+        )
     }
 
     /**

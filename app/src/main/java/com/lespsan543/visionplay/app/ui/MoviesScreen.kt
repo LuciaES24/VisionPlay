@@ -64,7 +64,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -74,8 +76,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter
-import coil.compose.rememberAsyncImagePainter
 import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.util.Constants.FONT_FAMILY
@@ -164,87 +164,73 @@ fun MoviesScreen(
             if (movieList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
                 visionPlayViewModel.findMovieInList(movieList[moviePosition].title)
-                val painter = rememberAsyncImagePainter(movieList[moviePosition])
-                if (painter.state is AsyncImagePainter.State.Loading){
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxSize()) {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .height(height * 0.5f)
-                                .width(width * 0.5f)
-                        )
-                    }
-                }else{
-                    Column(modifier = Modifier
-                        .fillMaxSize()
-                        .padding(top = height * 0.07f)
-                    ) {
-                        OutlinedTextField(
-                            value = userSearch,
-                            label = { Text(text = "Search", color = Color.White, fontFamily = FONT_FAMILY)},
-                            onValueChange = { visionPlayViewModel.writeSearch(it) },
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                disabledBorderColor = Color(138,0,0),
-                                focusedBorderColor = Color(138,0,0),
-                                unfocusedBorderColor = Color(138,0,0),
-                                textColor = Color.White,
-                                disabledTextColor = Color.White,
-                                containerColor = Color(24,24,24)
-                            ),
-                            trailingIcon = {
-                                IconButton(onClick = {  }) {
-                                    Icon(imageVector = Icons.Filled.Search, contentDescription = "Search", tint = Color.White)
-                                }
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            shape = RectangleShape
-                        )
-                        AsyncImage(model = painter,
-                            contentDescription = "Poster película",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(bottom = height * 0.08f)
-                                .combinedClickable(enabled = true,
-                                    onDoubleClick = {
-                                        if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
-                                            visionPlayViewModel.deleteMovieOrSerie()
-                                        } else {
-                                            visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition])
-                                        }
-                                    },
-                                    onClick = {
-                                        visionPlayViewModel.addSelected(movieList[moviePosition])
-                                        navController.navigate(Routes.ShowMovie.route)
-                                        visionPlayViewModel.changeBottomBar(PropertyBottomBar.Inicio)
-                                    })
-                                .offset { IntOffset(offsetX, 0) }
-                                .draggable(
-                                    orientation = Orientation.Horizontal,
-                                    state = rememberDraggableState { delta ->
-                                        offsetX += delta.toInt()
-                                    },
-                                    onDragStopped = {
-                                        if (offsetX < 0) {
-                                            visionPlayViewModel.newMovie()
-                                        } else if (offsetX > 0) {
-                                            visionPlayViewModel.lastMovie()
-                                        }
-                                        offsetX = 0
+                Column(modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = height * 0.07f)
+                ) {
+                    OutlinedTextField(
+                        value = userSearch,
+                        label = { Text(text = "Search", color = Color.White, fontFamily = FONT_FAMILY)},
+                        onValueChange = { visionPlayViewModel.writeSearch(it) },
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            disabledBorderColor = Color(138,0,0),
+                            focusedBorderColor = Color(138,0,0),
+                            unfocusedBorderColor = Color(138,0,0),
+                            textColor = Color.White,
+                            disabledTextColor = Color.White,
+                            containerColor = Color(24,24,24)
+                        ),
+                        trailingIcon = {
+                            IconButton(onClick = {  }) {
+                                Icon(imageVector = Icons.Filled.Search, contentDescription = "Search", tint = Color.White)
+                            }
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        shape = RectangleShape
+                    )
+                    AsyncImage(model = movieList[moviePosition].poster,
+                        contentDescription = "Poster película",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(bottom = height * 0.08f)
+                            .combinedClickable(enabled = true,
+                                onDoubleClick = {
+                                    if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
+                                        visionPlayViewModel.deleteMovieOrSerie()
+                                    } else {
+                                        visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition])
                                     }
-                                )
-                        )
-                        Guardar(
-                            modifier = Modifier
-                                .padding(start = width*0.10f, top = height*0.85f),
-                            property1 = property,
-                            guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition]) },
-                            eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
-                        )
-                    }
+                                },
+                                onClick = {
+                                    visionPlayViewModel.addSelected(movieList[moviePosition])
+                                    navController.navigate(Routes.ShowMovie.route)
+                                    visionPlayViewModel.changeBottomBar(PropertyBottomBar.Inicio)
+                                })
+                            .offset { IntOffset(offsetX, 0) }
+                            .draggable(
+                                orientation = Orientation.Horizontal,
+                                state = rememberDraggableState { delta ->
+                                    offsetX += delta.toInt()
+                                },
+                                onDragStopped = {
+                                    if (offsetX < 0) {
+                                        visionPlayViewModel.newMovie()
+                                    } else if (offsetX > 0) {
+                                        visionPlayViewModel.lastMovie()
+                                    }
+                                    offsetX = 0
+                                }
+                            )
+                    )
+                    Guardar(
+                        modifier = Modifier
+                            .padding(start = width*0.10f, top = height*0.85f),
+                        property1 = property,
+                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition]) },
+                        eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
+                    )
                 }
             }else {
                 //Aparece si aún no ha cargado la información de la API
@@ -270,7 +256,9 @@ fun MoviesScreen(
  * @param visionPlayViewModel viewModel del que obtendremos los datos
  */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RememberReturnType")
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class
+)
 @Composable
 fun ShowMovie(navController: NavHostController,
               visionPlayViewModel: VisionPlayViewModel
@@ -291,6 +279,14 @@ fun ShowMovie(navController: NavHostController,
     val similar = visionPlayViewModel.similarMovies.collectAsState()
     //Propiedad del menú dependiendo de la pantalla en la que se encontraba anteriormente
     val propertyBottomBar = visionPlayViewModel.propertyBottomBar.collectAsState()
+    //Lista de plataformas en las que se encuentra la película o serie seleccionada
+    val providerList by visionPlayViewModel.providerList.collectAsState()
+    //Se encarga de abrir el enlace que se le proporcione
+    val uriHandler = LocalUriHandler.current
+    //Enlace a la plataforma seleccionada
+    val platformLink by visionPlayViewModel.platformLink.collectAsState()
+
+    val context = LocalContext.current
 
     //Variables para el manejo de la sección de comentarios
     val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
@@ -302,12 +298,18 @@ fun ShowMovie(navController: NavHostController,
             visionPlayViewModel.resetTrailer()
         }
     }
-    //Comprobamos si la película ya ha sido guardada
+    //Buscamos el trailer de la película o serie
     visionPlayViewModel.formatTitle(movieOrSerie.title)
+    //Comprobamos si la película o serie ya ha sido guardada
     visionPlayViewModel.findMovieInList(movieOrSerie.title)
+    //Buscamos los géneros de la película o serie
     visionPlayViewModel.getGenresToShow(movieOrSerie)
+    //Buscamos los comentarios de la película o serie seleccionada
     visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.title)
+    //Buscamos las películas y series similares a la seleccionada
     visionPlayViewModel.findSimilarMovies(movieOrSerie)
+    //Buscamos las plataformas en las que se encuentra la película o serie
+    visionPlayViewModel.getWatchProvider(movieOrSerie)
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
         val width = maxWidth
@@ -380,7 +382,7 @@ fun ShowMovie(navController: NavHostController,
                             .height(maxHeight.times(0.08f)),
                         propertyParam = Property.Volver,
                         volver = { navController.popBackStack()
-                                   visionPlayViewModel.changeSelectedMovieOrSerie() }
+                                   visionPlayViewModel.changeSelectedMovieOrSerie()}
                     )
                 },
                 bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
@@ -491,7 +493,7 @@ fun ShowMovie(navController: NavHostController,
                             end = width * 0.05f
                         )
                     )
-                    Spacer(modifier = Modifier.height(width * 0.03f))
+                    Spacer(modifier = Modifier.height(width * 0.07f))
                     Text(text = "Trailer: ",
                         fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
@@ -506,6 +508,41 @@ fun ShowMovie(navController: NavHostController,
                     if (trailerId!=""){
                         YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
                         Spacer(modifier = Modifier.height(width * 0.07f))
+                    }
+                    Spacer(modifier = Modifier.height(width * 0.03f))
+                    Text(text = "Platforms: ",
+                        fontFamily = FONT_FAMILY,
+                        textAlign = TextAlign.Justify,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(
+                            start = width * 0.05f,
+                            end = width * 0.05f
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(width * 0.03f))
+                    if (providerList.isNotEmpty()){
+                        LazyRow (modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                start = width * 0.05f,
+                                end = width * 0.05f
+                            ))
+                        {
+                            items(providerList){ provider ->
+                                AsyncImage(model = provider.logo,
+                                    contentDescription = "Poster película",
+                                    modifier = Modifier
+                                        .size(height * 0.07f)
+                                        .clip(shape = RoundedCornerShape(13.dp))
+                                        .combinedClickable(enabled = true,
+                                            onClick = {
+                                                visionPlayViewModel.clickWatchProvider(provider, context)
+                                            })
+                                )
+                                Spacer(modifier = Modifier.width(width * 0.02f))
+                            }
+                        }
                     }
                     Spacer(modifier = Modifier.height(width * 0.05f))
                     Button(modifier = Modifier

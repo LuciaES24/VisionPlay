@@ -134,6 +134,8 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
     val position by visionPlayViewModel.searchByGenrePosition.collectAsState()
     //Propiedad del botón de guardado
     val property by visionPlayViewModel.propertyButton.collectAsState()
+    //Género a mostrar si se accede desde la pantalla de géneros
+    val selectedGenreText by visionPlayViewModel.selectedGenreText.collectAsState()
 
     //Se encarga del desplazamiento de las películas o series al deslizar
     var offsetX by remember { mutableIntStateOf(0) }
@@ -157,7 +159,8 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                         .height(maxHeight.times(0.08f)),
                     com.lespsan543.visionplay.cabecera.Property.Volver,
                     volver = { navController.navigate(Routes.SearchGenres.route)
-                               visionPlayViewModel.reset()}
+                               visionPlayViewModel.reset()},
+                    generoSeleccionado = selectedGenreText
                 )
             }
         ) {

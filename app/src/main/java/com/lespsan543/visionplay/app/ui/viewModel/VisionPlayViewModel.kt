@@ -1,5 +1,8 @@
 package com.lespsan543.visionplay.app.ui.viewModel
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -11,13 +14,16 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.lespsan543.visionplay.app.data.model.CommentModel
 import com.lespsan543.visionplay.app.data.model.UserModel
+import com.lespsan543.visionplay.app.domain.DiscoverMovieProviderUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
+import com.lespsan543.visionplay.app.domain.DiscoverSerieProviderUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSimilarMoviesUseCase
 import com.lespsan543.visionplay.app.domain.GetCinemaUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetTrailerUseCase
+import com.lespsan543.visionplay.app.ui.states.MovieOrSerieProviderState
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.guardar.Property1
 import com.lespsan543.visionplay.menu.PropertyBottomBar
@@ -66,6 +72,10 @@ class VisionPlayViewModel : ViewModel() {
     private val getCinemaUseCase = GetCinemaUseCase()
 
     private val getSimilarMoviesUseCase = DiscoverSimilarMoviesUseCase()
+
+    private val discoverMovieProviderUseCase = DiscoverMovieProviderUseCase()
+
+    private val discoverSerieProviderUseCase = DiscoverSerieProviderUseCase()
 
     var email by mutableStateOf("")
         private set
@@ -138,6 +148,9 @@ class VisionPlayViewModel : ViewModel() {
 
     private var _actualGenre = MutableStateFlow("")
 
+    private var _selectedGenreText = MutableStateFlow("")
+    var selectedGenreText : StateFlow<String> = _selectedGenreText
+
     private var _searchByGenrePosition = MutableStateFlow(0)
     var searchByGenrePosition : StateFlow<Int> = _searchByGenrePosition
 
@@ -145,6 +158,12 @@ class VisionPlayViewModel : ViewModel() {
 
     private var _propertyBottomBar = MutableStateFlow(PropertyBottomBar.Inicio)
     var propertyBottomBar : StateFlow<PropertyBottomBar> = _propertyBottomBar
+
+    private var _providerList = MutableStateFlow<List<MovieOrSerieProviderState>>(emptyList())
+    var providerList : StateFlow<List<MovieOrSerieProviderState>> = _providerList
+
+    private var _platformLink = MutableStateFlow("")
+    var platformLink : StateFlow<String> = _platformLink
 
     var userSearch by mutableStateOf("")
         private set
@@ -234,6 +253,21 @@ class VisionPlayViewModel : ViewModel() {
     private fun getAllSeries(page:Int){
         viewModelScope.launch(Dispatchers.IO) {
             _serieList.value = discoverSeriesUseCase.invoke(page).results
+        }
+    }
+
+    /**
+     * Busca las plataformas en las que se encuentra una película o serie
+     */
+    fun getWatchProvider(movieOrSerie: MovieOrSerieState){
+        if (movieOrSerie.type == "Serie"){
+            viewModelScope.launch {
+                _providerList.value = discoverSerieProviderUseCase.invoke(movieOrSerie.idAPI).providerList
+            }
+        }else{
+            viewModelScope.launch {
+                _providerList.value = discoverMovieProviderUseCase.invoke(movieOrSerie.idAPI).providerList
+            }
         }
     }
 
@@ -356,6 +390,7 @@ class VisionPlayViewModel : ViewModel() {
         for ((key, value ) in _genres.value){
             if (genre == value){
                 _actualGenre.value = key
+                _selectedGenreText.value = value
                 break
             }
         }
@@ -743,10 +778,12 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Reinicia el número de página de la API y la posición al cambiar de género
+     * Reinicia la posición al cambiar de género y el género seleccionado
      */
     fun reset(){
         _searchByGenrePosition.value = 0
+        _selectedGenreText.value = ""
+        _actualGenre.value = ""
     }
 
     /**
@@ -868,5 +905,83 @@ class VisionPlayViewModel : ViewModel() {
      */
     fun writeSearch(search:String){
         this.userSearch = search
+    }
+
+    fun clickWatchProvider(provier: MovieOrSerieProviderState, context: Context){
+        when(provier.provider_name){
+            "Disney Plus" -> _platformLink.value = "https://www.disneyplus.com/es-es"
+            "Netflix" -> _platformLink.value = "https://www.netflix.com/es/"
+            "Amazon Prime Video" -> _platformLink.value = "https://www.primevideo.com/-/es/offers/nonprimehomepage/ref=atv_hom_offers_c_9zZ8D2_hom?language=es"
+            "fuboTV" -> _platformLink.value = "https://www.fubo.tv/stream/latino-es/"
+            "Apple TV" -> _platformLink.value = "https://tv.apple.com/es"
+            "Apple TV Plus" -> _platformLink.value = "https://www.apple.com/es/apple-tv-plus/"
+            "Filmin" -> _platformLink.value = "https://www.filmin.es/?utm_medium=Email&utm_source=Borrador%20NdP%202"
+            "Filmin Plus" -> _platformLink.value = "https://www.filmin.es/?utm_medium=Email&utm_source=Borrador%20NdP%202"
+            "SkyShowtime" -> _platformLink.value = "https://www.skyshowtime.com/es?lid=wycodr8y54th&market=es&LoB=sst&Channel=sea&Platform=gad&Mobj=acq&campaign_name=23q1aomulti&Campaign_ID=71700000105085578&Placement_ID=na&Creative_ID=na&dispatch_id=na&datena&gad_source=1&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz1_Qg3_TWDhIxpxiCf6PwsWvuwCKpHcT7ysCSZr7RTV1lwCeQPLMm1YaAo62EALw_wcB&gclsrc=aw.ds"
+            "Movistar Plus" -> _platformLink.value = "https://ver.movistarplus.es/?id_perfil=OTT&suscripcion=UT-UTE0H,UT-UTXC0,UT-UTXIG,UT-UTXIH,UT-UTXIJ,UT-UTXIW&promo=PRFICC&ui=FICCIO&demarcation=15"
+            "HBO Max" -> _platformLink.value = "https://www.max.com/es/es"
+            "Rakuten TV" -> _platformLink.value = "https://www.rakuten.tv/es"
+            "Atres Player" -> _platformLink.value = "https://www.atresplayer.com/"
+            "Google Play Movies" -> _platformLink.value = "https://play.google.com/store/movies?hl=es&gl=US&pli=1"
+            "Microsoft Store" -> _platformLink.value = "https://www.microsoft.com/es-ad/store/b/home"
+            "MUBI" -> _platformLink.value = "https://mubi.com/es/es"
+            "GuideDoc" -> _platformLink.value = "https://guidedoc.tv/"
+            "YouTube Premium" -> _platformLink.value = "https://www.youtube.com/premium?ybp=Sg0IBhIJdW5saW1pdGVk4AEB"
+            "FlixOlé" -> _platformLink.value = "https://flixole.com/"
+            "Curiosity Stream" -> _platformLink.value = "https://curiositystream.com/es?utm_source=google&utm_medium=cpc&utm_campaign={campaign}&utm_content=659044019910&utm_term=curiosity%20stream&utm_campaign={campaign}&utm_medium=cpc&utm_source=google&utm_content=659044019910&utm_term=curiosity%20stream&gad_source=1&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz1_wXmeyUhtwNMibIWobJEHPz0jIzZmsu8hVrHzv6sWKylsHR-9WRBsaAjlMEALw_wcB"
+            "Mitele" -> _platformLink.value = "https://www.mitele.es/"
+            "DOCSVILLE" -> _platformLink.value = "https://www.docsville.com/"
+            "Spamflix" -> _platformLink.value = "https://spamflix.com/home.do"
+            "rtve" -> _platformLink.value = "https://www.rtve.es/"
+            "Plex" -> _platformLink.value = "https://www.plex.tv/es/"
+            "WOW Presents Plus" -> _platformLink.value = "https://es.wowpresentsplus.com/?utm_source=google.com&utm_medium=organic"
+            "Magellan TV" -> _platformLink.value = "https://www.magellantv.com/featured"
+            "BroadwayHD" -> _platformLink.value = "https://www.broadwayhd.com/"
+            "Filmzie" -> _platformLink.value = "https://filmzie.com/home"
+            "Dekkoo" -> _platformLink.value = "https://www.dekkoo.com/"
+            "True Story" -> _platformLink.value = "https://www.truestory.film/"
+            "DocAlliance Films" -> _platformLink.value = "https://www.docalliance.org/"
+            "Hoichoi" -> _platformLink.value = "https://www.hoichoi.tv/"
+            "Amazon Video" -> _platformLink.value = "https://www.primevideo.com/offers/nonprimehomepage/ref=dvm_pds_amz_ES_lb_s_g_mkw_sygw97QF2-dc_pcrid_637462221524?gclid=Cj0KCQjwjLGyBhCYARIsAPqTz193XrZP2Q43fNdH7ejpVZhU2IpB3PIIkDgHj8UFgweWQLXsXVkmaN8aAndnEALw_wcB&mrntrk=slid__pgrid_84338514223_pgeo_1005444_x__adext__ptid_kwd-297838409925"
+            "Pluto TV" -> _platformLink.value = "https://pluto.tv/es/live-tv/65786a1ccbd0d60008f7e2a9?lang=en"
+            "Eventive" -> _platformLink.value = "https://eventive.org/"
+            "MUBI Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=mubies&ref_=DVM_PDS_CHN_ES_mi_C_mkw_s0sPBvTrG-dc_pcrid_658404667329&mrntrk=slid__pgrid_146344738942_pgeo_1005444_x__adext__ptid_kwd-308010117976&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz19_0g8lj50isY_Hwj5oyAzjJY5O9K4jldipKtoYm5xHUaWcmgIeZR0aAmCAEALw_wcB"
+            "OUTtv Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=outtves&ref_=DVM_PDS_CHN_ES_mi_C_mkw_shw2sIq6l-dc_pcrid_658404667335&mrntrk=slid__pgrid_146344739022_pgeo_1005444_x__adext__ptid_kwd-758826826305&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz1_z7fkp40kgXsA8LxMgbnyz_EMg0chT6aZuZiDuDfthVB8WY4PFTRkaAmQvEALw_wcB"
+            "AcornTV Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/ref=atv_nb_lcl_zh_CN?ref=dvm_pds_chn_ca_dc_c_g%7Cm_8A0RKmYrc_c353290793170&benefitId=acorntvca&ie=UTF8&language=es_ES&gclid=EAIaIQobChMIwPu5t4qs3AIVAQAAAB0BAAAAEAAYACAAEgJVzfD_BwE"
+            "MGM Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/ref=atv_nb_lcl_es_ES?benefitId=mgmfr&ref=DVM_PDS_PDS_FR_SB_C__469782380371__m&language=es_ES&ie=UTF8"
+            "FlixOlé Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=flixolees&ref_=DVM_PDS_CHN_ES_mi_C_mkw_sbcwuo5ih-dc_pcrid_638885515625&mrntrk=slid__pgrid_143367867999_pgeo_1005444_x__adext__ptid_kwd-1927779810393&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz1_coge5grsmh5RtMlZEIB_vX_wodpPZQK-yJVGr1WUhh9i-V6NnQlIaAmNkEALw_wcB"
+            "TVCortos Amazon Channel" -> _platformLink.value = "https://shorts.tv/es/tv"
+            "Cultpix" -> _platformLink.value = "https://www.cultpix.com/movies/Films%20Free%20to%20View%20for%20All"
+            "FilmBox+" -> _platformLink.value = "https://www.filmbox.com/int/home?locale=en-US"
+            "Acontra Plus" -> _platformLink.value = "https://acontraplus.com/"
+            "Planet Horror Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=planethorrores&ref_=DVM_PDS_CHN_ES_mi_C_mkw_s0ihOivA8-dc_pcrid_658404667341&mrntrk=slid__pgrid_146344739222_pgeo_1005444_x__adext__ptid_kwd-1927779811873&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz191zq8b0nzmuaW9eIYLmmvEzZylFMueWTET3JMtrk882VnbSgQB-jsaArcXEALw_wcB"
+            "Dizi Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=dizies&ref_=DVM_PDS_CHN_ES_mi_C_mkw_smTwCDK5e-dc_pcrid_658404667182&mrntrk=slid__pgrid_146344738222_pgeo_1005444_x__adext__ptid_kwd-624685590644&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz194v8TARPOGbevgnWGbVmG9EN-RpeJ3126lt6zcFWnRu-Icb6DK2ZMaAh1TEALw_wcB"
+            "Acontra Plus Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=acontraes&ref_=DVM_PDS_CHN_ES_mi_C_mkw_soRKmT4Ka-dc_pcrid_638885515622&mrntrk=slid__pgrid_143367867839_pgeo_1005444_x__adext__ptid_kwd-1927779808513&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz1_xUpMnTMRQiT3XSdWmzQP6-_5YkWlZ9yL9MwLo5rRIUfiMehTz9I4aAnPdEALw_wcB"
+            "Historia y Actualidad Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=historiaes&ref_=DVM_PDS_CHN_ES_mi_C_mkw_sTajwB6fy-dc_pcrid_658404667194&mrntrk=slid__pgrid_146344738502_pgeo_1005444_x__adext__ptid_kwd-1927779810633&gclid=Cj0KCQjwjLGyBhCYARIsAPqTz19KyKjmXkq5rD_39On1K2CuttIZ0vY0HluXNo9iR3Q5T-MCwHa-b8saAouaEALw_wcB"
+            "Takflix" -> _platformLink.value = "https://takflix.com/uk"
+            "Sun Nxt" -> _platformLink.value = "https://www.sunnxt.com/"
+            "Classix" -> _platformLink.value = "https://www.classixapp.com/"
+            "Netflix basic with Ads" -> _platformLink.value = "https://www.netflix.com/es/"
+            "Tivify" -> _platformLink.value = "https://www.tivify.es/es/"
+            "Runtime" -> _platformLink.value = "https://www.runtime.tv/"
+            "Crunchyroll" -> _platformLink.value = "https://www.crunchyroll.com/es/"
+            "AMC+ Amazon Channel" -> _platformLink.value = "https://www.amazon.com/-/es/gp/video/offers?benefitId=amcplus"
+            "Love Nature Amazon Channel" -> _platformLink.value = "https://www.amazon.com/gp/video/storefront/ref=dvah?benefitId=lovenatureca&node=2858778011"
+            "Shahid VIP" -> _platformLink.value = "https://shahid.mbc.net/en"
+            "Acorn TV Apple TV" -> _platformLink.value = "https://tv.apple.com/es/room/acorn-tv/edt.item.62914943-2c47-472c-ae22-934f48436969?ctx_brand=tvs.sbd.1000383"
+            "AMC Plus Apple TV Channel " -> _platformLink.value = "https://tv.apple.com/us/room/amc/edt.item.5f47e242-dc79-470a-b936-f61eaae0a028"
+            "Kocowa" -> _platformLink.value = "https://www.kocowa.com/es_es/guide"
+            "Chili" -> _platformLink.value = "https://es.chili.com/"
+            "Hayu" -> _platformLink.value = "https://get.hayu.com/welcome?geo=ES&gad_source=1&gclid=Cj0KCQjw0ruyBhDuARIsANSZ3wo92TAQoNttoKPZjKg6aIzCnql-bvPkLz6hZVa8_Ni8xiy76v0TmfsaArCgEALw_wcB&gclsrc=aw.ds"
+            "Discovery+" -> _platformLink.value = "https://www.discoveryplus.com/es/"
+            "Hayu Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=hayues&ref_=DVM_PDS_CHN_ES_mi_C_mkw_sO2tY5O86-dc_pcrid_658404667191&mrntrk=slid__pgrid_146344738462_pgeo_1005444_x__adext__ptid_kwd-307930840022&gclid=Cj0KCQjw0ruyBhDuARIsANSZ3woaKK-2TXL76549AM8l-AJJWn0dDoY9i0UF6VuxX2Bla6G1VWg0IIoaAg97EALw_wcB"
+            "Noggin Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/ref=atv_nb_lcl_es_ES?benefitId=nogginfr&language=es_ES&ie=UTF8"
+            "Pash Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=pashes&ref_=DVM_PDS_CHN_ES_mi_C_mkw_sO3G5Ez3N-dc_pcrid_658404667338&mrntrk=slid__pgrid_146344739182_pgeo_1005444_x__adext__ptid_kwd-570999103429&gclid=Cj0KCQjw0ruyBhDuARIsANSZ3wof_ok2Zrzq-coSpgavlaKPh3S-qb9Imk31tfDq6vCHB_0t-r_A4wMaAkfjEALw_wcB"
+            "Hopster Amazon Channel" -> _platformLink.value = "https://www.primevideo.com/offers/?benefitId=hopsteres&ref_=DVM_PDS_CHN_ES_mi_C_mkw_sKS8cV5Mi-dc_pcrid_658404667197&mrntrk=slid__pgrid_146344738542_pgeo_1005444_x__adext__ptid_kwd-307975369100&gclid=Cj0KCQjw0ruyBhDuARIsANSZ3woIInp1rn0T8gQTOfBqrTx_rq_q0fQ11ifal9hIguNm1Blxi2oeG2QaArqMEALw_wcB"
+            "Noggin Apple TV Channel" -> _platformLink.value = "https://tv.apple.com/us/show/noggin-knows/umc.cmc.13fruiqc3rpcotwyipmhq0uve"
+
+        }
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(_platformLink.value))
+        context.startActivity(intent)
     }
 }
