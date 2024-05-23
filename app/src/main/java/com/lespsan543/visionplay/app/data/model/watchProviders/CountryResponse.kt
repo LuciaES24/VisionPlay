@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class CountryResponse(
     @SerializedName("ES")
-    var result : TypesModel
+    var result : TypesModel? = null
 )

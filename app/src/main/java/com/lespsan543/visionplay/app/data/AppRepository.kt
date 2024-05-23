@@ -158,7 +158,8 @@ class AppRepository {
      * @return estado con los datos de búsqueda de las plataformas donde ver una película o serie
      */
     private fun CountryResponse.toProviderState() : ProviderState{
-        val platforms = (this.result.buy ?: emptyList()) + (this.result.flatrate?: emptyList()) + (this.result.rent?: emptyList())
+        val platforms = (this.result?.buy ?: emptyList()) + (this.result?.flatrate ?: emptyList()) + (this.result?.rent
+            ?: emptyList())
         val distinctPlatforms = platforms.distinct()
         return ProviderState(
             providerList = distinctPlatforms.map { it.toMovieOrSerieProviderState() }
