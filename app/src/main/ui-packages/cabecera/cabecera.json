@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "23:336",
-    "version": "5796474715",
+    "version": "5843595367",
     "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
   },
   "default": "Property=Perfil",
@@ -251,7 +251,7 @@
               "Género",
               "volver2"
             ],
-            "item-spacing": "72.0",
+            "item-spacing": "70.0",
             "background-color": {
               "alpha": "1.0",
               "hue": "0.0",
@@ -279,11 +279,11 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "127.0"
+                "value": "151.0"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "25.0"
+                "value": "27.0"
               }
             },
             "color": {

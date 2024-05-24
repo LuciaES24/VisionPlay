@@ -4,23 +4,6 @@
             "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values/values.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\src\\main\\res\\values\\themes.xml",
-                    "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "59",
-                        "endColumns": "87",
-                        "endOffsets": "142"
-                    },
-                    "to": {
-                        "startLines": "204",
-                        "startColumns": "4",
-                        "startOffsets": "13856",
-                        "endColumns": "86",
-                        "endOffsets": "13938"
-                    }
-                },
-                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bbd9c4ab6d8ff5b1c8e654d15cd59ed6\\transformed\\navigation-common-2.7.5\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,15,21,27,30",
@@ -40,23 +23,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "17",
-                        "endColumns": "47",
-                        "endOffsets": "60"
-                    },
-                    "to": {
-                        "startLines": "124",
-                        "startColumns": "4",
-                        "startOffsets": "7630",
-                        "endColumns": "47",
-                        "endOffsets": "7673"
-                    }
-                },
-                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\22dac88c5d6580f6592572430df8a2fc\\transformed\\material3-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4",
@@ -71,23 +37,6 @@
                         "startOffsets": "8308,10924,11026",
                         "endColumns": "47,43,45",
                         "endOffsets": "8351,10963,11067"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,136,240,348,468,568",
-                        "endColumns": "80,103,107,119,99,76",
-                        "endOffsets": "131,235,343,463,563,640"
-                    },
-                    "to": {
-                        "startLines": "162,163,164,165,166,173",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "11287,11368,11472,11580,11700,12098",
-                        "endColumns": "80,103,107,119,99,76",
-                        "endOffsets": "11363,11467,11575,11695,11795,12170"
                     }
                 },
                 {
@@ -122,6 +71,40 @@
                         "startOffsets": "7409,9396",
                         "endColumns": "67,166",
                         "endOffsets": "7472,9558"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,136,240,348,468,568",
+                        "endColumns": "80,103,107,119,99,76",
+                        "endOffsets": "131,235,343,463,563,640"
+                    },
+                    "to": {
+                        "startLines": "162,163,164,165,166,173",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "11287,11368,11472,11580,11700,12098",
+                        "endColumns": "80,103,107,119,99,76",
+                        "endOffsets": "11363,11467,11575,11695,11795,12170"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\themes.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "56",
+                        "endColumns": "87",
+                        "endOffsets": "139"
+                    },
+                    "to": {
+                        "startLines": "204",
+                        "startColumns": "4",
+                        "startOffsets": "13856",
+                        "endColumns": "86",
+                        "endOffsets": "13938"
                     }
                 },
                 {
@@ -250,6 +233,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "7,2,3,4,5,6,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "286,55,102,149,196,241,328",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "323,97,144,191,236,281,365"
+                    },
+                    "to": {
+                        "startLines": "6,23,24,25,26,27,28",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "431,1656,1703,1750,1797,1842,1887",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "468,1698,1745,1792,1837,1882,1924"
+                    }
+                },
+                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\784c6a386847cb445c00032eeeca6965\\transformed\\customview-poolingcontainer-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3",
@@ -283,6 +283,23 @@
                         "endLines": "97,216,491,494",
                         "endColumns": "52,24,24,24",
                         "endOffsets": "6176,14526,25598,25713"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "16",
+                        "endColumns": "47",
+                        "endOffsets": "59"
+                    },
+                    "to": {
+                        "startLines": "124",
+                        "startColumns": "4",
+                        "startOffsets": "7630",
+                        "endColumns": "47",
+                        "endOffsets": "7673"
                     }
                 },
                 {
@@ -357,23 +374,6 @@
                         "endLines": "13,14,15,16,17,18,19,20,135,136,137,138,139,140,141,142,144,145,146,147,148,149,150,151,152,460,518",
                         "endColumns": "89,79,89,89,79,80,79,79,104,180,124,106,179,122,115,102,187,104,180,124,174,147,62,61,78,20,20",
                         "endOffsets": "938,1018,1108,1198,1278,1359,1439,1519,8456,8637,8762,8869,9049,9172,9288,9391,9746,9851,10032,10157,10332,10480,10543,10605,10684,24220,26312"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "7,2,3,4,5,6,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "293,57,105,153,201,247,336",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "330,99,147,195,241,287,373"
-                    },
-                    "to": {
-                        "startLines": "6,23,24,25,26,27,28",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "431,1656,1703,1750,1797,1842,1887",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "468,1698,1745,1792,1837,1882,1924"
                     }
                 },
                 {

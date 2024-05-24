@@ -342,7 +342,7 @@ fun GNeroPropertyVolver(
         ),
         height = 1.18701171875.em,
         maxLines = -1,
-        modifier = modifier.requiredWidth(127.0.dp).requiredHeight(25.0.dp).wrapContentHeight(
+        modifier = modifier.requiredWidth(151.0.dp).requiredHeight(27.0.dp).wrapContentHeight(
             align = Alignment.CenterVertically,
             unbounded = true
         )
@@ -376,7 +376,7 @@ fun TopLevelPropertyVolver(
             end = 14.0.dp,
             bottom = 12.0.dp
         ),
-        itemSpacing = 72.0,
+        itemSpacing = 70.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
