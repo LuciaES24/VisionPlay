@@ -4,6 +4,7 @@ import com.lespsan543.visionplay.app.data.model.GenresModel
 import com.lespsan543.visionplay.app.data.model.MovieResponse
 import com.lespsan543.visionplay.app.data.model.SerieResponse
 import com.lespsan543.visionplay.app.data.model.YoutubeResponse
+import com.lespsan543.visionplay.app.data.model.search.SearchResponse
 import com.lespsan543.visionplay.app.data.model.watchProviders.MovieOrSerieProviderResponse
 import com.lespsan543.visionplay.app.data.util.Constants.API_KEY
 import com.lespsan543.visionplay.app.data.util.Constants.BASE_URL
@@ -98,6 +99,15 @@ class APIService {
      */
     suspend fun discoverSerieGenres() : Response<GenresModel> {
         return retrofitTMDB.create(RetrofitAPI::class.java).getSerieGenres(API_KEY)
+    }
+
+    /**
+     * Recoge una lista de películas y series que coinciden con la búsqueda
+     *
+     * @return objeto SearchResponse con la información recogida de la API
+     */
+    suspend fun searchMovieOrSerie(query:String) : Response<SearchResponse> {
+        return retrofitTMDB.create(RetrofitAPI::class.java).searchMovieOrSerie(API_KEY, query)
     }
 
     /**

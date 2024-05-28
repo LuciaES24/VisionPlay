@@ -43,7 +43,7 @@ fun SimilarMovieOrSerie(
             visionPlayViewModel.findSimilarMovies(movieOrSerie)
         }
         .padding(6.dp)
-        .height(height * 0.4f)
+        .height(height * 0.27f)
         .background(Color.Transparent)){
         Column(modifier = Modifier
             .background(Color.Transparent)
@@ -59,7 +59,8 @@ fun SimilarMovieOrSerie(
                     fontSize = 15.sp,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     textAlign = TextAlign.Center,
-                    fontFamily = Constants.FONT_FAMILY
+                    fontFamily = Constants.FONT_FAMILY,
+                    maxLines = 1
                 )
         }
     }

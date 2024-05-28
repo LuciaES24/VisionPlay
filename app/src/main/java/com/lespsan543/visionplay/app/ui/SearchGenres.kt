@@ -221,7 +221,8 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                     CircularProgressIndicator(
                         modifier = Modifier
                             .height(height * 0.5f)
-                            .width(width * 0.5f)
+                            .width(width * 0.5f),
+                        color = Color(138,0,0)
                     )
                 }
             }

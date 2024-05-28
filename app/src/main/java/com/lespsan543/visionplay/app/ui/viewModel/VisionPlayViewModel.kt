@@ -23,6 +23,7 @@ import com.lespsan543.visionplay.app.domain.GetCinemaUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetTrailerUseCase
+import com.lespsan543.visionplay.app.domain.SearchUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieProviderState
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.guardar.Property1
@@ -76,6 +77,8 @@ class VisionPlayViewModel : ViewModel() {
     private val discoverMovieProviderUseCase = DiscoverMovieProviderUseCase()
 
     private val discoverSerieProviderUseCase = DiscoverSerieProviderUseCase()
+
+    private val searchUseCase = SearchUseCase()
 
     var email by mutableStateOf("")
         private set
@@ -163,10 +166,12 @@ class VisionPlayViewModel : ViewModel() {
     var providerList : StateFlow<List<MovieOrSerieProviderState>> = _providerList
 
     private var _platformLink = MutableStateFlow("")
-    var platformLink : StateFlow<String> = _platformLink
 
     var userSearch by mutableStateOf("")
         private set
+
+    private val _searchList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+    val searchList : StateFlow<List<MovieOrSerieState>> = _searchList
 
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
@@ -178,8 +183,20 @@ class VisionPlayViewModel : ViewModel() {
         getCinemaMovies()
     }
 
+    /**
+     * Cambia la propiedad de la barra del menñu inferior
+     */
     fun changeBottomBar(property : PropertyBottomBar){
         _propertyBottomBar.value = property
+    }
+
+    /**
+     * Realiza la búsqueda del usuario en la API
+     */
+    fun search(){
+        viewModelScope.launch(Dispatchers.IO) {
+            _searchList.value = searchUseCase.invoke(userSearch).results
+        }
     }
 
     /**
@@ -451,9 +468,12 @@ class VisionPlayViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Buscamos
+     */
     fun findSimilarMovies(movie: MovieOrSerieState){
         viewModelScope.launch {
-            _similarMovies.value = getSimilarMoviesUseCase.invoke(movie.idAPI).results
+            _similarMovies.value = getSimilarMoviesUseCase.invoke(movie.idAPI).results.filter { it.poster != null && !it.overview.isNullOrEmpty() }
         }
     }
 
@@ -905,6 +925,13 @@ class VisionPlayViewModel : ViewModel() {
      */
     fun writeSearch(search:String){
         this.userSearch = search
+    }
+
+    /**
+     * Reinicia el valor de la búsqueda
+     */
+    fun resetSearch(){
+        userSearch = ""
     }
 
     fun clickWatchProvider(provier: MovieOrSerieProviderState, context: Context){

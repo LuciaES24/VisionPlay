@@ -4,6 +4,7 @@ import com.lespsan543.visionplay.app.data.model.GenresModel
 import com.lespsan543.visionplay.app.data.model.MovieResponse
 import com.lespsan543.visionplay.app.data.model.SerieResponse
 import com.lespsan543.visionplay.app.data.model.YoutubeResponse
+import com.lespsan543.visionplay.app.data.model.search.SearchResponse
 import com.lespsan543.visionplay.app.data.model.watchProviders.MovieOrSerieProviderResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -28,6 +29,9 @@ interface RetrofitAPI {
 
     @GET("movie/now_playing")
     suspend fun getCineMovies(@Query("api_key") apiKey:String, @Query("page") page:Int) : Response<MovieResponse>
+
+    @GET("search/multi")
+    suspend fun searchMovieOrSerie(@Query("api_key") apiKey:String, @Query("query") query:String) : Response<SearchResponse>
 
     @GET("discover/tv")
     suspend fun discoverSeries(@Query("api_key") apiKey:String, @Query("page") page:Int) : Response<SerieResponse>

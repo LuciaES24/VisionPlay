@@ -20,6 +20,7 @@ import com.lespsan543.visionplay.app.ui.LogInScreen
 import com.lespsan543.visionplay.app.ui.MoviesScreen
 import com.lespsan543.visionplay.app.ui.RegisterScreen
 import com.lespsan543.visionplay.app.ui.SearchGenres
+import com.lespsan543.visionplay.app.ui.SearchScreen
 import com.lespsan543.visionplay.app.ui.SeriesScreen
 import com.lespsan543.visionplay.app.ui.ShowMovie
 import com.lespsan543.visionplay.app.ui.ShowMoviesAndSeriesByGenre
@@ -74,6 +75,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Routes.CinemaScreen.route) {
                             CinemaScreen(navController, visionPlayViewModel)
+                        }
+                        composable(Routes.SearchScreen.route) {
+                            SearchScreen(navController, visionPlayViewModel)
                         }
                     }
                 }

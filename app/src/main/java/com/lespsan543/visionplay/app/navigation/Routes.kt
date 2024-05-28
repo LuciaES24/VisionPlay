@@ -19,13 +19,9 @@ sealed class Routes(val route:String) {
 
     object ShowByGenre : Routes("ShowByGenre")
 
-    object ShowMovieOrSerieByGenre : Routes("ShowMovieOrSerieByGenre")
+    object SearchScreen : Routes("SearchScreen")
 
     object ShowMovie : Routes("ShowMovie")
-
-    object ShowSerie : Routes("ShowSerie")
-
-    object ShowFavotite : Routes("ShowFavotite")
 
     object CinemaScreen : Routes("CinemaScreen")
 }

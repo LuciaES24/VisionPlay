@@ -89,6 +89,7 @@ import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.PropertyBottomBar
 import kotlinx.coroutines.launch
+import okhttp3.Route
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
@@ -170,7 +171,8 @@ fun MoviesScreen(
                 ) {
                     OutlinedTextField(
                         value = userSearch,
-                        label = { Text(text = "Search", color = Color.White, fontFamily = FONT_FAMILY)},
+                        singleLine = true,
+                        placeholder = { Text(text = "Search", color = Color.White, fontFamily = FONT_FAMILY)},
                         onValueChange = { visionPlayViewModel.writeSearch(it) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             disabledBorderColor = Color(138,0,0),
@@ -181,7 +183,10 @@ fun MoviesScreen(
                             containerColor = Color(24,24,24)
                         ),
                         trailingIcon = {
-                            IconButton(onClick = {  }) {
+                            IconButton(onClick = {
+                                visionPlayViewModel.search()
+                                navController.navigate(Routes.SearchScreen.route)
+                            }) {
                                 Icon(imageVector = Icons.Filled.Search, contentDescription = "Search", tint = Color.White)
                             }
                         },
@@ -241,7 +246,8 @@ fun MoviesScreen(
                     CircularProgressIndicator(
                         modifier = Modifier
                             .height(height * 0.5f)
-                            .width(width * 0.5f)
+                            .width(width * 0.5f),
+                        color = Color(138,0,0)
                     )
                 }
             }
@@ -281,10 +287,6 @@ fun ShowMovie(navController: NavHostController,
     val propertyBottomBar = visionPlayViewModel.propertyBottomBar.collectAsState()
     //Lista de plataformas en las que se encuentra la película o serie seleccionada
     val providerList by visionPlayViewModel.providerList.collectAsState()
-    //Se encarga de abrir el enlace que se le proporcione
-    val uriHandler = LocalUriHandler.current
-    //Enlace a la plataforma seleccionada
-    val platformLink by visionPlayViewModel.platformLink.collectAsState()
 
     val context = LocalContext.current
 
@@ -591,7 +593,7 @@ fun ShowMovie(navController: NavHostController,
                             }
                         }
                     }
-                    Spacer(modifier = Modifier.height(width * 0.05f))
+                    Spacer(modifier = Modifier.height(width * 0.01f))
                 }
             }
         }

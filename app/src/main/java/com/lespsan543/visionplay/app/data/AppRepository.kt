@@ -4,6 +4,8 @@ import com.lespsan543.visionplay.app.data.model.MovieModel
 import com.lespsan543.visionplay.app.data.model.MovieResponse
 import com.lespsan543.visionplay.app.data.model.SerieModel
 import com.lespsan543.visionplay.app.data.model.SerieResponse
+import com.lespsan543.visionplay.app.data.model.search.MovieOrSerieSearchModel
+import com.lespsan543.visionplay.app.data.model.search.SearchResponse
 import com.lespsan543.visionplay.app.data.model.watchProviders.CountryResponse
 import com.lespsan543.visionplay.app.data.model.watchProviders.MovieOrSerieProviderModel
 import com.lespsan543.visionplay.app.data.util.Constants.BASE_URL_IMG
@@ -69,6 +71,20 @@ class AppRepository {
      */
     suspend fun getCineMovies(page:Int): MovieOrSerieResponseState {
         val response = apiService.getCineMovies(page)
+        return if (response.isSuccessful) {
+            response.body()?.toMovieOrSerieResponseState() ?: MovieOrSerieResponseState()
+        } else {
+            MovieOrSerieResponseState()
+        }
+    }
+
+    /**
+     * Realiza una búsqueda de películas en la API
+     *
+     * @return resultado de la búsqueda
+     */
+    suspend fun searchMovieOrSerie(query:String): MovieOrSerieResponseState {
+        val response = apiService.searchMovieOrSerie(query)
         return if (response.isSuccessful) {
             response.body()?.toMovieOrSerieResponseState() ?: MovieOrSerieResponseState()
         } else {
@@ -187,6 +203,35 @@ class AppRepository {
     private fun MovieResponse.toMovieOrSerieResponseState(): MovieOrSerieResponseState {
         return MovieOrSerieResponseState(
             results = this.results.map { it.toMovieOrSerieState() }
+        )
+    }
+
+    /**
+     * Función de extensión que transforma el modelo de datos al estado
+     *
+     * @return estado con los datos de una búsqueda de películas y series
+     */
+    private fun SearchResponse.toMovieOrSerieResponseState(): MovieOrSerieResponseState {
+        return MovieOrSerieResponseState(
+            results = this.results!!.filter { (it.type == "movie" && it.poster != null && !it.overview.isNullOrEmpty()) || (it.type == "tv" && it.poster != null && !it.overview.isNullOrEmpty()) }.sortedByDescending { it.popularity }.map { it.toMovieOrSerieState() }
+        )
+    }
+
+    /**
+     * Función de extensión que transforma el modelo de datos al estado
+     *
+     * @return estado con los datos de una película
+     */
+    private fun MovieOrSerieSearchModel.toMovieOrSerieState(): MovieOrSerieState {
+        return MovieOrSerieState(
+            idAPI = this.idAPI!!,
+            title = this.title ?: this.titleTv!!,
+            overview = this.overview!!,
+            poster = BASE_URL_IMG + this.poster,
+            date = this.date ?: this.dateTv ?: "",
+            votes = this.votes!!,
+            genres = this.genres!!,
+            type = this.type!!
         )
     }
 

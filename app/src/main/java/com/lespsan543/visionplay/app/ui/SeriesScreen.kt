@@ -136,7 +136,7 @@ fun SeriesScreen(
                 ) {
                     OutlinedTextField(
                         value = userSearch,
-                        label = { Text(text = "Search", color = Color.White, fontFamily = Constants.FONT_FAMILY)},
+                        placeholder = { Text(text = "Search", color = Color.White, fontFamily = Constants.FONT_FAMILY)},
                         onValueChange = { visionPlayViewModel.writeSearch(it) },
                         colors = TextFieldDefaults.outlinedTextFieldColors(
                             disabledBorderColor = Color(138,0,0),
@@ -147,7 +147,10 @@ fun SeriesScreen(
                             containerColor = Color(24,24,24)
                         ),
                         trailingIcon = {
-                            IconButton(onClick = {  }) {
+                            IconButton(onClick = {
+                                visionPlayViewModel.search()
+                                navController.navigate(Routes.SearchScreen.route)
+                            }) {
                                 Icon(imageVector = Icons.Filled.Search, contentDescription = "Search", tint = Color.White)
                             }
                         },
@@ -206,7 +209,8 @@ fun SeriesScreen(
                     CircularProgressIndicator(
                         modifier = Modifier
                             .height(height * 0.5f)
-                            .width(width * 0.5f)
+                            .width(width * 0.5f),
+                        color = Color(138,0,0)
                     )
                 }
             }
