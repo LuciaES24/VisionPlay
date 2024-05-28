@@ -66,7 +66,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -510,6 +509,16 @@ fun ShowMovie(navController: NavHostController,
                     if (trailerId!=""){
                         YoutubeVideo(id = trailerId, lifecycleOwner = LocalLifecycleOwner.current, width = width, height = height)
                         Spacer(modifier = Modifier.height(width * 0.07f))
+                    }else{
+                        Text(text = "There is no trailer",
+                            fontFamily = FONT_FAMILY,
+                            textAlign = TextAlign.Justify,
+                            fontSize = 18.sp,
+                            modifier = Modifier.padding(
+                                start = width * 0.05f,
+                                end = width * 0.05f
+                            )
+                        )
                     }
                     Spacer(modifier = Modifier.height(width * 0.03f))
                     Text(text = "Platforms: ",
@@ -545,6 +554,16 @@ fun ShowMovie(navController: NavHostController,
                                 Spacer(modifier = Modifier.width(width * 0.02f))
                             }
                         }
+                    }else{
+                        Text(text = "Not found on any platform",
+                            fontFamily = FONT_FAMILY,
+                            textAlign = TextAlign.Justify,
+                            fontSize = 18.sp,
+                            modifier = Modifier.padding(
+                                start = width * 0.05f,
+                                end = width * 0.05f
+                            )
+                        )
                     }
                     Spacer(modifier = Modifier.height(width * 0.05f))
                     Button(modifier = Modifier
