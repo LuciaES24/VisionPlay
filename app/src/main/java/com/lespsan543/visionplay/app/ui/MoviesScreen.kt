@@ -88,7 +88,6 @@ import com.lespsan543.visionplay.guardar.Guardar
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.PropertyBottomBar
 import kotlinx.coroutines.launch
-import okhttp3.Route
 
 /**
  * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
@@ -494,7 +493,7 @@ fun ShowMovie(navController: NavHostController,
                             end = width * 0.05f
                         )
                     )
-                    Spacer(modifier = Modifier.height(width * 0.07f))
+                    Spacer(modifier = Modifier.height(width * 0.05f))
                     Text(text = "Trailer: ",
                         fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,
@@ -520,7 +519,7 @@ fun ShowMovie(navController: NavHostController,
                             )
                         )
                     }
-                    Spacer(modifier = Modifier.height(width * 0.03f))
+                    Spacer(modifier = Modifier.height(width * 0.05f))
                     Text(text = "Platforms: ",
                         fontFamily = FONT_FAMILY,
                         textAlign = TextAlign.Justify,

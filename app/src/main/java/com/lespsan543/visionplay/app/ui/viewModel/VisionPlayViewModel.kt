@@ -174,12 +174,15 @@ class VisionPlayViewModel : ViewModel() {
     val searchList : StateFlow<List<MovieOrSerieState>> = _searchList
 
     init {
-        //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
+        //Hacemos una primera búsqueda de películas y series en la base de datos al iniciar la aplicación
         fetchMoviesFromDB()
         fetchSeriesFromDB()
+        //Buscamos los distintos géneros que hay de películas y series
         movieGenres()
         serieGenres()
+        //Buscamos y guardamos la información del usuario que ha iniciado sesión
         findUserInDB()
+        //Buscamos las películas que se encuentran actualmente en el cine en la API
         getCinemaMovies()
     }
 
@@ -204,8 +207,8 @@ class VisionPlayViewModel : ViewModel() {
      */
     fun newMovieOrSerie(){
         _propertyButton.value = Property1.Default
-        if (_searchByGenrePosition.value == _dbList.value.size-1){
-            _searchByGenrePosition.value=0
+        if (_searchByGenrePosition.value == _moviesAndSeriesByGenreList.value.size-1){
+            _searchByGenrePosition.value=_moviesAndSeriesByGenreList.value.size-1
         }else{
             _searchByGenrePosition.value++
         }
@@ -469,7 +472,9 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Buscamos
+     * Buscamos películas y series similares a partir de otra
+     *
+     * @param movie película o serie de la que queremos buscar similares
      */
     fun findSimilarMovies(movie: MovieOrSerieState){
         viewModelScope.launch {
@@ -579,7 +584,7 @@ class VisionPlayViewModel : ViewModel() {
                         movies.add(movie)
                     }
                 }
-                _movieList.value = movies
+                _movieList.value = movies.distinct()
             }
     }
 
@@ -615,7 +620,7 @@ class VisionPlayViewModel : ViewModel() {
                         series.add(serie)
                     }
                 }
-                _serieList.value = series
+                _serieList.value = series.distinct()
             }
     }
 

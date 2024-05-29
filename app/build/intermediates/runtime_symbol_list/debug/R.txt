@@ -76,6 +76,7 @@ int color common_google_signin_btn_text_light_disabled 0x7f020010
 int color common_google_signin_btn_text_light_focused 0x7f020011
 int color common_google_signin_btn_text_light_pressed 0x7f020012
 int color common_google_signin_btn_tint 0x7f020013
+int color ic_launcher_background 0x7f02001e
 int color notification_action_color_filter 0x7f020014
 int color notification_icon_bg_color 0x7f020015
 int color purple_200 0x7f020016
@@ -314,6 +315,7 @@ int layout notification_template_icon_group 0x7f080008
 int layout notification_template_part_chronometer 0x7f080009
 int layout notification_template_part_time 0x7f08000a
 int mipmap ic_launcher 0x7f090000
+int mipmap ic_launcher_foreground 0x7f090002
 int mipmap ic_launcher_round 0x7f090001
 int raw ayp_youtube_player 0x7f0a0000
 int raw firebase_common_keep 0x7f0a0001
