@@ -173,6 +173,9 @@ class VisionPlayViewModel : ViewModel() {
     private val _searchList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
     val searchList : StateFlow<List<MovieOrSerieState>> = _searchList
 
+    var loadingDB by mutableStateOf(false)
+        private set
+
     init {
         //Hacemos una primera búsqueda de películas y series en la base de datos al iniciar la aplicación
         fetchMoviesFromDB()
@@ -356,15 +359,17 @@ class VisionPlayViewModel : ViewModel() {
     private fun saveInDB(){
         for (list in _dbList.value){
             for (movieOrSerie in list){
-                saveMovieOrSerie(movieOrSerie)
+                saveMovieOrSerie(movieOrSerie, "MoviesAndSeries")
             }
         }
+        loadingDB = false
     }
 
     /**
      * Borra todas las películas y series que están guardadas en la base de datos para actualizarlas
      */
     fun restartDB(){
+        loadingDB = true
         for (list in _dbList.value){
             for (movieOrSerie in list){
                 try {
@@ -711,12 +716,13 @@ class VisionPlayViewModel : ViewModel() {
         }
     }
 
+
     /**
      * Guarda la película o serie que se le indica en la base de datos
      *
      * @param searchMovieState película o serie que queremos añadir a favoritos
      */
-    fun saveMovieOrSerie(searchMovieState: MovieOrSerieState) {
+    fun saveMovieOrSerie(searchMovieState: MovieOrSerieState, collection:String) {
         val email = auth.currentUser?.email
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -731,7 +737,7 @@ class VisionPlayViewModel : ViewModel() {
                     "genres" to searchMovieState.genres,
                     "emailUser" to email.toString()
                 )
-                firestore.collection("Favoritos")
+                firestore.collection(collection)
                     .add(newMovieOrSerie)
                     .addOnSuccessListener {
                         guardarPeliculaOSerie()

@@ -169,7 +169,7 @@ fun SeriesScreen(
                                     if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
                                         visionPlayViewModel.deleteMovieOrSerie()
                                     }else{
-                                        visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition])
+                                        visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition], "Favoritos")
                                     }
                                 },
                                 onClick = {
@@ -196,7 +196,7 @@ fun SeriesScreen(
                         modifier = Modifier
                             .padding(start = width*0.10f, top = height*0.85f),
                         property1 = property,
-                        guardar = { visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition]) },
+                        guardar = { visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition], "Favoritos") },
                         eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                     )
                 }

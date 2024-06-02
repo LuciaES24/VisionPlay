@@ -203,7 +203,7 @@ fun MoviesScreen(
                                     if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
                                         visionPlayViewModel.deleteMovieOrSerie()
                                     } else {
-                                        visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition])
+                                        visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition], "Favoritos")
                                     }
                                 },
                                 onClick = {
@@ -231,7 +231,7 @@ fun MoviesScreen(
                         modifier = Modifier
                             .padding(start = width*0.10f, top = height*0.85f),
                         property1 = property,
-                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition]) },
+                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition], "Favoritos") },
                         eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                     )
                 }
@@ -394,7 +394,7 @@ fun ShowMovie(navController: NavHostController,
                 floatingActionButton = {
                     Guardar(
                         property1 = property,
-                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieOrSerie) },
+                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieOrSerie, "Favoritos") },
                         eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                     )
                 }

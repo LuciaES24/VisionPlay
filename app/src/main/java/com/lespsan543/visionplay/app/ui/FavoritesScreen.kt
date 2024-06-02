@@ -1,6 +1,7 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,12 +15,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CloudDownload
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,6 +40,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.lespsan543.visionplay.app.data.util.Constants.FONT_FAMILY
@@ -62,12 +66,16 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
     val favoritesList by visionPlayViewModel.favoritesInDB.collectAsState()
     //Nombre del usuario
     val username by visionPlayViewModel.userName.collectAsState()
+    //Indica si se está reiniciando la base de datos
+    val loadingDB = visionPlayViewModel.loadingDB
 
     LaunchedEffect(Unit){
         visionPlayViewModel.fetchFavoritesFromDB()
         visionPlayViewModel.findUserInDB()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        val height = maxHeight
+        val width = maxWidth
         Scaffold(
             topBar = {
                 Cabecera(
@@ -133,6 +141,20 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                         fontSize = 18.sp,
                         fontFamily = FONT_FAMILY
                     )
+                }
+            }
+            if (loadingDB){
+                Log.d("actualizarDB", loadingDB.toString())
+                Dialog(onDismissRequest = {  }) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .height(height * 0.5f)
+                                .width(width * 0.5f),
+                            color = Color(138, 0, 0)
+                        )
+                    }
                 }
             }
         }
