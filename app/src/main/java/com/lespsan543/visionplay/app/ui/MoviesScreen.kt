@@ -305,7 +305,7 @@ fun ShowMovie(navController: NavHostController,
     //Buscamos los géneros de la película o serie
     visionPlayViewModel.getGenresToShow(movieOrSerie)
     //Buscamos los comentarios de la película o serie seleccionada
-    visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.title)
+    visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.idAPI.toString())
     //Buscamos las películas y series similares a la seleccionada
     visionPlayViewModel.findSimilarMovies(movieOrSerie)
     //Buscamos las plataformas en las que se encuentra la película o serie
@@ -352,7 +352,6 @@ fun ShowMovie(navController: NavHostController,
                         modifier = Modifier.width(width*0.7f)
                     )
                     IconButton(onClick = { visionPlayViewModel.saveComment(movieOrSerie.idAPI.toString(), commentText.value)
-                        visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.title)
                         visionPlayViewModel.newComment()})
                     {
                         Icon(
