@@ -144,7 +144,7 @@ fun MoviesScreen(
                             .height(height.times(0.05f)),
                         shape = RoundedCornerShape(3.dp),
                         containerColor = Color(138,0,0)) {
-                        Text(text = "Películas", color = Color.White, fontSize = 16.sp, fontFamily = FONT_FAMILY)
+                        Text(text = "Movies", color = Color.White, fontSize = 16.sp, fontFamily = FONT_FAMILY)
                     }
                     Spacer(modifier = Modifier.width(10.dp))
                     FloatingActionButton(onClick = { navController.navigate(Routes.SeriesScreen.route) },
@@ -351,7 +351,7 @@ fun ShowMovie(navController: NavHostController,
                         ),
                         modifier = Modifier.width(width*0.7f)
                     )
-                    IconButton(onClick = { visionPlayViewModel.saveComment(movieOrSerie.title, commentText.value)
+                    IconButton(onClick = { visionPlayViewModel.saveComment(movieOrSerie.idAPI.toString(), commentText.value)
                         visionPlayViewModel.fetchCommentsFromDB(movieOrSerie.title)
                         visionPlayViewModel.newComment()})
                     {

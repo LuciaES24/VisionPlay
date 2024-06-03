@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\lucia\\.gradle\\daemon\\8.0\\com.lespsan543.visionplay.app-mergeDebugResources-61:\\values\\values.xml",
+            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values/values.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\src\\main\\res\\values\\themes.xml",
+                    "from": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "59",
+                        "endColumns": "87",
+                        "endOffsets": "142"
+                    },
+                    "to": {
+                        "startLines": "205",
+                        "startColumns": "4",
+                        "startOffsets": "13913",
+                        "endColumns": "86",
+                        "endOffsets": "13995"
+                    }
+                },
                 {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bbd9c4ab6d8ff5b1c8e654d15cd59ed6\\transformed\\navigation-common-2.7.5\\res\\values\\values.xml",
                     "from": {
@@ -23,6 +40,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endColumns": "47",
+                        "endOffsets": "60"
+                    },
+                    "to": {
+                        "startLines": "125",
+                        "startColumns": "4",
+                        "startOffsets": "7687",
+                        "endColumns": "47",
+                        "endOffsets": "7730"
+                    }
+                },
+                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\22dac88c5d6580f6592572430df8a2fc\\transformed\\material3-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4",
@@ -37,6 +71,23 @@
                         "startOffsets": "8365,10981,11083",
                         "endColumns": "47,43,45",
                         "endOffsets": "8408,11020,11124"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,136,240,348,468,568",
+                        "endColumns": "80,103,107,119,99,76",
+                        "endOffsets": "131,235,343,463,563,640"
+                    },
+                    "to": {
+                        "startLines": "163,164,165,166,167,174",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "11344,11425,11529,11637,11757,12155",
+                        "endColumns": "80,103,107,119,99,76",
+                        "endOffsets": "11420,11524,11632,11752,11852,12227"
                     }
                 },
                 {
@@ -71,40 +122,6 @@
                         "startOffsets": "7466,9453",
                         "endColumns": "67,166",
                         "endOffsets": "7529,9615"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "55,136,240,348,468,568",
-                        "endColumns": "80,103,107,119,99,76",
-                        "endOffsets": "131,235,343,463,563,640"
-                    },
-                    "to": {
-                        "startLines": "163,164,165,166,167,174",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "11344,11425,11529,11637,11757,12155",
-                        "endColumns": "80,103,107,119,99,76",
-                        "endOffsets": "11420,11524,11632,11752,11852,12227"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\themes.xml",
-                    "from": {
-                        "startLines": "3",
-                        "startColumns": "4",
-                        "startOffsets": "56",
-                        "endColumns": "87",
-                        "endOffsets": "139"
-                    },
-                    "to": {
-                        "startLines": "205",
-                        "startColumns": "4",
-                        "startOffsets": "13913",
-                        "endColumns": "86",
-                        "endOffsets": "13995"
                     }
                 },
                 {
@@ -233,40 +250,6 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\ic_launcher_background.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endColumns": "56",
-                        "endOffsets": "109"
-                    },
-                    "to": {
-                        "startLines": "21",
-                        "startColumns": "4",
-                        "startOffsets": "1524",
-                        "endColumns": "56",
-                        "endOffsets": "1576"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "7,2,3,4,5,6,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "286,55,102,149,196,241,328",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "323,97,144,191,236,281,365"
-                    },
-                    "to": {
-                        "startLines": "6,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "431,1713,1760,1807,1854,1899,1944",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "468,1755,1802,1849,1894,1939,1981"
-                    }
-                },
-                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\784c6a386847cb445c00032eeeca6965\\transformed\\customview-poolingcontainer-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3",
@@ -300,23 +283,6 @@
                         "endLines": "98,217,492,495",
                         "endColumns": "52,24,24,24",
                         "endOffsets": "6233,14583,25655,25770"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "1",
-                        "startColumns": "4",
-                        "startOffsets": "16",
-                        "endColumns": "47",
-                        "endOffsets": "59"
-                    },
-                    "to": {
-                        "startLines": "125",
-                        "startColumns": "4",
-                        "startOffsets": "7687",
-                        "endColumns": "47",
-                        "endOffsets": "7730"
                     }
                 },
                 {
@@ -394,6 +360,23 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\src\\main\\res\\values\\colors.xml",
+                    "from": {
+                        "startLines": "7,2,3,4,5,6,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "293,57,105,153,201,247,336",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "330,99,147,195,241,287,373"
+                    },
+                    "to": {
+                        "startLines": "6,24,25,26,27,28,29",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "431,1713,1760,1807,1854,1899,1944",
+                        "endColumns": "41,46,46,46,44,44,41",
+                        "endOffsets": "468,1755,1802,1849,1894,1939,1981"
+                    }
+                },
+                {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\243c5124bf6e4dc603cbb6ddd692c645\\transformed\\foundation-release\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3",
@@ -411,317 +394,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\031ab8c8e2c932418ad3d1290b9f15dd\\transformed\\activity-1.8.2\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,97",
-                        "endColumns": "41,59",
-                        "endOffsets": "92,152"
-                    },
-                    "to": {
-                        "startLines": "100,118",
-                        "startColumns": "4,4",
-                        "startOffsets": "6305,7249",
-                        "endColumns": "41,59",
-                        "endOffsets": "6342,7304"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "com.lespsan543.visionplay.app-mergeDebugResources-61:/values/values.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\22dac88c5d6580f6592572430df8a2fc\\transformed\\material3-1.0.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1",
-                        "startColumns": "-1,-1,-1",
-                        "startOffsets": "-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "135,157,159",
-                        "startColumns": "4,4,4",
-                        "startOffsets": "8365,10981,11083",
-                        "endColumns": "47,43,45",
-                        "endOffsets": "8408,11020,11124"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\963441b330dd7083c1d8657b8f8bd854\\transformed\\lifecycle-viewmodel-2.7.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "120",
-                        "startColumns": "4",
-                        "startOffsets": "7363",
-                        "endColumns": "49",
-                        "endOffsets": "7408"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\adacb3c91960815dbae4214d60ff1ecb\\transformed\\play-services-basement-18.1.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1",
-                        "startColumns": "-1,-1",
-                        "startOffsets": "-1,-1"
-                    },
-                    "to": {
-                        "startLines": "122,144",
-                        "startColumns": "4,4",
-                        "startOffsets": "7466,9453",
-                        "endColumns": "67,166",
-                        "endOffsets": "7529,9615"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\generated\\res\\processDebugGoogleServices\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "163,164,165,166,167,174",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "11344,11425,11529,11637,11757,12155",
-                        "endColumns": "80,103,107,119,99,76",
-                        "endOffsets": "11420,11524,11632,11752,11852,12227"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\themes.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "205",
-                        "startColumns": "4",
-                        "startOffsets": "13913",
-                        "endColumns": "86",
-                        "endOffsets": "13995"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\34a34afc4a51d01950a278dd0490b44c\\transformed\\savedstate-1.2.1\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "119",
-                        "startColumns": "4",
-                        "startOffsets": "7309",
-                        "endColumns": "53",
-                        "endOffsets": "7358"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\0c340f0927decd5cd7136e52a1cf79ef\\transformed\\ui-release\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,91,92,93,94,121,133,134,155,156,158,168,169,170,171,172,173,175,176,177,179,180,181,184,187,190",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "3808,3867,3926,3986,4046,4106,4166,4226,4286,4346,4406,4466,4526,4585,4645,4705,4765,4825,4885,4945,5005,5065,5125,5185,5244,5304,5364,5423,5482,5541,5600,5659,5718,5842,5900,5955,6006,7413,8246,8311,10814,10880,11025,11857,11909,11969,12031,12085,12121,12232,12282,12336,12453,12500,12536,12737,12849,12960",
-                        "endLines": "57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,91,92,93,94,121,133,134,155,156,158,168,169,170,171,172,173,175,176,177,179,180,181,186,189,193",
-                        "endColumns": "58,58,59,59,59,59,59,59,59,59,59,59,58,59,59,59,59,59,59,59,59,59,59,58,59,59,58,58,58,58,58,58,73,57,54,50,54,52,64,53,65,100,57,51,59,61,53,35,33,49,53,45,46,35,89,12,12,12",
-                        "endOffsets": "3862,3921,3981,4041,4101,4161,4221,4281,4341,4401,4461,4521,4580,4640,4700,4760,4820,4880,4940,5000,5060,5120,5180,5239,5299,5359,5418,5477,5536,5595,5654,5713,5787,5895,5950,6001,6056,7461,8306,8360,10875,10976,11078,11904,11964,12026,12080,12116,12150,12277,12331,12377,12495,12531,12621,12844,12955,13150"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\ceb13197f9e65d5eec83d5027f6af658\\transformed\\coil-base-2.5.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "90",
-                        "startColumns": "4",
-                        "startOffsets": "5792",
-                        "endColumns": "49",
-                        "endOffsets": "5837"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\80ac47546b022f680839e074fd9d27b3\\transformed\\lifecycle-runtime-2.7.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "117",
-                        "startColumns": "4",
-                        "startOffsets": "7206",
-                        "endColumns": "42",
-                        "endOffsets": "7244"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\960af8604272390a4bb4bd582690780f\\transformed\\coordinatorlayout-1.0.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1",
-                        "startColumns": "-1,-1",
-                        "startOffsets": "-1,-1"
-                    },
-                    "to": {
-                        "startLines": "2,208",
-                        "startColumns": "4,4",
-                        "startOffsets": "150,14139",
-                        "endLines": "2,210",
-                        "endColumns": "60,12",
-                        "endOffsets": "206,14279"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\5d5f90d684b11056db68460943bee0cc\\transformed\\core-1.12.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "3,4,5,11,12,22,23,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,96,97,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,123,126,127,128,129,130,131,132,178,194,195,199,200,204,206,207",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "211,271,343,722,787,1581,1650,2129,2199,2267,2339,2409,2470,2544,2617,2678,2739,2801,2865,2927,2988,3056,3156,3216,3282,3355,3424,3481,3533,3595,3667,3743,6115,6150,6347,6402,6465,6520,6578,6636,6697,6760,6817,6868,6918,6979,7036,7102,7136,7171,7534,7735,7802,7874,7943,8012,8086,8158,12382,13155,13272,13473,13583,13784,14000,14072",
-                        "endLines": "3,4,5,11,12,22,23,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,96,97,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,123,126,127,128,129,130,131,132,178,194,198,199,203,204,206,207",
-                        "endColumns": "59,71,87,64,65,68,62,69,67,71,69,60,73,72,60,60,61,63,61,60,67,99,59,65,72,68,56,51,61,71,75,64,34,34,54,62,54,57,57,60,62,56,50,49,60,56,65,33,34,34,69,66,71,68,68,73,71,87,70,116,12,109,12,128,71,66",
-                        "endOffsets": "266,338,426,782,848,1645,1708,2194,2262,2334,2404,2465,2539,2612,2673,2734,2796,2860,2922,2983,3051,3151,3211,3277,3350,3419,3476,3528,3590,3662,3738,3803,6145,6180,6397,6460,6515,6573,6631,6692,6755,6812,6863,6913,6974,7031,7097,7131,7166,7201,7599,7797,7869,7938,8007,8081,8153,8241,12448,13267,13468,13578,13779,13908,14067,14134"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\569b9eae1829155aa5ac443991a922ac\\transformed\\browser-1.4.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "7,8,9,10,30,31,154,160,161,162",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "473,531,597,660,1986,2057,10746,11129,11196,11275",
-                        "endColumns": "57,65,62,61,70,71,67,66,78,68",
-                        "endOffsets": "526,592,655,717,2052,2124,10809,11191,11270,11339"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\colors.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "6,24,25,26,27,28,29",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "431,1713,1760,1807,1854,1899,1944",
-                        "endColumns": "41,46,46,46,44,44,41",
-                        "endOffsets": "468,1755,1802,1849,1894,1939,1981"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\784c6a386847cb445c00032eeeca6965\\transformed\\customview-poolingcontainer-1.0.0\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1",
-                        "startColumns": "-1,-1",
-                        "startOffsets": "-1,-1"
-                    },
-                    "to": {
-                        "startLines": "95,99",
-                        "startColumns": "4,4",
-                        "startOffsets": "6061,6238",
-                        "endColumns": "53,66",
-                        "endOffsets": "6110,6300"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\499a1080740f889718335f6d364e563b\\transformed\\navigation-runtime-2.7.5\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "98",
-                        "startColumns": "4",
-                        "startOffsets": "6185",
-                        "endColumns": "52",
-                        "endOffsets": "6233"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\main\\res\\values\\strings.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "125",
-                        "startColumns": "4",
-                        "startOffsets": "7687",
-                        "endColumns": "47",
-                        "endOffsets": "7730"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\cbebb5ce83a237192215f5b24e8b2f60\\transformed\\startup-runtime-1.1.1\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
-                    },
-                    "to": {
-                        "startLines": "124",
-                        "startColumns": "4",
-                        "startOffsets": "7604",
-                        "endColumns": "82",
-                        "endOffsets": "7682"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\e28121e44ee587e9ebe2063d58a490b5\\transformed\\play-services-base-18.0.1\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startColumns": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1",
-                        "startOffsets": "-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1"
-                    },
-                    "to": {
-                        "startLines": "13,14,15,16,17,18,19,20,136,137,138,139,140,141,142,143,145,146,147,148,149,150,151,152,153",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "853,943,1023,1113,1203,1283,1364,1444,8413,8518,8699,8824,8931,9111,9234,9350,9620,9808,9913,10094,10219,10394,10542,10605,10667",
-                        "endColumns": "89,79,89,89,79,80,79,79,104,180,124,106,179,122,115,102,187,104,180,124,174,147,62,61,78",
-                        "endOffsets": "938,1018,1108,1198,1278,1359,1439,1519,8513,8694,8819,8926,9106,9229,9345,9448,9803,9908,10089,10214,10389,10537,10600,10662,10741"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\243c5124bf6e4dc603cbb6ddd692c645\\transformed\\foundation-release\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "-1,-1",
-                        "startColumns": "-1,-1",
-                        "startOffsets": "-1,-1"
-                    },
-                    "to": {
-                        "startLines": "182,183",
-                        "startColumns": "4,4",
-                        "startOffsets": "12626,12682",
-                        "endColumns": "55,54",
-                        "endOffsets": "12677,12732"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lucia\\Desktop\\VisionPlay\\app\\src\\debug\\res\\values\\ic_launcher_background.xml",
+                    "source": "C:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\src\\debug\\res\\values\\ic_launcher_background.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -740,9 +413,11 @@
                 {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\031ab8c8e2c932418ad3d1290b9f15dd\\transformed\\activity-1.8.2\\res\\values\\values.xml",
                     "from": {
-                        "startLines": "-1,-1",
-                        "startColumns": "-1,-1",
-                        "startOffsets": "-1,-1"
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,97",
+                        "endColumns": "41,59",
+                        "endOffsets": "92,152"
                     },
                     "to": {
                         "startLines": "100,118",

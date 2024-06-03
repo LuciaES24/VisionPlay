@@ -101,13 +101,29 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
             },
             floatingActionButton = {
                 if (visionPlayViewModel.isAdmin()){
-                    IconButton(onClick = { visionPlayViewModel.restartDB() }) {
-                        Icon(imageVector = Icons.Filled.CloudDownload , contentDescription = null, tint = Color.Blue,
+                    IconButton(onClick = { visionPlayViewModel.showLoading()
+                                           visionPlayViewModel.restartDB()}
+                    ){
+                        Icon(imageVector = Icons.Filled.CloudDownload , contentDescription = null, tint = Color(138,0,0),
                             modifier = Modifier.size(maxHeight*0.045f) )
                     }
                 }
             }
             ) {
+            //Se muestra si se está actualizando la base de datos
+            if (loadingDB){
+                Dialog(onDismissRequest = {  }) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center) {
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .height(height * 0.5f)
+                                .width(width * 0.5f),
+                            color = Color(138,0,0)
+                        )
+                    }
+                }
+            }
             //Se muestra si hay algún elemento en la lista de favoritos
             if(favoritesList.isNotEmpty()){
                 Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
@@ -141,20 +157,6 @@ fun FavoritesScreen(navController: NavHostController, visionPlayViewModel: Visio
                         fontSize = 18.sp,
                         fontFamily = FONT_FAMILY
                     )
-                }
-            }
-            if (loadingDB){
-                Log.d("actualizarDB", loadingDB.toString())
-                Dialog(onDismissRequest = {  }) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center) {
-                        CircularProgressIndicator(
-                            modifier = Modifier
-                                .height(height * 0.5f)
-                                .width(width * 0.5f),
-                            color = Color(138, 0, 0)
-                        )
-                    }
                 }
             }
         }

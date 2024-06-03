@@ -33,6 +33,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
 
 /**
@@ -96,8 +98,12 @@ class VisionPlayViewModel : ViewModel() {
     private var _seriePosition = MutableStateFlow(0)
     var seriePosition : StateFlow<Int> = _seriePosition
 
+    private var _movieAPIList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+
     private var _movieList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
     var movieList : StateFlow<List<MovieOrSerieState>> = _movieList.asStateFlow()
+
+    private var _serieAPIList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
 
     private var _serieList = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
     var serieList : StateFlow<List<MovieOrSerieState>> = _serieList.asStateFlow()
@@ -190,7 +196,16 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
+     * Muestra en la pantalla que se está actualizando la base de datos
+     */
+    fun showLoading(){
+        loadingDB = true
+    }
+
+    /**
      * Cambia la propiedad de la barra del menñu inferior
+     *
+     * @param property propiedad a la que cambiar el menú
      */
     fun changeBottomBar(property : PropertyBottomBar){
         _propertyBottomBar.value = property
@@ -230,8 +245,7 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Guarda la película o serie que se ha seleccionado en la variable
-     * del ViewModel
+     * Guarda la película o serie que se ha seleccionado en la variable del ViewModel
      *
      * @param movieOrSerie película o serie que se ha seleccioando
      */
@@ -257,30 +271,36 @@ class VisionPlayViewModel : ViewModel() {
                         moviesAndSeries.add(movieOrSerie)
                     }
                 }
-                _moviesAndSeriesByGenreList.value = moviesAndSeries
+                _moviesAndSeriesByGenreList.value = moviesAndSeries.distinct().shuffled()
             }
     }
 
     /**
      * Buscamos una lista de películas en la API
+     *
+     * @param page página de la API que hay que buscar
      */
     private fun getAllMovies(page:Int){
         viewModelScope.launch(Dispatchers.IO) {
-            _movieList.value = discoverMoviesUseCase.invoke(page).results
+            _movieAPIList.value = discoverMoviesUseCase.invoke(page).results
         }
     }
 
     /**
      * Buscamos una lista de series en la API
+     *
+     * @param page página de la API que hay que buscar
      */
     private fun getAllSeries(page:Int){
         viewModelScope.launch(Dispatchers.IO) {
-            _serieList.value = discoverSeriesUseCase.invoke(page).results
+            _serieAPIList.value = discoverSeriesUseCase.invoke(page).results
         }
     }
 
     /**
      * Busca las plataformas en las que se encuentra una película o serie
+     *
+     * @param movieOrSerie película o serie de la que queremos buscar las plataformas
      */
     fun getWatchProvider(movieOrSerie: MovieOrSerieState){
         if (movieOrSerie.type == "Serie"){
@@ -340,55 +360,68 @@ class VisionPlayViewModel : ViewModel() {
     /**
      * Realiza una búsqueda amplia de películas y series en la API para introducirlas en la base de datos de Firebase
      */
-    private fun loadFromAPI(){
-        val temporalList = mutableListOf<List<MovieOrSerieState>>()
-        for (z in 1..20-1){
-            getAllSeries(z)
-            getAllMovies(z)
-            Thread.sleep(500)
-            temporalList.add(_serieList.value)
-            temporalList.add(_movieList.value)
+    private fun loadFromAPI() {
+        viewModelScope.launch {
+            loadingDB = true
+            val temporalList = mutableListOf<List<MovieOrSerieState>>()
+            for (z in 1 until 20) {
+                withContext(Dispatchers.IO) {
+                    getAllSeries(z)
+                    getAllMovies(z)
+                    Thread.sleep(500)
+                    temporalList.add(_serieAPIList.value)
+                    temporalList.add(_movieAPIList.value)
+                }
+            }
+            _dbList.value = temporalList
+            saveInDB()
         }
-        _dbList.value = temporalList
-        saveInDB()
     }
 
     /**
      * Guarda todas las películas y series obtenidas en la base de datos
      */
-    private fun saveInDB(){
-        for (list in _dbList.value){
-            for (movieOrSerie in list){
-                saveMovieOrSerie(movieOrSerie, "MoviesAndSeries")
+    private fun saveInDB() {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                _dbList.value?.forEach { list ->
+                    list.forEach { movieOrSerie ->
+                        saveMovieOrSerie(movieOrSerie, "MoviesAndSeries")
+                    }
+                }
             }
+            loadingDB = false
         }
-        loadingDB = false
     }
 
     /**
      * Borra todas las películas y series que están guardadas en la base de datos para actualizarlas
      */
-    fun restartDB(){
-        loadingDB = true
-        for (list in _dbList.value){
-            for (movieOrSerie in list){
-                try {
-                    viewModelScope.launch {
-                        firestore.collection("MoviesAndSeries").document(movieOrSerie.idDoc)
-                            .delete()
+    fun restartDB() {
+        viewModelScope.launch {
+            loadingDB = true
+            withContext(Dispatchers.IO) {
+                _dbList.value?.forEach { list ->
+                    list.forEach { movieOrSerie ->
+                        try {
+                            firestore.collection("MoviesAndSeries").document(movieOrSerie.idDoc).delete().await()
+                        } catch (e: Exception) {
+                            print(e.localizedMessage)
+                        }
                     }
-                }catch (e: Exception) {
-                    print(e.localizedMessage)
                 }
+                loadFromAPI()
             }
         }
-        loadFromAPI()
     }
+
 
     /**
      * Buscamos los géneros que hay entre películas y series
      * para que no se repitan si alguno coincide
      * y los guardamos en la variable _genres
+     *
+     * @param genre género seleccionado para filtrar
      */
     fun diferentGenres(genre:String){
         val temporalGenresMap = mutableMapOf<String, String>()
@@ -434,8 +467,7 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Guarda la película o serie que se ha seleccionado en la variable
-     * del ViewModel
+     * Guarda la película o serie que se ha seleccionado en la variable del ViewModel
      */
     fun changeSelectedMovieOrSerie(){
         val temporalList = _lastSelectedMoviesOrSeries.value.toMutableList()
@@ -589,7 +621,7 @@ class VisionPlayViewModel : ViewModel() {
                         movies.add(movie)
                     }
                 }
-                _movieList.value = movies.distinct()
+                _movieList.value = movies.distinct().shuffled()
             }
     }
 
@@ -625,7 +657,7 @@ class VisionPlayViewModel : ViewModel() {
                         series.add(serie)
                     }
                 }
-                _serieList.value = series.distinct()
+                _serieList.value = series.distinct().shuffled()
             }
     }
 
@@ -721,6 +753,7 @@ class VisionPlayViewModel : ViewModel() {
      * Guarda la película o serie que se le indica en la base de datos
      *
      * @param searchMovieState película o serie que queremos añadir a favoritos
+     * @param collection colección de la base de datos en la que vamos a guardarla
      */
     fun saveMovieOrSerie(searchMovieState: MovieOrSerieState, collection:String) {
         val email = auth.currentUser?.email
@@ -735,7 +768,8 @@ class VisionPlayViewModel : ViewModel() {
                     "date" to searchMovieState.date,
                     "votes" to searchMovieState.votes,
                     "genres" to searchMovieState.genres,
-                    "emailUser" to email.toString()
+                    "emailUser" to email.toString(),
+                    "type" to searchMovieState.type
                 )
                 firestore.collection(collection)
                     .add(newMovieOrSerie)
@@ -785,6 +819,8 @@ class VisionPlayViewModel : ViewModel() {
 
     /**
      * Formatea el título de la película o serie para realizar la búsqueda del trailer en la API
+     *
+     * @param title título de la película o serie a buscar
      */
     fun formatTitle(title: String){
         val result = "official trailer "
@@ -793,6 +829,8 @@ class VisionPlayViewModel : ViewModel() {
 
     /**
      * Busca el trailer de la película o serie en la API
+     *
+     * @param title título de la película o serie a buscar
      */
     private fun getTrailer(title: String){
         _trailerId.value = ""
@@ -945,6 +983,12 @@ class VisionPlayViewModel : ViewModel() {
         userSearch = ""
     }
 
+    /**
+     * Determina el enlace al que debe navegar dependiendo de la plataforma en la que pulse
+     *
+     * @param provier plataforma sobre la que se ha pulsado
+     * @param context contexto en el que se navega al enlace
+     */
     fun clickWatchProvider(provier: MovieOrSerieProviderState, context: Context){
         when(provier.provider_name){
             "Disney Plus" -> _platformLink.value = "https://www.disneyplus.com/es-es"

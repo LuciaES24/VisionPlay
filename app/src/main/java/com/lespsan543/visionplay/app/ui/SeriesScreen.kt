@@ -111,7 +111,7 @@ fun SeriesScreen(
                         containerColor = Color(40,40,40),
                         shape = RoundedCornerShape(3.dp))
                     {
-                        Text(text = "Películas", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
+                        Text(text = "Movies", color = Color.White, fontSize = 16.sp, fontFamily = Constants.FONT_FAMILY)
                     }
                     Spacer(modifier = Modifier.width(10.dp))
                     FloatingActionButton(onClick = { navController.navigate(Routes.SeriesScreen.route) },
