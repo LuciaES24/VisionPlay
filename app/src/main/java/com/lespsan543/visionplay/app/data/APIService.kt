@@ -32,6 +32,8 @@ class APIService {
     /**
      * Recoge una lista de las películas más populares
      *
+     * @param page página de la API
+     *
      * @return objeto MovieResponse con los datos de las películas encontradas
      */
     suspend fun discoverMovies(page:Int) : Response<MovieResponse>{
@@ -41,6 +43,8 @@ class APIService {
     /**
      * Recoge una lista de películas similares a partir del id de otra
      *
+     * @param movie_id identificador de la película
+     *
      * @return objeto MovieResponse con los datos de las películas encontradas
      */
     suspend fun discoverSimilarMovies(movie_id: Int) : Response<MovieResponse>{
@@ -48,7 +52,20 @@ class APIService {
     }
 
     /**
+     * Recoge una lista de series similares a partir del id de otra
+     *
+     * @param series_id identificador de la serie
+     *
+     * @return objeto SerieResponse con los datos de las películas encontradas
+     */
+    suspend fun discoverSimilarSeries(series_id: Int) : Response<SerieResponse>{
+        return retrofitTMDB.create(RetrofitAPI::class.java).discoverSimilarSeries(series_id, API_KEY)
+    }
+
+    /**
      * Recoge una lista de películas que se encuentran actualmente en el cine
+     *
+     * @param page página de la API
      *
      * @return objeto MovieResponse con la información recogida de la API
      */
@@ -59,6 +76,8 @@ class APIService {
     /**
      * Recoge una lista de plataformas en las que se encuentra una película
      *
+     * @param movie_id identificador de la película
+     *
      * @return objeto MovieOrSerieProviderResponse con la información recogida de la API
      */
     suspend fun getMovieProvider(movie_id:Int) : Response<MovieOrSerieProviderResponse> {
@@ -68,6 +87,8 @@ class APIService {
     /**
      * Recoge una lista de plataformas en las que se encuentra una serie
      *
+     * @param series_id identificador de la serie
+     *
      * @return objeto MovieOrSerieProviderResponse con la información recogida de la API
      */
     suspend fun getSerieProvider(series_id:Int) : Response<MovieOrSerieProviderResponse> {
@@ -76,6 +97,8 @@ class APIService {
 
     /**
      * Recoge una lista de las series más populares
+     *
+     * @param page página de la API
      *
      * @return objeto SerieResponse con la información recogida de la API
      */
@@ -104,6 +127,8 @@ class APIService {
     /**
      * Recoge una lista de películas y series que coinciden con la búsqueda
      *
+     * @param query búsqueda que realiza el usuario
+     *
      * @return objeto SearchResponse con la información recogida de la API
      */
     suspend fun searchMovieOrSerie(query:String) : Response<SearchResponse> {
@@ -112,6 +137,8 @@ class APIService {
 
     /**
      * Recoge una serie de videos que coinciden con la búsqueda
+     *
+     * @param movieOrSerie título de la película o serie a buscar
      *
      * @return objeto YoutubeResponse con la información recogida de la API
      */

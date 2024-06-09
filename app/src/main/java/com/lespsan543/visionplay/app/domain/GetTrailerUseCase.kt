@@ -2,6 +2,11 @@ package com.lespsan543.visionplay.app.domain
 
 import com.lespsan543.visionplay.app.data.AppRepository
 
+/**
+ * Caso de uso que realiza una búsqueda en la API de un tráiler
+ *
+ * @property appRepository repositorio del que obtenemos la comunicación con la API
+ */
 class GetTrailerUseCase {
     private val appRepository = AppRepository()
 

@@ -60,9 +60,6 @@ import com.lespsan543.visionplay.menu.PropertyBottomBar
 fun SearchGenres(navController: NavHostController, visionPlayViewModel: VisionPlayViewModel){
     val genresToShow = visionPlayViewModel.genresToShow
 
-    LaunchedEffect(Unit){
-        visionPlayViewModel.fetchFavoritesFromDB()
-    }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val height = maxHeight
         Scaffold(
@@ -167,7 +164,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
             //Aparece si la información de la API ya ha sido cargada
             if (moviesAndSeriesList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
-                visionPlayViewModel.findMovieInList(moviesAndSeriesList[position].title)
+                visionPlayViewModel.findMovieOrSerieInList(moviesAndSeriesList[position].title)
                 AsyncImage(model = moviesAndSeriesList[position].poster,
                     contentDescription = "Poster película",
                     contentScale = ContentScale.Crop,
@@ -187,7 +184,6 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                                 visionPlayViewModel.addSelected(moviesAndSeriesList[position])
                                 navController.navigate(Routes.ShowMovie.route)
                                 visionPlayViewModel.formatTitle(moviesAndSeriesList[position].title)
-                                visionPlayViewModel.changeBottomBar(PropertyBottomBar.Generos)
                             })
                         .offset { IntOffset(offsetX, 0) }
                         .draggable(

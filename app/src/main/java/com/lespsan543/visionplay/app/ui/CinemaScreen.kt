@@ -89,7 +89,7 @@ fun CinemaScreen(navController: NavHostController, visionPlayViewModel: VisionPl
                     }
                 }
                 Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
-            }//Se muestra si el usuario aún no ha añadido nada a favoritos
+            }
             else{
                 //Aparece si aún no ha cargado la información de la API
                 Column(

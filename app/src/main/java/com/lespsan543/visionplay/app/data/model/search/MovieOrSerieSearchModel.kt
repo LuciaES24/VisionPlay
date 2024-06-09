@@ -2,6 +2,9 @@ package com.lespsan543.visionplay.app.data.model.search
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Modelo de datos que guarda la información de una película o serie
+ */
 data class MovieOrSerieSearchModel(
     @SerializedName("id")
     var idAPI: Int? = null,

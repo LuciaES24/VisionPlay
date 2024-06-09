@@ -1,13 +1,11 @@
 package com.lespsan543.visionplay.app.ui
 
 import android.annotation.SuppressLint
-import android.app.appsearch.SearchResult
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -46,11 +44,19 @@ import com.lespsan543.visionplay.cabecera.Property
 import com.lespsan543.visionplay.menu.Menu
 import com.lespsan543.visionplay.menu.PropertyBottomBar
 
+/**
+ * Pantalla en la que se muestran los resultados de la búsqueda que ha realizado el usuario
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param visionPlayViewModel viewModel del que obtendremos los datos
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SearchScreen(navController : NavHostController, visionPlayViewModel: VisionPlayViewModel){
+    //Lista de resultados de la búsqueda del usuario
     val searchList by visionPlayViewModel.searchList.collectAsState()
+    //Búsqueda que realiza el usuario
     val userSearch = visionPlayViewModel.userSearch
 
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {

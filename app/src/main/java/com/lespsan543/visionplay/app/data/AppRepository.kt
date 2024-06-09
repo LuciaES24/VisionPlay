@@ -25,6 +25,8 @@ class AppRepository {
     /**
      * Realiza una búsqueda de películas en la API
      *
+     * @param page página de la API
+     *
      * @return resultado de la búsqueda
      */
     suspend fun discoverMovies(page:Int): MovieOrSerieResponseState {
@@ -39,6 +41,8 @@ class AppRepository {
     /**
      * Realiza una búsqueda de series en la API
      *
+     * @param page página de la API
+     *
      * @return resultado de la búsqueda
      */
     suspend fun discoverSeries(page:Int): MovieOrSerieResponseState {
@@ -51,7 +55,9 @@ class AppRepository {
     }
 
     /**
-     * Realiza una búsqueda de series en la API
+     * Realiza una búsqueda de películas y series similares en la API
+     *
+     * @param movie_id identificador de la película
      *
      * @return resultado de la búsqueda
      */
@@ -65,7 +71,25 @@ class AppRepository {
     }
 
     /**
+     * Realiza una búsqueda de películas y series similares en la API
+     *
+     * @param series_id identificador de la serie
+     *
+     * @return resultado de la búsqueda
+     */
+    suspend fun discoverSimilarSeries(series_id: Int): MovieOrSerieResponseState {
+        val response = apiService.discoverSimilarSeries(series_id)
+        return if (response.isSuccessful) {
+            response.body()?.toMovieOrSerieResponseState() ?: MovieOrSerieResponseState()
+        } else {
+            MovieOrSerieResponseState()
+        }
+    }
+
+    /**
      * Realiza una búsqueda de películas en la API
+     *
+     * @param page página de la API
      *
      * @return resultado de la búsqueda
      */
@@ -79,7 +103,9 @@ class AppRepository {
     }
 
     /**
-     * Realiza una búsqueda de películas en la API
+     * Realiza una búsqueda de películas y series en la API según la consulta del usuario
+     *
+     * @param query búsqueda que realiza el usuario
      *
      * @return resultado de la búsqueda
      */
@@ -95,7 +121,7 @@ class AppRepository {
     /**
      * Realiza una búsqueda de los géneros de películas
      *
-     * @return lista con los distintos géneros
+     * @return mapa con los distintos géneros
      */
     suspend fun getMovieGenres() : MutableMap<String,String>{
         val response = apiService.discoverMovieGenres()
@@ -111,7 +137,7 @@ class AppRepository {
     /**
      * Realiza una búsqueda de los géneros de series
      *
-     * @return lista con los distintos géneros
+     * @return mapa con los distintos géneros
      */
     suspend fun getSerieGenres() : MutableMap<String,String>{
         val response = apiService.discoverSerieGenres()
@@ -143,6 +169,8 @@ class AppRepository {
     /**
      * Realiza una búsqueda de las plataformas en las que se encuentra una película
      *
+     * @param movie_id identificador de la película a buscar
+     *
      * @return modelo de datos con la lista de plataformas obtenida
      */
     suspend fun getMovieProvider(movie_id: Int): ProviderState {
@@ -156,6 +184,8 @@ class AppRepository {
 
     /**
      * Realiza una búsqueda de las plataformas en las que se encuentra una serie
+     *
+     * @param series_id identificador de la serie a buscar
      *
      * @return modelo de datos con la lista de plataformas obtenida
      */

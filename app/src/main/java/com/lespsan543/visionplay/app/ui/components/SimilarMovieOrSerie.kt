@@ -26,21 +26,30 @@ import com.lespsan543.visionplay.app.navigation.Routes
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.app.ui.viewModel.VisionPlayViewModel
 
+/**
+ * Componente para mostrar una película o serie similar
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param visionPlayViewModel viewModel del que obtendremos los datos
+ * @param movieOrSerie película o serie que se va a mostrar
+ * @param height altura a la que se tiene que ajustar el componente
+ * @param width ancho al que se tiene que ajustar el componente
+ */
 @Composable
 fun SimilarMovieOrSerie(
     navController:NavHostController,
     visionPlayViewModel: VisionPlayViewModel,
     movieOrSerie:MovieOrSerieState,
     height : Dp,
-    width:Dp){
-
+    width:Dp)
+{
     Box(modifier = Modifier
         .width(width*0.3f)
         .clickable {
             visionPlayViewModel.addSelected(movieOrSerie)
             navController.navigate(Routes.ShowMovie.route)
             visionPlayViewModel.formatTitle(movieOrSerie.title)
-            visionPlayViewModel.findSimilarMovies(movieOrSerie)
+            visionPlayViewModel.findSimilarMoviesOrSeries(movieOrSerie)
         }
         .padding(6.dp)
         .height(height * 0.27f)

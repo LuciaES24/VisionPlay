@@ -136,7 +136,7 @@ fun SeriesScreen(
             //Aparece si la información de la API ya ha sido cargada
             if (serieList.isNotEmpty()){
                 //Miramos si la película ya está guardada en la base de datos
-                visionPlayViewModel.findMovieInList(serieList[seriePosition].title)
+                visionPlayViewModel.findMovieOrSerieInList(serieList[seriePosition].title)
                 Column(modifier = Modifier
                     .fillMaxSize()
                     .padding(top = height * 0.07f)
@@ -182,7 +182,6 @@ fun SeriesScreen(
                                 onClick = {
                                     visionPlayViewModel.addSelected(serieList[seriePosition])
                                     navController.navigate(Routes.ShowMovie.route)
-                                    visionPlayViewModel.changeBottomBar(PropertyBottomBar.Inicio)
                                 })
                             .offset { IntOffset(offsetX, 0) }
                             .draggable(

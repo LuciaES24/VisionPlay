@@ -12,6 +12,14 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
+/**
+ * Componente para mostrar el tráiler de una película o serie
+ *
+ * @param id identificador del tráiler de la película o serie que se va a mostrar
+ * @param lifecycleOwner ciclo de vida del componente
+ * @param height altura a la que se tiene que ajustar el componente
+ * @param width ancho al que se tiene que ajustar el componente
+ */
 @Composable
 fun YoutubeVideo(id:String,
                  lifecycleOwner: LifecycleOwner,

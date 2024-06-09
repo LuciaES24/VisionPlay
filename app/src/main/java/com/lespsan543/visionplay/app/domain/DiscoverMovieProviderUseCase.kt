@@ -3,11 +3,18 @@ package com.lespsan543.visionplay.app.domain
 import com.lespsan543.visionplay.app.data.AppRepository
 import com.lespsan543.visionplay.app.ui.states.ProviderState
 
+/**
+ * Caso de uso que realiza una búsqueda en la API de las plataformas en las que se encuentra una película
+ *
+ * @property appRepository repositorio del que obtenemos la comunicación con la API
+ */
 class DiscoverMovieProviderUseCase {
     private val appRepository = AppRepository()
 
     /**
      * Invoca la función del repositorio que extrae la lista de paltaformas de una película
+     *
+     * @param movie_id identificador de la película o serie
      *
      * @return objeto con la información de la búsqueda
      */

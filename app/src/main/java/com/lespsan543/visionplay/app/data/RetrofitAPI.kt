@@ -21,6 +21,9 @@ interface RetrofitAPI {
     @GET("movie/{movie_id}/similar")
     suspend fun discoverSimilarMovies(@Path("movie_id") movie_id:Int, @Query("api_key") apiKey:String) : Response<MovieResponse>
 
+    @GET("tv/{serie_id}/similar")
+    suspend fun discoverSimilarSeries(@Path("serie_id") movie_id:Int, @Query("api_key") apiKey:String) : Response<SerieResponse>
+
     @GET("movie/{movie_id}/watch/providers")
     suspend fun discoverMoviePlatform(@Path("movie_id") movie_id:Int, @Query("api_key") apiKey:String) : Response<MovieOrSerieProviderResponse>
 

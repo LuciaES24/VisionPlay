@@ -24,6 +24,13 @@ import com.lespsan543.visionplay.R
 import com.lespsan543.visionplay.app.data.model.CommentModel
 import com.lespsan543.visionplay.app.data.util.Constants
 
+/**
+ * Componente que muestra un comentario
+ *
+ * @param comment comentario que se debe mostrar
+ * @param width ancho al que se debe ajustar el componente
+ * @param height alto al que se debe ajustar el componente
+ */
 @Composable
 fun CommentSection(comment : CommentModel, width : Dp, height : Dp){
     Row(modifier = Modifier.padding(

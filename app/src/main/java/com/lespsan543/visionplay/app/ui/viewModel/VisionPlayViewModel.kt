@@ -19,6 +19,7 @@ import com.lespsan543.visionplay.app.domain.DiscoverMoviesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSerieProviderUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSeriesUseCase
 import com.lespsan543.visionplay.app.domain.DiscoverSimilarMoviesUseCase
+import com.lespsan543.visionplay.app.domain.DiscoverSimilarSeriesUseCase
 import com.lespsan543.visionplay.app.domain.GetCinemaUseCase
 import com.lespsan543.visionplay.app.domain.GetMovieGenresUseCase
 import com.lespsan543.visionplay.app.domain.GetSerieGenresUseCase
@@ -27,36 +28,87 @@ import com.lespsan543.visionplay.app.domain.SearchUseCase
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieProviderState
 import com.lespsan543.visionplay.app.ui.states.MovieOrSerieState
 import com.lespsan543.visionplay.guardar.Property1
-import com.lespsan543.visionplay.menu.PropertyBottomBar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
 
 /**
- * ViewModel responsable del flujo de películas y series conectándose a la API, además
- * de añadir las películas o series a la base de datos que el usuario añada a favoritos
+ * ViewModel responsable del flujo de datos de la aplicación
  *
  * @property auth Instancia de FirebaseAuth utilizada para obtener el usuario actual
  * @property firestore Instancia de FirebaseFirestore utilizada para operaciones en la base de datos
  * @property discoverMoviesUseCase caso de uso para invocar la función que busca películas de la API
  * @property discoverSeriesUseCase caso de uso para invocar la función que busca series de la API
+ * @property getMovieGenresUseCase caso de uso para invocar la función que busca los géneros de las películas en la API
+ * @property getSerieGenresUseCase caso de uso para invocar la función que busca los géneros de las series en la API
+ * @property getTrailerUseCase caso de uso para invocar la función que realiza la búsqueda de un trailer
+ * @property getCinemaUseCase caso de uso para invocar la función que busca las películas que se encuentran en el cine actualmente
+ * @property getSimilarMoviesUseCase caso de uso para invocar la función que busca películas y series parecidas a la película seleccionada
+ * @property getSimilarSeriesUseCase caso de uso para invocar la función que busca películas y series parecidas a la serie seleccionada
+ * @property discoverMovieProviderUseCase caso de uso para invocar la función que busca las plataformas en las que se encuentran las películas
+ * @property discoverSerieProviderUseCase caso de uso para invocar la función que busca las platadormas en las que se encuentran las series
+ * @property searchUseCase caso de uso para invocar la función que realiza la búsqueda del usuario
+ * @property email variable en la que vamos a guardar el email que escriba el usuario
+ * @property password variable en la que vamos a guardar la contraseña que escriba el usuario
+ * @property name variable en la que vamos a guardar el nombre que escriba el usuario
+ * @property _wrong flujo de datos del booleano que determina si alguno de los datos está incorrecto para mostrar el error
+ * @property wrong estado público del boleano que controla los errores
  * @property _moviePosition flujo de datos que mantiene la posición de la película que se va a mostrar al usuario
  * @property moviePosition estado público de la posición de la película
  * @property _seriePosition flujo de datos que mantiene la posición de la serie que se va a mostrar al usuario
  * @property seriePosition estado público de la posición de la serie
- * @property _movieList flujo de datos de las películas que se han recogido en la API
+ * @property _movieAPIList flujo de datos que mantiene la lista de películas recogidas de la API
+ * @property _movieList flujo de datos de las películas que se han recogido de la base de datos
  * @property movieList estado público de la lista de películas recogida
+ * @property _serieAPIList flujo de datos que mantiene la lista de series recogidas de la API
  * @property _serieList flujo de datos de las series que se han encontrado en la API
  * @property serieList estado público de la lista de series recogida
  * @property _propertyButton flujo de datos de la propiedad en la que se encuetra en botón de guardado
  * @property propertyButton estado público de la propiedad del botón de guardado
  * @property _favoritesInDB flujo de datos de las películas que se han recogido de la base de datos
+ * @property favoritesInDB estado público de la lista de películas añadidas a favoritos por el usuario
+ * @property _moviesAndSeriesByGenreList flujo de datos que mantiene la lista de películas y series recogidas de la base de datos filtradas por género
+ * @property moviesAndSeriesByGenreList estado público de la lista de películas y géneros filtrada por género
+ * @property _dbList flujo de datos que guarda todas las películas y series recogidas de la API cuando se actualiza la base de datos
  * @property _actualMovieOrSerieState flujo de datos de la película actual que se está mostrando con los datos de la base de datos
+ * @property _movieGenres flujo de datos que mantiene los posibles géneros que puede tener una película buscados en la API
+ * @property _serieGenres flujo de datos que mantiene los posibles géneros que puede tener una serie buscados en la API
+ * @property _genres flujo de datos que mantiene los posibles géneros que existen
+ * @property _showGenres flujo de datos que mantiene la cadena con los nombres de los géneros de una película o serie
+ * @property showGenres estado público de la cadena con los géneros de la película o serie seleccionada
+ * @property _trailerId flujo de datos que mantiene el identificador del tráiler de la película o serie seleccionada
+ * @property trailerId estado público del identificador del tráiler
+ * @property _commentsList flujo de datos que recoge los comentarios de una película o serie de la base de datos
+ * @property commentsList estado público de la lista de comentarios
+ * @property _userName flujo de datos que guarda el nombre del usuario que ha iniciado sesión
+ * @property userName estado público del nombre del usuario que ha iniciado sesión
+ * @property commentText variable en la que guardamos el comentario que escribe el usuario
+ * @property _similarMoviesAndSeries flujo de datos que guarda la lista de similares de una película o serie recogida de la API
+ * @property similarMoviesAndSeries estado público con la lista de similares
+ * @property _selectedMovieOrSerie flujo de datos que guarda la película o serie seleccionada cuando navega a la pantalla de información de la misma
+ * @property selectedMovieOrSerie estado público de la película o serie seleccionada
+ * @property _lastSelectedMoviesOrSeries flujo de datos con la lista de películas o series que se han seleccionado
+ * @property _cinemaList flujo de datos que guarda la consulta a la API con las películas que se encuentran en el cine
+ * @property cinemaList estado público con las películas que se encuentran actualmente en el cine
+ * @property _showTrailer flujo de datos que indica si se debe mostrar el tráiler en la pantalla de la cartelera
+ * @property showTrailer estado público que indica si se muestra el tráiler
+ * @property _actualGenre flujo de datos que guarda la clave del género que ha seleccionado el usuario para filtrar
+ * @property _selectedGenreText flujo de datos que guarda el valor del género que ha seleccionado el usuario para filtrar
+ * @property selectedGenreText estado público con el valor del género seleccionado
+ * @property _searchByGenrePosition flujo de datos que mantiene la posición de la película o serie que se va a mostrar al usuario
+ * @property searchByGenrePosition estado público de la posición de la película o serie
+ * @property genresToShow lista de géneros que se van a mostrar al usuario y por los que podrá filtrar
+ * @property _providerList flujo de datos que guarda las plataformas en las que se encuentra una película o serie
+ * @property providerList estado público de la lista de plataformas
+ * @property _platformLink flujo de datos con el enlace a la plataforma seleccionada
+ * @property userSearch variable en la que guardamos la búsqueda del usuario
+ * @property _searchList flujo de datos con los resultados de la búsqueda del usuario en la API
+ * @property searchList estado público con la lista de resultados de la búsqueda
+ * @property loadingDB indica si se está actualizando la base de datos
  */
 class VisionPlayViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
@@ -75,6 +127,8 @@ class VisionPlayViewModel : ViewModel() {
     private val getCinemaUseCase = GetCinemaUseCase()
 
     private val getSimilarMoviesUseCase = DiscoverSimilarMoviesUseCase()
+
+    private val getSimilarSeriesUseCase = DiscoverSimilarSeriesUseCase()
 
     private val discoverMovieProviderUseCase = DiscoverMovieProviderUseCase()
 
@@ -141,8 +195,8 @@ class VisionPlayViewModel : ViewModel() {
 
     var commentText = mutableStateOf("")
 
-    private var _similarMovies = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
-    var similarMovies : StateFlow<List<MovieOrSerieState>> = _similarMovies
+    private var _similarMoviesAndSeries = MutableStateFlow<List<MovieOrSerieState>>(emptyList())
+    var similarMoviesAndSeries : StateFlow<List<MovieOrSerieState>> = _similarMoviesAndSeries
 
     private val _selectedMovieOrSerie = MutableStateFlow(MovieOrSerieState())
     var selectedMovieOrSerie : StateFlow<MovieOrSerieState> = _selectedMovieOrSerie
@@ -163,10 +217,7 @@ class VisionPlayViewModel : ViewModel() {
     private var _searchByGenrePosition = MutableStateFlow(0)
     var searchByGenrePosition : StateFlow<Int> = _searchByGenrePosition
 
-    var genresToShow = listOf("Crime","Comedy","Animation","Action","Adventure", "Fantasy","Horror","Romance","Mystery","Western")
-
-    private var _propertyBottomBar = MutableStateFlow(PropertyBottomBar.Inicio)
-    var propertyBottomBar : StateFlow<PropertyBottomBar> = _propertyBottomBar
+    var genresToShow = listOf("Crime","Comedy","Animation","Action","Adventure","Fantasy","Horror","Romance","Mystery","Western")
 
     private var _providerList = MutableStateFlow<List<MovieOrSerieProviderState>>(emptyList())
     var providerList : StateFlow<List<MovieOrSerieProviderState>> = _providerList
@@ -203,15 +254,6 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Cambia la propiedad de la barra del menñu inferior
-     *
-     * @param property propiedad a la que cambiar el menú
-     */
-    fun changeBottomBar(property : PropertyBottomBar){
-        _propertyBottomBar.value = property
-    }
-
-    /**
      * Realiza la búsqueda del usuario en la API
      */
     fun search(){
@@ -221,7 +263,7 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Muestra una nueva película o serie
+     * Muestra una nueva película o serie en la pantalla de buscar por género
      */
     fun newMovieOrSerie(){
         _propertyButton.value = Property1.Default
@@ -233,7 +275,7 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Muestra la película o serie anterior
+     * Muestra la película o serie anterior en la pantalla de buscar por género
      */
     fun lastMovieOrSerie(){
         _propertyButton.value = Property1.Default
@@ -241,6 +283,7 @@ class VisionPlayViewModel : ViewModel() {
             _searchByGenrePosition.value=0
         }else{
             _searchByGenrePosition.value--
+            findMovieOrSerieInList(_moviesAndSeriesByGenreList.value[_searchByGenrePosition.value].title)
         }
     }
 
@@ -355,23 +398,22 @@ class VisionPlayViewModel : ViewModel() {
      */
     fun signOut() {
         auth.signOut()
+        reset()
     }
 
     /**
      * Realiza una búsqueda amplia de películas y series en la API para introducirlas en la base de datos de Firebase
      */
     private fun loadFromAPI() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             loadingDB = true
             val temporalList = mutableListOf<List<MovieOrSerieState>>()
             for (z in 1 until 20) {
-                withContext(Dispatchers.IO) {
-                    getAllSeries(z)
-                    getAllMovies(z)
-                    Thread.sleep(500)
-                    temporalList.add(_serieAPIList.value)
-                    temporalList.add(_movieAPIList.value)
-                }
+                getAllSeries(z)
+                getAllMovies(z)
+                Thread.sleep(500)
+                temporalList.add(_serieAPIList.value)
+                temporalList.add(_movieAPIList.value)
             }
             _dbList.value = temporalList
             saveInDB()
@@ -382,12 +424,10 @@ class VisionPlayViewModel : ViewModel() {
      * Guarda todas las películas y series obtenidas en la base de datos
      */
     private fun saveInDB() {
-        viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                _dbList.value?.forEach { list ->
-                    list.forEach { movieOrSerie ->
-                        saveMovieOrSerie(movieOrSerie)
-                    }
+        viewModelScope.launch(Dispatchers.IO) {
+            _dbList.value?.forEach { list ->
+                list.forEach { movieOrSerie ->
+                    saveMovieOrSerie(movieOrSerie)
                 }
             }
             loadingDB = false
@@ -398,20 +438,18 @@ class VisionPlayViewModel : ViewModel() {
      * Borra todas las películas y series que están guardadas en la base de datos para actualizarlas
      */
     fun restartDB() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             loadingDB = true
-            withContext(Dispatchers.IO) {
-                _dbList.value?.forEach { list ->
-                    list.forEach { movieOrSerie ->
-                        try {
-                            firestore.collection("MoviesAndSeries").document(movieOrSerie.idDoc).delete().await()
-                        } catch (e: Exception) {
-                            print(e.localizedMessage)
-                        }
+            _dbList.value?.forEach { list ->
+                list.forEach { movieOrSerie ->
+                    try {
+                        firestore.collection("MoviesAndSeries").document(movieOrSerie.idDoc).delete().await()
+                    } catch (e: Exception) {
+                        print(e.localizedMessage)
                     }
                 }
-                loadFromAPI()
             }
+            loadFromAPI()
         }
     }
 
@@ -511,11 +549,17 @@ class VisionPlayViewModel : ViewModel() {
     /**
      * Buscamos películas y series similares a partir de otra
      *
-     * @param movie película o serie de la que queremos buscar similares
+     * @param movieOrSerie película o serie de la que queremos buscar similares
      */
-    fun findSimilarMovies(movie: MovieOrSerieState){
-        viewModelScope.launch {
-            _similarMovies.value = getSimilarMoviesUseCase.invoke(movie.idAPI).results.filter { it.poster != null && !it.overview.isNullOrEmpty() }
+    fun findSimilarMoviesOrSeries(movieOrSerie: MovieOrSerieState){
+        if (movieOrSerie.type == "Movie"){
+            viewModelScope.launch {
+                _similarMoviesAndSeries.value = getSimilarMoviesUseCase.invoke(movieOrSerie.idAPI).results.filter { it.poster != null && !it.overview.isNullOrEmpty() }
+            }
+        }else{
+            viewModelScope.launch {
+                _similarMoviesAndSeries.value = getSimilarSeriesUseCase.invoke(movieOrSerie.idAPI).results.filter { it.poster != null && !it.overview.isNullOrEmpty() }
+            }
         }
     }
 
@@ -525,7 +569,7 @@ class VisionPlayViewModel : ViewModel() {
      *
      * @param title título de la película o serie que queremos comprobar
      */
-    fun findMovieInList(title: String){
+    fun findMovieOrSerieInList(title: String){
         for (movie in _favoritesInDB.value) {
             if (title == movie.title){
                 _propertyButton.value = Property1.Guardado
@@ -562,7 +606,7 @@ class VisionPlayViewModel : ViewModel() {
     /**
      * Busca todos los comentarios de una película o serie de la base de datos
      *
-     * @param movieOrSerie película o serie de la que vamos a buscar los comentarios
+     * @param movieOrSerie título de la película o serie de la que vamos a buscar los comentarios
      */
     fun fetchCommentsFromDB(movieOrSerie : String) {
         firestore.collection("Comments")
@@ -686,7 +730,7 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Muestra una nueva película
+     * Muestra una nueva película en la pantalla de películas
      */
     fun newMovie(){
         _propertyButton.value = Property1.Default
@@ -694,11 +738,12 @@ class VisionPlayViewModel : ViewModel() {
             _moviePosition.value=0
         }else{
             _moviePosition.value++
+            findMovieOrSerieInList(_movieList.value[_moviePosition.value].title)
         }
     }
 
     /**
-     * Muestra la película anterior
+     * Muestra la película anterior en la pantalla de películas
      */
     fun lastMovie(){
         _propertyButton.value = Property1.Default
@@ -708,11 +753,12 @@ class VisionPlayViewModel : ViewModel() {
             _moviePosition.value = _movieList.value.size - 1
         }else{
             _moviePosition.value--
+            findMovieOrSerieInList(_movieList.value[_moviePosition.value].title)
         }
     }
 
     /**
-     * Muestra una nueva serie
+     * Muestra una nueva serie en la pantalla de series
      */
     fun newSerie(){
         _propertyButton.value = Property1.Default
@@ -720,11 +766,12 @@ class VisionPlayViewModel : ViewModel() {
             _seriePosition.value=0
         }else{
             _seriePosition.value++
+            findMovieOrSerieInList(_serieList.value[_seriePosition.value].title)
         }
     }
 
     /**
-     * Muestra la serie anterior
+     * Muestra la serie anterior en la pantalla de series
      */
     fun lastSerie(){
         _propertyButton.value = Property1.Default
@@ -734,14 +781,16 @@ class VisionPlayViewModel : ViewModel() {
             _seriePosition.value = _movieList.value.size - 1
         }else{
             _seriePosition.value--
+            findMovieOrSerieInList(_serieList.value[_seriePosition.value].title)
         }
     }
 
     /**
      * Cambia la propiedad del botón de guardado dependiendo de cuando se pulsa
      */
-    private fun guardarPeliculaOSerie(){
+    private fun guardarPeliculaOSerie(movieOrSerie : MovieOrSerieState){
         if (_propertyButton.value == Property1.Default){
+            _actualMovieOrSerieState.value = movieOrSerie
             _propertyButton.value = Property1.Guardado
         }else{
             _propertyButton.value = Property1.Default
@@ -773,7 +822,7 @@ class VisionPlayViewModel : ViewModel() {
                 firestore.collection("Favoritos")
                     .add(newMovieOrSerie)
                     .addOnSuccessListener {
-                        guardarPeliculaOSerie()
+                        guardarPeliculaOSerie(searchMovieState)
                     }
                     .addOnFailureListener {
                         throw Exception()
@@ -789,7 +838,7 @@ class VisionPlayViewModel : ViewModel() {
      *
      * @param movieOrSerieState película o serie que queremos añadir a favoritos
      */
-    fun saveMovieOrSerie(movieOrSerieState: MovieOrSerieState) {
+    private fun saveMovieOrSerie(movieOrSerieState: MovieOrSerieState) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val newMovieOrSerie = hashMapOf(
@@ -808,7 +857,6 @@ class VisionPlayViewModel : ViewModel() {
                         throw Exception()
                     }
             } catch (e: Exception){
-                _propertyButton.value = Property1.Default
             }
         }
     }
@@ -822,7 +870,7 @@ class VisionPlayViewModel : ViewModel() {
                 firestore.collection("Favoritos").document(_actualMovieOrSerieState.value.idDoc)
                     .delete()
                     .addOnSuccessListener {
-                        guardarPeliculaOSerie()
+                        guardarPeliculaOSerie(_actualMovieOrSerieState.value)
                     }
                     .addOnFailureListener {
                         _propertyButton.value = Property1.Guardado
@@ -875,12 +923,17 @@ class VisionPlayViewModel : ViewModel() {
     }
 
     /**
-     * Reinicia la posición al cambiar de género y el género seleccionado
+     * Reinicia las variables necesarias cuando un usuario cierra sesión
      */
     fun reset(){
         _searchByGenrePosition.value = 0
         _selectedGenreText.value = ""
         _actualGenre.value = ""
+        _selectedMovieOrSerie.value = MovieOrSerieState()
+        _moviePosition.value = 0
+        _seriePosition.value = 0
+        _userName.value = ""
+        _propertyButton.value = Property1.Default
     }
 
     /**
@@ -949,6 +1002,7 @@ class VisionPlayViewModel : ViewModel() {
                 _wrong.value = true
             }
         }
+
     }
 
     /**
