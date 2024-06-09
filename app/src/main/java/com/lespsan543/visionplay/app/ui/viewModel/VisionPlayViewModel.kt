@@ -386,7 +386,7 @@ class VisionPlayViewModel : ViewModel() {
             withContext(Dispatchers.IO) {
                 _dbList.value?.forEach { list ->
                     list.forEach { movieOrSerie ->
-                        saveMovieOrSerie(movieOrSerie, "MoviesAndSeries")
+                        saveMovieOrSerie(movieOrSerie)
                     }
                 }
             }
@@ -750,12 +750,11 @@ class VisionPlayViewModel : ViewModel() {
 
 
     /**
-     * Guarda la película o serie que se le indica en la base de datos
+     * Guarda la película o serie que se le indica en la base de datos de favoritos
      *
      * @param searchMovieState película o serie que queremos añadir a favoritos
-     * @param collection colección de la base de datos en la que vamos a guardarla
      */
-    fun saveMovieOrSerie(searchMovieState: MovieOrSerieState, collection:String) {
+    fun saveMovieOrSerieInFavorites(searchMovieState: MovieOrSerieState) {
         val email = auth.currentUser?.email
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -771,11 +770,40 @@ class VisionPlayViewModel : ViewModel() {
                     "emailUser" to email.toString(),
                     "type" to searchMovieState.type
                 )
-                firestore.collection(collection)
+                firestore.collection("Favoritos")
                     .add(newMovieOrSerie)
                     .addOnSuccessListener {
                         guardarPeliculaOSerie()
                     }
+                    .addOnFailureListener {
+                        throw Exception()
+                    }
+            } catch (e: Exception){
+                _propertyButton.value = Property1.Default
+            }
+        }
+    }
+
+    /**
+     * Guarda la película o serie que se le indica en la base de datos de películas y series
+     *
+     * @param movieOrSerieState película o serie que queremos añadir a favoritos
+     */
+    fun saveMovieOrSerie(movieOrSerieState: MovieOrSerieState) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val newMovieOrSerie = hashMapOf(
+                    "idAPI" to movieOrSerieState.idAPI,
+                    "title" to movieOrSerieState.title,
+                    "overview" to movieOrSerieState.overview,
+                    "poster" to movieOrSerieState.poster,
+                    "date" to movieOrSerieState.date,
+                    "votes" to movieOrSerieState.votes,
+                    "genres" to movieOrSerieState.genres,
+                    "type" to movieOrSerieState.type
+                )
+                firestore.collection("MoviesAndSeries")
+                    .add(newMovieOrSerie)
                     .addOnFailureListener {
                         throw Exception()
                     }

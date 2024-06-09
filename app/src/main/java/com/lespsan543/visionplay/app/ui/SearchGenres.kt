@@ -180,7 +180,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                                 if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
                                     visionPlayViewModel.deleteMovieOrSerie()
                                 }else{
-                                    visionPlayViewModel.saveMovieOrSerie(moviesAndSeriesList[position], "Favoritos")
+                                    visionPlayViewModel.saveMovieOrSerieInFavorites(moviesAndSeriesList[position])
                                 }
                             },
                             onClick = {
@@ -209,7 +209,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                     modifier = Modifier
                         .padding(start = width*0.10f, top = height*0.85f),
                     property1 = property,
-                    guardar = { visionPlayViewModel.saveMovieOrSerie(moviesAndSeriesList[position], "Favoritos") },
+                    guardar = { visionPlayViewModel.saveMovieOrSerieInFavorites(moviesAndSeriesList[position]) },
                     eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                 )
             }else{

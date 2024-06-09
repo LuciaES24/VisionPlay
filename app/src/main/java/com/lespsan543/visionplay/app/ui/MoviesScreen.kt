@@ -138,6 +138,13 @@ fun MoviesScreen(
                 cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
             floatingActionButton = {
                 Row {
+                    Guardar(
+                        modifier = Modifier
+                            .padding(end = width*0.3f),
+                        property1 = property,
+                        guardar = { visionPlayViewModel.saveMovieOrSerieInFavorites(movieList[moviePosition]) },
+                        eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
+                    )
                     FloatingActionButton(onClick = { navController.navigate(Routes.MoviesScreen.route) },
                         modifier = Modifier
                             .width(width.times(0.25f))
@@ -203,7 +210,7 @@ fun MoviesScreen(
                                     if (property == com.lespsan543.visionplay.guardar.Property1.Guardado) {
                                         visionPlayViewModel.deleteMovieOrSerie()
                                     } else {
-                                        visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition], "Favoritos")
+                                        visionPlayViewModel.saveMovieOrSerieInFavorites(movieList[moviePosition])
                                     }
                                 },
                                 onClick = {
@@ -226,13 +233,6 @@ fun MoviesScreen(
                                     offsetX = 0
                                 }
                             )
-                    )
-                    Guardar(
-                        modifier = Modifier
-                            .padding(start = width*0.10f, top = height*0.85f),
-                        property1 = property,
-                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieList[moviePosition], "Favoritos") },
-                        eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                     )
                 }
             }else {
@@ -393,7 +393,7 @@ fun ShowMovie(navController: NavHostController,
                 floatingActionButton = {
                     Guardar(
                         property1 = property,
-                        guardar = { visionPlayViewModel.saveMovieOrSerie(movieOrSerie, "Favoritos") },
+                        guardar = { visionPlayViewModel.saveMovieOrSerieInFavorites(movieOrSerie) },
                         eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                     )
                 }

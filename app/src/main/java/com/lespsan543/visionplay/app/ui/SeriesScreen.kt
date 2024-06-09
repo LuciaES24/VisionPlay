@@ -104,6 +104,13 @@ fun SeriesScreen(
                 cine1 = { navController.navigate(Routes.CinemaScreen.route) }) },
             floatingActionButton = {
                 Row {
+                    Guardar(
+                        modifier = Modifier
+                            .padding(end = width*0.3f),
+                        property1 = property,
+                        guardar = { visionPlayViewModel.saveMovieOrSerieInFavorites(serieList[seriePosition]) },
+                        eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
+                    )
                     FloatingActionButton(onClick = { navController.navigate(Routes.MoviesScreen.route) },
                         modifier = Modifier
                             .width(width.times(0.25f))
@@ -169,7 +176,7 @@ fun SeriesScreen(
                                     if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
                                         visionPlayViewModel.deleteMovieOrSerie()
                                     }else{
-                                        visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition], "Favoritos")
+                                        visionPlayViewModel.saveMovieOrSerieInFavorites(serieList[seriePosition])
                                     }
                                 },
                                 onClick = {
@@ -191,13 +198,6 @@ fun SeriesScreen(
                                     }
                                     offsetX = 0 }
                             )
-                    )
-                    Guardar(
-                        modifier = Modifier
-                            .padding(start = width*0.10f, top = height*0.85f),
-                        property1 = property,
-                        guardar = { visionPlayViewModel.saveMovieOrSerie(serieList[seriePosition], "Favoritos") },
-                        eliminar = { visionPlayViewModel.deleteMovieOrSerie() }
                     )
                 }
             }else{
