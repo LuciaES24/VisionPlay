@@ -186,7 +186,7 @@ fun ShowMovieOrSerie(
             visionPlayViewModel.formatTitle(movieOrSerie.title)
         }
         .padding(8.dp)
-        .height(maxHeigth * 0.45f)
+        .height(maxHeigth * 0.4f)
         .background(Color.Transparent)){
         Column(modifier = Modifier
             .background(Color.Transparent)
@@ -202,7 +202,8 @@ fun ShowMovieOrSerie(
                 fontSize = 18.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center,
-                fontFamily = FONT_FAMILY
+                fontFamily = FONT_FAMILY,
+                maxLines = 1
             )
         }
     }
