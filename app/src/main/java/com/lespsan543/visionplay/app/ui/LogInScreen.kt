@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -77,7 +78,7 @@ fun LogInScreen(navController: NavController, visionPlayViewModel: VisionPlayVie
         )
         {
             Text(
-                text = "Iniciar sesión",
+                text = "Log In",
                 fontSize = 30.sp,
                 modifier = Modifier.padding(top = height * 0.1f),
                 color = Color.White,
@@ -148,18 +149,18 @@ fun LogInScreen(navController: NavController, visionPlayViewModel: VisionPlayVie
                 )
             )
             {
-                Text(text = "Iniciar sesión", fontFamily = FONT_FAMILY)
+                Text(text = "Log In", fontFamily = FONT_FAMILY, fontSize = 16.sp)
             }
             Spacer(modifier = Modifier.height(height * 0.15f))
             Row {
                 Text(
-                    text = "¿Aun no te has registrado?",
+                    text = "Not registered yet? ",
                     color = Color.White,
                     fontFamily = FONT_FAMILY
                 )
                 ClickableText(
                     onClick = { navController.navigate(Routes.RegisterScreen.route) },
-                    text = AnnotatedString("Registrarse"),
+                    text = AnnotatedString("Sign in"),
                     style = TextStyle(
                         color = Color.Red,
                         fontSize = 16.sp,
@@ -173,10 +174,10 @@ fun LogInScreen(navController: NavController, visionPlayViewModel: VisionPlayVie
                 AlertDialog(onDismissRequest = { },
                     confirmButton = {
                         Button(onClick = { visionPlayViewModel.closeDialog() }) {
-                            Text(text = "Aceptar", fontFamily = FONT_FAMILY)
+                            Text(text = "Ok", fontFamily = FONT_FAMILY)
                         }
                     },
-                    text = { Text(text = "Algún dato es incorrecto", fontFamily = FONT_FAMILY) }
+                    text = { Text(text = "Something is wrong", fontFamily = FONT_FAMILY) }
                 )
             }
         }

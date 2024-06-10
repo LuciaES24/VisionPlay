@@ -38,6 +38,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -80,7 +81,7 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel: VisionPlay
         )
         {
             Text(
-                text = "Registrarse",
+                text = "Sign In",
                 fontSize = 30.sp,
                 modifier = Modifier.padding(top = height * 0.1f),
                 color = Color.White,
@@ -155,7 +156,7 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel: VisionPlay
                 shape = RoundedCornerShape(3.dp)
             )
             Text(
-                text = "*Al menos 6 caracteres",
+                text = "*At least 6 characters",
                 color = Color.LightGray,
                 style = MaterialTheme.typography.bodySmall,
                 modifier = Modifier.padding(end = width * 0.3f)
@@ -176,14 +177,14 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel: VisionPlay
                 )
             )
             {
-                Text(text = "Registrarse", fontFamily = FONT_FAMILY)
+                Text(text = "Sign In", fontFamily = FONT_FAMILY, fontSize = 16.sp)
             }
             Spacer(modifier = Modifier.height(height * 0.07f))
             Row {
-                Text(text = "¿Ya estas registrado?", color = Color.White, fontFamily = FONT_FAMILY)
+                Text(text = "Registered yet? ", color = Color.White, fontFamily = FONT_FAMILY)
                 ClickableText(
                     onClick = { navController.navigate(Routes.LogInScreen.route) },
-                    text = AnnotatedString("Inicia sesión"),
+                    text = AnnotatedString("Log in"),
                     style = TextStyle(
                         color = Color.Red,
                         fontSize = 16.sp,
@@ -197,10 +198,10 @@ fun RegisterScreen(navController: NavController, visionPlayViewModel: VisionPlay
                 AlertDialog(onDismissRequest = { },
                     confirmButton = {
                         Button(onClick = { visionPlayViewModel.closeDialog() }) {
-                            Text(text = "Aceptar", fontFamily = FONT_FAMILY)
+                            Text(text = "Ok", fontFamily = FONT_FAMILY)
                         }
                     },
-                    text = { Text(text = "Algún dato es incorrecto", fontFamily = FONT_FAMILY) }
+                    text = { Text(text = "Something is wrong", fontFamily = FONT_FAMILY) }
                 )
             }
         }
