@@ -29,7 +29,7 @@ com.lespsan543.visionplay.test.app-activity-ktx-1.8.2-27 C:\Users\lucia\.gradle\
 com.lespsan543.visionplay.test.app-ui-test-junit4-release-28 C:\Users\lucia\.gradle\caches\transforms-3\edeee6f942d93edb808dab72ae2b6cf5\transformed\ui-test-junit4-release\res
 com.lespsan543.visionplay.test.app-activity-compose-1.8.2-29 C:\Users\lucia\.gradle\caches\transforms-3\efab56f028b4edc5386777e335ba8873\transformed\activity-compose-1.8.2\res
 com.lespsan543.visionplay.test.app-ui-geometry-release-30 C:\Users\lucia\.gradle\caches\transforms-3\ffe7bc0c19629fae6936ba833f1fc54b\transformed\ui-geometry-release\res
-com.lespsan543.visionplay.test.app-androidTest-31 C:\Users\lucia\Desktop\VisionPlay\app\build\generated\res\resValues\androidTest\debug
-com.lespsan543.visionplay.test.app-mergeDebugAndroidTestResources-32 C:\Users\lucia\Desktop\VisionPlay\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.lespsan543.visionplay.test.app-mergeDebugAndroidTestResources-33 C:\Users\lucia\Desktop\VisionPlay\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.lespsan543.visionplay.test.app-merged_res-34 C:\Users\lucia\Desktop\VisionPlay\app\build\intermediates\merged_res\debugAndroidTest
+com.lespsan543.visionplay.test.app-androidTest-31 C:\Users\lucia\AndroidStudioProjects\VisionPlay\app\build\generated\res\resValues\androidTest\debug
+com.lespsan543.visionplay.test.app-mergeDebugAndroidTestResources-32 C:\Users\lucia\AndroidStudioProjects\VisionPlay\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.lespsan543.visionplay.test.app-mergeDebugAndroidTestResources-33 C:\Users\lucia\AndroidStudioProjects\VisionPlay\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.lespsan543.visionplay.test.app-merged_res-34 C:\Users\lucia\AndroidStudioProjects\VisionPlay\app\build\intermediates\merged_res\debugAndroidTest

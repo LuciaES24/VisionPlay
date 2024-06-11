@@ -1,7 +1,7 @@
-#Wed May 08 23:08:23 CEST 2024
-base.0=C\:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
-base.1=C\:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
-base.2=C\:\\Users\\lucia\\Desktop\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\12\\classes.dex
+#Tue Jun 11 01:19:46 CEST 2024
+base.0=C\:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
+base.1=C\:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
+base.2=C\:\\Users\\lucia\\AndroidStudioProjects\\VisionPlay\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\12\\classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=12/classes.dex
