@@ -8,6 +8,7 @@ El objetivo de VisionPlay es poder tener un lugar donde buscar películas y seri
 
 * **Kotlin:** Lenguaje de programación utilizado.
 * **Android Studio:** Entorno de desarrollo integrado para la creación de aplicaciones Android.
+* **Jetpack Compose:** Kit de herramientas diseñado para simplificar el desarrollo de interfaces en aplicaciones Android.
 * **Figma:** Herramienta para la generación de prototipos.
 * **Relay:** Plugin de Figma para la exportación de diseños de componentes directamente al proyecto de Android Studio.
 * **Firebase (Firestore):** Producto de Firebase que te permite tener una base de datos NoSQL en la nube.
