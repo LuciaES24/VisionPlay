@@ -1,6 +1,6 @@
 # Manual
 
-El manual de instalación de la aplicación puede verlo en el apartado de [Instalación y preparación](https://docs.google.com/document/d/19AOKmpIpFCF1d0wU7OmmOW71VEal2GRIYiYh7IbcCvQ/edit#heading=h.2cp0tes5o83q).&#x20;
+El manual de instalación de la aplicación puede verlo en el apartado de Instalación y preparación.&#x20;
 
 
 
