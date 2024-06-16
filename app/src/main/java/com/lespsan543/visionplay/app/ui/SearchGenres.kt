@@ -174,6 +174,7 @@ fun ShowMoviesAndSeriesByGenre(navController: NavHostController, visionPlayViewM
                         .padding(top = height*0.08f, bottom = height*0.08f)
                         .combinedClickable(enabled = true,
                             onDoubleClick = {
+                                visionPlayViewModel.findMovieOrSerieInList(moviesAndSeriesList[position].title)
                                 if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
                                     visionPlayViewModel.deleteMovieOrSerie()
                                 }else{

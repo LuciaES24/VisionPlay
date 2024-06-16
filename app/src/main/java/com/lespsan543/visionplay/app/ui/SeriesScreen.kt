@@ -174,6 +174,7 @@ fun SeriesScreen(
                             .combinedClickable(enabled = true,
                                 onDoubleClick = {
                                     if(property == com.lespsan543.visionplay.guardar.Property1.Guardado){
+                                        visionPlayViewModel.findMovieOrSerieInList(serieList[seriePosition].title)
                                         visionPlayViewModel.deleteMovieOrSerie()
                                     }else{
                                         visionPlayViewModel.saveMovieOrSerieInFavorites(serieList[seriePosition])

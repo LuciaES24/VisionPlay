@@ -823,6 +823,7 @@ class VisionPlayViewModel : ViewModel() {
                     .add(newMovieOrSerie)
                     .addOnSuccessListener {
                         guardarPeliculaOSerie(searchMovieState)
+                        fetchFavoritesFromDB()
                     }
                     .addOnFailureListener {
                         throw Exception()
@@ -930,6 +931,7 @@ class VisionPlayViewModel : ViewModel() {
         _selectedGenreText.value = ""
         _actualGenre.value = ""
         _selectedMovieOrSerie.value = MovieOrSerieState()
+        _moviesAndSeriesByGenreList.value = emptyList()
         _moviePosition.value = 0
         _seriePosition.value = 0
         _userName.value = ""
